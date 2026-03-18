@@ -1,5 +1,3 @@
-import json
-from dataclasses import asdict
 from typing import Any
 
 import requests
@@ -23,7 +21,10 @@ class OnlineSzamlazoClient:
         self.block = block
 
     def _call(
-        self, method: str, params: dict[str, Any] | None = None, skip_block: bool = False
+        self,
+        method: str,
+        params: dict[str, Any] | None = None,
+        skip_block: bool = False,
     ) -> dict[str, Any]:
         url = f"{self.api_url}/{method}"
 
@@ -40,7 +41,9 @@ class OnlineSzamlazoClient:
         if not skip_block and "block" not in body:
             body["block"] = self.block
 
-        response = requests.post(url, json=body, headers={"Content-Type": "application/json"})
+        response = requests.post(
+            url, json=body, headers={"Content-Type": "application/json"}
+        )
         response.raise_for_status()
 
         data = response.json()
