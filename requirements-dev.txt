@@ -1,3 +1,5 @@
+-e .
+
 pytest>=7.0.0
 responses
 black
