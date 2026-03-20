@@ -1,6 +1,9 @@
 from typing import Any
 
+import logging
 import requests
+
+LOG = logging.getLogger(__name__)
 
 
 class ApiError(Exception):
@@ -41,12 +44,20 @@ class OnlineSzamlazoClient:
         if not skip_block and "block" not in body:
             body["block"] = self.block
 
+        bodydupe = {}
+        bodydupe.update(body)
+        bodydupe["password"] = "***"
+        LOG.info("Request URL:\n%s\npayload:\n%r", url, bodydupe)
+
         response = requests.post(
             url, json=body, headers={"Content-Type": "application/json"}
         )
+        if response.status_code >= 400:
+            LOG.error("Response URL:\n%s\n%s", url, response)
         response.raise_for_status()
 
         data = response.json()
+        LOG.info("Response URL:\n%s, data:\n%r", url, data)
 
         status_id = data.get("status_id")
         if status_id is not None and int(status_id) >= 4000:
