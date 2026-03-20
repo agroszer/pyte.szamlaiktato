@@ -2492,1300 +2492,1035 @@ class SzamlaiktatoAPI:
         method: str,
         request: Any,
         response_cls: Any,
-        skip_block: bool,
-        req_mapping: builtins.dict[str, str],
-        resp_mapping: builtins.dict[str, str],
+        skip_block: bool = False,
+        req_mapping: Optional[builtins.dict[str, str]] = None,
+        resp_mapping: Optional[builtins.dict[str, str]] = None,
     ) -> Any:
         params = asdict(request) if request else {}
-        for py_name, orig_name in req_mapping.items():
-            if py_name in params:
-                params[orig_name] = params.pop(py_name)
+        if req_mapping:
+            for py_name, orig_name in req_mapping.items():
+                if py_name in params:
+                    params[orig_name] = params.pop(py_name)
         data = self.client._call(method, params, skip_block=skip_block)
-        for orig_name, py_name in resp_mapping.items():
-            if orig_name in data:
-                data[py_name] = data.pop(orig_name)
+        if resp_mapping:
+            for orig_name, py_name in resp_mapping.items():
+                if orig_name in data:
+                    data[py_name] = data.pop(orig_name)
         valid_keys = response_cls.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return response_cls(**filtered_data)
 
     def install(self, request: InstallRequest) -> InstallResponse:
         return self._invoke(
-            method="install",
-            request=request,
-            response_cls=InstallResponse,
+            "install",
+            request,
+            InstallResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def update(self, request: UpdateRequest) -> UpdateResponse:
         return self._invoke(
-            method="update",
-            request=request,
-            response_cls=UpdateResponse,
+            "update",
+            request,
+            UpdateResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def customerAdd(self, request: CustomerAddRequest) -> CustomerAddResponse:
         return self._invoke(
-            method="customerAdd",
-            request=request,
-            response_cls=CustomerAddResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "customerAdd",
+            request,
+            CustomerAddResponse,
         )
 
     def customerModify(self, request: CustomerModifyRequest) -> CustomerModifyResponse:
         return self._invoke(
-            method="customerModify",
-            request=request,
-            response_cls=CustomerModifyResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "customerModify",
+            request,
+            CustomerModifyResponse,
         )
 
     def customerGet(self, request: CustomerGetRequest) -> CustomerGetResponse:
         return self._invoke(
-            method="customerGet",
-            request=request,
-            response_cls=CustomerGetResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "customerGet",
+            request,
+            CustomerGetResponse,
         )
 
     def customerActivate(
         self, request: CustomerActivateRequest
     ) -> CustomerActivateResponse:
         return self._invoke(
-            method="customerActivate",
-            request=request,
-            response_cls=CustomerActivateResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "customerActivate",
+            request,
+            CustomerActivateResponse,
         )
 
     def customerInactivate(
         self, request: CustomerInactivateRequest
     ) -> CustomerInactivateResponse:
         return self._invoke(
-            method="customerInactivate",
-            request=request,
-            response_cls=CustomerInactivateResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "customerInactivate",
+            request,
+            CustomerInactivateResponse,
         )
 
     def customerSwap(self, request: CustomerSwapRequest) -> CustomerSwapResponse:
         return self._invoke(
-            method="customerSwap",
-            request=request,
-            response_cls=CustomerSwapResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "customerSwap",
+            request,
+            CustomerSwapResponse,
         )
 
     def customerList(self, request: CustomerListRequest) -> CustomerListResponse:
         return self._invoke(
-            method="customerList",
-            request=request,
-            response_cls=CustomerListResponse,
+            "customerList",
+            request,
+            CustomerListResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def productAdd(self, request: ProductAddRequest) -> ProductAddResponse:
         return self._invoke(
-            method="productAdd",
-            request=request,
-            response_cls=ProductAddResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "productAdd",
+            request,
+            ProductAddResponse,
         )
 
     def productModify(self, request: ProductModifyRequest) -> ProductModifyResponse:
         return self._invoke(
-            method="productModify",
-            request=request,
-            response_cls=ProductModifyResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "productModify",
+            request,
+            ProductModifyResponse,
         )
 
     def productGet(self, request: ProductGetRequest) -> ProductGetResponse:
         return self._invoke(
-            method="productGet",
-            request=request,
-            response_cls=ProductGetResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "productGet",
+            request,
+            ProductGetResponse,
         )
 
     def productActivate(
         self, request: ProductActivateRequest
     ) -> ProductActivateResponse:
         return self._invoke(
-            method="productActivate",
-            request=request,
-            response_cls=ProductActivateResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "productActivate",
+            request,
+            ProductActivateResponse,
         )
 
     def productInactivate(
         self, request: ProductInactivateRequest
     ) -> ProductInactivateResponse:
         return self._invoke(
-            method="productInactivate",
-            request=request,
-            response_cls=ProductInactivateResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "productInactivate",
+            request,
+            ProductInactivateResponse,
         )
 
     def productList(self, request: ProductListRequest) -> ProductListResponse:
         return self._invoke(
-            method="productList",
-            request=request,
-            response_cls=ProductListResponse,
+            "productList",
+            request,
+            ProductListResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def productFileList(
         self, request: ProductFileListRequest
     ) -> ProductFileListResponse:
         return self._invoke(
-            method="productFileList",
-            request=request,
-            response_cls=ProductFileListResponse,
+            "productFileList",
+            request,
+            ProductFileListResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def outerDatasources(
         self, request: OuterDatasourcesRequest
     ) -> OuterDatasourcesResponse:
         return self._invoke(
-            method="outerDatasources",
-            request=request,
-            response_cls=OuterDatasourcesResponse,
+            "outerDatasources",
+            request,
+            OuterDatasourcesResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def outerDatasourcesGet(
         self, request: OuterDatasourcesGetRequest
     ) -> OuterDatasourcesGetResponse:
         return self._invoke(
-            method="outerDatasourcesGet",
-            request=request,
-            response_cls=OuterDatasourcesGetResponse,
+            "outerDatasourcesGet",
+            request,
+            OuterDatasourcesGetResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def outerDatasourcesSave(
         self, request: OuterDatasourcesSaveRequest
     ) -> OuterDatasourcesSaveResponse:
         return self._invoke(
-            method="outerDatasourcesSave",
-            request=request,
-            response_cls=OuterDatasourcesSaveResponse,
+            "outerDatasourcesSave",
+            request,
+            OuterDatasourcesSaveResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def adminUserAdd(self, request: AdminUserAddRequest) -> AdminUserAddResponse:
         return self._invoke(
-            method="adminUserAdd",
-            request=request,
-            response_cls=AdminUserAddResponse,
+            "adminUserAdd",
+            request,
+            AdminUserAddResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def adminUserPassword(
         self, request: AdminUserPasswordRequest
     ) -> AdminUserPasswordResponse:
         return self._invoke(
-            method="adminUserPassword",
-            request=request,
-            response_cls=AdminUserPasswordResponse,
+            "adminUserPassword",
+            request,
+            AdminUserPasswordResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def adminUserDel(self, request: AdminUserDelRequest) -> AdminUserDelResponse:
         return self._invoke(
-            method="adminUserDel",
-            request=request,
-            response_cls=AdminUserDelResponse,
+            "adminUserDel",
+            request,
+            AdminUserDelResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def blockAdd(self, request: BlockAddRequest) -> BlockAddResponse:
         return self._invoke(
-            method="blockAdd",
-            request=request,
-            response_cls=BlockAddResponse,
+            "blockAdd",
+            request,
+            BlockAddResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def blockUpdateCompanyData(
         self, request: BlockUpdateCompanyDataRequest
     ) -> BlockUpdateCompanyDataResponse:
         return self._invoke(
-            method="blockUpdateCompanyData",
-            request=request,
-            response_cls=BlockUpdateCompanyDataResponse,
+            "blockUpdateCompanyData",
+            request,
+            BlockUpdateCompanyDataResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def blockModify(self, request: BlockModifyRequest) -> BlockModifyResponse:
         return self._invoke(
-            method="blockModify",
-            request=request,
-            response_cls=BlockModifyResponse,
+            "blockModify",
+            request,
+            BlockModifyResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def blockList(self, request: BlockListRequest) -> BlockListResponse:
         return self._invoke(
-            method="blockList",
-            request=request,
-            response_cls=BlockListResponse,
+            "blockList",
+            request,
+            BlockListResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def blockClose(self, request: BlockCloseRequest) -> BlockCloseResponse:
         return self._invoke(
-            method="blockClose",
-            request=request,
-            response_cls=BlockCloseResponse,
+            "blockClose",
+            request,
+            BlockCloseResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def blockOpen(self, request: BlockOpenRequest) -> BlockOpenResponse:
         return self._invoke(
-            method="blockOpen",
-            request=request,
-            response_cls=BlockOpenResponse,
+            "blockOpen",
+            request,
+            BlockOpenResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def costCentreAdd(self, request: CostCentreAddRequest) -> CostCentreAddResponse:
         return self._invoke(
-            method="costCentreAdd",
-            request=request,
-            response_cls=CostCentreAddResponse,
+            "costCentreAdd",
+            request,
+            CostCentreAddResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def costCentreModify(
         self, request: CostCentreModifyRequest
     ) -> CostCentreModifyResponse:
         return self._invoke(
-            method="costCentreModify",
-            request=request,
-            response_cls=CostCentreModifyResponse,
+            "costCentreModify",
+            request,
+            CostCentreModifyResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def costCentreList(self, request: CostCentreListRequest) -> CostCentreListResponse:
         return self._invoke(
-            method="costCentreList",
-            request=request,
-            response_cls=CostCentreListResponse,
+            "costCentreList",
+            request,
+            CostCentreListResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def costCentreActivate(
         self, request: CostCentreActivateRequest
     ) -> CostCentreActivateResponse:
         return self._invoke(
-            method="costCentreActivate",
-            request=request,
-            response_cls=CostCentreActivateResponse,
+            "costCentreActivate",
+            request,
+            CostCentreActivateResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def costCentreInactivate(
         self, request: CostCentreInactivateRequest
     ) -> CostCentreInactivateResponse:
         return self._invoke(
-            method="costCentreInactivate",
-            request=request,
-            response_cls=CostCentreInactivateResponse,
+            "costCentreInactivate",
+            request,
+            CostCentreInactivateResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def costTypeAdd(self, request: CostTypeAddRequest) -> CostTypeAddResponse:
         return self._invoke(
-            method="costTypeAdd",
-            request=request,
-            response_cls=CostTypeAddResponse,
+            "costTypeAdd",
+            request,
+            CostTypeAddResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def costTypeModify(self, request: CostTypeModifyRequest) -> CostTypeModifyResponse:
         return self._invoke(
-            method="costTypeModify",
-            request=request,
-            response_cls=CostTypeModifyResponse,
+            "costTypeModify",
+            request,
+            CostTypeModifyResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def costTypeList(self, request: CostTypeListRequest) -> CostTypeListResponse:
         return self._invoke(
-            method="costTypeList",
-            request=request,
-            response_cls=CostTypeListResponse,
+            "costTypeList",
+            request,
+            CostTypeListResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def costTypeActivate(
         self, request: CostTypeActivateRequest
     ) -> CostTypeActivateResponse:
         return self._invoke(
-            method="costTypeActivate",
-            request=request,
-            response_cls=CostTypeActivateResponse,
+            "costTypeActivate",
+            request,
+            CostTypeActivateResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def costTypeInactivate(
         self, request: CostTypeInactivateRequest
     ) -> CostTypeInactivateResponse:
         return self._invoke(
-            method="costTypeInactivate",
-            request=request,
-            response_cls=CostTypeInactivateResponse,
+            "costTypeInactivate",
+            request,
+            CostTypeInactivateResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectList(self, request: ProjectListRequest) -> ProjectListResponse:
         return self._invoke(
-            method="projectList",
-            request=request,
-            response_cls=ProjectListResponse,
+            "projectList",
+            request,
+            ProjectListResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectGet(self, request: ProjectGetRequest) -> ProjectGetResponse:
         return self._invoke(
-            method="projectGet",
-            request=request,
-            response_cls=ProjectGetResponse,
+            "projectGet",
+            request,
+            ProjectGetResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectCreate(self, request: ProjectCreateRequest) -> ProjectCreateResponse:
         return self._invoke(
-            method="projectCreate",
-            request=request,
-            response_cls=ProjectCreateResponse,
+            "projectCreate",
+            request,
+            ProjectCreateResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectInactivate(
         self, request: ProjectInactivateRequest
     ) -> ProjectInactivateResponse:
         return self._invoke(
-            method="projectInactivate",
-            request=request,
-            response_cls=ProjectInactivateResponse,
+            "projectInactivate",
+            request,
+            ProjectInactivateResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectTimesheetList(
         self, request: ProjectTimesheetListRequest
     ) -> ProjectTimesheetListResponse:
         return self._invoke(
-            method="projectTimesheetList",
-            request=request,
-            response_cls=ProjectTimesheetListResponse,
+            "projectTimesheetList",
+            request,
+            ProjectTimesheetListResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectTimesheetStart(
         self, request: ProjectTimesheetStartRequest
     ) -> ProjectTimesheetStartResponse:
         return self._invoke(
-            method="projectTimesheetStart",
-            request=request,
-            response_cls=ProjectTimesheetStartResponse,
+            "projectTimesheetStart",
+            request,
+            ProjectTimesheetStartResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectTimesheetStop(
         self, request: ProjectTimesheetStopRequest
     ) -> ProjectTimesheetStopResponse:
         return self._invoke(
-            method="projectTimesheetStop",
-            request=request,
-            response_cls=ProjectTimesheetStopResponse,
+            "projectTimesheetStop",
+            request,
+            ProjectTimesheetStopResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectBookingSlotCreate(
         self, request: ProjectBookingSlotCreateRequest
     ) -> ProjectBookingSlotCreateResponse:
         return self._invoke(
-            method="projectBookingSlotCreate",
-            request=request,
-            response_cls=ProjectBookingSlotCreateResponse,
+            "projectBookingSlotCreate",
+            request,
+            ProjectBookingSlotCreateResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectBookingBook(
         self, request: ProjectBookingBookRequest
     ) -> ProjectBookingBookResponse:
         return self._invoke(
-            method="projectBookingBook",
-            request=request,
-            response_cls=ProjectBookingBookResponse,
+            "projectBookingBook",
+            request,
+            ProjectBookingBookResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectBookingCancel(
         self, request: ProjectBookingCancelRequest
     ) -> ProjectBookingCancelResponse:
         return self._invoke(
-            method="projectBookingCancel",
-            request=request,
-            response_cls=ProjectBookingCancelResponse,
+            "projectBookingCancel",
+            request,
+            ProjectBookingCancelResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectBookingClose(
         self, request: ProjectBookingCloseRequest
     ) -> ProjectBookingCloseResponse:
         return self._invoke(
-            method="projectBookingClose",
-            request=request,
-            response_cls=ProjectBookingCloseResponse,
+            "projectBookingClose",
+            request,
+            ProjectBookingCloseResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectBookingBookDateRange(
         self, request: ProjectBookingBookDateRangeRequest
     ) -> ProjectBookingBookDateRangeResponse:
         return self._invoke(
-            method="projectBookingBookDateRange",
-            request=request,
-            response_cls=ProjectBookingBookDateRangeResponse,
+            "projectBookingBookDateRange",
+            request,
+            ProjectBookingBookDateRangeResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectBookingCancelGroup(
         self, request: ProjectBookingCancelGroupRequest
     ) -> ProjectBookingCancelGroupResponse:
         return self._invoke(
-            method="projectBookingCancelGroup",
-            request=request,
-            response_cls=ProjectBookingCancelGroupResponse,
+            "projectBookingCancelGroup",
+            request,
+            ProjectBookingCancelGroupResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectBookingCloseGroup(
         self, request: ProjectBookingCloseGroupRequest
     ) -> ProjectBookingCloseGroupResponse:
         return self._invoke(
-            method="projectBookingCloseGroup",
-            request=request,
-            response_cls=ProjectBookingCloseGroupResponse,
+            "projectBookingCloseGroup",
+            request,
+            ProjectBookingCloseGroupResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectBookingSetSlotPrice(
         self, request: ProjectBookingSetSlotPriceRequest
     ) -> ProjectBookingSetSlotPriceResponse:
         return self._invoke(
-            method="projectBookingSetSlotPrice",
-            request=request,
-            response_cls=ProjectBookingSetSlotPriceResponse,
+            "projectBookingSetSlotPrice",
+            request,
+            ProjectBookingSetSlotPriceResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectAvailableSlots(
         self, request: ProjectAvailableSlotsRequest
     ) -> ProjectAvailableSlotsResponse:
         return self._invoke(
-            method="projectAvailableSlots",
-            request=request,
-            response_cls=ProjectAvailableSlotsResponse,
+            "projectAvailableSlots",
+            request,
+            ProjectAvailableSlotsResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectWorkerList(
         self, request: ProjectWorkerListRequest
     ) -> ProjectWorkerListResponse:
         return self._invoke(
-            method="projectWorkerList",
-            request=request,
-            response_cls=ProjectWorkerListResponse,
+            "projectWorkerList",
+            request,
+            ProjectWorkerListResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectCalendar(
         self, request: ProjectCalendarRequest
     ) -> ProjectCalendarResponse:
         return self._invoke(
-            method="projectCalendar",
-            request=request,
-            response_cls=ProjectCalendarResponse,
+            "projectCalendar",
+            request,
+            ProjectCalendarResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectPassCreate(
         self, request: ProjectPassCreateRequest
     ) -> ProjectPassCreateResponse:
         return self._invoke(
-            method="projectPassCreate",
-            request=request,
-            response_cls=ProjectPassCreateResponse,
+            "projectPassCreate",
+            request,
+            ProjectPassCreateResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectPassList(
         self, request: ProjectPassListRequest
     ) -> ProjectPassListResponse:
         return self._invoke(
-            method="projectPassList",
-            request=request,
-            response_cls=ProjectPassListResponse,
+            "projectPassList",
+            request,
+            ProjectPassListResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectPassDeactivate(
         self, request: ProjectPassDeactivateRequest
     ) -> ProjectPassDeactivateResponse:
         return self._invoke(
-            method="projectPassDeactivate",
-            request=request,
-            response_cls=ProjectPassDeactivateResponse,
+            "projectPassDeactivate",
+            request,
+            ProjectPassDeactivateResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def projectPassUpdateExpiry(
         self, request: ProjectPassUpdateExpiryRequest
     ) -> ProjectPassUpdateExpiryResponse:
         return self._invoke(
-            method="projectPassUpdateExpiry",
-            request=request,
-            response_cls=ProjectPassUpdateExpiryResponse,
+            "projectPassUpdateExpiry",
+            request,
+            ProjectPassUpdateExpiryResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def taxList(self, request: TaxListRequest) -> TaxListResponse:
         return self._invoke(
-            method="taxList",
-            request=request,
-            response_cls=TaxListResponse,
+            "taxList",
+            request,
+            TaxListResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def taxAdd(self, request: TaxAddRequest) -> TaxAddResponse:
         return self._invoke(
-            method="taxAdd",
-            request=request,
-            response_cls=TaxAddResponse,
+            "taxAdd",
+            request,
+            TaxAddResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def taxModify(self, request: TaxModifyRequest) -> TaxModifyResponse:
         return self._invoke(
-            method="taxModify",
-            request=request,
-            response_cls=TaxModifyResponse,
+            "taxModify",
+            request,
+            TaxModifyResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def taxActivate(self, request: TaxActivateRequest) -> TaxActivateResponse:
         return self._invoke(
-            method="taxActivate",
-            request=request,
-            response_cls=TaxActivateResponse,
+            "taxActivate",
+            request,
+            TaxActivateResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def taxInactivate(self, request: TaxInactivateRequest) -> TaxInactivateResponse:
         return self._invoke(
-            method="taxInactivate",
-            request=request,
-            response_cls=TaxInactivateResponse,
+            "taxInactivate",
+            request,
+            TaxInactivateResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def paymentModeInactivate(
         self, request: PaymentModeInactivateRequest
     ) -> PaymentModeInactivateResponse:
         return self._invoke(
-            method="paymentModeInactivate",
-            request=request,
-            response_cls=PaymentModeInactivateResponse,
+            "paymentModeInactivate",
+            request,
+            PaymentModeInactivateResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def paymentModeActivate(
         self, request: PaymentModeActivateRequest
     ) -> PaymentModeActivateResponse:
         return self._invoke(
-            method="paymentModeActivate",
-            request=request,
-            response_cls=PaymentModeActivateResponse,
+            "paymentModeActivate",
+            request,
+            PaymentModeActivateResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def paymentModeDownload(
         self, request: PaymentModeDownloadRequest
     ) -> PaymentModeDownloadResponse:
         return self._invoke(
-            method="paymentModeDownload",
-            request=request,
-            response_cls=PaymentModeDownloadResponse,
+            "paymentModeDownload",
+            request,
+            PaymentModeDownloadResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def orderAdd(self, request: OrderAddRequest) -> OrderAddResponse:
         return self._invoke(
-            method="orderAdd",
-            request=request,
-            response_cls=OrderAddResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "orderAdd",
+            request,
+            OrderAddResponse,
         )
 
     def orderCollectiveAdd(
         self, request: OrderCollectiveAddRequest
     ) -> OrderCollectiveAddResponse:
         return self._invoke(
-            method="orderCollectiveAdd",
-            request=request,
-            response_cls=OrderCollectiveAddResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "orderCollectiveAdd",
+            request,
+            OrderCollectiveAddResponse,
         )
 
     def orderList(self, request: OrderListRequest) -> OrderListResponse:
         return self._invoke(
-            method="orderList",
-            request=request,
-            response_cls=OrderListResponse,
-            skip_block=False,
+            "orderList",
+            request,
+            OrderListResponse,
             req_mapping={"from_": "from"},
-            resp_mapping={},
         )
 
     def orderStorno(self, request: OrderStornoRequest) -> OrderStornoResponse:
         return self._invoke(
-            method="orderStorno",
-            request=request,
-            response_cls=OrderStornoResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "orderStorno",
+            request,
+            OrderStornoResponse,
         )
 
     def orderProformDownload(
         self, request: OrderProformDownloadRequest
     ) -> OrderProformDownloadResponse:
         return self._invoke(
-            method="orderProformDownload",
-            request=request,
-            response_cls=OrderProformDownloadResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "orderProformDownload",
+            request,
+            OrderProformDownloadResponse,
         )
 
     def orderBill(self, request: OrderBillRequest) -> OrderBillResponse:
         return self._invoke(
-            method="orderBill",
-            request=request,
-            response_cls=OrderBillResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "orderBill",
+            request,
+            OrderBillResponse,
         )
 
     def orderDetails(self, request: OrderDetailsRequest) -> OrderDetailsResponse:
         return self._invoke(
-            method="orderDetails",
-            request=request,
-            response_cls=OrderDetailsResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "orderDetails",
+            request,
+            OrderDetailsResponse,
         )
 
     def orderCollectiveClose(
         self, request: OrderCollectiveCloseRequest
     ) -> OrderCollectiveCloseResponse:
         return self._invoke(
-            method="orderCollectiveClose",
-            request=request,
-            response_cls=OrderCollectiveCloseResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "orderCollectiveClose",
+            request,
+            OrderCollectiveCloseResponse,
         )
 
     def orderCollectiveSettling(
         self, request: OrderCollectiveSettlingRequest
     ) -> OrderCollectiveSettlingResponse:
         return self._invoke(
-            method="orderCollectiveSettling",
-            request=request,
-            response_cls=OrderCollectiveSettlingResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "orderCollectiveSettling",
+            request,
+            OrderCollectiveSettlingResponse,
         )
 
     def orderCollectiveAddElements(
         self, request: OrderCollectiveAddElementsRequest
     ) -> OrderCollectiveAddElementsResponse:
         return self._invoke(
-            method="orderCollectiveAddElements",
-            request=request,
-            response_cls=OrderCollectiveAddElementsResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "orderCollectiveAddElements",
+            request,
+            OrderCollectiveAddElementsResponse,
         )
 
     def orderSetPaid(self, request: OrderSetPaidRequest) -> OrderSetPaidResponse:
         return self._invoke(
-            method="orderSetPaid",
-            request=request,
-            response_cls=OrderSetPaidResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "orderSetPaid",
+            request,
+            OrderSetPaidResponse,
         )
 
     def orderCheckPaid(self, request: OrderCheckPaidRequest) -> OrderCheckPaidResponse:
         return self._invoke(
-            method="orderCheckPaid",
-            request=request,
-            response_cls=OrderCheckPaidResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "orderCheckPaid",
+            request,
+            OrderCheckPaidResponse,
         )
 
     def orderPaidChangeList(
         self, request: OrderPaidChangeListRequest
     ) -> OrderPaidChangeListResponse:
         return self._invoke(
-            method="orderPaidChangeList",
-            request=request,
-            response_cls=OrderPaidChangeListResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "orderPaidChangeList",
+            request,
+            OrderPaidChangeListResponse,
         )
 
     def invoiceAdd(self, request: InvoiceAddRequest) -> InvoiceAddResponse:
         return self._invoke(
-            method="invoiceAdd",
-            request=request,
-            response_cls=InvoiceAddResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "invoiceAdd",
+            request,
+            InvoiceAddResponse,
         )
 
     def invoiceAddPrepayment(
         self, request: InvoiceAddPrepaymentRequest
     ) -> InvoiceAddPrepaymentResponse:
         return self._invoke(
-            method="invoiceAddPrepayment",
-            request=request,
-            response_cls=InvoiceAddPrepaymentResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "invoiceAddPrepayment",
+            request,
+            InvoiceAddPrepaymentResponse,
         )
 
     def invoiceAddFinal(
         self, request: InvoiceAddFinalRequest
     ) -> InvoiceAddFinalResponse:
         return self._invoke(
-            method="invoiceAddFinal",
-            request=request,
-            response_cls=InvoiceAddFinalResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "invoiceAddFinal",
+            request,
+            InvoiceAddFinalResponse,
         )
 
     def invoiceDetails(self, request: InvoiceDetailsRequest) -> InvoiceDetailsResponse:
         return self._invoke(
-            method="invoiceDetails",
-            request=request,
-            response_cls=InvoiceDetailsResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "invoiceDetails",
+            request,
+            InvoiceDetailsResponse,
         )
 
     def invoiceDownload(
         self, request: InvoiceDownloadRequest
     ) -> InvoiceDownloadResponse:
         return self._invoke(
-            method="invoiceDownload",
-            request=request,
-            response_cls=InvoiceDownloadResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "invoiceDownload",
+            request,
+            InvoiceDownloadResponse,
         )
 
     def invoiceStorno(self, request: InvoiceStornoRequest) -> InvoiceStornoResponse:
         return self._invoke(
-            method="invoiceStorno",
-            request=request,
-            response_cls=InvoiceStornoResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "invoiceStorno",
+            request,
+            InvoiceStornoResponse,
         )
 
     def invoiceList(self, request: InvoiceListRequest) -> InvoiceListResponse:
         return self._invoke(
-            method="invoiceList",
-            request=request,
-            response_cls=InvoiceListResponse,
-            skip_block=False,
+            "invoiceList",
+            request,
+            InvoiceListResponse,
             req_mapping={"from_": "from"},
-            resp_mapping={},
         )
 
     def invoiceExport(self, request: InvoiceExportRequest) -> InvoiceExportResponse:
         return self._invoke(
-            method="invoiceExport",
-            request=request,
-            response_cls=InvoiceExportResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "invoiceExport",
+            request,
+            InvoiceExportResponse,
         )
 
     def invoiceSearch(self, request: InvoiceSearchRequest) -> InvoiceSearchResponse:
         return self._invoke(
-            method="invoiceSearch",
-            request=request,
-            response_cls=InvoiceSearchResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "invoiceSearch",
+            request,
+            InvoiceSearchResponse,
         )
 
     def invoiceCorrection(
         self, request: InvoiceCorrectionRequest
     ) -> InvoiceCorrectionResponse:
         return self._invoke(
-            method="invoiceCorrection",
-            request=request,
-            response_cls=InvoiceCorrectionResponse,
+            "invoiceCorrection",
+            request,
+            InvoiceCorrectionResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def invoiceResend(self, request: InvoiceResendRequest) -> InvoiceResendResponse:
         return self._invoke(
-            method="invoiceResend",
-            request=request,
-            response_cls=InvoiceResendResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "invoiceResend",
+            request,
+            InvoiceResendResponse,
         )
 
     def invoiceCheckPaid(
         self, request: InvoiceCheckPaidRequest
     ) -> InvoiceCheckPaidResponse:
         return self._invoke(
-            method="invoiceCheckPaid",
-            request=request,
-            response_cls=InvoiceCheckPaidResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "invoiceCheckPaid",
+            request,
+            InvoiceCheckPaidResponse,
         )
 
     def invoiceSetPaid(self, request: InvoiceSetPaidRequest) -> InvoiceSetPaidResponse:
         return self._invoke(
-            method="invoiceSetPaid",
-            request=request,
-            response_cls=InvoiceSetPaidResponse,
-            skip_block=False,
-            req_mapping={},
-            resp_mapping={},
+            "invoiceSetPaid",
+            request,
+            InvoiceSetPaidResponse,
         )
 
     def debtDetails(self, request: DebtDetailsRequest) -> DebtDetailsResponse:
         return self._invoke(
-            method="debtDetails",
-            request=request,
-            response_cls=DebtDetailsResponse,
+            "debtDetails",
+            request,
+            DebtDetailsResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def debtDownload(self, request: DebtDownloadRequest) -> DebtDownloadResponse:
         return self._invoke(
-            method="debtDownload",
-            request=request,
-            response_cls=DebtDownloadResponse,
+            "debtDownload",
+            request,
+            DebtDownloadResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def debtList(self, request: DebtListRequest) -> DebtListResponse:
         return self._invoke(
-            method="debtList",
-            request=request,
-            response_cls=DebtListResponse,
+            "debtList",
+            request,
+            DebtListResponse,
             skip_block=True,
             req_mapping={"from_": "from"},
-            resp_mapping={},
         )
 
     def debtAdd(self, request: DebtAddRequest) -> DebtAddResponse:
         return self._invoke(
-            method="debtAdd",
-            request=request,
-            response_cls=DebtAddResponse,
+            "debtAdd",
+            request,
+            DebtAddResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def debtModify(self, request: DebtModifyRequest) -> DebtModifyResponse:
         return self._invoke(
-            method="debtModify",
-            request=request,
-            response_cls=DebtModifyResponse,
+            "debtModify",
+            request,
+            DebtModifyResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def debtAccept(self, request: DebtAcceptRequest) -> DebtAcceptResponse:
         return self._invoke(
-            method="debtAccept",
-            request=request,
-            response_cls=DebtAcceptResponse,
+            "debtAccept",
+            request,
+            DebtAcceptResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def debtPay(self, request: DebtPayRequest) -> DebtPayResponse:
         return self._invoke(
-            method="debtPay",
-            request=request,
-            response_cls=DebtPayResponse,
+            "debtPay",
+            request,
+            DebtPayResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def debtDelete(self, request: DebtDeleteRequest) -> DebtDeleteResponse:
         return self._invoke(
-            method="debtDelete",
-            request=request,
-            response_cls=DebtDeleteResponse,
+            "debtDelete",
+            request,
+            DebtDeleteResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def debtGenerate(self, request: DebtGenerateRequest) -> DebtGenerateResponse:
         return self._invoke(
-            method="debtGenerate",
-            request=request,
-            response_cls=DebtGenerateResponse,
+            "debtGenerate",
+            request,
+            DebtGenerateResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def debtExport(self, request: DebtExportRequest) -> DebtExportResponse:
         return self._invoke(
-            method="debtExport",
-            request=request,
-            response_cls=DebtExportResponse,
+            "debtExport",
+            request,
+            DebtExportResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def systemMessageList(
         self, request: SystemMessageListRequest
     ) -> SystemMessageListResponse:
         return self._invoke(
-            method="systemMessageList",
-            request=request,
-            response_cls=SystemMessageListResponse,
+            "systemMessageList",
+            request,
+            SystemMessageListResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def systemMessageSetRead(
         self, request: SystemMessageSetReadRequest
     ) -> SystemMessageSetReadResponse:
         return self._invoke(
-            method="systemMessageSetRead",
-            request=request,
-            response_cls=SystemMessageSetReadResponse,
+            "systemMessageSetRead",
+            request,
+            SystemMessageSetReadResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def systemErrorCodeList(
         self, request: SystemErrorCodeListRequest
     ) -> SystemErrorCodeListResponse:
         return self._invoke(
-            method="systemErrorCodeList",
-            request=request,
-            response_cls=SystemErrorCodeListResponse,
+            "systemErrorCodeList",
+            request,
+            SystemErrorCodeListResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def getVersion(self, request: GetVersionRequest) -> GetVersionResponse:
         return self._invoke(
-            method="getVersion",
-            request=request,
-            response_cls=GetVersionResponse,
+            "getVersion",
+            request,
+            GetVersionResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def serviceProviderDatas(
         self, request: ServiceProviderDatasRequest
     ) -> ServiceProviderDatasResponse:
         return self._invoke(
-            method="serviceProviderDatas",
-            request=request,
-            response_cls=ServiceProviderDatasResponse,
+            "serviceProviderDatas",
+            request,
+            ServiceProviderDatasResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def companyData(self, request: CompanyDataRequest) -> CompanyDataResponse:
         return self._invoke(
-            method="companyData",
-            request=request,
-            response_cls=CompanyDataResponse,
+            "companyData",
+            request,
+            CompanyDataResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def quantityList(self, request: QuantityListRequest) -> QuantityListResponse:
         return self._invoke(
-            method="quantityList",
-            request=request,
-            response_cls=QuantityListResponse,
+            "quantityList",
+            request,
+            QuantityListResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def currencyDownload(
         self, request: CurrencyDownloadRequest
     ) -> CurrencyDownloadResponse:
         return self._invoke(
-            method="currencyDownload",
-            request=request,
-            response_cls=CurrencyDownloadResponse,
+            "currencyDownload",
+            request,
+            CurrencyDownloadResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def regularityDownload(
         self, request: RegularityDownloadRequest
     ) -> RegularityDownloadResponse:
         return self._invoke(
-            method="regularityDownload",
-            request=request,
-            response_cls=RegularityDownloadResponse,
+            "regularityDownload",
+            request,
+            RegularityDownloadResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def countryDownload(
         self, request: CountryDownloadRequest
     ) -> CountryDownloadResponse:
         return self._invoke(
-            method="countryDownload",
-            request=request,
-            response_cls=CountryDownloadResponse,
+            "countryDownload",
+            request,
+            CountryDownloadResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def postcodeDownload(
         self, request: PostcodeDownloadRequest
     ) -> PostcodeDownloadResponse:
         return self._invoke(
-            method="postcodeDownload",
-            request=request,
-            response_cls=PostcodeDownloadResponse,
+            "postcodeDownload",
+            request,
+            PostcodeDownloadResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def ping(self, request: PingRequest) -> PingResponse:
         return self._invoke(
-            method="ping",
-            request=request,
-            response_cls=PingResponse,
+            "ping",
+            request,
+            PingResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )
 
     def monitor(self, request: MonitorRequest) -> MonitorResponse:
         return self._invoke(
-            method="monitor",
-            request=request,
-            response_cls=MonitorResponse,
+            "monitor",
+            request,
+            MonitorResponse,
             skip_block=True,
-            req_mapping={},
-            resp_mapping={},
         )

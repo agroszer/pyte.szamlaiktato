@@ -195,20 +195,22 @@ def generate_python(endpoints, output_file):
         f.write("        method: str,\n")
         f.write("        request: Any,\n")
         f.write("        response_cls: Any,\n")
-        f.write("        skip_block: bool,\n")
-        f.write("        req_mapping: builtins.dict[str, str],\n")
-        f.write("        resp_mapping: builtins.dict[str, str],\n")
+        f.write("        skip_block: bool = False,\n")
+        f.write("        req_mapping: Optional[builtins.dict[str, str]] = None,\n")
+        f.write("        resp_mapping: Optional[builtins.dict[str, str]] = None,\n")
         f.write("    ) -> Any:\n")
         f.write("        params = asdict(request) if request else {}\n")
-        f.write("        for py_name, orig_name in req_mapping.items():\n")
-        f.write("            if py_name in params:\n")
-        f.write("                params[orig_name] = params.pop(py_name)\n")
+        f.write("        if req_mapping:\n")
+        f.write("            for py_name, orig_name in req_mapping.items():\n")
+        f.write("                if py_name in params:\n")
+        f.write("                    params[orig_name] = params.pop(py_name)\n")
         f.write(
             "        data = self.client._call(method, params, skip_block=skip_block)\n"
         )
-        f.write("        for orig_name, py_name in resp_mapping.items():\n")
-        f.write("            if orig_name in data:\n")
-        f.write("                data[py_name] = data.pop(orig_name)\n")
+        f.write("        if resp_mapping:\n")
+        f.write("            for orig_name, py_name in resp_mapping.items():\n")
+        f.write("                if orig_name in data:\n")
+        f.write("                    data[py_name] = data.pop(orig_name)\n")
         f.write("        valid_keys = response_cls.__dataclass_fields__.keys()\n")
         f.write("        filtered_data = {\n")
         f.write("            k: v for k, v in data.items() if k in valid_keys\n")
@@ -261,18 +263,21 @@ def generate_python(endpoints, output_file):
                 if py_name != orig_name:
                     resp_mapping[orig_name] = py_name
 
-            skip_block_val = "False" if ep.get("requires_block", False) else "True"
+            skip_block_val = ep.get("requires_block", False) is False
 
-            f.write(
-                f"        return self._invoke(\n"
-                f"            method='{method_name}',\n"
-                f"            request=request,\n"
-                f"            response_cls={resp_name},\n"
-                f"            skip_block={skip_block_val},\n"
-                f"            req_mapping={req_mapping},\n"
-                f"            resp_mapping={resp_mapping},\n"
-                f"        )\n\n"
-            )
+            f.write("        return self._invoke(\n")
+            f.write(f"            '{method_name}',\n")
+            f.write("            request,\n")
+            f.write(f"            {resp_name},\n")
+
+            if skip_block_val:
+                f.write("            skip_block=True,\n")
+            if req_mapping:
+                f.write(f"            req_mapping={req_mapping},\n")
+            if resp_mapping:
+                f.write(f"            resp_mapping={resp_mapping},\n")
+
+            f.write("        )\n\n")
 
 
 if __name__ == "__main__":
