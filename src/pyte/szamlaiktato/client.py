@@ -1,7 +1,7 @@
 from typing import Any
 
 import logging
-import requests
+import requests  # type: ignore
 
 LOG = logging.getLogger(__name__)
 
