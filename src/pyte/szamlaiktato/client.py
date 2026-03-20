@@ -17,17 +17,26 @@ class ApiError(Exception):
 
 
 class OnlineSzamlazoClient:
-    def __init__(self, api_url: str, uid: str, password: str, block: str):
+    def __init__(
+        self,
+        api_url: str,
+        uid: str,
+        password: str,
+        block: str,
+        instance_id: str | None = None,
+    ):
         self.api_url = api_url.rstrip("/")
         self.uid = uid
         self.password = password
         self.block = block
+        self.instance_id = instance_id
 
     def _call(
         self,
         method: str,
         params: dict[str, Any] | None = None,
         skip_block: bool = False,
+        requires_instance_id: bool = False,
     ) -> dict[str, Any]:
         url = f"{self.api_url}/{method}"
 
@@ -43,6 +52,13 @@ class OnlineSzamlazoClient:
 
         if not skip_block and "block" not in body:
             body["block"] = self.block
+
+        if (
+            requires_instance_id
+            and self.instance_id is not None
+            and "instance_id" not in body
+        ):
+            body["instance_id"] = self.instance_id
 
         bodydupe = {}
         bodydupe.update(body)

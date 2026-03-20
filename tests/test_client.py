@@ -7,7 +7,11 @@ from pyte.szamlaiktato.api import SzamlaiktatoAPI, PingRequest
 @responses.activate
 def test_client_call():
     client = OnlineSzamlazoClient(
-        "https://api.szamlaiktato.hu", "test_uid", "test_pass", "test_block"
+        "https://api.szamlaiktato.hu",
+        "test_uid",
+        "test_pass",
+        "test_block",
+        instance_id="123",
     )
     api = SzamlaiktatoAPI(client)
 
@@ -18,7 +22,7 @@ def test_client_call():
         status=200,
     )
 
-    req = PingRequest(instance_id="123")
+    req = PingRequest()
     resp = api.ping(req)
 
     assert resp.status_id == 1000
@@ -28,7 +32,11 @@ def test_client_call():
 @responses.activate
 def test_client_error():
     client = OnlineSzamlazoClient(
-        "https://api.szamlaiktato.hu", "test_uid", "test_pass", "test_block"
+        "https://api.szamlaiktato.hu",
+        "test_uid",
+        "test_pass",
+        "test_block",
+        instance_id="123",
     )
     api = SzamlaiktatoAPI(client)
 
@@ -40,7 +48,7 @@ def test_client_error():
     )
 
     with pytest.raises(ApiError) as excinfo:
-        api.ping(PingRequest(instance_id="123"))
+        api.ping(PingRequest())
 
     assert excinfo.value.status_id == 4001
     assert "Unauthorized" in str(excinfo.value)

@@ -94,9 +94,14 @@ def extract_endpoints(html_file):
             # Detect if "block" parameter is required
             requires_block = any(f["name"] == "block" for f in req_table)
 
+            # Detect if "instance_id" parameter is required
+            requires_instance_id = any(f["name"] == "instance_id" for f in req_table)
+
             # Remove base credentials
             req_table = [
-                f for f in req_table if f["name"] not in ("uid", "password", "block")
+                f
+                for f in req_table
+                if f["name"] not in ("uid", "password", "block", "instance_id")
             ]
 
             # Deduplicate fields
@@ -120,6 +125,7 @@ def extract_endpoints(html_file):
                     "request": dedup_req,
                     "response": dedup_resp,
                     "requires_block": requires_block,
+                    "requires_instance_id": requires_instance_id,
                 }
             )
 
@@ -196,6 +202,7 @@ def generate_python(endpoints, output_file):
         f.write("        request: Any,\n")
         f.write("        response_cls: Any,\n")
         f.write("        skip_block: bool = False,\n")
+        f.write("        requires_instance_id: bool = False,\n")
         f.write("        req_mapping: Optional[builtins.dict[str, str]] = None,\n")
         f.write("        resp_mapping: Optional[builtins.dict[str, str]] = None,\n")
         f.write("    ) -> Any:\n")
@@ -204,9 +211,12 @@ def generate_python(endpoints, output_file):
         f.write("            for py_name, orig_name in req_mapping.items():\n")
         f.write("                if py_name in params:\n")
         f.write("                    params[orig_name] = params.pop(py_name)\n")
-        f.write(
-            "        data = self.client._call(method, params, skip_block=skip_block)\n"
-        )
+        f.write("        data = self.client._call(\n")
+        f.write("            method,\n")
+        f.write("            params,\n")
+        f.write("            skip_block=skip_block,\n")
+        f.write("            requires_instance_id=requires_instance_id,\n")
+        f.write("        )\n")
         f.write("        if resp_mapping:\n")
         f.write("            for orig_name, py_name in resp_mapping.items():\n")
         f.write("                if orig_name in data:\n")
@@ -264,6 +274,7 @@ def generate_python(endpoints, output_file):
                     resp_mapping[orig_name] = py_name
 
             skip_block_val = ep.get("requires_block", False) is False
+            req_instance_id_val = ep.get("requires_instance_id", False)
 
             f.write("        return self._invoke(\n")
             f.write(f"            '{method_name}',\n")
@@ -272,6 +283,8 @@ def generate_python(endpoints, output_file):
 
             if skip_block_val:
                 f.write("            skip_block=True,\n")
+            if req_instance_id_val:
+                f.write("            requires_instance_id=True,\n")
             if req_mapping:
                 f.write(f"            req_mapping={req_mapping},\n")
             if resp_mapping:
