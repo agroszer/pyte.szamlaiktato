@@ -438,8 +438,8 @@ class ProductListResponse:
     status: Optional[str] = None
     numberOfResults: Optional[int] = None
     numberOfPages: Optional[int] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     sid: Optional[str] = None
     name: Optional[str] = None
     service_id: Optional[str] = None
@@ -476,7 +476,7 @@ class ProductFileListRequest:
 class ProductFileListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
+    list: Optional[list[dict[str, Any]]] = None
     sid: Optional[str] = None
     filename: Optional[str] = None
     checksum: Optional[str] = None
@@ -493,8 +493,8 @@ class OuterDatasourcesRequest:
 class OuterDatasourcesResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
     description: Optional[str] = None
@@ -504,7 +504,7 @@ class OuterDatasourcesResponse:
 @dataclass
 class OuterDatasourcesGetRequest:
     instance_id: str
-    type_: str
+    type: str
 
 
 @dataclass
@@ -517,7 +517,7 @@ class OuterDatasourcesGetResponse:
 @dataclass
 class OuterDatasourcesSaveRequest:
     instance_id: str
-    type_: str
+    type: str
     data: str
     nav_xml_user: str
     nav_xml_password: str
@@ -715,8 +715,8 @@ class BlockListRequest:
 class BlockListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     block_name: Optional[str] = None
     name: Optional[str] = None
     lang: Optional[str] = None
@@ -869,8 +869,8 @@ class CostTypeListRequest:
 class CostTypeListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
     comment: Optional[str] = None
@@ -928,7 +928,7 @@ class ProjectGetRequest:
 class ProjectGetResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    id_: Optional[int] = None
+    id: Optional[int] = None
     code: Optional[str] = None
     name: Optional[str] = None
     is_booking: Optional[int] = None
@@ -959,7 +959,7 @@ class ProjectCreateRequest:
 class ProjectCreateResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    id_: Optional[int] = None
+    id: Optional[int] = None
     code: Optional[str] = None
 
 
@@ -1235,15 +1235,15 @@ class ProjectPassUpdateExpiryResponse:
 @dataclass
 class TaxListRequest:
     instance_id: str
-    type_: str
+    type: str
 
 
 @dataclass
 class TaxListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
     value: Optional[float] = None
@@ -1347,8 +1347,8 @@ class PaymentModeDownloadRequest:
 class PaymentModeDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
     active: Optional[int] = None
@@ -1440,7 +1440,7 @@ class OrderListRequest:
     customer_sid: Optional[str] = None
     regularities_id: Optional[int] = None
     regularity: Optional[str] = None
-    type_: Optional[str] = None
+    type: Optional[str] = None
 
 
 @dataclass
@@ -1462,7 +1462,7 @@ class OrderListResponse:
     invoice_to_post: Optional[int] = None
     invoice_to_post_code: Optional[str] = None
     collective: Optional[int] = None
-    type_: Optional[int] = None
+    type: Optional[int] = None
     type_code: Optional[str] = None
     payment_mode_id: Optional[int] = None
     payment_mode_code: Optional[str] = None
@@ -1619,7 +1619,7 @@ class OrderCollectiveSettlingRequest:
 class OrderCollectiveSettlingResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
+    list: Optional[list[dict[str, Any]]] = None
     order_number: Optional[str] = None
     invoice_number: Optional[str] = None
     customer_sid: Optional[str] = None
@@ -1693,7 +1693,7 @@ class OrderPaidChangeListRequest:
 class OrderPaidChangeListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
+    list: Optional[list[dict[str, Any]]] = None
     order_number: Optional[str] = None
 
 
@@ -1921,7 +1921,7 @@ class InvoiceListResponse:
     trade_date: Optional[str] = None
     print_date: Optional[str] = None
     pay_date: Optional[str] = None
-    type_: Optional[int] = None
+    type: Optional[int] = None
     type_code: Optional[str] = None
     reference: Optional[str] = None
     payment_mode_id: Optional[int] = None
@@ -2075,7 +2075,7 @@ class InvoiceSetPaidResponse:
 @dataclass
 class DebtDetailsRequest:
     instance_id: str
-    type_: str
+    type: str
     customer_sid: str
     invoice_number: str
 
@@ -2105,7 +2105,7 @@ class DebtDownloadResponse:
 @dataclass
 class DebtListRequest:
     instance_id: str
-    type_: Optional[int] = None
+    type: Optional[int] = None
     active: Optional[int] = None
     paid: Optional[int] = None
     customer_sid: Optional[str] = None
@@ -2121,7 +2121,7 @@ class DebtListResponse:
     status: Optional[str] = None
     numberOfResults: Optional[int] = None
     numberOfPages: Optional[int] = None
-    list_: Optional[list[dict[str, Any]]] = None
+    list: Optional[list[dict[str, Any]]] = None
 
 
 @dataclass
@@ -2158,7 +2158,7 @@ class DebtAddResponse:
 @dataclass
 class DebtModifyRequest:
     instance_id: str
-    id_: int
+    id: int
     customer_sid: Optional[str] = None
     invoice_number: Optional[str] = None
     amount: Optional[float] = None
@@ -2251,7 +2251,7 @@ class DebtExportRequest:
 class DebtExportResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
+    list: Optional[list[dict[str, Any]]] = None
 
 
 @dataclass
@@ -2263,8 +2263,8 @@ class SystemMessageListRequest:
 class SystemMessageListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     message: Optional[str] = None
     message_date: Optional[str] = None
     message_type: Optional[int] = None
@@ -2273,7 +2273,7 @@ class SystemMessageListResponse:
 @dataclass
 class SystemMessageSetReadRequest:
     instance_id: str
-    id_: int
+    id: int
 
 
 @dataclass
@@ -2295,7 +2295,7 @@ class SystemErrorCodeListResponse:
     lang: Optional[list[dict[str, Any]]] = None
     code: Optional[int] = None
     description: Optional[str] = None
-    type_: Optional[str] = None
+    type: Optional[str] = None
 
 
 @dataclass
@@ -2345,7 +2345,7 @@ class CompanyDataRequest:
 class CompanyDataResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    id_: Optional[int] = None
+    id: Optional[int] = None
     block_name: Optional[str] = None
     name: Optional[str] = None
     country: Optional[str] = None
@@ -2377,15 +2377,15 @@ class CompanyDataResponse:
 @dataclass
 class QuantityListRequest:
     instance_id: str
-    type_: str
+    type: str
 
 
 @dataclass
 class QuantityListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
     active: Optional[int] = None
@@ -2396,15 +2396,15 @@ class QuantityListResponse:
 @dataclass
 class CurrencyDownloadRequest:
     instance_id: str
-    type_: str
+    type: str
 
 
 @dataclass
 class CurrencyDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     currency: Optional[str] = None
     amount: Optional[float] = None
     unit: Optional[float] = None
@@ -2420,8 +2420,8 @@ class RegularityDownloadRequest:
 class RegularityDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     code: Optional[str] = None
     regularity: Optional[str] = None
 
@@ -2435,7 +2435,7 @@ class CountryDownloadRequest:
 class CountryDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
+    list: Optional[list[dict[str, Any]]] = None
     code: Optional[str] = None
     country: Optional[str] = None
 
@@ -2476,7 +2476,7 @@ class MonitorRequest:
 class MonitorResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
+    list: Optional[list[dict[str, Any]]] = None
     state: Optional[str] = None
     name: Optional[str] = None
     last_check: Optional[str] = None
@@ -2595,10 +2595,6 @@ class SzamlaiktatoAPI:
     def productList(self, request: ProductListRequest) -> ProductListResponse:
         params = asdict(request) if request else {}
         data = self.client._call("productList", params, skip_block=True)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
         valid_keys = ProductListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProductListResponse(**filtered_data)
@@ -2608,8 +2604,6 @@ class SzamlaiktatoAPI:
     ) -> ProductFileListResponse:
         params = asdict(request) if request else {}
         data = self.client._call("productFileList", params, skip_block=True)
-        if "list" in data:
-            data["list_"] = data.pop("list")
         valid_keys = ProductFileListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProductFileListResponse(**filtered_data)
@@ -2619,10 +2613,6 @@ class SzamlaiktatoAPI:
     ) -> OuterDatasourcesResponse:
         params = asdict(request) if request else {}
         data = self.client._call("outerDatasources", params, skip_block=True)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
         valid_keys = OuterDatasourcesResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OuterDatasourcesResponse(**filtered_data)
@@ -2631,8 +2621,6 @@ class SzamlaiktatoAPI:
         self, request: OuterDatasourcesGetRequest
     ) -> OuterDatasourcesGetResponse:
         params = asdict(request) if request else {}
-        if "type_" in params:
-            params["type"] = params.pop("type_")
         data = self.client._call("outerDatasourcesGet", params, skip_block=True)
         valid_keys = OuterDatasourcesGetResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
@@ -2642,8 +2630,6 @@ class SzamlaiktatoAPI:
         self, request: OuterDatasourcesSaveRequest
     ) -> OuterDatasourcesSaveResponse:
         params = asdict(request) if request else {}
-        if "type_" in params:
-            params["type"] = params.pop("type_")
         data = self.client._call("outerDatasourcesSave", params, skip_block=True)
         valid_keys = OuterDatasourcesSaveResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
@@ -2698,10 +2684,6 @@ class SzamlaiktatoAPI:
     def blockList(self, request: BlockListRequest) -> BlockListResponse:
         params = asdict(request) if request else {}
         data = self.client._call("blockList", params, skip_block=True)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
         valid_keys = BlockListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return BlockListResponse(**filtered_data)
@@ -2778,10 +2760,6 @@ class SzamlaiktatoAPI:
     def costTypeList(self, request: CostTypeListRequest) -> CostTypeListResponse:
         params = asdict(request) if request else {}
         data = self.client._call("costTypeList", params, skip_block=True)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
         valid_keys = CostTypeListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CostTypeListResponse(**filtered_data)
@@ -2814,8 +2792,6 @@ class SzamlaiktatoAPI:
     def projectGet(self, request: ProjectGetRequest) -> ProjectGetResponse:
         params = asdict(request) if request else {}
         data = self.client._call("projectGet", params, skip_block=True)
-        if "id" in data:
-            data["id_"] = data.pop("id")
         valid_keys = ProjectGetResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectGetResponse(**filtered_data)
@@ -2823,8 +2799,6 @@ class SzamlaiktatoAPI:
     def projectCreate(self, request: ProjectCreateRequest) -> ProjectCreateResponse:
         params = asdict(request) if request else {}
         data = self.client._call("projectCreate", params, skip_block=True)
-        if "id" in data:
-            data["id_"] = data.pop("id")
         valid_keys = ProjectCreateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectCreateResponse(**filtered_data)
@@ -3002,13 +2976,7 @@ class SzamlaiktatoAPI:
 
     def taxList(self, request: TaxListRequest) -> TaxListResponse:
         params = asdict(request) if request else {}
-        if "type_" in params:
-            params["type"] = params.pop("type_")
         data = self.client._call("taxList", params, skip_block=True)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
         valid_keys = TaxListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return TaxListResponse(**filtered_data)
@@ -3064,10 +3032,6 @@ class SzamlaiktatoAPI:
     ) -> PaymentModeDownloadResponse:
         params = asdict(request) if request else {}
         data = self.client._call("paymentModeDownload", params, skip_block=True)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
         valid_keys = PaymentModeDownloadResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return PaymentModeDownloadResponse(**filtered_data)
@@ -3092,11 +3056,7 @@ class SzamlaiktatoAPI:
         params = asdict(request) if request else {}
         if "from_" in params:
             params["from"] = params.pop("from_")
-        if "type_" in params:
-            params["type"] = params.pop("type_")
         data = self.client._call("orderList", params, skip_block=False)
-        if "type" in data:
-            data["type_"] = data.pop("type")
         valid_keys = OrderListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OrderListResponse(**filtered_data)
@@ -3145,8 +3105,6 @@ class SzamlaiktatoAPI:
     ) -> OrderCollectiveSettlingResponse:
         params = asdict(request) if request else {}
         data = self.client._call("orderCollectiveSettling", params, skip_block=False)
-        if "list" in data:
-            data["list_"] = data.pop("list")
         valid_keys = OrderCollectiveSettlingResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OrderCollectiveSettlingResponse(**filtered_data)
@@ -3179,8 +3137,6 @@ class SzamlaiktatoAPI:
     ) -> OrderPaidChangeListResponse:
         params = asdict(request) if request else {}
         data = self.client._call("orderPaidChangeList", params, skip_block=False)
-        if "list" in data:
-            data["list_"] = data.pop("list")
         valid_keys = OrderPaidChangeListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OrderPaidChangeListResponse(**filtered_data)
@@ -3238,8 +3194,6 @@ class SzamlaiktatoAPI:
         if "from_" in params:
             params["from"] = params.pop("from_")
         data = self.client._call("invoiceList", params, skip_block=False)
-        if "type" in data:
-            data["type_"] = data.pop("type")
         valid_keys = InvoiceListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return InvoiceListResponse(**filtered_data)
@@ -3292,8 +3246,6 @@ class SzamlaiktatoAPI:
 
     def debtDetails(self, request: DebtDetailsRequest) -> DebtDetailsResponse:
         params = asdict(request) if request else {}
-        if "type_" in params:
-            params["type"] = params.pop("type_")
         data = self.client._call("debtDetails", params, skip_block=True)
         valid_keys = DebtDetailsResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
@@ -3308,13 +3260,9 @@ class SzamlaiktatoAPI:
 
     def debtList(self, request: DebtListRequest) -> DebtListResponse:
         params = asdict(request) if request else {}
-        if "type_" in params:
-            params["type"] = params.pop("type_")
         if "from_" in params:
             params["from"] = params.pop("from_")
         data = self.client._call("debtList", params, skip_block=True)
-        if "list" in data:
-            data["list_"] = data.pop("list")
         valid_keys = DebtListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return DebtListResponse(**filtered_data)
@@ -3328,8 +3276,6 @@ class SzamlaiktatoAPI:
 
     def debtModify(self, request: DebtModifyRequest) -> DebtModifyResponse:
         params = asdict(request) if request else {}
-        if "id_" in params:
-            params["id"] = params.pop("id_")
         data = self.client._call("debtModify", params, skip_block=True)
         valid_keys = DebtModifyResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
@@ -3366,8 +3312,6 @@ class SzamlaiktatoAPI:
     def debtExport(self, request: DebtExportRequest) -> DebtExportResponse:
         params = asdict(request) if request else {}
         data = self.client._call("debtExport", params, skip_block=True)
-        if "list" in data:
-            data["list_"] = data.pop("list")
         valid_keys = DebtExportResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return DebtExportResponse(**filtered_data)
@@ -3377,10 +3321,6 @@ class SzamlaiktatoAPI:
     ) -> SystemMessageListResponse:
         params = asdict(request) if request else {}
         data = self.client._call("systemMessageList", params, skip_block=True)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
         valid_keys = SystemMessageListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return SystemMessageListResponse(**filtered_data)
@@ -3389,8 +3329,6 @@ class SzamlaiktatoAPI:
         self, request: SystemMessageSetReadRequest
     ) -> SystemMessageSetReadResponse:
         params = asdict(request) if request else {}
-        if "id_" in params:
-            params["id"] = params.pop("id_")
         data = self.client._call("systemMessageSetRead", params, skip_block=True)
         valid_keys = SystemMessageSetReadResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
@@ -3401,8 +3339,6 @@ class SzamlaiktatoAPI:
     ) -> SystemErrorCodeListResponse:
         params = asdict(request) if request else {}
         data = self.client._call("systemErrorCodeList", params, skip_block=True)
-        if "type" in data:
-            data["type_"] = data.pop("type")
         valid_keys = SystemErrorCodeListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return SystemErrorCodeListResponse(**filtered_data)
@@ -3426,21 +3362,13 @@ class SzamlaiktatoAPI:
     def companyData(self, request: CompanyDataRequest) -> CompanyDataResponse:
         params = asdict(request) if request else {}
         data = self.client._call("companyData", params, skip_block=True)
-        if "id" in data:
-            data["id_"] = data.pop("id")
         valid_keys = CompanyDataResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CompanyDataResponse(**filtered_data)
 
     def quantityList(self, request: QuantityListRequest) -> QuantityListResponse:
         params = asdict(request) if request else {}
-        if "type_" in params:
-            params["type"] = params.pop("type_")
         data = self.client._call("quantityList", params, skip_block=True)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
         valid_keys = QuantityListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return QuantityListResponse(**filtered_data)
@@ -3449,13 +3377,7 @@ class SzamlaiktatoAPI:
         self, request: CurrencyDownloadRequest
     ) -> CurrencyDownloadResponse:
         params = asdict(request) if request else {}
-        if "type_" in params:
-            params["type"] = params.pop("type_")
         data = self.client._call("currencyDownload", params, skip_block=True)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
         valid_keys = CurrencyDownloadResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CurrencyDownloadResponse(**filtered_data)
@@ -3465,10 +3387,6 @@ class SzamlaiktatoAPI:
     ) -> RegularityDownloadResponse:
         params = asdict(request) if request else {}
         data = self.client._call("regularityDownload", params, skip_block=True)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
         valid_keys = RegularityDownloadResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return RegularityDownloadResponse(**filtered_data)
@@ -3478,8 +3396,6 @@ class SzamlaiktatoAPI:
     ) -> CountryDownloadResponse:
         params = asdict(request) if request else {}
         data = self.client._call("countryDownload", params, skip_block=True)
-        if "list" in data:
-            data["list_"] = data.pop("list")
         valid_keys = CountryDownloadResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CountryDownloadResponse(**filtered_data)
@@ -3503,8 +3419,6 @@ class SzamlaiktatoAPI:
     def monitor(self, request: MonitorRequest) -> MonitorResponse:
         params = asdict(request) if request else {}
         data = self.client._call("monitor", params, skip_block=True)
-        if "list" in data:
-            data["list_"] = data.pop("list")
         valid_keys = MonitorResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return MonitorResponse(**filtered_data)

@@ -149,13 +149,9 @@ def generate_python(endpoints, output_file):
                         "from",
                         "import",
                         "pass",
-                        "type",
-                        "id",
                         "def",
                         "class",
                         "global",
-                        "list",
-                        "dict",
                     )
                     if py_name in reserved:
                         py_name += "_"
@@ -178,13 +174,9 @@ def generate_python(endpoints, output_file):
                         "from",
                         "import",
                         "pass",
-                        "type",
-                        "id",
                         "def",
                         "class",
                         "global",
-                        "list",
-                        "dict",
                     )
                     if py_name in reserved:
                         py_name += "_"
@@ -216,13 +208,9 @@ def generate_python(endpoints, output_file):
                     "from",
                     "import",
                     "pass",
-                    "type",
-                    "id",
                     "def",
                     "class",
                     "global",
-                    "list",
-                    "dict",
                 )
                 if py_name in reserved:
                     py_name += "_"
@@ -247,13 +235,9 @@ def generate_python(endpoints, output_file):
                     "from",
                     "import",
                     "pass",
-                    "type",
-                    "id",
                     "def",
                     "class",
                     "global",
-                    "list",
-                    "dict",
                 )
                 if py_name in reserved:
                     py_name += "_"
