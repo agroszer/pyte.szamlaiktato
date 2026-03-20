@@ -438,8 +438,8 @@ class ProductListResponse:
     status: Optional[str] = None
     numberOfResults: Optional[int] = None
     numberOfPages: Optional[int] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     sid: Optional[str] = None
     name: Optional[str] = None
     service_id: Optional[str] = None
@@ -476,7 +476,7 @@ class ProductFileListRequest:
 class ProductFileListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
+    list: Optional[list[dict[str, Any]]] = None
     sid: Optional[str] = None
     filename: Optional[str] = None
     checksum: Optional[str] = None
@@ -493,8 +493,8 @@ class OuterDatasourcesRequest:
 class OuterDatasourcesResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
     description: Optional[str] = None
@@ -504,7 +504,7 @@ class OuterDatasourcesResponse:
 @dataclass
 class OuterDatasourcesGetRequest:
     instance_id: str
-    type_: str
+    type: str
 
 
 @dataclass
@@ -517,7 +517,7 @@ class OuterDatasourcesGetResponse:
 @dataclass
 class OuterDatasourcesSaveRequest:
     instance_id: str
-    type_: str
+    type: str
     data: str
     nav_xml_user: str
     nav_xml_password: str
@@ -715,8 +715,8 @@ class BlockListRequest:
 class BlockListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     block_name: Optional[str] = None
     name: Optional[str] = None
     lang: Optional[str] = None
@@ -869,8 +869,8 @@ class CostTypeListRequest:
 class CostTypeListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
     comment: Optional[str] = None
@@ -928,7 +928,7 @@ class ProjectGetRequest:
 class ProjectGetResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    id_: Optional[int] = None
+    id: Optional[int] = None
     code: Optional[str] = None
     name: Optional[str] = None
     is_booking: Optional[int] = None
@@ -959,7 +959,7 @@ class ProjectCreateRequest:
 class ProjectCreateResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    id_: Optional[int] = None
+    id: Optional[int] = None
     code: Optional[str] = None
 
 
@@ -1235,15 +1235,15 @@ class ProjectPassUpdateExpiryResponse:
 @dataclass
 class TaxListRequest:
     instance_id: str
-    type_: str
+    type: str
 
 
 @dataclass
 class TaxListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
     value: Optional[float] = None
@@ -1347,8 +1347,8 @@ class PaymentModeDownloadRequest:
 class PaymentModeDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
     active: Optional[int] = None
@@ -1435,12 +1435,12 @@ class OrderListRequest:
     instance_id: str
     limit: Optional[int] = None
     page: Optional[int] = None
-    from_: Optional[str] = None
+    from: Optional[str] = None
     to: Optional[str] = None
     customer_sid: Optional[str] = None
     regularities_id: Optional[int] = None
     regularity: Optional[str] = None
-    type_: Optional[str] = None
+    type: Optional[str] = None
 
 
 @dataclass
@@ -1462,7 +1462,7 @@ class OrderListResponse:
     invoice_to_post: Optional[int] = None
     invoice_to_post_code: Optional[str] = None
     collective: Optional[int] = None
-    type_: Optional[int] = None
+    type: Optional[int] = None
     type_code: Optional[str] = None
     payment_mode_id: Optional[int] = None
     payment_mode_code: Optional[str] = None
@@ -1619,7 +1619,7 @@ class OrderCollectiveSettlingRequest:
 class OrderCollectiveSettlingResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
+    list: Optional[list[dict[str, Any]]] = None
     order_number: Optional[str] = None
     invoice_number: Optional[str] = None
     customer_sid: Optional[str] = None
@@ -1693,7 +1693,7 @@ class OrderPaidChangeListRequest:
 class OrderPaidChangeListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
+    list: Optional[list[dict[str, Any]]] = None
     order_number: Optional[str] = None
 
 
@@ -1889,7 +1889,7 @@ class InvoiceListRequest:
     instance_id: str
     limit: Optional[int] = None
     page: Optional[int] = None
-    from_: Optional[str] = None
+    from: Optional[str] = None
     to: Optional[str] = None
     customer_sid: Optional[str] = None
 
@@ -1921,7 +1921,7 @@ class InvoiceListResponse:
     trade_date: Optional[str] = None
     print_date: Optional[str] = None
     pay_date: Optional[str] = None
-    type_: Optional[int] = None
+    type: Optional[int] = None
     type_code: Optional[str] = None
     reference: Optional[str] = None
     payment_mode_id: Optional[int] = None
@@ -2075,7 +2075,7 @@ class InvoiceSetPaidResponse:
 @dataclass
 class DebtDetailsRequest:
     instance_id: str
-    type_: str
+    type: str
     customer_sid: str
     invoice_number: str
 
@@ -2105,13 +2105,13 @@ class DebtDownloadResponse:
 @dataclass
 class DebtListRequest:
     instance_id: str
-    type_: Optional[int] = None
+    type: Optional[int] = None
     active: Optional[int] = None
     paid: Optional[int] = None
     customer_sid: Optional[str] = None
     limit: Optional[int] = None
     page: Optional[int] = None
-    from_: Optional[str] = None
+    from: Optional[str] = None
     to: Optional[str] = None
 
 
@@ -2121,7 +2121,7 @@ class DebtListResponse:
     status: Optional[str] = None
     numberOfResults: Optional[int] = None
     numberOfPages: Optional[int] = None
-    list_: Optional[list[dict[str, Any]]] = None
+    list: Optional[list[dict[str, Any]]] = None
 
 
 @dataclass
@@ -2158,7 +2158,7 @@ class DebtAddResponse:
 @dataclass
 class DebtModifyRequest:
     instance_id: str
-    id_: int
+    id: int
     customer_sid: Optional[str] = None
     invoice_number: Optional[str] = None
     amount: Optional[float] = None
@@ -2251,7 +2251,7 @@ class DebtExportRequest:
 class DebtExportResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
+    list: Optional[list[dict[str, Any]]] = None
 
 
 @dataclass
@@ -2263,8 +2263,8 @@ class SystemMessageListRequest:
 class SystemMessageListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     message: Optional[str] = None
     message_date: Optional[str] = None
     message_type: Optional[int] = None
@@ -2273,7 +2273,7 @@ class SystemMessageListResponse:
 @dataclass
 class SystemMessageSetReadRequest:
     instance_id: str
-    id_: int
+    id: int
 
 
 @dataclass
@@ -2295,7 +2295,7 @@ class SystemErrorCodeListResponse:
     lang: Optional[list[dict[str, Any]]] = None
     code: Optional[int] = None
     description: Optional[str] = None
-    type_: Optional[str] = None
+    type: Optional[str] = None
 
 
 @dataclass
@@ -2345,7 +2345,7 @@ class CompanyDataRequest:
 class CompanyDataResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    id_: Optional[int] = None
+    id: Optional[int] = None
     block_name: Optional[str] = None
     name: Optional[str] = None
     country: Optional[str] = None
@@ -2377,15 +2377,15 @@ class CompanyDataResponse:
 @dataclass
 class QuantityListRequest:
     instance_id: str
-    type_: str
+    type: str
 
 
 @dataclass
 class QuantityListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
     active: Optional[int] = None
@@ -2396,15 +2396,15 @@ class QuantityListResponse:
 @dataclass
 class CurrencyDownloadRequest:
     instance_id: str
-    type_: str
+    type: str
 
 
 @dataclass
 class CurrencyDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     currency: Optional[str] = None
     amount: Optional[float] = None
     unit: Optional[float] = None
@@ -2420,8 +2420,8 @@ class RegularityDownloadRequest:
 class RegularityDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
-    id_: Optional[int] = None
+    list: Optional[list[dict[str, Any]]] = None
+    id: Optional[int] = None
     code: Optional[str] = None
     regularity: Optional[str] = None
 
@@ -2435,7 +2435,7 @@ class CountryDownloadRequest:
 class CountryDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
+    list: Optional[list[dict[str, Any]]] = None
     code: Optional[str] = None
     country: Optional[str] = None
 
@@ -2476,7 +2476,7 @@ class MonitorRequest:
 class MonitorResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list_: Optional[list[dict[str, Any]]] = None
+    list: Optional[list[dict[str, Any]]] = None
     state: Optional[str] = None
     name: Optional[str] = None
     last_check: Optional[str] = None
