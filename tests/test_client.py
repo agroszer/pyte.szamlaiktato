@@ -1,4 +1,5 @@
 import pytest
+import requests
 import responses
 from pyte.szamlaiktato.client import OnlineSzamlazoClient, ApiError
 from pyte.szamlaiktato.api import SzamlaiktatoAPI, PingRequest
@@ -44,3 +45,41 @@ def test_client_error():
 
     assert excinfo.value.status_id == 4001
     assert "Unauthorized" in str(excinfo.value)
+
+
+@responses.activate
+def test_client_error_503():
+    client = OnlineSzamlazoClient(
+        "https://api.szamlaiktato.hu", "test_uid", "test_pass", "test_block"
+    )
+    api = SzamlaiktatoAPI(client)
+
+    responses.add(
+        responses.POST,
+        "https://api.szamlaiktato.hu/ping",
+        json={"status_id": 4002, "status": "Service Unavailable"},
+        status=503,
+    )
+
+    with pytest.raises(ApiError) as excinfo:
+        api.ping(PingRequest(instance_id="123"))
+
+    assert excinfo.value.status_id == 4002
+    assert "Service Unavailable" in str(excinfo.value)
+
+
+@responses.activate
+def test_client_error_40x():
+    client = OnlineSzamlazoClient(
+        "https://api.szamlaiktato.hu", "test_uid", "test_pass", "test_block"
+    )
+    api = SzamlaiktatoAPI(client)
+
+    responses.add(
+        responses.POST,
+        "https://api.szamlaiktato.hu/ping",
+        status=404,
+    )
+
+    with pytest.raises(requests.exceptions.HTTPError):
+        api.ping(PingRequest(instance_id="123"))
