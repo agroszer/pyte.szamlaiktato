@@ -36,7 +36,7 @@ class OnlineSzamlazoClient:
         method: str,
         params: dict[str, Any] | None = None,
         skip_block: bool = False,
-        requires_instance_id: bool = False,
+        requires_instance_id: bool = True,
     ) -> dict[str, Any]:
         url = f"{self.api_url}/{method}"
 

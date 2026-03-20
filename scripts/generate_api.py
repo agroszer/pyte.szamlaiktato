@@ -202,7 +202,7 @@ def generate_python(endpoints, output_file):
         f.write("        request: Any,\n")
         f.write("        response_cls: Any,\n")
         f.write("        skip_block: bool = False,\n")
-        f.write("        requires_instance_id: bool = False,\n")
+        f.write("        requires_instance_id: bool = True,\n")
         f.write("        req_mapping: Optional[builtins.dict[str, str]] = None,\n")
         f.write("        resp_mapping: Optional[builtins.dict[str, str]] = None,\n")
         f.write("    ) -> Any:\n")
@@ -283,8 +283,8 @@ def generate_python(endpoints, output_file):
 
             if skip_block_val:
                 f.write("            skip_block=True,\n")
-            if req_instance_id_val:
-                f.write("            requires_instance_id=True,\n")
+            if not req_instance_id_val:
+                f.write("            requires_instance_id=False,\n")
             if req_mapping:
                 f.write(f"            req_mapping={req_mapping},\n")
             if resp_mapping:

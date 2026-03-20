@@ -2392,7 +2392,7 @@ class SzamlaiktatoAPI:
         request: Any,
         response_cls: Any,
         skip_block: bool = False,
-        requires_instance_id: bool = False,
+        requires_instance_id: bool = True,
         req_mapping: Optional[builtins.dict[str, str]] = None,
         resp_mapping: Optional[builtins.dict[str, str]] = None,
     ) -> Any:
@@ -2421,6 +2421,7 @@ class SzamlaiktatoAPI:
             request,
             InstallResponse,
             skip_block=True,
+            requires_instance_id=False,
         )
 
     def update(self, request: UpdateRequest) -> UpdateResponse:
@@ -2429,6 +2430,7 @@ class SzamlaiktatoAPI:
             request,
             UpdateResponse,
             skip_block=True,
+            requires_instance_id=False,
         )
 
     def customerAdd(self, request: CustomerAddRequest) -> CustomerAddResponse:
@@ -2436,7 +2438,6 @@ class SzamlaiktatoAPI:
             "customerAdd",
             request,
             CustomerAddResponse,
-            requires_instance_id=True,
         )
 
     def customerModify(self, request: CustomerModifyRequest) -> CustomerModifyResponse:
@@ -2444,7 +2445,6 @@ class SzamlaiktatoAPI:
             "customerModify",
             request,
             CustomerModifyResponse,
-            requires_instance_id=True,
         )
 
     def customerGet(self, request: CustomerGetRequest) -> CustomerGetResponse:
@@ -2452,7 +2452,6 @@ class SzamlaiktatoAPI:
             "customerGet",
             request,
             CustomerGetResponse,
-            requires_instance_id=True,
         )
 
     def customerActivate(
@@ -2462,7 +2461,6 @@ class SzamlaiktatoAPI:
             "customerActivate",
             request,
             CustomerActivateResponse,
-            requires_instance_id=True,
         )
 
     def customerInactivate(
@@ -2472,7 +2470,6 @@ class SzamlaiktatoAPI:
             "customerInactivate",
             request,
             CustomerInactivateResponse,
-            requires_instance_id=True,
         )
 
     def customerSwap(self, request: CustomerSwapRequest) -> CustomerSwapResponse:
@@ -2480,7 +2477,6 @@ class SzamlaiktatoAPI:
             "customerSwap",
             request,
             CustomerSwapResponse,
-            requires_instance_id=True,
         )
 
     def customerList(self, request: CustomerListRequest) -> CustomerListResponse:
@@ -2489,7 +2485,6 @@ class SzamlaiktatoAPI:
             request,
             CustomerListResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def productAdd(self, request: ProductAddRequest) -> ProductAddResponse:
@@ -2497,7 +2492,6 @@ class SzamlaiktatoAPI:
             "productAdd",
             request,
             ProductAddResponse,
-            requires_instance_id=True,
         )
 
     def productModify(self, request: ProductModifyRequest) -> ProductModifyResponse:
@@ -2505,7 +2499,6 @@ class SzamlaiktatoAPI:
             "productModify",
             request,
             ProductModifyResponse,
-            requires_instance_id=True,
         )
 
     def productGet(self, request: ProductGetRequest) -> ProductGetResponse:
@@ -2513,7 +2506,6 @@ class SzamlaiktatoAPI:
             "productGet",
             request,
             ProductGetResponse,
-            requires_instance_id=True,
         )
 
     def productActivate(
@@ -2523,7 +2515,6 @@ class SzamlaiktatoAPI:
             "productActivate",
             request,
             ProductActivateResponse,
-            requires_instance_id=True,
         )
 
     def productInactivate(
@@ -2533,7 +2524,6 @@ class SzamlaiktatoAPI:
             "productInactivate",
             request,
             ProductInactivateResponse,
-            requires_instance_id=True,
         )
 
     def productList(self, request: ProductListRequest) -> ProductListResponse:
@@ -2542,7 +2532,6 @@ class SzamlaiktatoAPI:
             request,
             ProductListResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def productFileList(
@@ -2553,7 +2542,6 @@ class SzamlaiktatoAPI:
             request,
             ProductFileListResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def outerDatasources(
@@ -2564,7 +2552,6 @@ class SzamlaiktatoAPI:
             request,
             OuterDatasourcesResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def outerDatasourcesGet(
@@ -2575,7 +2562,6 @@ class SzamlaiktatoAPI:
             request,
             OuterDatasourcesGetResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def outerDatasourcesSave(
@@ -2586,7 +2572,6 @@ class SzamlaiktatoAPI:
             request,
             OuterDatasourcesSaveResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def adminUserAdd(self, request: AdminUserAddRequest) -> AdminUserAddResponse:
@@ -2595,7 +2580,6 @@ class SzamlaiktatoAPI:
             request,
             AdminUserAddResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def adminUserPassword(
@@ -2606,7 +2590,6 @@ class SzamlaiktatoAPI:
             request,
             AdminUserPasswordResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def adminUserDel(self, request: AdminUserDelRequest) -> AdminUserDelResponse:
@@ -2615,7 +2598,6 @@ class SzamlaiktatoAPI:
             request,
             AdminUserDelResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def blockAdd(self, request: BlockAddRequest) -> BlockAddResponse:
@@ -2624,7 +2606,6 @@ class SzamlaiktatoAPI:
             request,
             BlockAddResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def blockUpdateCompanyData(
@@ -2635,7 +2616,6 @@ class SzamlaiktatoAPI:
             request,
             BlockUpdateCompanyDataResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def blockModify(self, request: BlockModifyRequest) -> BlockModifyResponse:
@@ -2644,7 +2624,6 @@ class SzamlaiktatoAPI:
             request,
             BlockModifyResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def blockList(self, request: BlockListRequest) -> BlockListResponse:
@@ -2653,7 +2632,6 @@ class SzamlaiktatoAPI:
             request,
             BlockListResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def blockClose(self, request: BlockCloseRequest) -> BlockCloseResponse:
@@ -2662,7 +2640,6 @@ class SzamlaiktatoAPI:
             request,
             BlockCloseResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def blockOpen(self, request: BlockOpenRequest) -> BlockOpenResponse:
@@ -2671,7 +2648,6 @@ class SzamlaiktatoAPI:
             request,
             BlockOpenResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def costCentreAdd(self, request: CostCentreAddRequest) -> CostCentreAddResponse:
@@ -2680,7 +2656,6 @@ class SzamlaiktatoAPI:
             request,
             CostCentreAddResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def costCentreModify(
@@ -2691,7 +2666,6 @@ class SzamlaiktatoAPI:
             request,
             CostCentreModifyResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def costCentreList(
@@ -2702,7 +2676,6 @@ class SzamlaiktatoAPI:
             request,
             CostCentreListResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def costCentreActivate(
@@ -2713,7 +2686,6 @@ class SzamlaiktatoAPI:
             request,
             CostCentreActivateResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def costCentreInactivate(
@@ -2724,7 +2696,6 @@ class SzamlaiktatoAPI:
             request,
             CostCentreInactivateResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def costTypeAdd(self, request: CostTypeAddRequest) -> CostTypeAddResponse:
@@ -2733,7 +2704,6 @@ class SzamlaiktatoAPI:
             request,
             CostTypeAddResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def costTypeModify(self, request: CostTypeModifyRequest) -> CostTypeModifyResponse:
@@ -2742,7 +2712,6 @@ class SzamlaiktatoAPI:
             request,
             CostTypeModifyResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def costTypeList(
@@ -2753,7 +2722,6 @@ class SzamlaiktatoAPI:
             request,
             CostTypeListResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def costTypeActivate(
@@ -2764,7 +2732,6 @@ class SzamlaiktatoAPI:
             request,
             CostTypeActivateResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def costTypeInactivate(
@@ -2775,7 +2742,6 @@ class SzamlaiktatoAPI:
             request,
             CostTypeInactivateResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectList(self, request: ProjectListRequest) -> ProjectListResponse:
@@ -2784,7 +2750,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectListResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectGet(self, request: ProjectGetRequest) -> ProjectGetResponse:
@@ -2793,7 +2758,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectGetResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectCreate(self, request: ProjectCreateRequest) -> ProjectCreateResponse:
@@ -2802,7 +2766,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectCreateResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectInactivate(
@@ -2813,7 +2776,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectInactivateResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectTimesheetList(
@@ -2824,7 +2786,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectTimesheetListResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectTimesheetStart(
@@ -2835,7 +2796,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectTimesheetStartResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectTimesheetStop(
@@ -2846,7 +2806,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectTimesheetStopResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectBookingSlotCreate(
@@ -2857,7 +2816,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectBookingSlotCreateResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectBookingBook(
@@ -2868,7 +2826,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectBookingBookResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectBookingCancel(
@@ -2879,7 +2836,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectBookingCancelResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectBookingClose(
@@ -2890,7 +2846,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectBookingCloseResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectBookingBookDateRange(
@@ -2901,7 +2856,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectBookingBookDateRangeResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectBookingCancelGroup(
@@ -2912,7 +2866,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectBookingCancelGroupResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectBookingCloseGroup(
@@ -2923,7 +2876,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectBookingCloseGroupResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectBookingSetSlotPrice(
@@ -2934,7 +2886,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectBookingSetSlotPriceResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectAvailableSlots(
@@ -2945,7 +2896,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectAvailableSlotsResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectWorkerList(
@@ -2956,7 +2906,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectWorkerListResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectCalendar(
@@ -2967,7 +2916,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectCalendarResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectPassCreate(
@@ -2978,7 +2926,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectPassCreateResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectPassList(
@@ -2989,7 +2936,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectPassListResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectPassDeactivate(
@@ -3000,7 +2946,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectPassDeactivateResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def projectPassUpdateExpiry(
@@ -3011,7 +2956,6 @@ class SzamlaiktatoAPI:
             request,
             ProjectPassUpdateExpiryResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def taxList(self, request: TaxListRequest) -> TaxListResponse:
@@ -3020,7 +2964,6 @@ class SzamlaiktatoAPI:
             request,
             TaxListResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def taxAdd(self, request: TaxAddRequest) -> TaxAddResponse:
@@ -3029,7 +2972,6 @@ class SzamlaiktatoAPI:
             request,
             TaxAddResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def taxModify(self, request: TaxModifyRequest) -> TaxModifyResponse:
@@ -3038,7 +2980,6 @@ class SzamlaiktatoAPI:
             request,
             TaxModifyResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def taxActivate(self, request: TaxActivateRequest) -> TaxActivateResponse:
@@ -3047,7 +2988,6 @@ class SzamlaiktatoAPI:
             request,
             TaxActivateResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def taxInactivate(self, request: TaxInactivateRequest) -> TaxInactivateResponse:
@@ -3056,7 +2996,6 @@ class SzamlaiktatoAPI:
             request,
             TaxInactivateResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def paymentModeInactivate(
@@ -3067,7 +3006,6 @@ class SzamlaiktatoAPI:
             request,
             PaymentModeInactivateResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def paymentModeActivate(
@@ -3078,7 +3016,6 @@ class SzamlaiktatoAPI:
             request,
             PaymentModeActivateResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def paymentModeDownload(
@@ -3089,7 +3026,6 @@ class SzamlaiktatoAPI:
             request,
             PaymentModeDownloadResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def orderAdd(self, request: OrderAddRequest) -> OrderAddResponse:
@@ -3097,7 +3033,6 @@ class SzamlaiktatoAPI:
             "orderAdd",
             request,
             OrderAddResponse,
-            requires_instance_id=True,
         )
 
     def orderCollectiveAdd(
@@ -3107,7 +3042,6 @@ class SzamlaiktatoAPI:
             "orderCollectiveAdd",
             request,
             OrderCollectiveAddResponse,
-            requires_instance_id=True,
         )
 
     def orderList(self, request: OrderListRequest) -> OrderListResponse:
@@ -3115,7 +3049,6 @@ class SzamlaiktatoAPI:
             "orderList",
             request,
             OrderListResponse,
-            requires_instance_id=True,
             req_mapping={"from_": "from"},
         )
 
@@ -3124,7 +3057,6 @@ class SzamlaiktatoAPI:
             "orderStorno",
             request,
             OrderStornoResponse,
-            requires_instance_id=True,
         )
 
     def orderProformDownload(
@@ -3134,7 +3066,6 @@ class SzamlaiktatoAPI:
             "orderProformDownload",
             request,
             OrderProformDownloadResponse,
-            requires_instance_id=True,
         )
 
     def orderBill(self, request: OrderBillRequest) -> OrderBillResponse:
@@ -3142,7 +3073,6 @@ class SzamlaiktatoAPI:
             "orderBill",
             request,
             OrderBillResponse,
-            requires_instance_id=True,
         )
 
     def orderDetails(self, request: OrderDetailsRequest) -> OrderDetailsResponse:
@@ -3150,7 +3080,6 @@ class SzamlaiktatoAPI:
             "orderDetails",
             request,
             OrderDetailsResponse,
-            requires_instance_id=True,
         )
 
     def orderCollectiveClose(
@@ -3160,7 +3089,6 @@ class SzamlaiktatoAPI:
             "orderCollectiveClose",
             request,
             OrderCollectiveCloseResponse,
-            requires_instance_id=True,
         )
 
     def orderCollectiveSettling(
@@ -3170,7 +3098,6 @@ class SzamlaiktatoAPI:
             "orderCollectiveSettling",
             request,
             OrderCollectiveSettlingResponse,
-            requires_instance_id=True,
         )
 
     def orderCollectiveAddElements(
@@ -3180,7 +3107,6 @@ class SzamlaiktatoAPI:
             "orderCollectiveAddElements",
             request,
             OrderCollectiveAddElementsResponse,
-            requires_instance_id=True,
         )
 
     def orderSetPaid(self, request: OrderSetPaidRequest) -> OrderSetPaidResponse:
@@ -3188,7 +3114,6 @@ class SzamlaiktatoAPI:
             "orderSetPaid",
             request,
             OrderSetPaidResponse,
-            requires_instance_id=True,
         )
 
     def orderCheckPaid(self, request: OrderCheckPaidRequest) -> OrderCheckPaidResponse:
@@ -3196,7 +3121,6 @@ class SzamlaiktatoAPI:
             "orderCheckPaid",
             request,
             OrderCheckPaidResponse,
-            requires_instance_id=True,
         )
 
     def orderPaidChangeList(
@@ -3206,7 +3130,6 @@ class SzamlaiktatoAPI:
             "orderPaidChangeList",
             request,
             OrderPaidChangeListResponse,
-            requires_instance_id=True,
         )
 
     def invoiceAdd(self, request: InvoiceAddRequest) -> InvoiceAddResponse:
@@ -3214,7 +3137,6 @@ class SzamlaiktatoAPI:
             "invoiceAdd",
             request,
             InvoiceAddResponse,
-            requires_instance_id=True,
         )
 
     def invoiceAddPrepayment(
@@ -3224,7 +3146,6 @@ class SzamlaiktatoAPI:
             "invoiceAddPrepayment",
             request,
             InvoiceAddPrepaymentResponse,
-            requires_instance_id=True,
         )
 
     def invoiceAddFinal(
@@ -3234,7 +3155,6 @@ class SzamlaiktatoAPI:
             "invoiceAddFinal",
             request,
             InvoiceAddFinalResponse,
-            requires_instance_id=True,
         )
 
     def invoiceDetails(self, request: InvoiceDetailsRequest) -> InvoiceDetailsResponse:
@@ -3242,7 +3162,6 @@ class SzamlaiktatoAPI:
             "invoiceDetails",
             request,
             InvoiceDetailsResponse,
-            requires_instance_id=True,
         )
 
     def invoiceDownload(
@@ -3252,7 +3171,6 @@ class SzamlaiktatoAPI:
             "invoiceDownload",
             request,
             InvoiceDownloadResponse,
-            requires_instance_id=True,
         )
 
     def invoiceStorno(self, request: InvoiceStornoRequest) -> InvoiceStornoResponse:
@@ -3260,7 +3178,6 @@ class SzamlaiktatoAPI:
             "invoiceStorno",
             request,
             InvoiceStornoResponse,
-            requires_instance_id=True,
         )
 
     def invoiceList(self, request: InvoiceListRequest) -> InvoiceListResponse:
@@ -3268,7 +3185,6 @@ class SzamlaiktatoAPI:
             "invoiceList",
             request,
             InvoiceListResponse,
-            requires_instance_id=True,
             req_mapping={"from_": "from"},
         )
 
@@ -3277,7 +3193,6 @@ class SzamlaiktatoAPI:
             "invoiceExport",
             request,
             InvoiceExportResponse,
-            requires_instance_id=True,
         )
 
     def invoiceSearch(self, request: InvoiceSearchRequest) -> InvoiceSearchResponse:
@@ -3285,7 +3200,6 @@ class SzamlaiktatoAPI:
             "invoiceSearch",
             request,
             InvoiceSearchResponse,
-            requires_instance_id=True,
         )
 
     def invoiceCorrection(
@@ -3296,7 +3210,6 @@ class SzamlaiktatoAPI:
             request,
             InvoiceCorrectionResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def invoiceResend(self, request: InvoiceResendRequest) -> InvoiceResendResponse:
@@ -3304,7 +3217,6 @@ class SzamlaiktatoAPI:
             "invoiceResend",
             request,
             InvoiceResendResponse,
-            requires_instance_id=True,
         )
 
     def invoiceCheckPaid(
@@ -3314,7 +3226,6 @@ class SzamlaiktatoAPI:
             "invoiceCheckPaid",
             request,
             InvoiceCheckPaidResponse,
-            requires_instance_id=True,
         )
 
     def invoiceSetPaid(self, request: InvoiceSetPaidRequest) -> InvoiceSetPaidResponse:
@@ -3322,7 +3233,6 @@ class SzamlaiktatoAPI:
             "invoiceSetPaid",
             request,
             InvoiceSetPaidResponse,
-            requires_instance_id=True,
         )
 
     def debtDetails(self, request: DebtDetailsRequest) -> DebtDetailsResponse:
@@ -3331,7 +3241,6 @@ class SzamlaiktatoAPI:
             request,
             DebtDetailsResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def debtDownload(self, request: DebtDownloadRequest) -> DebtDownloadResponse:
@@ -3340,7 +3249,6 @@ class SzamlaiktatoAPI:
             request,
             DebtDownloadResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def debtList(self, request: DebtListRequest) -> DebtListResponse:
@@ -3349,7 +3257,6 @@ class SzamlaiktatoAPI:
             request,
             DebtListResponse,
             skip_block=True,
-            requires_instance_id=True,
             req_mapping={"from_": "from"},
         )
 
@@ -3359,7 +3266,6 @@ class SzamlaiktatoAPI:
             request,
             DebtAddResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def debtModify(self, request: DebtModifyRequest) -> DebtModifyResponse:
@@ -3368,7 +3274,6 @@ class SzamlaiktatoAPI:
             request,
             DebtModifyResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def debtAccept(self, request: DebtAcceptRequest) -> DebtAcceptResponse:
@@ -3377,7 +3282,6 @@ class SzamlaiktatoAPI:
             request,
             DebtAcceptResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def debtPay(self, request: DebtPayRequest) -> DebtPayResponse:
@@ -3386,7 +3290,6 @@ class SzamlaiktatoAPI:
             request,
             DebtPayResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def debtDelete(self, request: DebtDeleteRequest) -> DebtDeleteResponse:
@@ -3395,7 +3298,6 @@ class SzamlaiktatoAPI:
             request,
             DebtDeleteResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def debtGenerate(self, request: DebtGenerateRequest) -> DebtGenerateResponse:
@@ -3404,7 +3306,6 @@ class SzamlaiktatoAPI:
             request,
             DebtGenerateResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def debtExport(self, request: DebtExportRequest) -> DebtExportResponse:
@@ -3413,7 +3314,6 @@ class SzamlaiktatoAPI:
             request,
             DebtExportResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def systemMessageList(
@@ -3424,7 +3324,6 @@ class SzamlaiktatoAPI:
             request,
             SystemMessageListResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def systemMessageSetRead(
@@ -3435,7 +3334,6 @@ class SzamlaiktatoAPI:
             request,
             SystemMessageSetReadResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def systemErrorCodeList(
@@ -3446,7 +3344,6 @@ class SzamlaiktatoAPI:
             request,
             SystemErrorCodeListResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def getVersion(
@@ -3457,7 +3354,6 @@ class SzamlaiktatoAPI:
             request,
             GetVersionResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def serviceProviderDatas(
@@ -3468,7 +3364,6 @@ class SzamlaiktatoAPI:
             request,
             ServiceProviderDatasResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def companyData(
@@ -3479,7 +3374,6 @@ class SzamlaiktatoAPI:
             request,
             CompanyDataResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def quantityList(self, request: QuantityListRequest) -> QuantityListResponse:
@@ -3488,7 +3382,6 @@ class SzamlaiktatoAPI:
             request,
             QuantityListResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def currencyDownload(
@@ -3499,7 +3392,6 @@ class SzamlaiktatoAPI:
             request,
             CurrencyDownloadResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def regularityDownload(
@@ -3510,7 +3402,6 @@ class SzamlaiktatoAPI:
             request,
             RegularityDownloadResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def countryDownload(
@@ -3521,7 +3412,6 @@ class SzamlaiktatoAPI:
             request,
             CountryDownloadResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def postcodeDownload(
@@ -3532,7 +3422,6 @@ class SzamlaiktatoAPI:
             request,
             PostcodeDownloadResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def ping(self, request: Optional[PingRequest] = None) -> PingResponse:
@@ -3541,7 +3430,6 @@ class SzamlaiktatoAPI:
             request,
             PingResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
 
     def monitor(self, request: Optional[MonitorRequest] = None) -> MonitorResponse:
@@ -3550,5 +3438,4 @@ class SzamlaiktatoAPI:
             request,
             MonitorResponse,
             skip_block=True,
-            requires_instance_id=True,
         )
