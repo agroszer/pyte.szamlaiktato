@@ -190,6 +190,31 @@ def generate_python(endpoints, output_file):
         f.write("    def __init__(self, client: OnlineSzamlazoClient):\n")
         f.write("        self.client = client\n\n")
 
+        f.write("    def _invoke(\n")
+        f.write("        self,\n")
+        f.write("        method: str,\n")
+        f.write("        request: Any,\n")
+        f.write("        response_cls: Any,\n")
+        f.write("        skip_block: bool,\n")
+        f.write("        req_mapping: builtins.dict[str, str],\n")
+        f.write("        resp_mapping: builtins.dict[str, str],\n")
+        f.write("    ) -> Any:\n")
+        f.write("        params = asdict(request) if request else {}\n")
+        f.write("        for py_name, orig_name in req_mapping.items():\n")
+        f.write("            if py_name in params:\n")
+        f.write("                params[orig_name] = params.pop(py_name)\n")
+        f.write(
+            "        data = self.client._call(method, params, skip_block=skip_block)\n"
+        )
+        f.write("        for orig_name, py_name in resp_mapping.items():\n")
+        f.write("            if orig_name in data:\n")
+        f.write("                data[py_name] = data.pop(orig_name)\n")
+        f.write("        valid_keys = response_cls.__dataclass_fields__.keys()\n")
+        f.write("        filtered_data = {\n")
+        f.write("            k: v for k, v in data.items() if k in valid_keys\n")
+        f.write("        }\n")
+        f.write("        return response_cls(**filtered_data)\n\n")
+
         for ep in endpoints:
             req_name = ep["name"][0].upper() + ep["name"][1:] + "Request"
             resp_name = ep["name"][0].upper() + ep["name"][1:] + "Response"
@@ -200,8 +225,8 @@ def generate_python(endpoints, output_file):
             else:
                 sig = f"request: Optional[{req_name}] = None"
             f.write(f"    def {method_name}(self, {sig}) -> {resp_name}:\n")
-            f.write("        params = asdict(request) if request else {}\n")
 
+            req_mapping = {}
             for field in ep["request"]:
                 py_name = field["name"].replace(".", "_").replace("-", "_")
                 orig_name = field["name"]
@@ -217,18 +242,9 @@ def generate_python(endpoints, output_file):
                     py_name += "_"
 
                 if py_name != orig_name:
-                    f.write(f"        if '{py_name}' in params:\n")
-                    f.write(
-                        f"            params['{orig_name}'] = params.pop('{py_name}')\n"
-                    )
+                    req_mapping[py_name] = orig_name
 
-            skip_block_val = "False" if ep.get("requires_block", False) else "True"
-            f.write(
-                f"        data = self.client._call(\n"
-                f"            '{method_name}', params, skip_block={skip_block_val}\n"
-                f"        )\n"
-            )
-
+            resp_mapping = {}
             for field in ep["response"]:
                 py_name = field["name"].replace(".", "_").replace("-", "_")
                 orig_name = field["name"]
@@ -243,18 +259,20 @@ def generate_python(endpoints, output_file):
                 if py_name in reserved:
                     py_name += "_"
                 if py_name != orig_name:
-                    f.write(f"        if '{orig_name}' in data:\n")
-                    f.write(
-                        f"            data['{py_name}'] = data.pop('{orig_name}')\n"
-                    )
+                    resp_mapping[orig_name] = py_name
 
-            f.write(f"        valid_keys = {resp_name}.__dataclass_fields__.keys()\n")
+            skip_block_val = "False" if ep.get("requires_block", False) else "True"
+
             f.write(
-                "        filtered_data = {\n"
-                "            k: v for k, v in data.items() if k in valid_keys\n"
-                "        }\n"
+                f"        return self._invoke(\n"
+                f"            method='{method_name}',\n"
+                f"            request=request,\n"
+                f"            response_cls={resp_name},\n"
+                f"            skip_block={skip_block_val},\n"
+                f"            req_mapping={req_mapping},\n"
+                f"            resp_mapping={resp_mapping},\n"
+                f"        )\n\n"
             )
-            f.write(f"        return {resp_name}(**filtered_data)\n\n")
 
 
 if __name__ == "__main__":

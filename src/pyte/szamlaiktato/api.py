@@ -2487,939 +2487,1305 @@ class SzamlaiktatoAPI:
     def __init__(self, client: OnlineSzamlazoClient):
         self.client = client
 
-    def install(self, request: InstallRequest) -> InstallResponse:
+    def _invoke(
+        self,
+        method: str,
+        request: Any,
+        response_cls: Any,
+        skip_block: bool,
+        req_mapping: builtins.dict[str, str],
+        resp_mapping: builtins.dict[str, str],
+    ) -> Any:
         params = asdict(request) if request else {}
-        data = self.client._call("install", params, skip_block=True)
-        valid_keys = InstallResponse.__dataclass_fields__.keys()
+        for py_name, orig_name in req_mapping.items():
+            if py_name in params:
+                params[orig_name] = params.pop(py_name)
+        data = self.client._call(method, params, skip_block=skip_block)
+        for orig_name, py_name in resp_mapping.items():
+            if orig_name in data:
+                data[py_name] = data.pop(orig_name)
+        valid_keys = response_cls.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return InstallResponse(**filtered_data)
+        return response_cls(**filtered_data)
+
+    def install(self, request: InstallRequest) -> InstallResponse:
+        return self._invoke(
+            method="install",
+            request=request,
+            response_cls=InstallResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def update(self, request: UpdateRequest) -> UpdateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("update", params, skip_block=True)
-        valid_keys = UpdateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return UpdateResponse(**filtered_data)
+        return self._invoke(
+            method="update",
+            request=request,
+            response_cls=UpdateResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def customerAdd(self, request: CustomerAddRequest) -> CustomerAddResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("customerAdd", params, skip_block=False)
-        valid_keys = CustomerAddResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CustomerAddResponse(**filtered_data)
+        return self._invoke(
+            method="customerAdd",
+            request=request,
+            response_cls=CustomerAddResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def customerModify(self, request: CustomerModifyRequest) -> CustomerModifyResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("customerModify", params, skip_block=False)
-        valid_keys = CustomerModifyResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CustomerModifyResponse(**filtered_data)
+        return self._invoke(
+            method="customerModify",
+            request=request,
+            response_cls=CustomerModifyResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def customerGet(self, request: CustomerGetRequest) -> CustomerGetResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("customerGet", params, skip_block=False)
-        valid_keys = CustomerGetResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CustomerGetResponse(**filtered_data)
+        return self._invoke(
+            method="customerGet",
+            request=request,
+            response_cls=CustomerGetResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def customerActivate(
         self, request: CustomerActivateRequest
     ) -> CustomerActivateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("customerActivate", params, skip_block=False)
-        valid_keys = CustomerActivateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CustomerActivateResponse(**filtered_data)
+        return self._invoke(
+            method="customerActivate",
+            request=request,
+            response_cls=CustomerActivateResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def customerInactivate(
         self, request: CustomerInactivateRequest
     ) -> CustomerInactivateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("customerInactivate", params, skip_block=False)
-        valid_keys = CustomerInactivateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CustomerInactivateResponse(**filtered_data)
+        return self._invoke(
+            method="customerInactivate",
+            request=request,
+            response_cls=CustomerInactivateResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def customerSwap(self, request: CustomerSwapRequest) -> CustomerSwapResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("customerSwap", params, skip_block=False)
-        valid_keys = CustomerSwapResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CustomerSwapResponse(**filtered_data)
+        return self._invoke(
+            method="customerSwap",
+            request=request,
+            response_cls=CustomerSwapResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def customerList(self, request: CustomerListRequest) -> CustomerListResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("customerList", params, skip_block=True)
-        valid_keys = CustomerListResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CustomerListResponse(**filtered_data)
+        return self._invoke(
+            method="customerList",
+            request=request,
+            response_cls=CustomerListResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def productAdd(self, request: ProductAddRequest) -> ProductAddResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("productAdd", params, skip_block=False)
-        valid_keys = ProductAddResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProductAddResponse(**filtered_data)
+        return self._invoke(
+            method="productAdd",
+            request=request,
+            response_cls=ProductAddResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def productModify(self, request: ProductModifyRequest) -> ProductModifyResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("productModify", params, skip_block=False)
-        valid_keys = ProductModifyResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProductModifyResponse(**filtered_data)
+        return self._invoke(
+            method="productModify",
+            request=request,
+            response_cls=ProductModifyResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def productGet(self, request: ProductGetRequest) -> ProductGetResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("productGet", params, skip_block=False)
-        valid_keys = ProductGetResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProductGetResponse(**filtered_data)
+        return self._invoke(
+            method="productGet",
+            request=request,
+            response_cls=ProductGetResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def productActivate(
         self, request: ProductActivateRequest
     ) -> ProductActivateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("productActivate", params, skip_block=False)
-        valid_keys = ProductActivateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProductActivateResponse(**filtered_data)
+        return self._invoke(
+            method="productActivate",
+            request=request,
+            response_cls=ProductActivateResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def productInactivate(
         self, request: ProductInactivateRequest
     ) -> ProductInactivateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("productInactivate", params, skip_block=False)
-        valid_keys = ProductInactivateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProductInactivateResponse(**filtered_data)
+        return self._invoke(
+            method="productInactivate",
+            request=request,
+            response_cls=ProductInactivateResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def productList(self, request: ProductListRequest) -> ProductListResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("productList", params, skip_block=True)
-        valid_keys = ProductListResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProductListResponse(**filtered_data)
+        return self._invoke(
+            method="productList",
+            request=request,
+            response_cls=ProductListResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def productFileList(
         self, request: ProductFileListRequest
     ) -> ProductFileListResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("productFileList", params, skip_block=True)
-        valid_keys = ProductFileListResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProductFileListResponse(**filtered_data)
+        return self._invoke(
+            method="productFileList",
+            request=request,
+            response_cls=ProductFileListResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def outerDatasources(
         self, request: OuterDatasourcesRequest
     ) -> OuterDatasourcesResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("outerDatasources", params, skip_block=True)
-        valid_keys = OuterDatasourcesResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return OuterDatasourcesResponse(**filtered_data)
+        return self._invoke(
+            method="outerDatasources",
+            request=request,
+            response_cls=OuterDatasourcesResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def outerDatasourcesGet(
         self, request: OuterDatasourcesGetRequest
     ) -> OuterDatasourcesGetResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("outerDatasourcesGet", params, skip_block=True)
-        valid_keys = OuterDatasourcesGetResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return OuterDatasourcesGetResponse(**filtered_data)
+        return self._invoke(
+            method="outerDatasourcesGet",
+            request=request,
+            response_cls=OuterDatasourcesGetResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def outerDatasourcesSave(
         self, request: OuterDatasourcesSaveRequest
     ) -> OuterDatasourcesSaveResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("outerDatasourcesSave", params, skip_block=True)
-        valid_keys = OuterDatasourcesSaveResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return OuterDatasourcesSaveResponse(**filtered_data)
+        return self._invoke(
+            method="outerDatasourcesSave",
+            request=request,
+            response_cls=OuterDatasourcesSaveResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def adminUserAdd(self, request: AdminUserAddRequest) -> AdminUserAddResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("adminUserAdd", params, skip_block=True)
-        valid_keys = AdminUserAddResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return AdminUserAddResponse(**filtered_data)
+        return self._invoke(
+            method="adminUserAdd",
+            request=request,
+            response_cls=AdminUserAddResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def adminUserPassword(
         self, request: AdminUserPasswordRequest
     ) -> AdminUserPasswordResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("adminUserPassword", params, skip_block=True)
-        valid_keys = AdminUserPasswordResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return AdminUserPasswordResponse(**filtered_data)
+        return self._invoke(
+            method="adminUserPassword",
+            request=request,
+            response_cls=AdminUserPasswordResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def adminUserDel(self, request: AdminUserDelRequest) -> AdminUserDelResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("adminUserDel", params, skip_block=True)
-        valid_keys = AdminUserDelResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return AdminUserDelResponse(**filtered_data)
+        return self._invoke(
+            method="adminUserDel",
+            request=request,
+            response_cls=AdminUserDelResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def blockAdd(self, request: BlockAddRequest) -> BlockAddResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("blockAdd", params, skip_block=True)
-        valid_keys = BlockAddResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return BlockAddResponse(**filtered_data)
+        return self._invoke(
+            method="blockAdd",
+            request=request,
+            response_cls=BlockAddResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def blockUpdateCompanyData(
         self, request: BlockUpdateCompanyDataRequest
     ) -> BlockUpdateCompanyDataResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("blockUpdateCompanyData", params, skip_block=True)
-        valid_keys = BlockUpdateCompanyDataResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return BlockUpdateCompanyDataResponse(**filtered_data)
+        return self._invoke(
+            method="blockUpdateCompanyData",
+            request=request,
+            response_cls=BlockUpdateCompanyDataResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def blockModify(self, request: BlockModifyRequest) -> BlockModifyResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("blockModify", params, skip_block=True)
-        valid_keys = BlockModifyResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return BlockModifyResponse(**filtered_data)
+        return self._invoke(
+            method="blockModify",
+            request=request,
+            response_cls=BlockModifyResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def blockList(self, request: BlockListRequest) -> BlockListResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("blockList", params, skip_block=True)
-        valid_keys = BlockListResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return BlockListResponse(**filtered_data)
+        return self._invoke(
+            method="blockList",
+            request=request,
+            response_cls=BlockListResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def blockClose(self, request: BlockCloseRequest) -> BlockCloseResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("blockClose", params, skip_block=True)
-        valid_keys = BlockCloseResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return BlockCloseResponse(**filtered_data)
+        return self._invoke(
+            method="blockClose",
+            request=request,
+            response_cls=BlockCloseResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def blockOpen(self, request: BlockOpenRequest) -> BlockOpenResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("blockOpen", params, skip_block=True)
-        valid_keys = BlockOpenResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return BlockOpenResponse(**filtered_data)
+        return self._invoke(
+            method="blockOpen",
+            request=request,
+            response_cls=BlockOpenResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def costCentreAdd(self, request: CostCentreAddRequest) -> CostCentreAddResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("costCentreAdd", params, skip_block=True)
-        valid_keys = CostCentreAddResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CostCentreAddResponse(**filtered_data)
+        return self._invoke(
+            method="costCentreAdd",
+            request=request,
+            response_cls=CostCentreAddResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def costCentreModify(
         self, request: CostCentreModifyRequest
     ) -> CostCentreModifyResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("costCentreModify", params, skip_block=True)
-        valid_keys = CostCentreModifyResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CostCentreModifyResponse(**filtered_data)
+        return self._invoke(
+            method="costCentreModify",
+            request=request,
+            response_cls=CostCentreModifyResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def costCentreList(self, request: CostCentreListRequest) -> CostCentreListResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("costCentreList", params, skip_block=True)
-        valid_keys = CostCentreListResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CostCentreListResponse(**filtered_data)
+        return self._invoke(
+            method="costCentreList",
+            request=request,
+            response_cls=CostCentreListResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def costCentreActivate(
         self, request: CostCentreActivateRequest
     ) -> CostCentreActivateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("costCentreActivate", params, skip_block=True)
-        valid_keys = CostCentreActivateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CostCentreActivateResponse(**filtered_data)
+        return self._invoke(
+            method="costCentreActivate",
+            request=request,
+            response_cls=CostCentreActivateResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def costCentreInactivate(
         self, request: CostCentreInactivateRequest
     ) -> CostCentreInactivateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("costCentreInactivate", params, skip_block=True)
-        valid_keys = CostCentreInactivateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CostCentreInactivateResponse(**filtered_data)
+        return self._invoke(
+            method="costCentreInactivate",
+            request=request,
+            response_cls=CostCentreInactivateResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def costTypeAdd(self, request: CostTypeAddRequest) -> CostTypeAddResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("costTypeAdd", params, skip_block=True)
-        valid_keys = CostTypeAddResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CostTypeAddResponse(**filtered_data)
+        return self._invoke(
+            method="costTypeAdd",
+            request=request,
+            response_cls=CostTypeAddResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def costTypeModify(self, request: CostTypeModifyRequest) -> CostTypeModifyResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("costTypeModify", params, skip_block=True)
-        valid_keys = CostTypeModifyResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CostTypeModifyResponse(**filtered_data)
+        return self._invoke(
+            method="costTypeModify",
+            request=request,
+            response_cls=CostTypeModifyResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def costTypeList(self, request: CostTypeListRequest) -> CostTypeListResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("costTypeList", params, skip_block=True)
-        valid_keys = CostTypeListResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CostTypeListResponse(**filtered_data)
+        return self._invoke(
+            method="costTypeList",
+            request=request,
+            response_cls=CostTypeListResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def costTypeActivate(
         self, request: CostTypeActivateRequest
     ) -> CostTypeActivateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("costTypeActivate", params, skip_block=True)
-        valid_keys = CostTypeActivateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CostTypeActivateResponse(**filtered_data)
+        return self._invoke(
+            method="costTypeActivate",
+            request=request,
+            response_cls=CostTypeActivateResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def costTypeInactivate(
         self, request: CostTypeInactivateRequest
     ) -> CostTypeInactivateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("costTypeInactivate", params, skip_block=True)
-        valid_keys = CostTypeInactivateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CostTypeInactivateResponse(**filtered_data)
+        return self._invoke(
+            method="costTypeInactivate",
+            request=request,
+            response_cls=CostTypeInactivateResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectList(self, request: ProjectListRequest) -> ProjectListResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectList", params, skip_block=True)
-        valid_keys = ProjectListResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectListResponse(**filtered_data)
+        return self._invoke(
+            method="projectList",
+            request=request,
+            response_cls=ProjectListResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectGet(self, request: ProjectGetRequest) -> ProjectGetResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectGet", params, skip_block=True)
-        valid_keys = ProjectGetResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectGetResponse(**filtered_data)
+        return self._invoke(
+            method="projectGet",
+            request=request,
+            response_cls=ProjectGetResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectCreate(self, request: ProjectCreateRequest) -> ProjectCreateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectCreate", params, skip_block=True)
-        valid_keys = ProjectCreateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectCreateResponse(**filtered_data)
+        return self._invoke(
+            method="projectCreate",
+            request=request,
+            response_cls=ProjectCreateResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectInactivate(
         self, request: ProjectInactivateRequest
     ) -> ProjectInactivateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectInactivate", params, skip_block=True)
-        valid_keys = ProjectInactivateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectInactivateResponse(**filtered_data)
+        return self._invoke(
+            method="projectInactivate",
+            request=request,
+            response_cls=ProjectInactivateResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectTimesheetList(
         self, request: ProjectTimesheetListRequest
     ) -> ProjectTimesheetListResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectTimesheetList", params, skip_block=True)
-        valid_keys = ProjectTimesheetListResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectTimesheetListResponse(**filtered_data)
+        return self._invoke(
+            method="projectTimesheetList",
+            request=request,
+            response_cls=ProjectTimesheetListResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectTimesheetStart(
         self, request: ProjectTimesheetStartRequest
     ) -> ProjectTimesheetStartResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectTimesheetStart", params, skip_block=True)
-        valid_keys = ProjectTimesheetStartResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectTimesheetStartResponse(**filtered_data)
+        return self._invoke(
+            method="projectTimesheetStart",
+            request=request,
+            response_cls=ProjectTimesheetStartResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectTimesheetStop(
         self, request: ProjectTimesheetStopRequest
     ) -> ProjectTimesheetStopResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectTimesheetStop", params, skip_block=True)
-        valid_keys = ProjectTimesheetStopResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectTimesheetStopResponse(**filtered_data)
+        return self._invoke(
+            method="projectTimesheetStop",
+            request=request,
+            response_cls=ProjectTimesheetStopResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectBookingSlotCreate(
         self, request: ProjectBookingSlotCreateRequest
     ) -> ProjectBookingSlotCreateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectBookingSlotCreate", params, skip_block=True)
-        valid_keys = ProjectBookingSlotCreateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectBookingSlotCreateResponse(**filtered_data)
+        return self._invoke(
+            method="projectBookingSlotCreate",
+            request=request,
+            response_cls=ProjectBookingSlotCreateResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectBookingBook(
         self, request: ProjectBookingBookRequest
     ) -> ProjectBookingBookResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectBookingBook", params, skip_block=True)
-        valid_keys = ProjectBookingBookResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectBookingBookResponse(**filtered_data)
+        return self._invoke(
+            method="projectBookingBook",
+            request=request,
+            response_cls=ProjectBookingBookResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectBookingCancel(
         self, request: ProjectBookingCancelRequest
     ) -> ProjectBookingCancelResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectBookingCancel", params, skip_block=True)
-        valid_keys = ProjectBookingCancelResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectBookingCancelResponse(**filtered_data)
+        return self._invoke(
+            method="projectBookingCancel",
+            request=request,
+            response_cls=ProjectBookingCancelResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectBookingClose(
         self, request: ProjectBookingCloseRequest
     ) -> ProjectBookingCloseResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectBookingClose", params, skip_block=True)
-        valid_keys = ProjectBookingCloseResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectBookingCloseResponse(**filtered_data)
+        return self._invoke(
+            method="projectBookingClose",
+            request=request,
+            response_cls=ProjectBookingCloseResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectBookingBookDateRange(
         self, request: ProjectBookingBookDateRangeRequest
     ) -> ProjectBookingBookDateRangeResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectBookingBookDateRange", params, skip_block=True)
-        valid_keys = ProjectBookingBookDateRangeResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectBookingBookDateRangeResponse(**filtered_data)
+        return self._invoke(
+            method="projectBookingBookDateRange",
+            request=request,
+            response_cls=ProjectBookingBookDateRangeResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectBookingCancelGroup(
         self, request: ProjectBookingCancelGroupRequest
     ) -> ProjectBookingCancelGroupResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectBookingCancelGroup", params, skip_block=True)
-        valid_keys = ProjectBookingCancelGroupResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectBookingCancelGroupResponse(**filtered_data)
+        return self._invoke(
+            method="projectBookingCancelGroup",
+            request=request,
+            response_cls=ProjectBookingCancelGroupResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectBookingCloseGroup(
         self, request: ProjectBookingCloseGroupRequest
     ) -> ProjectBookingCloseGroupResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectBookingCloseGroup", params, skip_block=True)
-        valid_keys = ProjectBookingCloseGroupResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectBookingCloseGroupResponse(**filtered_data)
+        return self._invoke(
+            method="projectBookingCloseGroup",
+            request=request,
+            response_cls=ProjectBookingCloseGroupResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectBookingSetSlotPrice(
         self, request: ProjectBookingSetSlotPriceRequest
     ) -> ProjectBookingSetSlotPriceResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectBookingSetSlotPrice", params, skip_block=True)
-        valid_keys = ProjectBookingSetSlotPriceResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectBookingSetSlotPriceResponse(**filtered_data)
+        return self._invoke(
+            method="projectBookingSetSlotPrice",
+            request=request,
+            response_cls=ProjectBookingSetSlotPriceResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectAvailableSlots(
         self, request: ProjectAvailableSlotsRequest
     ) -> ProjectAvailableSlotsResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectAvailableSlots", params, skip_block=True)
-        valid_keys = ProjectAvailableSlotsResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectAvailableSlotsResponse(**filtered_data)
+        return self._invoke(
+            method="projectAvailableSlots",
+            request=request,
+            response_cls=ProjectAvailableSlotsResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectWorkerList(
         self, request: ProjectWorkerListRequest
     ) -> ProjectWorkerListResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectWorkerList", params, skip_block=True)
-        valid_keys = ProjectWorkerListResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectWorkerListResponse(**filtered_data)
+        return self._invoke(
+            method="projectWorkerList",
+            request=request,
+            response_cls=ProjectWorkerListResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectCalendar(
         self, request: ProjectCalendarRequest
     ) -> ProjectCalendarResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectCalendar", params, skip_block=True)
-        valid_keys = ProjectCalendarResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectCalendarResponse(**filtered_data)
+        return self._invoke(
+            method="projectCalendar",
+            request=request,
+            response_cls=ProjectCalendarResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectPassCreate(
         self, request: ProjectPassCreateRequest
     ) -> ProjectPassCreateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectPassCreate", params, skip_block=True)
-        valid_keys = ProjectPassCreateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectPassCreateResponse(**filtered_data)
+        return self._invoke(
+            method="projectPassCreate",
+            request=request,
+            response_cls=ProjectPassCreateResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectPassList(
         self, request: ProjectPassListRequest
     ) -> ProjectPassListResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectPassList", params, skip_block=True)
-        valid_keys = ProjectPassListResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectPassListResponse(**filtered_data)
+        return self._invoke(
+            method="projectPassList",
+            request=request,
+            response_cls=ProjectPassListResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectPassDeactivate(
         self, request: ProjectPassDeactivateRequest
     ) -> ProjectPassDeactivateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectPassDeactivate", params, skip_block=True)
-        valid_keys = ProjectPassDeactivateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectPassDeactivateResponse(**filtered_data)
+        return self._invoke(
+            method="projectPassDeactivate",
+            request=request,
+            response_cls=ProjectPassDeactivateResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def projectPassUpdateExpiry(
         self, request: ProjectPassUpdateExpiryRequest
     ) -> ProjectPassUpdateExpiryResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("projectPassUpdateExpiry", params, skip_block=True)
-        valid_keys = ProjectPassUpdateExpiryResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ProjectPassUpdateExpiryResponse(**filtered_data)
+        return self._invoke(
+            method="projectPassUpdateExpiry",
+            request=request,
+            response_cls=ProjectPassUpdateExpiryResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def taxList(self, request: TaxListRequest) -> TaxListResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("taxList", params, skip_block=True)
-        valid_keys = TaxListResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return TaxListResponse(**filtered_data)
+        return self._invoke(
+            method="taxList",
+            request=request,
+            response_cls=TaxListResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def taxAdd(self, request: TaxAddRequest) -> TaxAddResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("taxAdd", params, skip_block=True)
-        valid_keys = TaxAddResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return TaxAddResponse(**filtered_data)
+        return self._invoke(
+            method="taxAdd",
+            request=request,
+            response_cls=TaxAddResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def taxModify(self, request: TaxModifyRequest) -> TaxModifyResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("taxModify", params, skip_block=True)
-        valid_keys = TaxModifyResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return TaxModifyResponse(**filtered_data)
+        return self._invoke(
+            method="taxModify",
+            request=request,
+            response_cls=TaxModifyResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def taxActivate(self, request: TaxActivateRequest) -> TaxActivateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("taxActivate", params, skip_block=True)
-        valid_keys = TaxActivateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return TaxActivateResponse(**filtered_data)
+        return self._invoke(
+            method="taxActivate",
+            request=request,
+            response_cls=TaxActivateResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def taxInactivate(self, request: TaxInactivateRequest) -> TaxInactivateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("taxInactivate", params, skip_block=True)
-        valid_keys = TaxInactivateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return TaxInactivateResponse(**filtered_data)
+        return self._invoke(
+            method="taxInactivate",
+            request=request,
+            response_cls=TaxInactivateResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def paymentModeInactivate(
         self, request: PaymentModeInactivateRequest
     ) -> PaymentModeInactivateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("paymentModeInactivate", params, skip_block=True)
-        valid_keys = PaymentModeInactivateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return PaymentModeInactivateResponse(**filtered_data)
+        return self._invoke(
+            method="paymentModeInactivate",
+            request=request,
+            response_cls=PaymentModeInactivateResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def paymentModeActivate(
         self, request: PaymentModeActivateRequest
     ) -> PaymentModeActivateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("paymentModeActivate", params, skip_block=True)
-        valid_keys = PaymentModeActivateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return PaymentModeActivateResponse(**filtered_data)
+        return self._invoke(
+            method="paymentModeActivate",
+            request=request,
+            response_cls=PaymentModeActivateResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def paymentModeDownload(
         self, request: PaymentModeDownloadRequest
     ) -> PaymentModeDownloadResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("paymentModeDownload", params, skip_block=True)
-        valid_keys = PaymentModeDownloadResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return PaymentModeDownloadResponse(**filtered_data)
+        return self._invoke(
+            method="paymentModeDownload",
+            request=request,
+            response_cls=PaymentModeDownloadResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def orderAdd(self, request: OrderAddRequest) -> OrderAddResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("orderAdd", params, skip_block=False)
-        valid_keys = OrderAddResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return OrderAddResponse(**filtered_data)
+        return self._invoke(
+            method="orderAdd",
+            request=request,
+            response_cls=OrderAddResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def orderCollectiveAdd(
         self, request: OrderCollectiveAddRequest
     ) -> OrderCollectiveAddResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("orderCollectiveAdd", params, skip_block=False)
-        valid_keys = OrderCollectiveAddResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return OrderCollectiveAddResponse(**filtered_data)
+        return self._invoke(
+            method="orderCollectiveAdd",
+            request=request,
+            response_cls=OrderCollectiveAddResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def orderList(self, request: OrderListRequest) -> OrderListResponse:
-        params = asdict(request) if request else {}
-        if "from_" in params:
-            params["from"] = params.pop("from_")
-        data = self.client._call("orderList", params, skip_block=False)
-        valid_keys = OrderListResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return OrderListResponse(**filtered_data)
+        return self._invoke(
+            method="orderList",
+            request=request,
+            response_cls=OrderListResponse,
+            skip_block=False,
+            req_mapping={"from_": "from"},
+            resp_mapping={},
+        )
 
     def orderStorno(self, request: OrderStornoRequest) -> OrderStornoResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("orderStorno", params, skip_block=False)
-        valid_keys = OrderStornoResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return OrderStornoResponse(**filtered_data)
+        return self._invoke(
+            method="orderStorno",
+            request=request,
+            response_cls=OrderStornoResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def orderProformDownload(
         self, request: OrderProformDownloadRequest
     ) -> OrderProformDownloadResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("orderProformDownload", params, skip_block=False)
-        valid_keys = OrderProformDownloadResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return OrderProformDownloadResponse(**filtered_data)
+        return self._invoke(
+            method="orderProformDownload",
+            request=request,
+            response_cls=OrderProformDownloadResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def orderBill(self, request: OrderBillRequest) -> OrderBillResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("orderBill", params, skip_block=False)
-        valid_keys = OrderBillResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return OrderBillResponse(**filtered_data)
+        return self._invoke(
+            method="orderBill",
+            request=request,
+            response_cls=OrderBillResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def orderDetails(self, request: OrderDetailsRequest) -> OrderDetailsResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("orderDetails", params, skip_block=False)
-        valid_keys = OrderDetailsResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return OrderDetailsResponse(**filtered_data)
+        return self._invoke(
+            method="orderDetails",
+            request=request,
+            response_cls=OrderDetailsResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def orderCollectiveClose(
         self, request: OrderCollectiveCloseRequest
     ) -> OrderCollectiveCloseResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("orderCollectiveClose", params, skip_block=False)
-        valid_keys = OrderCollectiveCloseResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return OrderCollectiveCloseResponse(**filtered_data)
+        return self._invoke(
+            method="orderCollectiveClose",
+            request=request,
+            response_cls=OrderCollectiveCloseResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def orderCollectiveSettling(
         self, request: OrderCollectiveSettlingRequest
     ) -> OrderCollectiveSettlingResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("orderCollectiveSettling", params, skip_block=False)
-        valid_keys = OrderCollectiveSettlingResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return OrderCollectiveSettlingResponse(**filtered_data)
+        return self._invoke(
+            method="orderCollectiveSettling",
+            request=request,
+            response_cls=OrderCollectiveSettlingResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def orderCollectiveAddElements(
         self, request: OrderCollectiveAddElementsRequest
     ) -> OrderCollectiveAddElementsResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("orderCollectiveAddElements", params, skip_block=False)
-        valid_keys = OrderCollectiveAddElementsResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return OrderCollectiveAddElementsResponse(**filtered_data)
+        return self._invoke(
+            method="orderCollectiveAddElements",
+            request=request,
+            response_cls=OrderCollectiveAddElementsResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def orderSetPaid(self, request: OrderSetPaidRequest) -> OrderSetPaidResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("orderSetPaid", params, skip_block=False)
-        valid_keys = OrderSetPaidResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return OrderSetPaidResponse(**filtered_data)
+        return self._invoke(
+            method="orderSetPaid",
+            request=request,
+            response_cls=OrderSetPaidResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def orderCheckPaid(self, request: OrderCheckPaidRequest) -> OrderCheckPaidResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("orderCheckPaid", params, skip_block=False)
-        valid_keys = OrderCheckPaidResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return OrderCheckPaidResponse(**filtered_data)
+        return self._invoke(
+            method="orderCheckPaid",
+            request=request,
+            response_cls=OrderCheckPaidResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def orderPaidChangeList(
         self, request: OrderPaidChangeListRequest
     ) -> OrderPaidChangeListResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("orderPaidChangeList", params, skip_block=False)
-        valid_keys = OrderPaidChangeListResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return OrderPaidChangeListResponse(**filtered_data)
+        return self._invoke(
+            method="orderPaidChangeList",
+            request=request,
+            response_cls=OrderPaidChangeListResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def invoiceAdd(self, request: InvoiceAddRequest) -> InvoiceAddResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("invoiceAdd", params, skip_block=False)
-        valid_keys = InvoiceAddResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return InvoiceAddResponse(**filtered_data)
+        return self._invoke(
+            method="invoiceAdd",
+            request=request,
+            response_cls=InvoiceAddResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def invoiceAddPrepayment(
         self, request: InvoiceAddPrepaymentRequest
     ) -> InvoiceAddPrepaymentResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("invoiceAddPrepayment", params, skip_block=False)
-        valid_keys = InvoiceAddPrepaymentResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return InvoiceAddPrepaymentResponse(**filtered_data)
+        return self._invoke(
+            method="invoiceAddPrepayment",
+            request=request,
+            response_cls=InvoiceAddPrepaymentResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def invoiceAddFinal(
         self, request: InvoiceAddFinalRequest
     ) -> InvoiceAddFinalResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("invoiceAddFinal", params, skip_block=False)
-        valid_keys = InvoiceAddFinalResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return InvoiceAddFinalResponse(**filtered_data)
+        return self._invoke(
+            method="invoiceAddFinal",
+            request=request,
+            response_cls=InvoiceAddFinalResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def invoiceDetails(self, request: InvoiceDetailsRequest) -> InvoiceDetailsResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("invoiceDetails", params, skip_block=False)
-        valid_keys = InvoiceDetailsResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return InvoiceDetailsResponse(**filtered_data)
+        return self._invoke(
+            method="invoiceDetails",
+            request=request,
+            response_cls=InvoiceDetailsResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def invoiceDownload(
         self, request: InvoiceDownloadRequest
     ) -> InvoiceDownloadResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("invoiceDownload", params, skip_block=False)
-        valid_keys = InvoiceDownloadResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return InvoiceDownloadResponse(**filtered_data)
+        return self._invoke(
+            method="invoiceDownload",
+            request=request,
+            response_cls=InvoiceDownloadResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def invoiceStorno(self, request: InvoiceStornoRequest) -> InvoiceStornoResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("invoiceStorno", params, skip_block=False)
-        valid_keys = InvoiceStornoResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return InvoiceStornoResponse(**filtered_data)
+        return self._invoke(
+            method="invoiceStorno",
+            request=request,
+            response_cls=InvoiceStornoResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def invoiceList(self, request: InvoiceListRequest) -> InvoiceListResponse:
-        params = asdict(request) if request else {}
-        if "from_" in params:
-            params["from"] = params.pop("from_")
-        data = self.client._call("invoiceList", params, skip_block=False)
-        valid_keys = InvoiceListResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return InvoiceListResponse(**filtered_data)
+        return self._invoke(
+            method="invoiceList",
+            request=request,
+            response_cls=InvoiceListResponse,
+            skip_block=False,
+            req_mapping={"from_": "from"},
+            resp_mapping={},
+        )
 
     def invoiceExport(self, request: InvoiceExportRequest) -> InvoiceExportResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("invoiceExport", params, skip_block=False)
-        valid_keys = InvoiceExportResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return InvoiceExportResponse(**filtered_data)
+        return self._invoke(
+            method="invoiceExport",
+            request=request,
+            response_cls=InvoiceExportResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def invoiceSearch(self, request: InvoiceSearchRequest) -> InvoiceSearchResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("invoiceSearch", params, skip_block=False)
-        valid_keys = InvoiceSearchResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return InvoiceSearchResponse(**filtered_data)
+        return self._invoke(
+            method="invoiceSearch",
+            request=request,
+            response_cls=InvoiceSearchResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def invoiceCorrection(
         self, request: InvoiceCorrectionRequest
     ) -> InvoiceCorrectionResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("invoiceCorrection", params, skip_block=True)
-        valid_keys = InvoiceCorrectionResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return InvoiceCorrectionResponse(**filtered_data)
+        return self._invoke(
+            method="invoiceCorrection",
+            request=request,
+            response_cls=InvoiceCorrectionResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def invoiceResend(self, request: InvoiceResendRequest) -> InvoiceResendResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("invoiceResend", params, skip_block=False)
-        valid_keys = InvoiceResendResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return InvoiceResendResponse(**filtered_data)
+        return self._invoke(
+            method="invoiceResend",
+            request=request,
+            response_cls=InvoiceResendResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def invoiceCheckPaid(
         self, request: InvoiceCheckPaidRequest
     ) -> InvoiceCheckPaidResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("invoiceCheckPaid", params, skip_block=False)
-        valid_keys = InvoiceCheckPaidResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return InvoiceCheckPaidResponse(**filtered_data)
+        return self._invoke(
+            method="invoiceCheckPaid",
+            request=request,
+            response_cls=InvoiceCheckPaidResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def invoiceSetPaid(self, request: InvoiceSetPaidRequest) -> InvoiceSetPaidResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("invoiceSetPaid", params, skip_block=False)
-        valid_keys = InvoiceSetPaidResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return InvoiceSetPaidResponse(**filtered_data)
+        return self._invoke(
+            method="invoiceSetPaid",
+            request=request,
+            response_cls=InvoiceSetPaidResponse,
+            skip_block=False,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def debtDetails(self, request: DebtDetailsRequest) -> DebtDetailsResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("debtDetails", params, skip_block=True)
-        valid_keys = DebtDetailsResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return DebtDetailsResponse(**filtered_data)
+        return self._invoke(
+            method="debtDetails",
+            request=request,
+            response_cls=DebtDetailsResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def debtDownload(self, request: DebtDownloadRequest) -> DebtDownloadResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("debtDownload", params, skip_block=True)
-        valid_keys = DebtDownloadResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return DebtDownloadResponse(**filtered_data)
+        return self._invoke(
+            method="debtDownload",
+            request=request,
+            response_cls=DebtDownloadResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def debtList(self, request: DebtListRequest) -> DebtListResponse:
-        params = asdict(request) if request else {}
-        if "from_" in params:
-            params["from"] = params.pop("from_")
-        data = self.client._call("debtList", params, skip_block=True)
-        valid_keys = DebtListResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return DebtListResponse(**filtered_data)
+        return self._invoke(
+            method="debtList",
+            request=request,
+            response_cls=DebtListResponse,
+            skip_block=True,
+            req_mapping={"from_": "from"},
+            resp_mapping={},
+        )
 
     def debtAdd(self, request: DebtAddRequest) -> DebtAddResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("debtAdd", params, skip_block=True)
-        valid_keys = DebtAddResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return DebtAddResponse(**filtered_data)
+        return self._invoke(
+            method="debtAdd",
+            request=request,
+            response_cls=DebtAddResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def debtModify(self, request: DebtModifyRequest) -> DebtModifyResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("debtModify", params, skip_block=True)
-        valid_keys = DebtModifyResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return DebtModifyResponse(**filtered_data)
+        return self._invoke(
+            method="debtModify",
+            request=request,
+            response_cls=DebtModifyResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def debtAccept(self, request: DebtAcceptRequest) -> DebtAcceptResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("debtAccept", params, skip_block=True)
-        valid_keys = DebtAcceptResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return DebtAcceptResponse(**filtered_data)
+        return self._invoke(
+            method="debtAccept",
+            request=request,
+            response_cls=DebtAcceptResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def debtPay(self, request: DebtPayRequest) -> DebtPayResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("debtPay", params, skip_block=True)
-        valid_keys = DebtPayResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return DebtPayResponse(**filtered_data)
+        return self._invoke(
+            method="debtPay",
+            request=request,
+            response_cls=DebtPayResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def debtDelete(self, request: DebtDeleteRequest) -> DebtDeleteResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("debtDelete", params, skip_block=True)
-        valid_keys = DebtDeleteResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return DebtDeleteResponse(**filtered_data)
+        return self._invoke(
+            method="debtDelete",
+            request=request,
+            response_cls=DebtDeleteResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def debtGenerate(self, request: DebtGenerateRequest) -> DebtGenerateResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("debtGenerate", params, skip_block=True)
-        valid_keys = DebtGenerateResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return DebtGenerateResponse(**filtered_data)
+        return self._invoke(
+            method="debtGenerate",
+            request=request,
+            response_cls=DebtGenerateResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def debtExport(self, request: DebtExportRequest) -> DebtExportResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("debtExport", params, skip_block=True)
-        valid_keys = DebtExportResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return DebtExportResponse(**filtered_data)
+        return self._invoke(
+            method="debtExport",
+            request=request,
+            response_cls=DebtExportResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def systemMessageList(
         self, request: SystemMessageListRequest
     ) -> SystemMessageListResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("systemMessageList", params, skip_block=True)
-        valid_keys = SystemMessageListResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return SystemMessageListResponse(**filtered_data)
+        return self._invoke(
+            method="systemMessageList",
+            request=request,
+            response_cls=SystemMessageListResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def systemMessageSetRead(
         self, request: SystemMessageSetReadRequest
     ) -> SystemMessageSetReadResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("systemMessageSetRead", params, skip_block=True)
-        valid_keys = SystemMessageSetReadResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return SystemMessageSetReadResponse(**filtered_data)
+        return self._invoke(
+            method="systemMessageSetRead",
+            request=request,
+            response_cls=SystemMessageSetReadResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def systemErrorCodeList(
         self, request: SystemErrorCodeListRequest
     ) -> SystemErrorCodeListResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("systemErrorCodeList", params, skip_block=True)
-        valid_keys = SystemErrorCodeListResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return SystemErrorCodeListResponse(**filtered_data)
+        return self._invoke(
+            method="systemErrorCodeList",
+            request=request,
+            response_cls=SystemErrorCodeListResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def getVersion(self, request: GetVersionRequest) -> GetVersionResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("getVersion", params, skip_block=True)
-        valid_keys = GetVersionResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return GetVersionResponse(**filtered_data)
+        return self._invoke(
+            method="getVersion",
+            request=request,
+            response_cls=GetVersionResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def serviceProviderDatas(
         self, request: ServiceProviderDatasRequest
     ) -> ServiceProviderDatasResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("serviceProviderDatas", params, skip_block=True)
-        valid_keys = ServiceProviderDatasResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return ServiceProviderDatasResponse(**filtered_data)
+        return self._invoke(
+            method="serviceProviderDatas",
+            request=request,
+            response_cls=ServiceProviderDatasResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def companyData(self, request: CompanyDataRequest) -> CompanyDataResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("companyData", params, skip_block=True)
-        valid_keys = CompanyDataResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CompanyDataResponse(**filtered_data)
+        return self._invoke(
+            method="companyData",
+            request=request,
+            response_cls=CompanyDataResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def quantityList(self, request: QuantityListRequest) -> QuantityListResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("quantityList", params, skip_block=True)
-        valid_keys = QuantityListResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return QuantityListResponse(**filtered_data)
+        return self._invoke(
+            method="quantityList",
+            request=request,
+            response_cls=QuantityListResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def currencyDownload(
         self, request: CurrencyDownloadRequest
     ) -> CurrencyDownloadResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("currencyDownload", params, skip_block=True)
-        valid_keys = CurrencyDownloadResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CurrencyDownloadResponse(**filtered_data)
+        return self._invoke(
+            method="currencyDownload",
+            request=request,
+            response_cls=CurrencyDownloadResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def regularityDownload(
         self, request: RegularityDownloadRequest
     ) -> RegularityDownloadResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("regularityDownload", params, skip_block=True)
-        valid_keys = RegularityDownloadResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return RegularityDownloadResponse(**filtered_data)
+        return self._invoke(
+            method="regularityDownload",
+            request=request,
+            response_cls=RegularityDownloadResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def countryDownload(
         self, request: CountryDownloadRequest
     ) -> CountryDownloadResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("countryDownload", params, skip_block=True)
-        valid_keys = CountryDownloadResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return CountryDownloadResponse(**filtered_data)
+        return self._invoke(
+            method="countryDownload",
+            request=request,
+            response_cls=CountryDownloadResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def postcodeDownload(
         self, request: PostcodeDownloadRequest
     ) -> PostcodeDownloadResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("postcodeDownload", params, skip_block=True)
-        valid_keys = PostcodeDownloadResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return PostcodeDownloadResponse(**filtered_data)
+        return self._invoke(
+            method="postcodeDownload",
+            request=request,
+            response_cls=PostcodeDownloadResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def ping(self, request: PingRequest) -> PingResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("ping", params, skip_block=True)
-        valid_keys = PingResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return PingResponse(**filtered_data)
+        return self._invoke(
+            method="ping",
+            request=request,
+            response_cls=PingResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
 
     def monitor(self, request: MonitorRequest) -> MonitorResponse:
-        params = asdict(request) if request else {}
-        data = self.client._call("monitor", params, skip_block=True)
-        valid_keys = MonitorResponse.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return MonitorResponse(**filtered_data)
+        return self._invoke(
+            method="monitor",
+            request=request,
+            response_cls=MonitorResponse,
+            skip_block=True,
+            req_mapping={},
+            resp_mapping={},
+        )
