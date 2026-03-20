@@ -14,7 +14,7 @@ def normalize_type(raw_type):
     if t in ("bool", "boolean"):
         return "bool"
     if t == "array":
-        return "list[dict[str, Any]]"
+        return "builtins.list[builtins.dict[str, Any]]"
     if t in ("date", "datetime"):
         return "str"
     return "Any"
@@ -91,6 +91,9 @@ def extract_endpoints(html_file):
             req_table = tables[0]
             resp_table = tables[1]
 
+            # Detect if "block" parameter is required
+            requires_block = any(f["name"] == "block" for f in req_table)
+
             # Remove base credentials
             req_table = [
                 f for f in req_table if f["name"] not in ("uid", "password", "block")
@@ -116,6 +119,7 @@ def extract_endpoints(html_file):
                     "name": endpoint_name,
                     "request": dedup_req,
                     "response": dedup_resp,
+                    "requires_block": requires_block,
                 }
             )
 
@@ -124,6 +128,7 @@ def extract_endpoints(html_file):
 
 def generate_python(endpoints, output_file):
     with open(output_file, "w") as f:
+        f.write("import builtins\n")
         f.write("from typing import Any, Optional\n")
         f.write("from dataclasses import dataclass, asdict\n")
         f.write("from .client import OnlineSzamlazoClient\n\n")
@@ -145,13 +150,9 @@ def generate_python(endpoints, output_file):
                         "from",
                         "import",
                         "pass",
-                        "type",
-                        "id",
                         "def",
                         "class",
                         "global",
-                        "list",
-                        "dict",
                     )
                     if py_name in reserved:
                         py_name += "_"
@@ -174,13 +175,9 @@ def generate_python(endpoints, output_file):
                         "from",
                         "import",
                         "pass",
-                        "type",
-                        "id",
                         "def",
                         "class",
                         "global",
-                        "list",
-                        "dict",
                     )
                     if py_name in reserved:
                         py_name += "_"
@@ -199,9 +196,9 @@ def generate_python(endpoints, output_file):
             method_name = ep["name"]
 
             if ep["request"]:
-                sig = f"request: {req_name}, skip_block: bool = False"
+                sig = f"request: {req_name}"
             else:
-                sig = f"request: Optional[{req_name}] = None, skip_block: bool = False"
+                sig = f"request: Optional[{req_name}] = None"
             f.write(f"    def {method_name}(self, {sig}) -> {resp_name}:\n")
             f.write("        params = asdict(request) if request else {}\n")
 
@@ -212,13 +209,9 @@ def generate_python(endpoints, output_file):
                     "from",
                     "import",
                     "pass",
-                    "type",
-                    "id",
                     "def",
                     "class",
                     "global",
-                    "list",
-                    "dict",
                 )
                 if py_name in reserved:
                     py_name += "_"
@@ -229,9 +222,10 @@ def generate_python(endpoints, output_file):
                         f"            params['{orig_name}'] = params.pop('{py_name}')\n"
                     )
 
+            skip_block_val = "False" if ep.get("requires_block", False) else "True"
             f.write(
                 f"        data = self.client._call(\n"
-                f"            '{method_name}', params, skip_block=skip_block\n"
+                f"            '{method_name}', params, skip_block={skip_block_val}\n"
                 f"        )\n"
             )
 
@@ -242,13 +236,9 @@ def generate_python(endpoints, output_file):
                     "from",
                     "import",
                     "pass",
-                    "type",
-                    "id",
                     "def",
                     "class",
                     "global",
-                    "list",
-                    "dict",
                 )
                 if py_name in reserved:
                     py_name += "_"

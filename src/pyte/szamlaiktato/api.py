@@ -1,3 +1,4 @@
+import builtins
 from typing import Any, Optional
 from dataclasses import dataclass, asdict
 from .client import OnlineSzamlazoClient
@@ -254,7 +255,7 @@ class CustomerInactivateResponse:
 class CustomerSwapRequest:
     instance_id: str
     sid: str
-    swapped_sids: list[dict[str, Any]]
+    swapped_sids: builtins.list[builtins.dict[str, Any]]
 
 
 @dataclass
@@ -279,7 +280,7 @@ class CustomerListRequest:
 class CustomerListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    customers: Optional[list[dict[str, Any]]] = None
+    customers: Optional[builtins.list[builtins.dict[str, Any]]] = None
     sid: Optional[str] = None
     name: Optional[str] = None
     country: Optional[str] = None
@@ -318,7 +319,7 @@ class ProductAddRequest:
     comment: Optional[str] = None
     cost_type: Optional[str] = None
     cost_centre: Optional[str] = None
-    lang: Optional[list[dict[str, Any]]] = None
+    lang: Optional[builtins.list[builtins.dict[str, Any]]] = None
     short_description: Optional[str] = None
     description: Optional[str] = None
     other: Optional[str] = None
@@ -346,7 +347,7 @@ class ProductModifyRequest:
     comment: Optional[str] = None
     cost_type: Optional[str] = None
     cost_centre: Optional[str] = None
-    lang: Optional[list[dict[str, Any]]] = None
+    lang: Optional[builtins.list[builtins.dict[str, Any]]] = None
     short_description: Optional[str] = None
     description: Optional[str] = None
     other: Optional[str] = None
@@ -387,7 +388,7 @@ class ProductGetResponse:
     description: Optional[str] = None
     other: Optional[str] = None
     tax_code: Optional[str] = None
-    lang: Optional[list[dict[str, Any]]] = None
+    lang: Optional[builtins.list[builtins.dict[str, Any]]] = None
     files_number: Optional[int] = None
     modify_date: Optional[str] = None
 
@@ -438,7 +439,7 @@ class ProductListResponse:
     status: Optional[str] = None
     numberOfResults: Optional[int] = None
     numberOfPages: Optional[int] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     sid: Optional[str] = None
     name: Optional[str] = None
@@ -476,7 +477,7 @@ class ProductFileListRequest:
 class ProductFileListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     sid: Optional[str] = None
     filename: Optional[str] = None
     checksum: Optional[str] = None
@@ -493,7 +494,7 @@ class OuterDatasourcesRequest:
 class OuterDatasourcesResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
@@ -592,7 +593,7 @@ class BlockAddRequest:
     lang: str
     invoice_template: str
     currency: str
-    other: list[dict[str, Any]]
+    other: builtins.list[builtins.dict[str, Any]]
     countryMustVisibleInInvoice: int
     bank_name: Optional[str] = None
     comment: Optional[str] = None
@@ -620,7 +621,7 @@ class BlockAddRequest:
     order_number_visible: Optional[int] = None
     pdfConvertZpl: Optional[int] = None
     pdfConvertZplDownload: Optional[int] = None
-    pdf_design05: Optional[list[dict[str, Any]]] = None
+    pdf_design05: Optional[builtins.list[builtins.dict[str, Any]]] = None
     color1: Optional[str] = None
 
 
@@ -665,7 +666,7 @@ class BlockModifyRequest:
     lang: str
     invoice_template: str
     currency: str
-    other: list[dict[str, Any]]
+    other: builtins.list[builtins.dict[str, Any]]
     countryMustVisibleInInvoice: int
     bank_name: Optional[str] = None
     comment: Optional[str] = None
@@ -693,7 +694,7 @@ class BlockModifyRequest:
     order_number_visible: Optional[int] = None
     pdfConvertZpl: Optional[int] = None
     pdfConvertZplDownload: Optional[int] = None
-    pdf_design05: Optional[list[dict[str, Any]]] = None
+    pdf_design05: Optional[builtins.list[builtins.dict[str, Any]]] = None
     color1: Optional[str] = None
 
 
@@ -715,7 +716,7 @@ class BlockListRequest:
 class BlockListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     block_name: Optional[str] = None
     name: Optional[str] = None
@@ -794,7 +795,7 @@ class CostCentreListRequest:
 class CostCentreListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    cost_centres: Optional[list[dict[str, Any]]] = None
+    cost_centres: Optional[builtins.list[builtins.dict[str, Any]]] = None
     name: Optional[str] = None
     code: Optional[str] = None
     comment: Optional[int] = None
@@ -869,7 +870,7 @@ class CostTypeListRequest:
 class CostTypeListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
@@ -915,7 +916,7 @@ class ProjectListRequest:
 class ProjectListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    projects: Optional[list[dict[str, Any]]] = None
+    projects: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 
 @dataclass
@@ -986,7 +987,7 @@ class ProjectTimesheetListRequest:
 class ProjectTimesheetListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    timesheets: Optional[list[dict[str, Any]]] = None
+    timesheets: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 
 @dataclass
@@ -1145,7 +1146,7 @@ class ProjectAvailableSlotsRequest:
 class ProjectAvailableSlotsResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    slots: Optional[list[dict[str, Any]]] = None
+    slots: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 
 @dataclass
@@ -1157,7 +1158,7 @@ class ProjectWorkerListRequest:
 class ProjectWorkerListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    workers: Optional[list[dict[str, Any]]] = None
+    workers: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 
 @dataclass
@@ -1204,7 +1205,7 @@ class ProjectPassListRequest:
 class ProjectPassListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    passes: Optional[list[dict[str, Any]]] = None
+    passes: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 
 @dataclass
@@ -1242,7 +1243,7 @@ class TaxListRequest:
 class TaxListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
@@ -1347,7 +1348,7 @@ class PaymentModeDownloadRequest:
 class PaymentModeDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
@@ -1364,7 +1365,7 @@ class OrderAddRequest:
     trade_date: str
     print_date: str
     pay_date: str
-    elements: list[dict[str, Any]]
+    elements: builtins.list[builtins.dict[str, Any]]
     product_sid: str
     amount: float
     quantity: str
@@ -1383,7 +1384,7 @@ class OrderAddRequest:
     regularities_id: Optional[int] = None
     regularity: Optional[str] = None
     regularities_date: Optional[str] = None
-    meta: Optional[list[dict[str, Any]]] = None
+    meta: Optional[builtins.list[builtins.dict[str, Any]]] = None
     KULCS: Optional[str] = None
 
 
@@ -1405,7 +1406,7 @@ class OrderCollectiveAddRequest:
     trade_date: str
     print_date: str
     pay_date: str
-    elements: list[dict[str, Any]]
+    elements: builtins.list[builtins.dict[str, Any]]
     product_sid: str
     amount: float
     quantity: str
@@ -1435,7 +1436,7 @@ class OrderListRequest:
     instance_id: str
     limit: Optional[int] = None
     page: Optional[int] = None
-    from: Optional[str] = None
+    from_: Optional[str] = None
     to: Optional[str] = None
     customer_sid: Optional[str] = None
     regularities_id: Optional[int] = None
@@ -1449,7 +1450,7 @@ class OrderListResponse:
     status: Optional[str] = None
     numberOfResults: Optional[int] = None
     numberOfPages: Optional[int] = None
-    orders: Optional[list[dict[str, Any]]] = None
+    orders: Optional[builtins.list[builtins.dict[str, Any]]] = None
     order_number: Optional[str] = None
     block_id: Optional[int] = None
     print_date: Optional[str] = None
@@ -1536,7 +1537,7 @@ class OrderBillResponse:
     status: Optional[str] = None
     invoice_number: Optional[str] = None
     invoice_client_url: Optional[str] = None
-    invoices: Optional[list[dict[str, Any]]] = None
+    invoices: Optional[builtins.list[builtins.dict[str, Any]]] = None
     invoice_id: Optional[int] = None
     invoice_type_id: Optional[int] = None
     invoice_type: Optional[str] = None
@@ -1576,7 +1577,7 @@ class OrderDetailsResponse:
     net_price: Optional[str] = None
     tax_value: Optional[str] = None
     gross_price: Optional[str] = None
-    elements: Optional[list[dict[str, Any]]] = None
+    elements: Optional[builtins.list[builtins.dict[str, Any]]] = None
     product_sid: Optional[str] = None
     amount: Optional[float] = None
     quantity: Optional[str] = None
@@ -1619,7 +1620,7 @@ class OrderCollectiveSettlingRequest:
 class OrderCollectiveSettlingResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     order_number: Optional[str] = None
     invoice_number: Optional[str] = None
     customer_sid: Optional[str] = None
@@ -1638,7 +1639,7 @@ class OrderCollectiveSettlingResponse:
 class OrderCollectiveAddElementsRequest:
     instance_id: str
     customer_sid: str
-    elements: list[dict[str, Any]]
+    elements: builtins.list[builtins.dict[str, Any]]
     product_sid: str
     amount: float
     quantity: str
@@ -1693,7 +1694,7 @@ class OrderPaidChangeListRequest:
 class OrderPaidChangeListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     order_number: Optional[str] = None
 
 
@@ -1705,7 +1706,7 @@ class InvoiceAddRequest:
     trade_date: str
     print_date: str
     pay_date: str
-    elements: list[dict[str, Any]]
+    elements: builtins.list[builtins.dict[str, Any]]
     product_sid: str
     amount: float
     quantity: str
@@ -1740,7 +1741,7 @@ class InvoiceAddPrepaymentRequest:
     trade_date: str
     print_date: str
     pay_date: str
-    elements: list[dict[str, Any]]
+    elements: builtins.list[builtins.dict[str, Any]]
     product_sid: str
     amount: float
     quantity: str
@@ -1773,7 +1774,7 @@ class InvoiceAddFinalRequest:
     trade_date: str
     print_date: str
     pay_date: str
-    elements: list[dict[str, Any]]
+    elements: builtins.list[builtins.dict[str, Any]]
     product_sid: str
     amount: float
     quantity: str
@@ -1831,7 +1832,7 @@ class InvoiceDetailsResponse:
     net_price: Optional[str] = None
     tax_value: Optional[str] = None
     gross_price: Optional[str] = None
-    elements: Optional[list[dict[str, Any]]] = None
+    elements: Optional[builtins.list[builtins.dict[str, Any]]] = None
     product_sid: Optional[str] = None
     amount: Optional[float] = None
     quantity: Optional[str] = None
@@ -1858,7 +1859,7 @@ class InvoiceDownloadRequest:
 class InvoiceDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    invoices: Optional[list[dict[str, Any]]] = None
+    invoices: Optional[builtins.list[builtins.dict[str, Any]]] = None
     invoice_id: Optional[int] = None
     invoice_number: Optional[str] = None
     invoice_type_id: Optional[int] = None
@@ -1889,7 +1890,7 @@ class InvoiceListRequest:
     instance_id: str
     limit: Optional[int] = None
     page: Optional[int] = None
-    from: Optional[str] = None
+    from_: Optional[str] = None
     to: Optional[str] = None
     customer_sid: Optional[str] = None
 
@@ -1900,7 +1901,7 @@ class InvoiceListResponse:
     status: Optional[str] = None
     numberOfResults: Optional[int] = None
     numberOfPages: Optional[int] = None
-    invoices: Optional[list[dict[str, Any]]] = None
+    invoices: Optional[builtins.list[builtins.dict[str, Any]]] = None
     invoice_id: Optional[int] = None
     invoice_number: Optional[str] = None
     customer_sid: Optional[str] = None
@@ -1989,7 +1990,7 @@ class InvoiceSearchResponse:
     net_price: Optional[float] = None
     tax_value: Optional[float] = None
     gross_price: Optional[float] = None
-    elements: Optional[list[dict[str, Any]]] = None
+    elements: Optional[builtins.list[builtins.dict[str, Any]]] = None
     product_sid: Optional[str] = None
     product_name: Optional[str] = None
     product_service_id: Optional[str] = None
@@ -2007,8 +2008,8 @@ class InvoiceSearchResponse:
 class InvoiceCorrectionRequest:
     instance_id: str
     invoice_number: str
-    elementsStorno: list[dict[str, Any]]
-    elements: list[dict[str, Any]]
+    elementsStorno: builtins.list[builtins.dict[str, Any]]
+    elements: builtins.list[builtins.dict[str, Any]]
     quantity: str
     net_price_single: float
     tax_code: str
@@ -2111,7 +2112,7 @@ class DebtListRequest:
     customer_sid: Optional[str] = None
     limit: Optional[int] = None
     page: Optional[int] = None
-    from: Optional[str] = None
+    from_: Optional[str] = None
     to: Optional[str] = None
 
 
@@ -2121,7 +2122,7 @@ class DebtListResponse:
     status: Optional[str] = None
     numberOfResults: Optional[int] = None
     numberOfPages: Optional[int] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 
 @dataclass
@@ -2190,7 +2191,7 @@ class DebtModifyResponse:
 @dataclass
 class DebtAcceptRequest:
     instance_id: str
-    debt_ids: list[dict[str, Any]]
+    debt_ids: builtins.list[builtins.dict[str, Any]]
 
 
 @dataclass
@@ -2203,7 +2204,7 @@ class DebtAcceptResponse:
 @dataclass
 class DebtPayRequest:
     instance_id: str
-    debt_ids: list[dict[str, Any]]
+    debt_ids: builtins.list[builtins.dict[str, Any]]
 
 
 @dataclass
@@ -2216,7 +2217,7 @@ class DebtPayResponse:
 @dataclass
 class DebtDeleteRequest:
     instance_id: str
-    debt_ids: list[dict[str, Any]]
+    debt_ids: builtins.list[builtins.dict[str, Any]]
 
 
 @dataclass
@@ -2229,7 +2230,7 @@ class DebtDeleteResponse:
 @dataclass
 class DebtGenerateRequest:
     instance_id: str
-    debt_ids: list[dict[str, Any]]
+    debt_ids: builtins.list[builtins.dict[str, Any]]
 
 
 @dataclass
@@ -2251,7 +2252,7 @@ class DebtExportRequest:
 class DebtExportResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 
 @dataclass
@@ -2263,7 +2264,7 @@ class SystemMessageListRequest:
 class SystemMessageListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     message: Optional[str] = None
     message_date: Optional[str] = None
@@ -2292,7 +2293,7 @@ class SystemErrorCodeListRequest:
 class SystemErrorCodeListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    lang: Optional[list[dict[str, Any]]] = None
+    lang: Optional[builtins.list[builtins.dict[str, Any]]] = None
     code: Optional[int] = None
     description: Optional[str] = None
     type: Optional[str] = None
@@ -2384,7 +2385,7 @@ class QuantityListRequest:
 class QuantityListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
@@ -2403,7 +2404,7 @@ class CurrencyDownloadRequest:
 class CurrencyDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     currency: Optional[str] = None
     amount: Optional[float] = None
@@ -2420,7 +2421,7 @@ class RegularityDownloadRequest:
 class RegularityDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     code: Optional[str] = None
     regularity: Optional[str] = None
@@ -2435,7 +2436,7 @@ class CountryDownloadRequest:
 class CountryDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     code: Optional[str] = None
     country: Optional[str] = None
 
@@ -2450,7 +2451,7 @@ class PostcodeDownloadRequest:
 class PostcodeDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    postcodes: Optional[list[dict[str, Any]]] = None
+    postcodes: Optional[builtins.list[builtins.dict[str, Any]]] = None
     postcode: Optional[str] = None
     city: Optional[str] = None
     region: Optional[str] = None
@@ -2476,7 +2477,7 @@ class MonitorRequest:
 class MonitorResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     state: Optional[str] = None
     name: Optional[str] = None
     last_check: Optional[str] = None
@@ -2486,1163 +2487,939 @@ class SzamlaiktatoAPI:
     def __init__(self, client: OnlineSzamlazoClient):
         self.client = client
 
-    def install(
-        self, request: InstallRequest, skip_block: bool = False
-    ) -> InstallResponse:
+    def install(self, request: InstallRequest) -> InstallResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("install", params, skip_block=skip_block)
+        data = self.client._call("install", params, skip_block=True)
         valid_keys = InstallResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return InstallResponse(**filtered_data)
 
-    def update(
-        self, request: UpdateRequest, skip_block: bool = False
-    ) -> UpdateResponse:
+    def update(self, request: UpdateRequest) -> UpdateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("update", params, skip_block=skip_block)
+        data = self.client._call("update", params, skip_block=True)
         valid_keys = UpdateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return UpdateResponse(**filtered_data)
 
-    def customerAdd(
-        self, request: CustomerAddRequest, skip_block: bool = False
-    ) -> CustomerAddResponse:
+    def customerAdd(self, request: CustomerAddRequest) -> CustomerAddResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("customerAdd", params, skip_block=skip_block)
+        data = self.client._call("customerAdd", params, skip_block=False)
         valid_keys = CustomerAddResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CustomerAddResponse(**filtered_data)
 
-    def customerModify(
-        self, request: CustomerModifyRequest, skip_block: bool = False
-    ) -> CustomerModifyResponse:
+    def customerModify(self, request: CustomerModifyRequest) -> CustomerModifyResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("customerModify", params, skip_block=skip_block)
+        data = self.client._call("customerModify", params, skip_block=False)
         valid_keys = CustomerModifyResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CustomerModifyResponse(**filtered_data)
 
-    def customerGet(
-        self, request: CustomerGetRequest, skip_block: bool = False
-    ) -> CustomerGetResponse:
+    def customerGet(self, request: CustomerGetRequest) -> CustomerGetResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("customerGet", params, skip_block=skip_block)
+        data = self.client._call("customerGet", params, skip_block=False)
         valid_keys = CustomerGetResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CustomerGetResponse(**filtered_data)
 
     def customerActivate(
-        self, request: CustomerActivateRequest, skip_block: bool = False
+        self, request: CustomerActivateRequest
     ) -> CustomerActivateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("customerActivate", params, skip_block=skip_block)
+        data = self.client._call("customerActivate", params, skip_block=False)
         valid_keys = CustomerActivateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CustomerActivateResponse(**filtered_data)
 
     def customerInactivate(
-        self, request: CustomerInactivateRequest, skip_block: bool = False
+        self, request: CustomerInactivateRequest
     ) -> CustomerInactivateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("customerInactivate", params, skip_block=skip_block)
+        data = self.client._call("customerInactivate", params, skip_block=False)
         valid_keys = CustomerInactivateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CustomerInactivateResponse(**filtered_data)
 
-    def customerSwap(
-        self, request: CustomerSwapRequest, skip_block: bool = False
-    ) -> CustomerSwapResponse:
+    def customerSwap(self, request: CustomerSwapRequest) -> CustomerSwapResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("customerSwap", params, skip_block=skip_block)
+        data = self.client._call("customerSwap", params, skip_block=False)
         valid_keys = CustomerSwapResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CustomerSwapResponse(**filtered_data)
 
-    def customerList(
-        self, request: CustomerListRequest, skip_block: bool = False
-    ) -> CustomerListResponse:
+    def customerList(self, request: CustomerListRequest) -> CustomerListResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("customerList", params, skip_block=skip_block)
+        data = self.client._call("customerList", params, skip_block=True)
         valid_keys = CustomerListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CustomerListResponse(**filtered_data)
 
-    def productAdd(
-        self, request: ProductAddRequest, skip_block: bool = False
-    ) -> ProductAddResponse:
+    def productAdd(self, request: ProductAddRequest) -> ProductAddResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("productAdd", params, skip_block=skip_block)
+        data = self.client._call("productAdd", params, skip_block=False)
         valid_keys = ProductAddResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProductAddResponse(**filtered_data)
 
-    def productModify(
-        self, request: ProductModifyRequest, skip_block: bool = False
-    ) -> ProductModifyResponse:
+    def productModify(self, request: ProductModifyRequest) -> ProductModifyResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("productModify", params, skip_block=skip_block)
+        data = self.client._call("productModify", params, skip_block=False)
         valid_keys = ProductModifyResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProductModifyResponse(**filtered_data)
 
-    def productGet(
-        self, request: ProductGetRequest, skip_block: bool = False
-    ) -> ProductGetResponse:
+    def productGet(self, request: ProductGetRequest) -> ProductGetResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("productGet", params, skip_block=skip_block)
+        data = self.client._call("productGet", params, skip_block=False)
         valid_keys = ProductGetResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProductGetResponse(**filtered_data)
 
     def productActivate(
-        self, request: ProductActivateRequest, skip_block: bool = False
+        self, request: ProductActivateRequest
     ) -> ProductActivateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("productActivate", params, skip_block=skip_block)
+        data = self.client._call("productActivate", params, skip_block=False)
         valid_keys = ProductActivateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProductActivateResponse(**filtered_data)
 
     def productInactivate(
-        self, request: ProductInactivateRequest, skip_block: bool = False
+        self, request: ProductInactivateRequest
     ) -> ProductInactivateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("productInactivate", params, skip_block=skip_block)
+        data = self.client._call("productInactivate", params, skip_block=False)
         valid_keys = ProductInactivateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProductInactivateResponse(**filtered_data)
 
-    def productList(
-        self, request: ProductListRequest, skip_block: bool = False
-    ) -> ProductListResponse:
+    def productList(self, request: ProductListRequest) -> ProductListResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("productList", params, skip_block=skip_block)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
+        data = self.client._call("productList", params, skip_block=True)
         valid_keys = ProductListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProductListResponse(**filtered_data)
 
     def productFileList(
-        self, request: ProductFileListRequest, skip_block: bool = False
+        self, request: ProductFileListRequest
     ) -> ProductFileListResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("productFileList", params, skip_block=skip_block)
-        if "list" in data:
-            data["list_"] = data.pop("list")
+        data = self.client._call("productFileList", params, skip_block=True)
         valid_keys = ProductFileListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProductFileListResponse(**filtered_data)
 
     def outerDatasources(
-        self, request: OuterDatasourcesRequest, skip_block: bool = False
+        self, request: OuterDatasourcesRequest
     ) -> OuterDatasourcesResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("outerDatasources", params, skip_block=skip_block)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
+        data = self.client._call("outerDatasources", params, skip_block=True)
         valid_keys = OuterDatasourcesResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OuterDatasourcesResponse(**filtered_data)
 
     def outerDatasourcesGet(
-        self, request: OuterDatasourcesGetRequest, skip_block: bool = False
+        self, request: OuterDatasourcesGetRequest
     ) -> OuterDatasourcesGetResponse:
         params = asdict(request) if request else {}
-        if "type_" in params:
-            params["type"] = params.pop("type_")
-        data = self.client._call("outerDatasourcesGet", params, skip_block=skip_block)
+        data = self.client._call("outerDatasourcesGet", params, skip_block=True)
         valid_keys = OuterDatasourcesGetResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OuterDatasourcesGetResponse(**filtered_data)
 
     def outerDatasourcesSave(
-        self, request: OuterDatasourcesSaveRequest, skip_block: bool = False
+        self, request: OuterDatasourcesSaveRequest
     ) -> OuterDatasourcesSaveResponse:
         params = asdict(request) if request else {}
-        if "type_" in params:
-            params["type"] = params.pop("type_")
-        data = self.client._call("outerDatasourcesSave", params, skip_block=skip_block)
+        data = self.client._call("outerDatasourcesSave", params, skip_block=True)
         valid_keys = OuterDatasourcesSaveResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OuterDatasourcesSaveResponse(**filtered_data)
 
-    def adminUserAdd(
-        self, request: AdminUserAddRequest, skip_block: bool = False
-    ) -> AdminUserAddResponse:
+    def adminUserAdd(self, request: AdminUserAddRequest) -> AdminUserAddResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("adminUserAdd", params, skip_block=skip_block)
+        data = self.client._call("adminUserAdd", params, skip_block=True)
         valid_keys = AdminUserAddResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return AdminUserAddResponse(**filtered_data)
 
     def adminUserPassword(
-        self, request: AdminUserPasswordRequest, skip_block: bool = False
+        self, request: AdminUserPasswordRequest
     ) -> AdminUserPasswordResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("adminUserPassword", params, skip_block=skip_block)
+        data = self.client._call("adminUserPassword", params, skip_block=True)
         valid_keys = AdminUserPasswordResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return AdminUserPasswordResponse(**filtered_data)
 
-    def adminUserDel(
-        self, request: AdminUserDelRequest, skip_block: bool = False
-    ) -> AdminUserDelResponse:
+    def adminUserDel(self, request: AdminUserDelRequest) -> AdminUserDelResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("adminUserDel", params, skip_block=skip_block)
+        data = self.client._call("adminUserDel", params, skip_block=True)
         valid_keys = AdminUserDelResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return AdminUserDelResponse(**filtered_data)
 
-    def blockAdd(
-        self, request: BlockAddRequest, skip_block: bool = False
-    ) -> BlockAddResponse:
+    def blockAdd(self, request: BlockAddRequest) -> BlockAddResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("blockAdd", params, skip_block=skip_block)
+        data = self.client._call("blockAdd", params, skip_block=True)
         valid_keys = BlockAddResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return BlockAddResponse(**filtered_data)
 
     def blockUpdateCompanyData(
-        self, request: BlockUpdateCompanyDataRequest, skip_block: bool = False
+        self, request: BlockUpdateCompanyDataRequest
     ) -> BlockUpdateCompanyDataResponse:
         params = asdict(request) if request else {}
-        data = self.client._call(
-            "blockUpdateCompanyData", params, skip_block=skip_block
-        )
+        data = self.client._call("blockUpdateCompanyData", params, skip_block=True)
         valid_keys = BlockUpdateCompanyDataResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return BlockUpdateCompanyDataResponse(**filtered_data)
 
-    def blockModify(
-        self, request: BlockModifyRequest, skip_block: bool = False
-    ) -> BlockModifyResponse:
+    def blockModify(self, request: BlockModifyRequest) -> BlockModifyResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("blockModify", params, skip_block=skip_block)
+        data = self.client._call("blockModify", params, skip_block=True)
         valid_keys = BlockModifyResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return BlockModifyResponse(**filtered_data)
 
-    def blockList(
-        self, request: BlockListRequest, skip_block: bool = False
-    ) -> BlockListResponse:
+    def blockList(self, request: BlockListRequest) -> BlockListResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("blockList", params, skip_block=skip_block)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
+        data = self.client._call("blockList", params, skip_block=True)
         valid_keys = BlockListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return BlockListResponse(**filtered_data)
 
-    def blockClose(
-        self, request: BlockCloseRequest, skip_block: bool = False
-    ) -> BlockCloseResponse:
+    def blockClose(self, request: BlockCloseRequest) -> BlockCloseResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("blockClose", params, skip_block=skip_block)
+        data = self.client._call("blockClose", params, skip_block=True)
         valid_keys = BlockCloseResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return BlockCloseResponse(**filtered_data)
 
-    def blockOpen(
-        self, request: BlockOpenRequest, skip_block: bool = False
-    ) -> BlockOpenResponse:
+    def blockOpen(self, request: BlockOpenRequest) -> BlockOpenResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("blockOpen", params, skip_block=skip_block)
+        data = self.client._call("blockOpen", params, skip_block=True)
         valid_keys = BlockOpenResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return BlockOpenResponse(**filtered_data)
 
-    def costCentreAdd(
-        self, request: CostCentreAddRequest, skip_block: bool = False
-    ) -> CostCentreAddResponse:
+    def costCentreAdd(self, request: CostCentreAddRequest) -> CostCentreAddResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("costCentreAdd", params, skip_block=skip_block)
+        data = self.client._call("costCentreAdd", params, skip_block=True)
         valid_keys = CostCentreAddResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CostCentreAddResponse(**filtered_data)
 
     def costCentreModify(
-        self, request: CostCentreModifyRequest, skip_block: bool = False
+        self, request: CostCentreModifyRequest
     ) -> CostCentreModifyResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("costCentreModify", params, skip_block=skip_block)
+        data = self.client._call("costCentreModify", params, skip_block=True)
         valid_keys = CostCentreModifyResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CostCentreModifyResponse(**filtered_data)
 
-    def costCentreList(
-        self, request: CostCentreListRequest, skip_block: bool = False
-    ) -> CostCentreListResponse:
+    def costCentreList(self, request: CostCentreListRequest) -> CostCentreListResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("costCentreList", params, skip_block=skip_block)
+        data = self.client._call("costCentreList", params, skip_block=True)
         valid_keys = CostCentreListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CostCentreListResponse(**filtered_data)
 
     def costCentreActivate(
-        self, request: CostCentreActivateRequest, skip_block: bool = False
+        self, request: CostCentreActivateRequest
     ) -> CostCentreActivateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("costCentreActivate", params, skip_block=skip_block)
+        data = self.client._call("costCentreActivate", params, skip_block=True)
         valid_keys = CostCentreActivateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CostCentreActivateResponse(**filtered_data)
 
     def costCentreInactivate(
-        self, request: CostCentreInactivateRequest, skip_block: bool = False
+        self, request: CostCentreInactivateRequest
     ) -> CostCentreInactivateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("costCentreInactivate", params, skip_block=skip_block)
+        data = self.client._call("costCentreInactivate", params, skip_block=True)
         valid_keys = CostCentreInactivateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CostCentreInactivateResponse(**filtered_data)
 
-    def costTypeAdd(
-        self, request: CostTypeAddRequest, skip_block: bool = False
-    ) -> CostTypeAddResponse:
+    def costTypeAdd(self, request: CostTypeAddRequest) -> CostTypeAddResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("costTypeAdd", params, skip_block=skip_block)
+        data = self.client._call("costTypeAdd", params, skip_block=True)
         valid_keys = CostTypeAddResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CostTypeAddResponse(**filtered_data)
 
-    def costTypeModify(
-        self, request: CostTypeModifyRequest, skip_block: bool = False
-    ) -> CostTypeModifyResponse:
+    def costTypeModify(self, request: CostTypeModifyRequest) -> CostTypeModifyResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("costTypeModify", params, skip_block=skip_block)
+        data = self.client._call("costTypeModify", params, skip_block=True)
         valid_keys = CostTypeModifyResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CostTypeModifyResponse(**filtered_data)
 
-    def costTypeList(
-        self, request: CostTypeListRequest, skip_block: bool = False
-    ) -> CostTypeListResponse:
+    def costTypeList(self, request: CostTypeListRequest) -> CostTypeListResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("costTypeList", params, skip_block=skip_block)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
+        data = self.client._call("costTypeList", params, skip_block=True)
         valid_keys = CostTypeListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CostTypeListResponse(**filtered_data)
 
     def costTypeActivate(
-        self, request: CostTypeActivateRequest, skip_block: bool = False
+        self, request: CostTypeActivateRequest
     ) -> CostTypeActivateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("costTypeActivate", params, skip_block=skip_block)
+        data = self.client._call("costTypeActivate", params, skip_block=True)
         valid_keys = CostTypeActivateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CostTypeActivateResponse(**filtered_data)
 
     def costTypeInactivate(
-        self, request: CostTypeInactivateRequest, skip_block: bool = False
+        self, request: CostTypeInactivateRequest
     ) -> CostTypeInactivateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("costTypeInactivate", params, skip_block=skip_block)
+        data = self.client._call("costTypeInactivate", params, skip_block=True)
         valid_keys = CostTypeInactivateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CostTypeInactivateResponse(**filtered_data)
 
-    def projectList(
-        self, request: ProjectListRequest, skip_block: bool = False
-    ) -> ProjectListResponse:
+    def projectList(self, request: ProjectListRequest) -> ProjectListResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("projectList", params, skip_block=skip_block)
+        data = self.client._call("projectList", params, skip_block=True)
         valid_keys = ProjectListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectListResponse(**filtered_data)
 
-    def projectGet(
-        self, request: ProjectGetRequest, skip_block: bool = False
-    ) -> ProjectGetResponse:
+    def projectGet(self, request: ProjectGetRequest) -> ProjectGetResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("projectGet", params, skip_block=skip_block)
-        if "id" in data:
-            data["id_"] = data.pop("id")
+        data = self.client._call("projectGet", params, skip_block=True)
         valid_keys = ProjectGetResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectGetResponse(**filtered_data)
 
-    def projectCreate(
-        self, request: ProjectCreateRequest, skip_block: bool = False
-    ) -> ProjectCreateResponse:
+    def projectCreate(self, request: ProjectCreateRequest) -> ProjectCreateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("projectCreate", params, skip_block=skip_block)
-        if "id" in data:
-            data["id_"] = data.pop("id")
+        data = self.client._call("projectCreate", params, skip_block=True)
         valid_keys = ProjectCreateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectCreateResponse(**filtered_data)
 
     def projectInactivate(
-        self, request: ProjectInactivateRequest, skip_block: bool = False
+        self, request: ProjectInactivateRequest
     ) -> ProjectInactivateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("projectInactivate", params, skip_block=skip_block)
+        data = self.client._call("projectInactivate", params, skip_block=True)
         valid_keys = ProjectInactivateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectInactivateResponse(**filtered_data)
 
     def projectTimesheetList(
-        self, request: ProjectTimesheetListRequest, skip_block: bool = False
+        self, request: ProjectTimesheetListRequest
     ) -> ProjectTimesheetListResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("projectTimesheetList", params, skip_block=skip_block)
+        data = self.client._call("projectTimesheetList", params, skip_block=True)
         valid_keys = ProjectTimesheetListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectTimesheetListResponse(**filtered_data)
 
     def projectTimesheetStart(
-        self, request: ProjectTimesheetStartRequest, skip_block: bool = False
+        self, request: ProjectTimesheetStartRequest
     ) -> ProjectTimesheetStartResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("projectTimesheetStart", params, skip_block=skip_block)
+        data = self.client._call("projectTimesheetStart", params, skip_block=True)
         valid_keys = ProjectTimesheetStartResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectTimesheetStartResponse(**filtered_data)
 
     def projectTimesheetStop(
-        self, request: ProjectTimesheetStopRequest, skip_block: bool = False
+        self, request: ProjectTimesheetStopRequest
     ) -> ProjectTimesheetStopResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("projectTimesheetStop", params, skip_block=skip_block)
+        data = self.client._call("projectTimesheetStop", params, skip_block=True)
         valid_keys = ProjectTimesheetStopResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectTimesheetStopResponse(**filtered_data)
 
     def projectBookingSlotCreate(
-        self, request: ProjectBookingSlotCreateRequest, skip_block: bool = False
+        self, request: ProjectBookingSlotCreateRequest
     ) -> ProjectBookingSlotCreateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call(
-            "projectBookingSlotCreate", params, skip_block=skip_block
-        )
+        data = self.client._call("projectBookingSlotCreate", params, skip_block=True)
         valid_keys = ProjectBookingSlotCreateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectBookingSlotCreateResponse(**filtered_data)
 
     def projectBookingBook(
-        self, request: ProjectBookingBookRequest, skip_block: bool = False
+        self, request: ProjectBookingBookRequest
     ) -> ProjectBookingBookResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("projectBookingBook", params, skip_block=skip_block)
+        data = self.client._call("projectBookingBook", params, skip_block=True)
         valid_keys = ProjectBookingBookResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectBookingBookResponse(**filtered_data)
 
     def projectBookingCancel(
-        self, request: ProjectBookingCancelRequest, skip_block: bool = False
+        self, request: ProjectBookingCancelRequest
     ) -> ProjectBookingCancelResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("projectBookingCancel", params, skip_block=skip_block)
+        data = self.client._call("projectBookingCancel", params, skip_block=True)
         valid_keys = ProjectBookingCancelResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectBookingCancelResponse(**filtered_data)
 
     def projectBookingClose(
-        self, request: ProjectBookingCloseRequest, skip_block: bool = False
+        self, request: ProjectBookingCloseRequest
     ) -> ProjectBookingCloseResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("projectBookingClose", params, skip_block=skip_block)
+        data = self.client._call("projectBookingClose", params, skip_block=True)
         valid_keys = ProjectBookingCloseResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectBookingCloseResponse(**filtered_data)
 
     def projectBookingBookDateRange(
-        self, request: ProjectBookingBookDateRangeRequest, skip_block: bool = False
+        self, request: ProjectBookingBookDateRangeRequest
     ) -> ProjectBookingBookDateRangeResponse:
         params = asdict(request) if request else {}
-        data = self.client._call(
-            "projectBookingBookDateRange", params, skip_block=skip_block
-        )
+        data = self.client._call("projectBookingBookDateRange", params, skip_block=True)
         valid_keys = ProjectBookingBookDateRangeResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectBookingBookDateRangeResponse(**filtered_data)
 
     def projectBookingCancelGroup(
-        self, request: ProjectBookingCancelGroupRequest, skip_block: bool = False
+        self, request: ProjectBookingCancelGroupRequest
     ) -> ProjectBookingCancelGroupResponse:
         params = asdict(request) if request else {}
-        data = self.client._call(
-            "projectBookingCancelGroup", params, skip_block=skip_block
-        )
+        data = self.client._call("projectBookingCancelGroup", params, skip_block=True)
         valid_keys = ProjectBookingCancelGroupResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectBookingCancelGroupResponse(**filtered_data)
 
     def projectBookingCloseGroup(
-        self, request: ProjectBookingCloseGroupRequest, skip_block: bool = False
+        self, request: ProjectBookingCloseGroupRequest
     ) -> ProjectBookingCloseGroupResponse:
         params = asdict(request) if request else {}
-        data = self.client._call(
-            "projectBookingCloseGroup", params, skip_block=skip_block
-        )
+        data = self.client._call("projectBookingCloseGroup", params, skip_block=True)
         valid_keys = ProjectBookingCloseGroupResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectBookingCloseGroupResponse(**filtered_data)
 
     def projectBookingSetSlotPrice(
-        self, request: ProjectBookingSetSlotPriceRequest, skip_block: bool = False
+        self, request: ProjectBookingSetSlotPriceRequest
     ) -> ProjectBookingSetSlotPriceResponse:
         params = asdict(request) if request else {}
-        data = self.client._call(
-            "projectBookingSetSlotPrice", params, skip_block=skip_block
-        )
+        data = self.client._call("projectBookingSetSlotPrice", params, skip_block=True)
         valid_keys = ProjectBookingSetSlotPriceResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectBookingSetSlotPriceResponse(**filtered_data)
 
     def projectAvailableSlots(
-        self, request: ProjectAvailableSlotsRequest, skip_block: bool = False
+        self, request: ProjectAvailableSlotsRequest
     ) -> ProjectAvailableSlotsResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("projectAvailableSlots", params, skip_block=skip_block)
+        data = self.client._call("projectAvailableSlots", params, skip_block=True)
         valid_keys = ProjectAvailableSlotsResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectAvailableSlotsResponse(**filtered_data)
 
     def projectWorkerList(
-        self, request: ProjectWorkerListRequest, skip_block: bool = False
+        self, request: ProjectWorkerListRequest
     ) -> ProjectWorkerListResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("projectWorkerList", params, skip_block=skip_block)
+        data = self.client._call("projectWorkerList", params, skip_block=True)
         valid_keys = ProjectWorkerListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectWorkerListResponse(**filtered_data)
 
     def projectCalendar(
-        self, request: ProjectCalendarRequest, skip_block: bool = False
+        self, request: ProjectCalendarRequest
     ) -> ProjectCalendarResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("projectCalendar", params, skip_block=skip_block)
+        data = self.client._call("projectCalendar", params, skip_block=True)
         valid_keys = ProjectCalendarResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectCalendarResponse(**filtered_data)
 
     def projectPassCreate(
-        self, request: ProjectPassCreateRequest, skip_block: bool = False
+        self, request: ProjectPassCreateRequest
     ) -> ProjectPassCreateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("projectPassCreate", params, skip_block=skip_block)
+        data = self.client._call("projectPassCreate", params, skip_block=True)
         valid_keys = ProjectPassCreateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectPassCreateResponse(**filtered_data)
 
     def projectPassList(
-        self, request: ProjectPassListRequest, skip_block: bool = False
+        self, request: ProjectPassListRequest
     ) -> ProjectPassListResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("projectPassList", params, skip_block=skip_block)
+        data = self.client._call("projectPassList", params, skip_block=True)
         valid_keys = ProjectPassListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectPassListResponse(**filtered_data)
 
     def projectPassDeactivate(
-        self, request: ProjectPassDeactivateRequest, skip_block: bool = False
+        self, request: ProjectPassDeactivateRequest
     ) -> ProjectPassDeactivateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("projectPassDeactivate", params, skip_block=skip_block)
+        data = self.client._call("projectPassDeactivate", params, skip_block=True)
         valid_keys = ProjectPassDeactivateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectPassDeactivateResponse(**filtered_data)
 
     def projectPassUpdateExpiry(
-        self, request: ProjectPassUpdateExpiryRequest, skip_block: bool = False
+        self, request: ProjectPassUpdateExpiryRequest
     ) -> ProjectPassUpdateExpiryResponse:
         params = asdict(request) if request else {}
-        data = self.client._call(
-            "projectPassUpdateExpiry", params, skip_block=skip_block
-        )
+        data = self.client._call("projectPassUpdateExpiry", params, skip_block=True)
         valid_keys = ProjectPassUpdateExpiryResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ProjectPassUpdateExpiryResponse(**filtered_data)
 
-    def taxList(
-        self, request: TaxListRequest, skip_block: bool = False
-    ) -> TaxListResponse:
+    def taxList(self, request: TaxListRequest) -> TaxListResponse:
         params = asdict(request) if request else {}
-        if "type_" in params:
-            params["type"] = params.pop("type_")
-        data = self.client._call("taxList", params, skip_block=skip_block)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
+        data = self.client._call("taxList", params, skip_block=True)
         valid_keys = TaxListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return TaxListResponse(**filtered_data)
 
-    def taxAdd(
-        self, request: TaxAddRequest, skip_block: bool = False
-    ) -> TaxAddResponse:
+    def taxAdd(self, request: TaxAddRequest) -> TaxAddResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("taxAdd", params, skip_block=skip_block)
+        data = self.client._call("taxAdd", params, skip_block=True)
         valid_keys = TaxAddResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return TaxAddResponse(**filtered_data)
 
-    def taxModify(
-        self, request: TaxModifyRequest, skip_block: bool = False
-    ) -> TaxModifyResponse:
+    def taxModify(self, request: TaxModifyRequest) -> TaxModifyResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("taxModify", params, skip_block=skip_block)
+        data = self.client._call("taxModify", params, skip_block=True)
         valid_keys = TaxModifyResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return TaxModifyResponse(**filtered_data)
 
-    def taxActivate(
-        self, request: TaxActivateRequest, skip_block: bool = False
-    ) -> TaxActivateResponse:
+    def taxActivate(self, request: TaxActivateRequest) -> TaxActivateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("taxActivate", params, skip_block=skip_block)
+        data = self.client._call("taxActivate", params, skip_block=True)
         valid_keys = TaxActivateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return TaxActivateResponse(**filtered_data)
 
-    def taxInactivate(
-        self, request: TaxInactivateRequest, skip_block: bool = False
-    ) -> TaxInactivateResponse:
+    def taxInactivate(self, request: TaxInactivateRequest) -> TaxInactivateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("taxInactivate", params, skip_block=skip_block)
+        data = self.client._call("taxInactivate", params, skip_block=True)
         valid_keys = TaxInactivateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return TaxInactivateResponse(**filtered_data)
 
     def paymentModeInactivate(
-        self, request: PaymentModeInactivateRequest, skip_block: bool = False
+        self, request: PaymentModeInactivateRequest
     ) -> PaymentModeInactivateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("paymentModeInactivate", params, skip_block=skip_block)
+        data = self.client._call("paymentModeInactivate", params, skip_block=True)
         valid_keys = PaymentModeInactivateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return PaymentModeInactivateResponse(**filtered_data)
 
     def paymentModeActivate(
-        self, request: PaymentModeActivateRequest, skip_block: bool = False
+        self, request: PaymentModeActivateRequest
     ) -> PaymentModeActivateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("paymentModeActivate", params, skip_block=skip_block)
+        data = self.client._call("paymentModeActivate", params, skip_block=True)
         valid_keys = PaymentModeActivateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return PaymentModeActivateResponse(**filtered_data)
 
     def paymentModeDownload(
-        self, request: PaymentModeDownloadRequest, skip_block: bool = False
+        self, request: PaymentModeDownloadRequest
     ) -> PaymentModeDownloadResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("paymentModeDownload", params, skip_block=skip_block)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
+        data = self.client._call("paymentModeDownload", params, skip_block=True)
         valid_keys = PaymentModeDownloadResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return PaymentModeDownloadResponse(**filtered_data)
 
-    def orderAdd(
-        self, request: OrderAddRequest, skip_block: bool = False
-    ) -> OrderAddResponse:
+    def orderAdd(self, request: OrderAddRequest) -> OrderAddResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("orderAdd", params, skip_block=skip_block)
+        data = self.client._call("orderAdd", params, skip_block=False)
         valid_keys = OrderAddResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OrderAddResponse(**filtered_data)
 
     def orderCollectiveAdd(
-        self, request: OrderCollectiveAddRequest, skip_block: bool = False
+        self, request: OrderCollectiveAddRequest
     ) -> OrderCollectiveAddResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("orderCollectiveAdd", params, skip_block=skip_block)
+        data = self.client._call("orderCollectiveAdd", params, skip_block=False)
         valid_keys = OrderCollectiveAddResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OrderCollectiveAddResponse(**filtered_data)
 
-    def orderList(
-        self, request: OrderListRequest, skip_block: bool = False
-    ) -> OrderListResponse:
+    def orderList(self, request: OrderListRequest) -> OrderListResponse:
         params = asdict(request) if request else {}
         if "from_" in params:
             params["from"] = params.pop("from_")
-        if "type_" in params:
-            params["type"] = params.pop("type_")
-        data = self.client._call("orderList", params, skip_block=skip_block)
-        if "type" in data:
-            data["type_"] = data.pop("type")
+        data = self.client._call("orderList", params, skip_block=False)
         valid_keys = OrderListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OrderListResponse(**filtered_data)
 
-    def orderStorno(
-        self, request: OrderStornoRequest, skip_block: bool = False
-    ) -> OrderStornoResponse:
+    def orderStorno(self, request: OrderStornoRequest) -> OrderStornoResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("orderStorno", params, skip_block=skip_block)
+        data = self.client._call("orderStorno", params, skip_block=False)
         valid_keys = OrderStornoResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OrderStornoResponse(**filtered_data)
 
     def orderProformDownload(
-        self, request: OrderProformDownloadRequest, skip_block: bool = False
+        self, request: OrderProformDownloadRequest
     ) -> OrderProformDownloadResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("orderProformDownload", params, skip_block=skip_block)
+        data = self.client._call("orderProformDownload", params, skip_block=False)
         valid_keys = OrderProformDownloadResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OrderProformDownloadResponse(**filtered_data)
 
-    def orderBill(
-        self, request: OrderBillRequest, skip_block: bool = False
-    ) -> OrderBillResponse:
+    def orderBill(self, request: OrderBillRequest) -> OrderBillResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("orderBill", params, skip_block=skip_block)
+        data = self.client._call("orderBill", params, skip_block=False)
         valid_keys = OrderBillResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OrderBillResponse(**filtered_data)
 
-    def orderDetails(
-        self, request: OrderDetailsRequest, skip_block: bool = False
-    ) -> OrderDetailsResponse:
+    def orderDetails(self, request: OrderDetailsRequest) -> OrderDetailsResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("orderDetails", params, skip_block=skip_block)
+        data = self.client._call("orderDetails", params, skip_block=False)
         valid_keys = OrderDetailsResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OrderDetailsResponse(**filtered_data)
 
     def orderCollectiveClose(
-        self, request: OrderCollectiveCloseRequest, skip_block: bool = False
+        self, request: OrderCollectiveCloseRequest
     ) -> OrderCollectiveCloseResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("orderCollectiveClose", params, skip_block=skip_block)
+        data = self.client._call("orderCollectiveClose", params, skip_block=False)
         valid_keys = OrderCollectiveCloseResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OrderCollectiveCloseResponse(**filtered_data)
 
     def orderCollectiveSettling(
-        self, request: OrderCollectiveSettlingRequest, skip_block: bool = False
+        self, request: OrderCollectiveSettlingRequest
     ) -> OrderCollectiveSettlingResponse:
         params = asdict(request) if request else {}
-        data = self.client._call(
-            "orderCollectiveSettling", params, skip_block=skip_block
-        )
-        if "list" in data:
-            data["list_"] = data.pop("list")
+        data = self.client._call("orderCollectiveSettling", params, skip_block=False)
         valid_keys = OrderCollectiveSettlingResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OrderCollectiveSettlingResponse(**filtered_data)
 
     def orderCollectiveAddElements(
-        self, request: OrderCollectiveAddElementsRequest, skip_block: bool = False
+        self, request: OrderCollectiveAddElementsRequest
     ) -> OrderCollectiveAddElementsResponse:
         params = asdict(request) if request else {}
-        data = self.client._call(
-            "orderCollectiveAddElements", params, skip_block=skip_block
-        )
+        data = self.client._call("orderCollectiveAddElements", params, skip_block=False)
         valid_keys = OrderCollectiveAddElementsResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OrderCollectiveAddElementsResponse(**filtered_data)
 
-    def orderSetPaid(
-        self, request: OrderSetPaidRequest, skip_block: bool = False
-    ) -> OrderSetPaidResponse:
+    def orderSetPaid(self, request: OrderSetPaidRequest) -> OrderSetPaidResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("orderSetPaid", params, skip_block=skip_block)
+        data = self.client._call("orderSetPaid", params, skip_block=False)
         valid_keys = OrderSetPaidResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OrderSetPaidResponse(**filtered_data)
 
-    def orderCheckPaid(
-        self, request: OrderCheckPaidRequest, skip_block: bool = False
-    ) -> OrderCheckPaidResponse:
+    def orderCheckPaid(self, request: OrderCheckPaidRequest) -> OrderCheckPaidResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("orderCheckPaid", params, skip_block=skip_block)
+        data = self.client._call("orderCheckPaid", params, skip_block=False)
         valid_keys = OrderCheckPaidResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OrderCheckPaidResponse(**filtered_data)
 
     def orderPaidChangeList(
-        self, request: OrderPaidChangeListRequest, skip_block: bool = False
+        self, request: OrderPaidChangeListRequest
     ) -> OrderPaidChangeListResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("orderPaidChangeList", params, skip_block=skip_block)
-        if "list" in data:
-            data["list_"] = data.pop("list")
+        data = self.client._call("orderPaidChangeList", params, skip_block=False)
         valid_keys = OrderPaidChangeListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return OrderPaidChangeListResponse(**filtered_data)
 
-    def invoiceAdd(
-        self, request: InvoiceAddRequest, skip_block: bool = False
-    ) -> InvoiceAddResponse:
+    def invoiceAdd(self, request: InvoiceAddRequest) -> InvoiceAddResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("invoiceAdd", params, skip_block=skip_block)
+        data = self.client._call("invoiceAdd", params, skip_block=False)
         valid_keys = InvoiceAddResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return InvoiceAddResponse(**filtered_data)
 
     def invoiceAddPrepayment(
-        self, request: InvoiceAddPrepaymentRequest, skip_block: bool = False
+        self, request: InvoiceAddPrepaymentRequest
     ) -> InvoiceAddPrepaymentResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("invoiceAddPrepayment", params, skip_block=skip_block)
+        data = self.client._call("invoiceAddPrepayment", params, skip_block=False)
         valid_keys = InvoiceAddPrepaymentResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return InvoiceAddPrepaymentResponse(**filtered_data)
 
     def invoiceAddFinal(
-        self, request: InvoiceAddFinalRequest, skip_block: bool = False
+        self, request: InvoiceAddFinalRequest
     ) -> InvoiceAddFinalResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("invoiceAddFinal", params, skip_block=skip_block)
+        data = self.client._call("invoiceAddFinal", params, skip_block=False)
         valid_keys = InvoiceAddFinalResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return InvoiceAddFinalResponse(**filtered_data)
 
-    def invoiceDetails(
-        self, request: InvoiceDetailsRequest, skip_block: bool = False
-    ) -> InvoiceDetailsResponse:
+    def invoiceDetails(self, request: InvoiceDetailsRequest) -> InvoiceDetailsResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("invoiceDetails", params, skip_block=skip_block)
+        data = self.client._call("invoiceDetails", params, skip_block=False)
         valid_keys = InvoiceDetailsResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return InvoiceDetailsResponse(**filtered_data)
 
     def invoiceDownload(
-        self, request: InvoiceDownloadRequest, skip_block: bool = False
+        self, request: InvoiceDownloadRequest
     ) -> InvoiceDownloadResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("invoiceDownload", params, skip_block=skip_block)
+        data = self.client._call("invoiceDownload", params, skip_block=False)
         valid_keys = InvoiceDownloadResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return InvoiceDownloadResponse(**filtered_data)
 
-    def invoiceStorno(
-        self, request: InvoiceStornoRequest, skip_block: bool = False
-    ) -> InvoiceStornoResponse:
+    def invoiceStorno(self, request: InvoiceStornoRequest) -> InvoiceStornoResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("invoiceStorno", params, skip_block=skip_block)
+        data = self.client._call("invoiceStorno", params, skip_block=False)
         valid_keys = InvoiceStornoResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return InvoiceStornoResponse(**filtered_data)
 
-    def invoiceList(
-        self, request: InvoiceListRequest, skip_block: bool = False
-    ) -> InvoiceListResponse:
+    def invoiceList(self, request: InvoiceListRequest) -> InvoiceListResponse:
         params = asdict(request) if request else {}
         if "from_" in params:
             params["from"] = params.pop("from_")
-        data = self.client._call("invoiceList", params, skip_block=skip_block)
-        if "type" in data:
-            data["type_"] = data.pop("type")
+        data = self.client._call("invoiceList", params, skip_block=False)
         valid_keys = InvoiceListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return InvoiceListResponse(**filtered_data)
 
-    def invoiceExport(
-        self, request: InvoiceExportRequest, skip_block: bool = False
-    ) -> InvoiceExportResponse:
+    def invoiceExport(self, request: InvoiceExportRequest) -> InvoiceExportResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("invoiceExport", params, skip_block=skip_block)
+        data = self.client._call("invoiceExport", params, skip_block=False)
         valid_keys = InvoiceExportResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return InvoiceExportResponse(**filtered_data)
 
-    def invoiceSearch(
-        self, request: InvoiceSearchRequest, skip_block: bool = False
-    ) -> InvoiceSearchResponse:
+    def invoiceSearch(self, request: InvoiceSearchRequest) -> InvoiceSearchResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("invoiceSearch", params, skip_block=skip_block)
+        data = self.client._call("invoiceSearch", params, skip_block=False)
         valid_keys = InvoiceSearchResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return InvoiceSearchResponse(**filtered_data)
 
     def invoiceCorrection(
-        self, request: InvoiceCorrectionRequest, skip_block: bool = False
+        self, request: InvoiceCorrectionRequest
     ) -> InvoiceCorrectionResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("invoiceCorrection", params, skip_block=skip_block)
+        data = self.client._call("invoiceCorrection", params, skip_block=True)
         valid_keys = InvoiceCorrectionResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return InvoiceCorrectionResponse(**filtered_data)
 
-    def invoiceResend(
-        self, request: InvoiceResendRequest, skip_block: bool = False
-    ) -> InvoiceResendResponse:
+    def invoiceResend(self, request: InvoiceResendRequest) -> InvoiceResendResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("invoiceResend", params, skip_block=skip_block)
+        data = self.client._call("invoiceResend", params, skip_block=False)
         valid_keys = InvoiceResendResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return InvoiceResendResponse(**filtered_data)
 
     def invoiceCheckPaid(
-        self, request: InvoiceCheckPaidRequest, skip_block: bool = False
+        self, request: InvoiceCheckPaidRequest
     ) -> InvoiceCheckPaidResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("invoiceCheckPaid", params, skip_block=skip_block)
+        data = self.client._call("invoiceCheckPaid", params, skip_block=False)
         valid_keys = InvoiceCheckPaidResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return InvoiceCheckPaidResponse(**filtered_data)
 
-    def invoiceSetPaid(
-        self, request: InvoiceSetPaidRequest, skip_block: bool = False
-    ) -> InvoiceSetPaidResponse:
+    def invoiceSetPaid(self, request: InvoiceSetPaidRequest) -> InvoiceSetPaidResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("invoiceSetPaid", params, skip_block=skip_block)
+        data = self.client._call("invoiceSetPaid", params, skip_block=False)
         valid_keys = InvoiceSetPaidResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return InvoiceSetPaidResponse(**filtered_data)
 
-    def debtDetails(
-        self, request: DebtDetailsRequest, skip_block: bool = False
-    ) -> DebtDetailsResponse:
+    def debtDetails(self, request: DebtDetailsRequest) -> DebtDetailsResponse:
         params = asdict(request) if request else {}
-        if "type_" in params:
-            params["type"] = params.pop("type_")
-        data = self.client._call("debtDetails", params, skip_block=skip_block)
+        data = self.client._call("debtDetails", params, skip_block=True)
         valid_keys = DebtDetailsResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return DebtDetailsResponse(**filtered_data)
 
-    def debtDownload(
-        self, request: DebtDownloadRequest, skip_block: bool = False
-    ) -> DebtDownloadResponse:
+    def debtDownload(self, request: DebtDownloadRequest) -> DebtDownloadResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("debtDownload", params, skip_block=skip_block)
+        data = self.client._call("debtDownload", params, skip_block=True)
         valid_keys = DebtDownloadResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return DebtDownloadResponse(**filtered_data)
 
-    def debtList(
-        self, request: DebtListRequest, skip_block: bool = False
-    ) -> DebtListResponse:
+    def debtList(self, request: DebtListRequest) -> DebtListResponse:
         params = asdict(request) if request else {}
-        if "type_" in params:
-            params["type"] = params.pop("type_")
         if "from_" in params:
             params["from"] = params.pop("from_")
-        data = self.client._call("debtList", params, skip_block=skip_block)
-        if "list" in data:
-            data["list_"] = data.pop("list")
+        data = self.client._call("debtList", params, skip_block=True)
         valid_keys = DebtListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return DebtListResponse(**filtered_data)
 
-    def debtAdd(
-        self, request: DebtAddRequest, skip_block: bool = False
-    ) -> DebtAddResponse:
+    def debtAdd(self, request: DebtAddRequest) -> DebtAddResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("debtAdd", params, skip_block=skip_block)
+        data = self.client._call("debtAdd", params, skip_block=True)
         valid_keys = DebtAddResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return DebtAddResponse(**filtered_data)
 
-    def debtModify(
-        self, request: DebtModifyRequest, skip_block: bool = False
-    ) -> DebtModifyResponse:
+    def debtModify(self, request: DebtModifyRequest) -> DebtModifyResponse:
         params = asdict(request) if request else {}
-        if "id_" in params:
-            params["id"] = params.pop("id_")
-        data = self.client._call("debtModify", params, skip_block=skip_block)
+        data = self.client._call("debtModify", params, skip_block=True)
         valid_keys = DebtModifyResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return DebtModifyResponse(**filtered_data)
 
-    def debtAccept(
-        self, request: DebtAcceptRequest, skip_block: bool = False
-    ) -> DebtAcceptResponse:
+    def debtAccept(self, request: DebtAcceptRequest) -> DebtAcceptResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("debtAccept", params, skip_block=skip_block)
+        data = self.client._call("debtAccept", params, skip_block=True)
         valid_keys = DebtAcceptResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return DebtAcceptResponse(**filtered_data)
 
-    def debtPay(
-        self, request: DebtPayRequest, skip_block: bool = False
-    ) -> DebtPayResponse:
+    def debtPay(self, request: DebtPayRequest) -> DebtPayResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("debtPay", params, skip_block=skip_block)
+        data = self.client._call("debtPay", params, skip_block=True)
         valid_keys = DebtPayResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return DebtPayResponse(**filtered_data)
 
-    def debtDelete(
-        self, request: DebtDeleteRequest, skip_block: bool = False
-    ) -> DebtDeleteResponse:
+    def debtDelete(self, request: DebtDeleteRequest) -> DebtDeleteResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("debtDelete", params, skip_block=skip_block)
+        data = self.client._call("debtDelete", params, skip_block=True)
         valid_keys = DebtDeleteResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return DebtDeleteResponse(**filtered_data)
 
-    def debtGenerate(
-        self, request: DebtGenerateRequest, skip_block: bool = False
-    ) -> DebtGenerateResponse:
+    def debtGenerate(self, request: DebtGenerateRequest) -> DebtGenerateResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("debtGenerate", params, skip_block=skip_block)
+        data = self.client._call("debtGenerate", params, skip_block=True)
         valid_keys = DebtGenerateResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return DebtGenerateResponse(**filtered_data)
 
-    def debtExport(
-        self, request: DebtExportRequest, skip_block: bool = False
-    ) -> DebtExportResponse:
+    def debtExport(self, request: DebtExportRequest) -> DebtExportResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("debtExport", params, skip_block=skip_block)
-        if "list" in data:
-            data["list_"] = data.pop("list")
+        data = self.client._call("debtExport", params, skip_block=True)
         valid_keys = DebtExportResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return DebtExportResponse(**filtered_data)
 
     def systemMessageList(
-        self, request: SystemMessageListRequest, skip_block: bool = False
+        self, request: SystemMessageListRequest
     ) -> SystemMessageListResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("systemMessageList", params, skip_block=skip_block)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
+        data = self.client._call("systemMessageList", params, skip_block=True)
         valid_keys = SystemMessageListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return SystemMessageListResponse(**filtered_data)
 
     def systemMessageSetRead(
-        self, request: SystemMessageSetReadRequest, skip_block: bool = False
+        self, request: SystemMessageSetReadRequest
     ) -> SystemMessageSetReadResponse:
         params = asdict(request) if request else {}
-        if "id_" in params:
-            params["id"] = params.pop("id_")
-        data = self.client._call("systemMessageSetRead", params, skip_block=skip_block)
+        data = self.client._call("systemMessageSetRead", params, skip_block=True)
         valid_keys = SystemMessageSetReadResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return SystemMessageSetReadResponse(**filtered_data)
 
     def systemErrorCodeList(
-        self, request: SystemErrorCodeListRequest, skip_block: bool = False
+        self, request: SystemErrorCodeListRequest
     ) -> SystemErrorCodeListResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("systemErrorCodeList", params, skip_block=skip_block)
-        if "type" in data:
-            data["type_"] = data.pop("type")
+        data = self.client._call("systemErrorCodeList", params, skip_block=True)
         valid_keys = SystemErrorCodeListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return SystemErrorCodeListResponse(**filtered_data)
 
-    def getVersion(
-        self, request: GetVersionRequest, skip_block: bool = False
-    ) -> GetVersionResponse:
+    def getVersion(self, request: GetVersionRequest) -> GetVersionResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("getVersion", params, skip_block=skip_block)
+        data = self.client._call("getVersion", params, skip_block=True)
         valid_keys = GetVersionResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return GetVersionResponse(**filtered_data)
 
     def serviceProviderDatas(
-        self, request: ServiceProviderDatasRequest, skip_block: bool = False
+        self, request: ServiceProviderDatasRequest
     ) -> ServiceProviderDatasResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("serviceProviderDatas", params, skip_block=skip_block)
+        data = self.client._call("serviceProviderDatas", params, skip_block=True)
         valid_keys = ServiceProviderDatasResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return ServiceProviderDatasResponse(**filtered_data)
 
-    def companyData(
-        self, request: CompanyDataRequest, skip_block: bool = False
-    ) -> CompanyDataResponse:
+    def companyData(self, request: CompanyDataRequest) -> CompanyDataResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("companyData", params, skip_block=skip_block)
-        if "id" in data:
-            data["id_"] = data.pop("id")
+        data = self.client._call("companyData", params, skip_block=True)
         valid_keys = CompanyDataResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CompanyDataResponse(**filtered_data)
 
-    def quantityList(
-        self, request: QuantityListRequest, skip_block: bool = False
-    ) -> QuantityListResponse:
+    def quantityList(self, request: QuantityListRequest) -> QuantityListResponse:
         params = asdict(request) if request else {}
-        if "type_" in params:
-            params["type"] = params.pop("type_")
-        data = self.client._call("quantityList", params, skip_block=skip_block)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
+        data = self.client._call("quantityList", params, skip_block=True)
         valid_keys = QuantityListResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return QuantityListResponse(**filtered_data)
 
     def currencyDownload(
-        self, request: CurrencyDownloadRequest, skip_block: bool = False
+        self, request: CurrencyDownloadRequest
     ) -> CurrencyDownloadResponse:
         params = asdict(request) if request else {}
-        if "type_" in params:
-            params["type"] = params.pop("type_")
-        data = self.client._call("currencyDownload", params, skip_block=skip_block)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
+        data = self.client._call("currencyDownload", params, skip_block=True)
         valid_keys = CurrencyDownloadResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CurrencyDownloadResponse(**filtered_data)
 
     def regularityDownload(
-        self, request: RegularityDownloadRequest, skip_block: bool = False
+        self, request: RegularityDownloadRequest
     ) -> RegularityDownloadResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("regularityDownload", params, skip_block=skip_block)
-        if "list" in data:
-            data["list_"] = data.pop("list")
-        if "id" in data:
-            data["id_"] = data.pop("id")
+        data = self.client._call("regularityDownload", params, skip_block=True)
         valid_keys = RegularityDownloadResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return RegularityDownloadResponse(**filtered_data)
 
     def countryDownload(
-        self, request: CountryDownloadRequest, skip_block: bool = False
+        self, request: CountryDownloadRequest
     ) -> CountryDownloadResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("countryDownload", params, skip_block=skip_block)
-        if "list" in data:
-            data["list_"] = data.pop("list")
+        data = self.client._call("countryDownload", params, skip_block=True)
         valid_keys = CountryDownloadResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return CountryDownloadResponse(**filtered_data)
 
     def postcodeDownload(
-        self, request: PostcodeDownloadRequest, skip_block: bool = False
+        self, request: PostcodeDownloadRequest
     ) -> PostcodeDownloadResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("postcodeDownload", params, skip_block=skip_block)
+        data = self.client._call("postcodeDownload", params, skip_block=True)
         valid_keys = PostcodeDownloadResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return PostcodeDownloadResponse(**filtered_data)
 
-    def ping(self, request: PingRequest, skip_block: bool = False) -> PingResponse:
+    def ping(self, request: PingRequest) -> PingResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("ping", params, skip_block=skip_block)
+        data = self.client._call("ping", params, skip_block=True)
         valid_keys = PingResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return PingResponse(**filtered_data)
 
-    def monitor(
-        self, request: MonitorRequest, skip_block: bool = False
-    ) -> MonitorResponse:
+    def monitor(self, request: MonitorRequest) -> MonitorResponse:
         params = asdict(request) if request else {}
-        data = self.client._call("monitor", params, skip_block=skip_block)
-        if "list" in data:
-            data["list_"] = data.pop("list")
+        data = self.client._call("monitor", params, skip_block=True)
         valid_keys = MonitorResponse.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return MonitorResponse(**filtered_data)
