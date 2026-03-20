@@ -1,3 +1,4 @@
+import builtins
 from typing import Any, Optional
 from dataclasses import dataclass, asdict
 from .client import OnlineSzamlazoClient
@@ -254,7 +255,7 @@ class CustomerInactivateResponse:
 class CustomerSwapRequest:
     instance_id: str
     sid: str
-    swapped_sids: list[dict[str, Any]]
+    swapped_sids: builtins.list[builtins.dict[str, Any]]
 
 
 @dataclass
@@ -279,7 +280,7 @@ class CustomerListRequest:
 class CustomerListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    customers: Optional[list[dict[str, Any]]] = None
+    customers: Optional[builtins.list[builtins.dict[str, Any]]] = None
     sid: Optional[str] = None
     name: Optional[str] = None
     country: Optional[str] = None
@@ -318,7 +319,7 @@ class ProductAddRequest:
     comment: Optional[str] = None
     cost_type: Optional[str] = None
     cost_centre: Optional[str] = None
-    lang: Optional[list[dict[str, Any]]] = None
+    lang: Optional[builtins.list[builtins.dict[str, Any]]] = None
     short_description: Optional[str] = None
     description: Optional[str] = None
     other: Optional[str] = None
@@ -346,7 +347,7 @@ class ProductModifyRequest:
     comment: Optional[str] = None
     cost_type: Optional[str] = None
     cost_centre: Optional[str] = None
-    lang: Optional[list[dict[str, Any]]] = None
+    lang: Optional[builtins.list[builtins.dict[str, Any]]] = None
     short_description: Optional[str] = None
     description: Optional[str] = None
     other: Optional[str] = None
@@ -387,7 +388,7 @@ class ProductGetResponse:
     description: Optional[str] = None
     other: Optional[str] = None
     tax_code: Optional[str] = None
-    lang: Optional[list[dict[str, Any]]] = None
+    lang: Optional[builtins.list[builtins.dict[str, Any]]] = None
     files_number: Optional[int] = None
     modify_date: Optional[str] = None
 
@@ -438,7 +439,7 @@ class ProductListResponse:
     status: Optional[str] = None
     numberOfResults: Optional[int] = None
     numberOfPages: Optional[int] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     sid: Optional[str] = None
     name: Optional[str] = None
@@ -476,7 +477,7 @@ class ProductFileListRequest:
 class ProductFileListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     sid: Optional[str] = None
     filename: Optional[str] = None
     checksum: Optional[str] = None
@@ -493,7 +494,7 @@ class OuterDatasourcesRequest:
 class OuterDatasourcesResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
@@ -592,7 +593,7 @@ class BlockAddRequest:
     lang: str
     invoice_template: str
     currency: str
-    other: list[dict[str, Any]]
+    other: builtins.list[builtins.dict[str, Any]]
     countryMustVisibleInInvoice: int
     bank_name: Optional[str] = None
     comment: Optional[str] = None
@@ -620,7 +621,7 @@ class BlockAddRequest:
     order_number_visible: Optional[int] = None
     pdfConvertZpl: Optional[int] = None
     pdfConvertZplDownload: Optional[int] = None
-    pdf_design05: Optional[list[dict[str, Any]]] = None
+    pdf_design05: Optional[builtins.list[builtins.dict[str, Any]]] = None
     color1: Optional[str] = None
 
 
@@ -665,7 +666,7 @@ class BlockModifyRequest:
     lang: str
     invoice_template: str
     currency: str
-    other: list[dict[str, Any]]
+    other: builtins.list[builtins.dict[str, Any]]
     countryMustVisibleInInvoice: int
     bank_name: Optional[str] = None
     comment: Optional[str] = None
@@ -693,7 +694,7 @@ class BlockModifyRequest:
     order_number_visible: Optional[int] = None
     pdfConvertZpl: Optional[int] = None
     pdfConvertZplDownload: Optional[int] = None
-    pdf_design05: Optional[list[dict[str, Any]]] = None
+    pdf_design05: Optional[builtins.list[builtins.dict[str, Any]]] = None
     color1: Optional[str] = None
 
 
@@ -715,7 +716,7 @@ class BlockListRequest:
 class BlockListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     block_name: Optional[str] = None
     name: Optional[str] = None
@@ -794,7 +795,7 @@ class CostCentreListRequest:
 class CostCentreListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    cost_centres: Optional[list[dict[str, Any]]] = None
+    cost_centres: Optional[builtins.list[builtins.dict[str, Any]]] = None
     name: Optional[str] = None
     code: Optional[str] = None
     comment: Optional[int] = None
@@ -869,7 +870,7 @@ class CostTypeListRequest:
 class CostTypeListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
@@ -915,7 +916,7 @@ class ProjectListRequest:
 class ProjectListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    projects: Optional[list[dict[str, Any]]] = None
+    projects: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 
 @dataclass
@@ -986,7 +987,7 @@ class ProjectTimesheetListRequest:
 class ProjectTimesheetListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    timesheets: Optional[list[dict[str, Any]]] = None
+    timesheets: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 
 @dataclass
@@ -1145,7 +1146,7 @@ class ProjectAvailableSlotsRequest:
 class ProjectAvailableSlotsResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    slots: Optional[list[dict[str, Any]]] = None
+    slots: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 
 @dataclass
@@ -1157,7 +1158,7 @@ class ProjectWorkerListRequest:
 class ProjectWorkerListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    workers: Optional[list[dict[str, Any]]] = None
+    workers: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 
 @dataclass
@@ -1204,7 +1205,7 @@ class ProjectPassListRequest:
 class ProjectPassListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    passes: Optional[list[dict[str, Any]]] = None
+    passes: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 
 @dataclass
@@ -1242,7 +1243,7 @@ class TaxListRequest:
 class TaxListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
@@ -1347,7 +1348,7 @@ class PaymentModeDownloadRequest:
 class PaymentModeDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
@@ -1364,7 +1365,7 @@ class OrderAddRequest:
     trade_date: str
     print_date: str
     pay_date: str
-    elements: list[dict[str, Any]]
+    elements: builtins.list[builtins.dict[str, Any]]
     product_sid: str
     amount: float
     quantity: str
@@ -1383,7 +1384,7 @@ class OrderAddRequest:
     regularities_id: Optional[int] = None
     regularity: Optional[str] = None
     regularities_date: Optional[str] = None
-    meta: Optional[list[dict[str, Any]]] = None
+    meta: Optional[builtins.list[builtins.dict[str, Any]]] = None
     KULCS: Optional[str] = None
 
 
@@ -1405,7 +1406,7 @@ class OrderCollectiveAddRequest:
     trade_date: str
     print_date: str
     pay_date: str
-    elements: list[dict[str, Any]]
+    elements: builtins.list[builtins.dict[str, Any]]
     product_sid: str
     amount: float
     quantity: str
@@ -1449,7 +1450,7 @@ class OrderListResponse:
     status: Optional[str] = None
     numberOfResults: Optional[int] = None
     numberOfPages: Optional[int] = None
-    orders: Optional[list[dict[str, Any]]] = None
+    orders: Optional[builtins.list[builtins.dict[str, Any]]] = None
     order_number: Optional[str] = None
     block_id: Optional[int] = None
     print_date: Optional[str] = None
@@ -1536,7 +1537,7 @@ class OrderBillResponse:
     status: Optional[str] = None
     invoice_number: Optional[str] = None
     invoice_client_url: Optional[str] = None
-    invoices: Optional[list[dict[str, Any]]] = None
+    invoices: Optional[builtins.list[builtins.dict[str, Any]]] = None
     invoice_id: Optional[int] = None
     invoice_type_id: Optional[int] = None
     invoice_type: Optional[str] = None
@@ -1576,7 +1577,7 @@ class OrderDetailsResponse:
     net_price: Optional[str] = None
     tax_value: Optional[str] = None
     gross_price: Optional[str] = None
-    elements: Optional[list[dict[str, Any]]] = None
+    elements: Optional[builtins.list[builtins.dict[str, Any]]] = None
     product_sid: Optional[str] = None
     amount: Optional[float] = None
     quantity: Optional[str] = None
@@ -1619,7 +1620,7 @@ class OrderCollectiveSettlingRequest:
 class OrderCollectiveSettlingResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     order_number: Optional[str] = None
     invoice_number: Optional[str] = None
     customer_sid: Optional[str] = None
@@ -1638,7 +1639,7 @@ class OrderCollectiveSettlingResponse:
 class OrderCollectiveAddElementsRequest:
     instance_id: str
     customer_sid: str
-    elements: list[dict[str, Any]]
+    elements: builtins.list[builtins.dict[str, Any]]
     product_sid: str
     amount: float
     quantity: str
@@ -1693,7 +1694,7 @@ class OrderPaidChangeListRequest:
 class OrderPaidChangeListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     order_number: Optional[str] = None
 
 
@@ -1705,7 +1706,7 @@ class InvoiceAddRequest:
     trade_date: str
     print_date: str
     pay_date: str
-    elements: list[dict[str, Any]]
+    elements: builtins.list[builtins.dict[str, Any]]
     product_sid: str
     amount: float
     quantity: str
@@ -1740,7 +1741,7 @@ class InvoiceAddPrepaymentRequest:
     trade_date: str
     print_date: str
     pay_date: str
-    elements: list[dict[str, Any]]
+    elements: builtins.list[builtins.dict[str, Any]]
     product_sid: str
     amount: float
     quantity: str
@@ -1773,7 +1774,7 @@ class InvoiceAddFinalRequest:
     trade_date: str
     print_date: str
     pay_date: str
-    elements: list[dict[str, Any]]
+    elements: builtins.list[builtins.dict[str, Any]]
     product_sid: str
     amount: float
     quantity: str
@@ -1831,7 +1832,7 @@ class InvoiceDetailsResponse:
     net_price: Optional[str] = None
     tax_value: Optional[str] = None
     gross_price: Optional[str] = None
-    elements: Optional[list[dict[str, Any]]] = None
+    elements: Optional[builtins.list[builtins.dict[str, Any]]] = None
     product_sid: Optional[str] = None
     amount: Optional[float] = None
     quantity: Optional[str] = None
@@ -1858,7 +1859,7 @@ class InvoiceDownloadRequest:
 class InvoiceDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    invoices: Optional[list[dict[str, Any]]] = None
+    invoices: Optional[builtins.list[builtins.dict[str, Any]]] = None
     invoice_id: Optional[int] = None
     invoice_number: Optional[str] = None
     invoice_type_id: Optional[int] = None
@@ -1900,7 +1901,7 @@ class InvoiceListResponse:
     status: Optional[str] = None
     numberOfResults: Optional[int] = None
     numberOfPages: Optional[int] = None
-    invoices: Optional[list[dict[str, Any]]] = None
+    invoices: Optional[builtins.list[builtins.dict[str, Any]]] = None
     invoice_id: Optional[int] = None
     invoice_number: Optional[str] = None
     customer_sid: Optional[str] = None
@@ -1989,7 +1990,7 @@ class InvoiceSearchResponse:
     net_price: Optional[float] = None
     tax_value: Optional[float] = None
     gross_price: Optional[float] = None
-    elements: Optional[list[dict[str, Any]]] = None
+    elements: Optional[builtins.list[builtins.dict[str, Any]]] = None
     product_sid: Optional[str] = None
     product_name: Optional[str] = None
     product_service_id: Optional[str] = None
@@ -2007,8 +2008,8 @@ class InvoiceSearchResponse:
 class InvoiceCorrectionRequest:
     instance_id: str
     invoice_number: str
-    elementsStorno: list[dict[str, Any]]
-    elements: list[dict[str, Any]]
+    elementsStorno: builtins.list[builtins.dict[str, Any]]
+    elements: builtins.list[builtins.dict[str, Any]]
     quantity: str
     net_price_single: float
     tax_code: str
@@ -2121,7 +2122,7 @@ class DebtListResponse:
     status: Optional[str] = None
     numberOfResults: Optional[int] = None
     numberOfPages: Optional[int] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 
 @dataclass
@@ -2190,7 +2191,7 @@ class DebtModifyResponse:
 @dataclass
 class DebtAcceptRequest:
     instance_id: str
-    debt_ids: list[dict[str, Any]]
+    debt_ids: builtins.list[builtins.dict[str, Any]]
 
 
 @dataclass
@@ -2203,7 +2204,7 @@ class DebtAcceptResponse:
 @dataclass
 class DebtPayRequest:
     instance_id: str
-    debt_ids: list[dict[str, Any]]
+    debt_ids: builtins.list[builtins.dict[str, Any]]
 
 
 @dataclass
@@ -2216,7 +2217,7 @@ class DebtPayResponse:
 @dataclass
 class DebtDeleteRequest:
     instance_id: str
-    debt_ids: list[dict[str, Any]]
+    debt_ids: builtins.list[builtins.dict[str, Any]]
 
 
 @dataclass
@@ -2229,7 +2230,7 @@ class DebtDeleteResponse:
 @dataclass
 class DebtGenerateRequest:
     instance_id: str
-    debt_ids: list[dict[str, Any]]
+    debt_ids: builtins.list[builtins.dict[str, Any]]
 
 
 @dataclass
@@ -2251,7 +2252,7 @@ class DebtExportRequest:
 class DebtExportResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 
 @dataclass
@@ -2263,7 +2264,7 @@ class SystemMessageListRequest:
 class SystemMessageListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     message: Optional[str] = None
     message_date: Optional[str] = None
@@ -2292,7 +2293,7 @@ class SystemErrorCodeListRequest:
 class SystemErrorCodeListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    lang: Optional[list[dict[str, Any]]] = None
+    lang: Optional[builtins.list[builtins.dict[str, Any]]] = None
     code: Optional[int] = None
     description: Optional[str] = None
     type: Optional[str] = None
@@ -2384,7 +2385,7 @@ class QuantityListRequest:
 class QuantityListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
@@ -2403,7 +2404,7 @@ class CurrencyDownloadRequest:
 class CurrencyDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     currency: Optional[str] = None
     amount: Optional[float] = None
@@ -2420,7 +2421,7 @@ class RegularityDownloadRequest:
 class RegularityDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     id: Optional[int] = None
     code: Optional[str] = None
     regularity: Optional[str] = None
@@ -2435,7 +2436,7 @@ class CountryDownloadRequest:
 class CountryDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     code: Optional[str] = None
     country: Optional[str] = None
 
@@ -2450,7 +2451,7 @@ class PostcodeDownloadRequest:
 class PostcodeDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    postcodes: Optional[list[dict[str, Any]]] = None
+    postcodes: Optional[builtins.list[builtins.dict[str, Any]]] = None
     postcode: Optional[str] = None
     city: Optional[str] = None
     region: Optional[str] = None
@@ -2476,7 +2477,7 @@ class MonitorRequest:
 class MonitorResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    list: Optional[list[dict[str, Any]]] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
     state: Optional[str] = None
     name: Optional[str] = None
     last_check: Optional[str] = None

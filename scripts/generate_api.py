@@ -14,7 +14,7 @@ def normalize_type(raw_type):
     if t in ("bool", "boolean"):
         return "bool"
     if t == "array":
-        return "list[dict[str, Any]]"
+        return "builtins.list[builtins.dict[str, Any]]"
     if t in ("date", "datetime"):
         return "str"
     return "Any"
@@ -128,6 +128,7 @@ def extract_endpoints(html_file):
 
 def generate_python(endpoints, output_file):
     with open(output_file, "w") as f:
+        f.write("import builtins\n")
         f.write("from typing import Any, Optional\n")
         f.write("from dataclasses import dataclass, asdict\n")
         f.write("from .client import OnlineSzamlazoClient\n\n")
