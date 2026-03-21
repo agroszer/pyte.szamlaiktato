@@ -116,7 +116,6 @@ class UpdateResponse:
 
 @dataclass
 class CustomerAddRequest:
-    instance_id: str
     sid: str
     name: str
     country: str
@@ -151,7 +150,6 @@ class CustomerAddResponse:
 
 @dataclass
 class CustomerModifyRequest:
-    instance_id: str
     sid: str
     name: str
     country: str
@@ -186,7 +184,6 @@ class CustomerModifyResponse:
 
 @dataclass
 class CustomerGetRequest:
-    instance_id: str
     sid: str
     tax_number: Optional[str] = None
     email: Optional[str] = None
@@ -227,7 +224,6 @@ class CustomerGetResponse:
 
 @dataclass
 class CustomerActivateRequest:
-    instance_id: str
     sid: str
 
 
@@ -240,7 +236,6 @@ class CustomerActivateResponse:
 
 @dataclass
 class CustomerInactivateRequest:
-    instance_id: str
     sid: str
 
 
@@ -253,7 +248,6 @@ class CustomerInactivateResponse:
 
 @dataclass
 class CustomerSwapRequest:
-    instance_id: str
     sid: str
     swapped_sids: builtins.list[builtins.dict[str, Any]]
 
@@ -267,7 +261,6 @@ class CustomerSwapResponse:
 
 @dataclass
 class CustomerListRequest:
-    instance_id: str
     firm_type: Optional[int] = None
     name: Optional[str] = None
     email: Optional[str] = None
@@ -309,7 +302,6 @@ class CustomerListResponse:
 
 @dataclass
 class ProductAddRequest:
-    instance_id: str
     sid: str
     name: str
     net_price_single: float
@@ -337,7 +329,6 @@ class ProductAddResponse:
 
 @dataclass
 class ProductModifyRequest:
-    instance_id: str
     sid: str
     name: str
     net_price_single: float
@@ -365,7 +356,6 @@ class ProductModifyResponse:
 
 @dataclass
 class ProductGetRequest:
-    instance_id: str
     sid: str
 
 
@@ -395,7 +385,6 @@ class ProductGetResponse:
 
 @dataclass
 class ProductActivateRequest:
-    instance_id: str
     sid: str
 
 
@@ -408,7 +397,6 @@ class ProductActivateResponse:
 
 @dataclass
 class ProductInactivateRequest:
-    instance_id: str
     sid: str
 
 
@@ -421,7 +409,6 @@ class ProductInactivateResponse:
 
 @dataclass
 class ProductListRequest:
-    instance_id: str
     cost_type: Optional[str] = None
     cost_centre: Optional[str] = None
     active: Optional[int] = None
@@ -468,7 +455,6 @@ class ProductListResponse:
 
 @dataclass
 class ProductFileListRequest:
-    instance_id: str
     sid: str
     with_file_content: bool
 
@@ -487,7 +473,7 @@ class ProductFileListResponse:
 
 @dataclass
 class OuterDatasourcesRequest:
-    instance_id: str
+    pass
 
 
 @dataclass
@@ -504,7 +490,6 @@ class OuterDatasourcesResponse:
 
 @dataclass
 class OuterDatasourcesGetRequest:
-    instance_id: str
     type: str
 
 
@@ -517,7 +502,6 @@ class OuterDatasourcesGetResponse:
 
 @dataclass
 class OuterDatasourcesSaveRequest:
-    instance_id: str
     type: str
     data: str
     nav_xml_user: str
@@ -535,7 +519,6 @@ class OuterDatasourcesSaveResponse:
 
 @dataclass
 class AdminUserAddRequest:
-    instance_id: str
     name: str
     email: str
     mailsend: bool
@@ -555,7 +538,6 @@ class AdminUserAddResponse:
 
 @dataclass
 class AdminUserPasswordRequest:
-    instance_id: str
     email: str
     new_password: str
 
@@ -569,7 +551,6 @@ class AdminUserPasswordResponse:
 
 @dataclass
 class AdminUserDelRequest:
-    instance_id: str
     email: str
 
 
@@ -582,7 +563,6 @@ class AdminUserDelResponse:
 
 @dataclass
 class BlockAddRequest:
-    instance_id: str
     block_name: str
     bank_number: str
     invoice_number_pre: str
@@ -635,7 +615,6 @@ class BlockAddResponse:
 
 @dataclass
 class BlockUpdateCompanyDataRequest:
-    instance_id: str
     name: str
     country: str
     postcode: str
@@ -655,7 +634,6 @@ class BlockUpdateCompanyDataResponse:
 
 @dataclass
 class BlockModifyRequest:
-    instance_id: str
     block_name: str
     bank_number: str
     invoice_number_pre: str
@@ -708,7 +686,6 @@ class BlockModifyResponse:
 
 @dataclass
 class BlockListRequest:
-    instance_id: str
     active: int
 
 
@@ -728,7 +705,6 @@ class BlockListResponse:
 
 @dataclass
 class BlockCloseRequest:
-    instance_id: str
     block_id: int
     block_name: str
 
@@ -741,7 +717,6 @@ class BlockCloseResponse:
 
 @dataclass
 class BlockOpenRequest:
-    instance_id: str
     block_id: int
     block_name: str
 
@@ -754,7 +729,6 @@ class BlockOpenResponse:
 
 @dataclass
 class CostCentreAddRequest:
-    instance_id: str
     name: str
     code: str
     comment: Optional[str] = None
@@ -771,7 +745,6 @@ class CostCentreAddResponse:
 
 @dataclass
 class CostCentreModifyRequest:
-    instance_id: str
     name: str
     code: str
     comment: Optional[str] = None
@@ -788,7 +761,7 @@ class CostCentreModifyResponse:
 
 @dataclass
 class CostCentreListRequest:
-    instance_id: str
+    pass
 
 
 @dataclass
@@ -803,7 +776,6 @@ class CostCentreListResponse:
 
 @dataclass
 class CostCentreActivateRequest:
-    instance_id: str
     code: str
 
 
@@ -816,7 +788,6 @@ class CostCentreActivateResponse:
 
 @dataclass
 class CostCentreInactivateRequest:
-    instance_id: str
     code: str
 
 
@@ -829,7 +800,6 @@ class CostCentreInactivateResponse:
 
 @dataclass
 class CostTypeAddRequest:
-    instance_id: str
     name: str
     code: str
     comment: Optional[str] = None
@@ -846,7 +816,6 @@ class CostTypeAddResponse:
 
 @dataclass
 class CostTypeModifyRequest:
-    instance_id: str
     name: str
     code: str
     comment: Optional[str] = None
@@ -863,7 +832,7 @@ class CostTypeModifyResponse:
 
 @dataclass
 class CostTypeListRequest:
-    instance_id: str
+    pass
 
 
 @dataclass
@@ -882,7 +851,6 @@ class CostTypeListResponse:
 
 @dataclass
 class CostTypeActivateRequest:
-    instance_id: str
     code: str
 
 
@@ -895,7 +863,6 @@ class CostTypeActivateResponse:
 
 @dataclass
 class CostTypeInactivateRequest:
-    instance_id: str
     code: str
 
 
@@ -908,7 +875,6 @@ class CostTypeInactivateResponse:
 
 @dataclass
 class ProjectListRequest:
-    instance_id: Optional[str] = None
     active: Optional[int] = None
 
 
@@ -922,7 +888,6 @@ class ProjectListResponse:
 @dataclass
 class ProjectGetRequest:
     code: str
-    instance_id: Optional[str] = None
 
 
 @dataclass
@@ -944,7 +909,6 @@ class ProjectCreateRequest:
     product_id: int
     quantities_id: int
     regularity: int
-    instance_id: Optional[str] = None
     net_price_single: Optional[str] = None
     minimum_minute: Optional[int] = None
     maximum_hour: Optional[int] = None
@@ -967,7 +931,6 @@ class ProjectCreateResponse:
 @dataclass
 class ProjectInactivateRequest:
     code: str
-    instance_id: Optional[str] = None
 
 
 @dataclass
@@ -980,7 +943,6 @@ class ProjectInactivateResponse:
 @dataclass
 class ProjectTimesheetListRequest:
     code: str
-    instance_id: Optional[str] = None
 
 
 @dataclass
@@ -994,7 +956,6 @@ class ProjectTimesheetListResponse:
 class ProjectTimesheetStartRequest:
     code: str
     projects_workers_id: int
-    instance_id: Optional[str] = None
     comment: Optional[str] = None
 
 
@@ -1008,7 +969,6 @@ class ProjectTimesheetStartResponse:
 @dataclass
 class ProjectTimesheetStopRequest:
     timesheet_id: int
-    instance_id: Optional[str] = None
     comment: Optional[str] = None
 
 
@@ -1025,7 +985,6 @@ class ProjectBookingSlotCreateRequest:
     projects_workers_id: int
     start_date: str
     stop_date: str
-    instance_id: Optional[str] = None
     comment: Optional[str] = None
 
 
@@ -1040,7 +999,6 @@ class ProjectBookingSlotCreateResponse:
 class ProjectBookingBookRequest:
     timesheet_id: int
     customer_id: int
-    instance_id: Optional[str] = None
 
 
 @dataclass
@@ -1053,7 +1011,6 @@ class ProjectBookingBookResponse:
 @dataclass
 class ProjectBookingCancelRequest:
     timesheet_id: int
-    instance_id: Optional[str] = None
 
 
 @dataclass
@@ -1066,7 +1023,6 @@ class ProjectBookingCancelResponse:
 @dataclass
 class ProjectBookingCloseRequest:
     timesheet_id: int
-    instance_id: Optional[str] = None
 
 
 @dataclass
@@ -1082,7 +1038,6 @@ class ProjectBookingBookDateRangeRequest:
     customer_id: int
     date_from: str
     date_to: str
-    instance_id: Optional[str] = None
 
 
 @dataclass
@@ -1096,7 +1051,6 @@ class ProjectBookingBookDateRangeResponse:
 @dataclass
 class ProjectBookingCancelGroupRequest:
     booking_group_id: str
-    instance_id: Optional[str] = None
 
 
 @dataclass
@@ -1109,7 +1063,6 @@ class ProjectBookingCancelGroupResponse:
 @dataclass
 class ProjectBookingCloseGroupRequest:
     booking_group_id: str
-    instance_id: Optional[str] = None
     comment: Optional[str] = None
 
 
@@ -1123,7 +1076,6 @@ class ProjectBookingCloseGroupResponse:
 @dataclass
 class ProjectBookingSetSlotPriceRequest:
     timesheet_id: int
-    instance_id: Optional[str] = None
     net_price_override: Optional[str] = None
 
 
@@ -1139,7 +1091,6 @@ class ProjectAvailableSlotsRequest:
     code: str
     date_from: str
     date_to: str
-    instance_id: Optional[str] = None
 
 
 @dataclass
@@ -1151,7 +1102,7 @@ class ProjectAvailableSlotsResponse:
 
 @dataclass
 class ProjectWorkerListRequest:
-    instance_id: Optional[str] = None
+    pass
 
 
 @dataclass
@@ -1166,7 +1117,6 @@ class ProjectCalendarRequest:
     code: str
     year: int
     month: int
-    instance_id: Optional[str] = None
 
 
 @dataclass
@@ -1181,7 +1131,6 @@ class ProjectPassCreateRequest:
     code: str
     customer_id: int
     total_occasions: int
-    instance_id: Optional[str] = None
     product_id: Optional[int] = None
     net_price_single: Optional[str] = None
     auto_invoice: Optional[int] = None
@@ -1198,7 +1147,6 @@ class ProjectPassCreateResponse:
 @dataclass
 class ProjectPassListRequest:
     code: str
-    instance_id: Optional[str] = None
 
 
 @dataclass
@@ -1211,7 +1159,6 @@ class ProjectPassListResponse:
 @dataclass
 class ProjectPassDeactivateRequest:
     pass_id: int
-    instance_id: Optional[str] = None
 
 
 @dataclass
@@ -1224,7 +1171,6 @@ class ProjectPassDeactivateResponse:
 class ProjectPassUpdateExpiryRequest:
     pass_id: int
     expiry_date: str
-    instance_id: Optional[str] = None
 
 
 @dataclass
@@ -1235,7 +1181,6 @@ class ProjectPassUpdateExpiryResponse:
 
 @dataclass
 class TaxListRequest:
-    instance_id: str
     type: str
 
 
@@ -1257,7 +1202,6 @@ class TaxListResponse:
 
 @dataclass
 class TaxAddRequest:
-    instance_id: str
     name: str
     code: str
     value: float
@@ -1274,7 +1218,6 @@ class TaxAddResponse:
 
 @dataclass
 class TaxModifyRequest:
-    instance_id: str
     name: str
     code: str
     value: float
@@ -1291,7 +1234,6 @@ class TaxModifyResponse:
 
 @dataclass
 class TaxActivateRequest:
-    instance_id: str
     code: str
 
 
@@ -1304,7 +1246,6 @@ class TaxActivateResponse:
 
 @dataclass
 class TaxInactivateRequest:
-    instance_id: str
     code: str
 
 
@@ -1317,7 +1258,6 @@ class TaxInactivateResponse:
 
 @dataclass
 class PaymentModeInactivateRequest:
-    instance_id: str
     code: str
 
 
@@ -1329,7 +1269,6 @@ class PaymentModeInactivateResponse:
 
 @dataclass
 class PaymentModeActivateRequest:
-    instance_id: str
     code: str
 
 
@@ -1341,7 +1280,7 @@ class PaymentModeActivateResponse:
 
 @dataclass
 class PaymentModeDownloadRequest:
-    instance_id: str
+    pass
 
 
 @dataclass
@@ -1358,7 +1297,6 @@ class PaymentModeDownloadResponse:
 
 @dataclass
 class OrderAddRequest:
-    instance_id: str
     proform_order: int
     customer_sid: str
     payment_mode_id: int
@@ -1400,7 +1338,6 @@ class OrderAddResponse:
 
 @dataclass
 class OrderCollectiveAddRequest:
-    instance_id: str
     customer_sid: str
     payment_mode_id: int
     trade_date: str
@@ -1433,7 +1370,6 @@ class OrderCollectiveAddResponse:
 
 @dataclass
 class OrderListRequest:
-    instance_id: str
     limit: Optional[int] = None
     page: Optional[int] = None
     from_: Optional[str] = None
@@ -1491,7 +1427,6 @@ class OrderListResponse:
 
 @dataclass
 class OrderStornoRequest:
-    instance_id: str
     order_number: str
     admin_comment: Optional[str] = None
     storno_reason: Optional[str] = None
@@ -1509,7 +1444,6 @@ class OrderStornoResponse:
 
 @dataclass
 class OrderProformDownloadRequest:
-    instance_id: str
     order_number: str
 
 
@@ -1525,7 +1459,6 @@ class OrderProformDownloadResponse:
 
 @dataclass
 class OrderBillRequest:
-    instance_id: str
     order_number: str
     paid: int
     payment_mode_id: Optional[int] = None
@@ -1547,7 +1480,6 @@ class OrderBillResponse:
 
 @dataclass
 class OrderDetailsRequest:
-    instance_id: str
     order_number: str
 
 
@@ -1598,7 +1530,6 @@ class OrderDetailsResponse:
 
 @dataclass
 class OrderCollectiveCloseRequest:
-    instance_id: str
     customer_sid: str
 
 
@@ -1611,7 +1542,6 @@ class OrderCollectiveCloseResponse:
 
 @dataclass
 class OrderCollectiveSettlingRequest:
-    instance_id: str
     order_number: str
     invoice_number: str
 
@@ -1637,7 +1567,6 @@ class OrderCollectiveSettlingResponse:
 
 @dataclass
 class OrderCollectiveAddElementsRequest:
-    instance_id: str
     customer_sid: str
     elements: builtins.list[builtins.dict[str, Any]]
     product_sid: str
@@ -1659,7 +1588,6 @@ class OrderCollectiveAddElementsResponse:
 
 @dataclass
 class OrderSetPaidRequest:
-    instance_id: str
     order_number: str
 
 
@@ -1673,7 +1601,6 @@ class OrderSetPaidResponse:
 
 @dataclass
 class OrderCheckPaidRequest:
-    instance_id: str
     order_number: str
 
 
@@ -1687,7 +1614,7 @@ class OrderCheckPaidResponse:
 
 @dataclass
 class OrderPaidChangeListRequest:
-    instance_id: str
+    pass
 
 
 @dataclass
@@ -1700,7 +1627,6 @@ class OrderPaidChangeListResponse:
 
 @dataclass
 class InvoiceAddRequest:
-    instance_id: str
     customer_sid: str
     payment_mode_id: int
     trade_date: str
@@ -1735,7 +1661,6 @@ class InvoiceAddResponse:
 
 @dataclass
 class InvoiceAddPrepaymentRequest:
-    instance_id: str
     customer_sid: str
     payment_mode_id: int
     trade_date: str
@@ -1768,7 +1693,6 @@ class InvoiceAddPrepaymentResponse:
 
 @dataclass
 class InvoiceAddFinalRequest:
-    instance_id: str
     customer_sid: str
     payment_mode_id: int
     trade_date: str
@@ -1801,7 +1725,6 @@ class InvoiceAddFinalResponse:
 
 @dataclass
 class InvoiceDetailsRequest:
-    instance_id: str
     invoice_number: str
 
 
@@ -1850,7 +1773,6 @@ class InvoiceDetailsResponse:
 
 @dataclass
 class InvoiceDownloadRequest:
-    instance_id: str
     invoice_number: str
     invoice_type: str
 
@@ -1870,7 +1792,6 @@ class InvoiceDownloadResponse:
 
 @dataclass
 class InvoiceStornoRequest:
-    instance_id: str
     invoice_number: str
     admin_comment: Optional[str] = None
     storno_reason: Optional[str] = None
@@ -1887,7 +1808,6 @@ class InvoiceStornoResponse:
 
 @dataclass
 class InvoiceListRequest:
-    instance_id: str
     limit: Optional[int] = None
     page: Optional[int] = None
     from_: Optional[str] = None
@@ -1942,7 +1862,6 @@ class InvoiceListResponse:
 
 @dataclass
 class InvoiceExportRequest:
-    instance_id: str
     date_from: Optional[str] = None
     date_to: Optional[str] = None
     number_from: Optional[str] = None
@@ -1958,7 +1877,6 @@ class InvoiceExportResponse:
 
 @dataclass
 class InvoiceSearchRequest:
-    instance_id: str
     search_type_code: str
     search: str
 
@@ -2006,7 +1924,6 @@ class InvoiceSearchResponse:
 
 @dataclass
 class InvoiceCorrectionRequest:
-    instance_id: str
     invoice_number: str
     elementsStorno: builtins.list[builtins.dict[str, Any]]
     elements: builtins.list[builtins.dict[str, Any]]
@@ -2032,7 +1949,6 @@ class InvoiceCorrectionResponse:
 
 @dataclass
 class InvoiceResendRequest:
-    instance_id: str
     invoice_number: str
 
 
@@ -2047,7 +1963,6 @@ class InvoiceResendResponse:
 
 @dataclass
 class InvoiceCheckPaidRequest:
-    instance_id: str
     invoice_number: str
 
 
@@ -2061,7 +1976,6 @@ class InvoiceCheckPaidResponse:
 
 @dataclass
 class InvoiceSetPaidRequest:
-    instance_id: str
     invoice_number: str
 
 
@@ -2075,7 +1989,6 @@ class InvoiceSetPaidResponse:
 
 @dataclass
 class DebtDetailsRequest:
-    instance_id: str
     type: str
     customer_sid: str
     invoice_number: str
@@ -2090,7 +2003,6 @@ class DebtDetailsResponse:
 
 @dataclass
 class DebtDownloadRequest:
-    instance_id: str
     invoice_number: str
     invoice_type: str
 
@@ -2105,7 +2017,6 @@ class DebtDownloadResponse:
 
 @dataclass
 class DebtListRequest:
-    instance_id: str
     type: Optional[int] = None
     active: Optional[int] = None
     paid: Optional[int] = None
@@ -2127,7 +2038,6 @@ class DebtListResponse:
 
 @dataclass
 class DebtAddRequest:
-    instance_id: str
     customer_sid: str
     invoice_number: str
     amount: float
@@ -2158,7 +2068,6 @@ class DebtAddResponse:
 
 @dataclass
 class DebtModifyRequest:
-    instance_id: str
     id: int
     customer_sid: Optional[str] = None
     invoice_number: Optional[str] = None
@@ -2190,7 +2099,6 @@ class DebtModifyResponse:
 
 @dataclass
 class DebtAcceptRequest:
-    instance_id: str
     debt_ids: builtins.list[builtins.dict[str, Any]]
 
 
@@ -2203,7 +2111,6 @@ class DebtAcceptResponse:
 
 @dataclass
 class DebtPayRequest:
-    instance_id: str
     debt_ids: builtins.list[builtins.dict[str, Any]]
 
 
@@ -2216,7 +2123,6 @@ class DebtPayResponse:
 
 @dataclass
 class DebtDeleteRequest:
-    instance_id: str
     debt_ids: builtins.list[builtins.dict[str, Any]]
 
 
@@ -2229,7 +2135,6 @@ class DebtDeleteResponse:
 
 @dataclass
 class DebtGenerateRequest:
-    instance_id: str
     debt_ids: builtins.list[builtins.dict[str, Any]]
 
 
@@ -2243,7 +2148,6 @@ class DebtGenerateResponse:
 
 @dataclass
 class DebtExportRequest:
-    instance_id: str
     dateFrom: str
     dateTo: str
 
@@ -2257,7 +2161,7 @@ class DebtExportResponse:
 
 @dataclass
 class SystemMessageListRequest:
-    instance_id: str
+    pass
 
 
 @dataclass
@@ -2273,7 +2177,6 @@ class SystemMessageListResponse:
 
 @dataclass
 class SystemMessageSetReadRequest:
-    instance_id: str
     id: int
 
 
@@ -2285,7 +2188,6 @@ class SystemMessageSetReadResponse:
 
 @dataclass
 class SystemErrorCodeListRequest:
-    instance_id: str
     lang: Optional[str] = None
 
 
@@ -2301,7 +2203,7 @@ class SystemErrorCodeListResponse:
 
 @dataclass
 class GetVersionRequest:
-    instance_id: str
+    pass
 
 
 @dataclass
@@ -2313,7 +2215,7 @@ class GetVersionResponse:
 
 @dataclass
 class ServiceProviderDatasRequest:
-    instance_id: str
+    pass
 
 
 @dataclass
@@ -2339,7 +2241,7 @@ class ServiceProviderDatasResponse:
 
 @dataclass
 class CompanyDataRequest:
-    instance_id: str
+    pass
 
 
 @dataclass
@@ -2377,7 +2279,6 @@ class CompanyDataResponse:
 
 @dataclass
 class QuantityListRequest:
-    instance_id: str
     type: str
 
 
@@ -2396,7 +2297,6 @@ class QuantityListResponse:
 
 @dataclass
 class CurrencyDownloadRequest:
-    instance_id: str
     type: str
 
 
@@ -2414,7 +2314,7 @@ class CurrencyDownloadResponse:
 
 @dataclass
 class RegularityDownloadRequest:
-    instance_id: str
+    pass
 
 
 @dataclass
@@ -2429,7 +2329,7 @@ class RegularityDownloadResponse:
 
 @dataclass
 class CountryDownloadRequest:
-    instance_id: str
+    pass
 
 
 @dataclass
@@ -2443,7 +2343,6 @@ class CountryDownloadResponse:
 
 @dataclass
 class PostcodeDownloadRequest:
-    instance_id: str
     country: str
 
 
@@ -2459,7 +2358,7 @@ class PostcodeDownloadResponse:
 
 @dataclass
 class PingRequest:
-    instance_id: str
+    pass
 
 
 @dataclass
@@ -2470,7 +2369,7 @@ class PingResponse:
 
 @dataclass
 class MonitorRequest:
-    instance_id: str
+    pass
 
 
 @dataclass
@@ -2493,6 +2392,7 @@ class SzamlaiktatoAPI:
         request: Any,
         response_cls: Any,
         skip_block: bool = False,
+        requires_instance_id: bool = True,
         req_mapping: Optional[builtins.dict[str, str]] = None,
         resp_mapping: Optional[builtins.dict[str, str]] = None,
     ) -> Any:
@@ -2501,7 +2401,12 @@ class SzamlaiktatoAPI:
             for py_name, orig_name in req_mapping.items():
                 if py_name in params:
                     params[orig_name] = params.pop(py_name)
-        data = self.client._call(method, params, skip_block=skip_block)
+        data = self.client._call(
+            method,
+            params,
+            skip_block=skip_block,
+            requires_instance_id=requires_instance_id,
+        )
         if resp_mapping:
             for orig_name, py_name in resp_mapping.items():
                 if orig_name in data:
@@ -2516,6 +2421,7 @@ class SzamlaiktatoAPI:
             request,
             InstallResponse,
             skip_block=True,
+            requires_instance_id=False,
         )
 
     def update(self, request: UpdateRequest) -> UpdateResponse:
@@ -2524,6 +2430,7 @@ class SzamlaiktatoAPI:
             request,
             UpdateResponse,
             skip_block=True,
+            requires_instance_id=False,
         )
 
     def customerAdd(self, request: CustomerAddRequest) -> CustomerAddResponse:
@@ -2638,7 +2545,7 @@ class SzamlaiktatoAPI:
         )
 
     def outerDatasources(
-        self, request: OuterDatasourcesRequest
+        self, request: Optional[OuterDatasourcesRequest] = None
     ) -> OuterDatasourcesResponse:
         return self._invoke(
             "outerDatasources",
@@ -2761,7 +2668,9 @@ class SzamlaiktatoAPI:
             skip_block=True,
         )
 
-    def costCentreList(self, request: CostCentreListRequest) -> CostCentreListResponse:
+    def costCentreList(
+        self, request: Optional[CostCentreListRequest] = None
+    ) -> CostCentreListResponse:
         return self._invoke(
             "costCentreList",
             request,
@@ -2805,7 +2714,9 @@ class SzamlaiktatoAPI:
             skip_block=True,
         )
 
-    def costTypeList(self, request: CostTypeListRequest) -> CostTypeListResponse:
+    def costTypeList(
+        self, request: Optional[CostTypeListRequest] = None
+    ) -> CostTypeListResponse:
         return self._invoke(
             "costTypeList",
             request,
@@ -2988,7 +2899,7 @@ class SzamlaiktatoAPI:
         )
 
     def projectWorkerList(
-        self, request: ProjectWorkerListRequest
+        self, request: Optional[ProjectWorkerListRequest] = None
     ) -> ProjectWorkerListResponse:
         return self._invoke(
             "projectWorkerList",
@@ -3108,7 +3019,7 @@ class SzamlaiktatoAPI:
         )
 
     def paymentModeDownload(
-        self, request: PaymentModeDownloadRequest
+        self, request: Optional[PaymentModeDownloadRequest] = None
     ) -> PaymentModeDownloadResponse:
         return self._invoke(
             "paymentModeDownload",
@@ -3213,7 +3124,7 @@ class SzamlaiktatoAPI:
         )
 
     def orderPaidChangeList(
-        self, request: OrderPaidChangeListRequest
+        self, request: Optional[OrderPaidChangeListRequest] = None
     ) -> OrderPaidChangeListResponse:
         return self._invoke(
             "orderPaidChangeList",
@@ -3406,7 +3317,7 @@ class SzamlaiktatoAPI:
         )
 
     def systemMessageList(
-        self, request: SystemMessageListRequest
+        self, request: Optional[SystemMessageListRequest] = None
     ) -> SystemMessageListResponse:
         return self._invoke(
             "systemMessageList",
@@ -3435,7 +3346,9 @@ class SzamlaiktatoAPI:
             skip_block=True,
         )
 
-    def getVersion(self, request: GetVersionRequest) -> GetVersionResponse:
+    def getVersion(
+        self, request: Optional[GetVersionRequest] = None
+    ) -> GetVersionResponse:
         return self._invoke(
             "getVersion",
             request,
@@ -3444,7 +3357,7 @@ class SzamlaiktatoAPI:
         )
 
     def serviceProviderDatas(
-        self, request: ServiceProviderDatasRequest
+        self, request: Optional[ServiceProviderDatasRequest] = None
     ) -> ServiceProviderDatasResponse:
         return self._invoke(
             "serviceProviderDatas",
@@ -3453,7 +3366,9 @@ class SzamlaiktatoAPI:
             skip_block=True,
         )
 
-    def companyData(self, request: CompanyDataRequest) -> CompanyDataResponse:
+    def companyData(
+        self, request: Optional[CompanyDataRequest] = None
+    ) -> CompanyDataResponse:
         return self._invoke(
             "companyData",
             request,
@@ -3480,7 +3395,7 @@ class SzamlaiktatoAPI:
         )
 
     def regularityDownload(
-        self, request: RegularityDownloadRequest
+        self, request: Optional[RegularityDownloadRequest] = None
     ) -> RegularityDownloadResponse:
         return self._invoke(
             "regularityDownload",
@@ -3490,7 +3405,7 @@ class SzamlaiktatoAPI:
         )
 
     def countryDownload(
-        self, request: CountryDownloadRequest
+        self, request: Optional[CountryDownloadRequest] = None
     ) -> CountryDownloadResponse:
         return self._invoke(
             "countryDownload",
@@ -3509,7 +3424,7 @@ class SzamlaiktatoAPI:
             skip_block=True,
         )
 
-    def ping(self, request: PingRequest) -> PingResponse:
+    def ping(self, request: Optional[PingRequest] = None) -> PingResponse:
         return self._invoke(
             "ping",
             request,
@@ -3517,7 +3432,7 @@ class SzamlaiktatoAPI:
             skip_block=True,
         )
 
-    def monitor(self, request: MonitorRequest) -> MonitorResponse:
+    def monitor(self, request: Optional[MonitorRequest] = None) -> MonitorResponse:
         return self._invoke(
             "monitor",
             request,
