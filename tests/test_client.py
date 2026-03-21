@@ -1,5 +1,4 @@
 import pytest
-import requests
 import responses
 from pyte.szamlaiktato.client import OnlineSzamlazoClient, ApiError
 from pyte.szamlaiktato.api import SzamlaiktatoAPI, PingRequest
