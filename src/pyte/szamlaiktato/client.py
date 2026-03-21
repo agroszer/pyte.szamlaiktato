@@ -1,7 +1,7 @@
 from typing import Any
 
 import logging
-import requests  # type: ignore
+import requests
 
 LOG = logging.getLogger(__name__)
 
@@ -42,7 +42,7 @@ class OnlineSzamlazoClient:
 
         body = {
             "uid": self.uid,
-            "password": self.password,
+            "password": "***",
         }
 
         if params:
@@ -60,10 +60,9 @@ class OnlineSzamlazoClient:
         ):
             body["instance_id"] = self.instance_id
 
-        bodydupe = {}
-        bodydupe.update(body)
-        bodydupe["password"] = "***"
-        LOG.info("Request URL:\n%s\npayload:\n%r", url, bodydupe)
+        LOG.info("Request URL:\n%s\npayload:\n%r", url, body)
+
+        body["password"] = self.password
 
         response = requests.post(
             url, json=body, headers={"Content-Type": "application/json"}
