@@ -2596,6 +2596,7 @@ class SzamlaiktatoAPI:
         requires_instance_id: bool = True,
         req_mapping: Optional[builtins.dict[str, str]] = None,
         resp_mapping: Optional[builtins.dict[str, str]] = None,
+        list_mapping: Optional[builtins.dict[str, Any]] = None,
     ) -> Any:
         params = asdict(request) if request else {}
         if req_mapping:
@@ -2612,6 +2613,20 @@ class SzamlaiktatoAPI:
             for orig_name, py_name in resp_mapping.items():
                 if orig_name in data:
                     data[py_name] = data.pop(orig_name)
+        if list_mapping:
+            for field_name, item_cls in list_mapping.items():
+                if field_name in data and isinstance(data[field_name], builtins.list):
+                    parsed_list = []
+                    item_keys = item_cls.__dataclass_fields__.keys()
+                    for item_data in data[field_name]:
+                        if isinstance(item_data, builtins.dict):
+                            filtered_item = {
+                                k: v for k, v in item_data.items() if k in item_keys
+                            }
+                            parsed_list.append(item_cls(**filtered_item))
+                        else:
+                            parsed_list.append(item_data)
+                    data[field_name] = parsed_list
         valid_keys = response_cls.__dataclass_fields__.keys()
         filtered_data = {k: v for k, v in data.items() if k in valid_keys}
         return response_cls(**filtered_data)
@@ -2686,6 +2701,9 @@ class SzamlaiktatoAPI:
             request,
             CustomerListResponse,
             skip_block=True,
+            list_mapping={
+                "customers": CustomerListCustomersItem,
+            },
         )
 
     def productAdd(self, request: ProductAddRequest) -> ProductAddResponse:
@@ -2707,6 +2725,9 @@ class SzamlaiktatoAPI:
             "productGet",
             request,
             ProductGetResponse,
+            list_mapping={
+                "lang": ProductGetLangItem,
+            },
         )
 
     def productActivate(
@@ -2733,6 +2754,9 @@ class SzamlaiktatoAPI:
             request,
             ProductListResponse,
             skip_block=True,
+            list_mapping={
+                "list": ProductListListItem,
+            },
         )
 
     def productFileList(
@@ -2743,6 +2767,9 @@ class SzamlaiktatoAPI:
             request,
             ProductFileListResponse,
             skip_block=True,
+            list_mapping={
+                "list": ProductFileListListItem,
+            },
         )
 
     def outerDatasources(
@@ -2753,6 +2780,9 @@ class SzamlaiktatoAPI:
             request,
             OuterDatasourcesResponse,
             skip_block=True,
+            list_mapping={
+                "list": OuterDatasourcesListItem,
+            },
         )
 
     def outerDatasourcesGet(
@@ -2833,6 +2863,9 @@ class SzamlaiktatoAPI:
             request,
             BlockListResponse,
             skip_block=True,
+            list_mapping={
+                "list": BlockListListItem,
+            },
         )
 
     def blockClose(self, request: BlockCloseRequest) -> BlockCloseResponse:
@@ -2877,6 +2910,9 @@ class SzamlaiktatoAPI:
             request,
             CostCentreListResponse,
             skip_block=True,
+            list_mapping={
+                "cost_centres": CostCentreListCost_centresItem,
+            },
         )
 
     def costCentreActivate(
@@ -2923,6 +2959,9 @@ class SzamlaiktatoAPI:
             request,
             CostTypeListResponse,
             skip_block=True,
+            list_mapping={
+                "list": CostTypeListListItem,
+            },
         )
 
     def costTypeActivate(
@@ -3165,6 +3204,9 @@ class SzamlaiktatoAPI:
             request,
             TaxListResponse,
             skip_block=True,
+            list_mapping={
+                "list": TaxListListItem,
+            },
         )
 
     def taxAdd(self, request: TaxAddRequest) -> TaxAddResponse:
@@ -3227,6 +3269,9 @@ class SzamlaiktatoAPI:
             request,
             PaymentModeDownloadResponse,
             skip_block=True,
+            list_mapping={
+                "list": PaymentModeDownloadListItem,
+            },
         )
 
     def orderAdd(self, request: OrderAddRequest) -> OrderAddResponse:
@@ -3251,6 +3296,9 @@ class SzamlaiktatoAPI:
             request,
             OrderListResponse,
             req_mapping={"from_": "from"},
+            list_mapping={
+                "orders": OrderListOrdersItem,
+            },
         )
 
     def orderStorno(self, request: OrderStornoRequest) -> OrderStornoResponse:
@@ -3274,6 +3322,9 @@ class SzamlaiktatoAPI:
             "orderBill",
             request,
             OrderBillResponse,
+            list_mapping={
+                "invoices": OrderBillInvoicesItem,
+            },
         )
 
     def orderDetails(self, request: OrderDetailsRequest) -> OrderDetailsResponse:
@@ -3281,6 +3332,9 @@ class SzamlaiktatoAPI:
             "orderDetails",
             request,
             OrderDetailsResponse,
+            list_mapping={
+                "elements": OrderDetailsElementsItem,
+            },
         )
 
     def orderCollectiveClose(
@@ -3299,6 +3353,9 @@ class SzamlaiktatoAPI:
             "orderCollectiveSettling",
             request,
             OrderCollectiveSettlingResponse,
+            list_mapping={
+                "list": OrderCollectiveSettlingListItem,
+            },
         )
 
     def orderCollectiveAddElements(
@@ -3331,6 +3388,9 @@ class SzamlaiktatoAPI:
             "orderPaidChangeList",
             request,
             OrderPaidChangeListResponse,
+            list_mapping={
+                "list": OrderPaidChangeListListItem,
+            },
         )
 
     def invoiceAdd(self, request: InvoiceAddRequest) -> InvoiceAddResponse:
@@ -3363,6 +3423,9 @@ class SzamlaiktatoAPI:
             "invoiceDetails",
             request,
             InvoiceDetailsResponse,
+            list_mapping={
+                "elements": InvoiceDetailsElementsItem,
+            },
         )
 
     def invoiceDownload(
@@ -3372,6 +3435,9 @@ class SzamlaiktatoAPI:
             "invoiceDownload",
             request,
             InvoiceDownloadResponse,
+            list_mapping={
+                "invoices": InvoiceDownloadInvoicesItem,
+            },
         )
 
     def invoiceStorno(self, request: InvoiceStornoRequest) -> InvoiceStornoResponse:
@@ -3387,6 +3453,9 @@ class SzamlaiktatoAPI:
             request,
             InvoiceListResponse,
             req_mapping={"from_": "from"},
+            list_mapping={
+                "invoices": InvoiceListInvoicesItem,
+            },
         )
 
     def invoiceExport(self, request: InvoiceExportRequest) -> InvoiceExportResponse:
@@ -3401,6 +3470,9 @@ class SzamlaiktatoAPI:
             "invoiceSearch",
             request,
             InvoiceSearchResponse,
+            list_mapping={
+                "elements": InvoiceSearchElementsItem,
+            },
         )
 
     def invoiceCorrection(
@@ -3525,6 +3597,9 @@ class SzamlaiktatoAPI:
             request,
             SystemMessageListResponse,
             skip_block=True,
+            list_mapping={
+                "list": SystemMessageListListItem,
+            },
         )
 
     def systemMessageSetRead(
@@ -3545,6 +3620,9 @@ class SzamlaiktatoAPI:
             request,
             SystemErrorCodeListResponse,
             skip_block=True,
+            list_mapping={
+                "lang": SystemErrorCodeListLangItem,
+            },
         )
 
     def getVersion(
@@ -3583,6 +3661,9 @@ class SzamlaiktatoAPI:
             request,
             QuantityListResponse,
             skip_block=True,
+            list_mapping={
+                "list": QuantityListListItem,
+            },
         )
 
     def currencyDownload(
@@ -3593,6 +3674,9 @@ class SzamlaiktatoAPI:
             request,
             CurrencyDownloadResponse,
             skip_block=True,
+            list_mapping={
+                "list": CurrencyDownloadListItem,
+            },
         )
 
     def regularityDownload(
@@ -3603,6 +3687,9 @@ class SzamlaiktatoAPI:
             request,
             RegularityDownloadResponse,
             skip_block=True,
+            list_mapping={
+                "list": RegularityDownloadListItem,
+            },
         )
 
     def countryDownload(
@@ -3613,6 +3700,9 @@ class SzamlaiktatoAPI:
             request,
             CountryDownloadResponse,
             skip_block=True,
+            list_mapping={
+                "list": CountryDownloadListItem,
+            },
         )
 
     def postcodeDownload(
@@ -3623,6 +3713,9 @@ class SzamlaiktatoAPI:
             request,
             PostcodeDownloadResponse,
             skip_block=True,
+            list_mapping={
+                "postcodes": PostcodeDownloadPostcodesItem,
+            },
         )
 
     def ping(self, request: Optional[PingRequest] = None) -> PingResponse:
@@ -3639,4 +3732,7 @@ class SzamlaiktatoAPI:
             request,
             MonitorResponse,
             skip_block=True,
+            list_mapping={
+                "list": MonitorListItem,
+            },
         )
