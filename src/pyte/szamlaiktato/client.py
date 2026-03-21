@@ -68,15 +68,24 @@ class OnlineSzamlazoClient:
         response = requests.post(
             url, json=body, headers={"Content-Type": "application/json"}
         )
-        if response.status_code >= 400:
-            LOG.error("Response URL:\n%s\n%s", url, response)
-        response.raise_for_status()
+
+        if response.status_code == 503:
+            LOG.error("Response URL:\n%s\n%s\n%s", url, response, response.text)
+            data = response.json()
+            status_id = data.get("status_id")
+            if status_id is not None and int(status_id) >= 4000:
+                raise ApiError(method, data)
+            raise ApiError(method, {})
+        elif response.status_code >= 400:
+            LOG.error("Response URL:\n%s\n%s\n%s", url, response, response.text)
+            response.raise_for_status()
 
         data = response.json()
-        LOG.info("Response URL:\n%s, data:\n%r", url, data)
-
         status_id = data.get("status_id")
         if status_id is not None and int(status_id) >= 4000:
             raise ApiError(method, data)
 
+        LOG.info("Response URL:\n%s, data:\n%r", url, data)
+
+        data = response.json()
         return data
