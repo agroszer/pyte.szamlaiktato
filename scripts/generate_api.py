@@ -315,6 +315,7 @@ def generate_python(endpoints, output_file):
         f.write("        requires_instance_id: bool = True,\n")
         f.write("        req_mapping: Optional[builtins.dict[str, str]] = None,\n")
         f.write("        resp_mapping: Optional[builtins.dict[str, str]] = None,\n")
+        f.write("        list_mapping: Optional[builtins.dict[str, Any]] = None,\n")
         f.write("    ) -> Any:\n")
         f.write("        params = asdict(request) if request else {}\n")
         f.write("        if req_mapping:\n")
@@ -331,6 +332,29 @@ def generate_python(endpoints, output_file):
         f.write("            for orig_name, py_name in resp_mapping.items():\n")
         f.write("                if orig_name in data:\n")
         f.write("                    data[py_name] = data.pop(orig_name)\n")
+        f.write("        if list_mapping:\n")
+        f.write("            for field_name, item_cls in list_mapping.items():\n")
+        f.write(
+            "                if field_name in data and isinstance("
+            "data[field_name], builtins.list):\n"
+        )
+        f.write("                    parsed_list = []\n")
+        f.write(
+            "                    item_keys = item_cls.__dataclass_fields__.keys()\n"
+        )
+        f.write("                    for item_data in data[field_name]:\n")
+        f.write("                        if isinstance(item_data, builtins.dict):\n")
+        f.write(
+            "                            filtered_item = {k: v for k, v "
+            "in item_data.items() if k in item_keys}\n"
+        )
+        f.write(
+            "                            parsed_list.append("
+            "item_cls(**filtered_item))\n"
+        )
+        f.write("                        else:\n")
+        f.write("                            parsed_list.append(item_data)\n")
+        f.write("                    data[field_name] = parsed_list\n")
         f.write("        valid_keys = response_cls.__dataclass_fields__.keys()\n")
         f.write("        filtered_data = {\n")
         f.write("            k: v for k, v in data.items() if k in valid_keys\n")
@@ -367,6 +391,7 @@ def generate_python(endpoints, output_file):
                     req_mapping[py_name] = orig_name
 
             resp_mapping = {}
+            list_mapping = {}
             for field in ep["response"]:
                 py_name = field["name"].replace(".", "_").replace("-", "_")
                 orig_name = field["name"]
@@ -382,6 +407,14 @@ def generate_python(endpoints, output_file):
                     py_name += "_"
                 if py_name != orig_name:
                     resp_mapping[orig_name] = py_name
+
+                if "sub_fields" in field and field["sub_fields"]:
+                    sub_cls_name = (
+                        resp_name.replace("Response", "")
+                        + field["name"].capitalize()
+                        + "Item"
+                    )
+                    list_mapping[py_name] = sub_cls_name
 
             skip_block_val = ep.get("requires_block", False) is False
             req_instance_id_val = ep.get("requires_instance_id", False)
@@ -399,6 +432,11 @@ def generate_python(endpoints, output_file):
                 f.write(f"            req_mapping={req_mapping},\n")
             if resp_mapping:
                 f.write(f"            resp_mapping={resp_mapping},\n")
+            if list_mapping:
+                f.write("            list_mapping={")
+                for key, val in list_mapping.items():
+                    f.write(f"'{key}': {val}, ")
+                f.write("},\n")
 
             f.write("        )\n\n")
 
