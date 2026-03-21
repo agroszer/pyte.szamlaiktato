@@ -172,7 +172,11 @@ def generate_python(endpoints, output_file):
             # Generate sub-dataclasses for fields with sub_fields in request
             for field in ep["request"]:
                 if "sub_fields" in field and field["sub_fields"]:
-                    sub_cls_name = req_name.replace("Request", "") + field["name"].capitalize() + "Item"
+                    sub_cls_name = (
+                        req_name.replace("Request", "")
+                        + field["name"].capitalize()
+                        + "Item"
+                    )
                     f.write(f"@dataclass\nclass {sub_cls_name}:\n")
                     req_sub = [sf for sf in field["sub_fields"] if sf["required"]]
                     opt_sub = [sf for sf in field["sub_fields"] if not sf["required"]]
@@ -220,7 +224,11 @@ def generate_python(endpoints, output_file):
                     py_name = py_name.replace(".", "_").replace("-", "_")
 
                     if "sub_fields" in field and field["sub_fields"]:
-                        sub_cls_name = req_name.replace("Request", "") + field["name"].capitalize() + "Item"
+                        sub_cls_name = (
+                            req_name.replace("Request", "")
+                            + field["name"].capitalize()
+                            + "Item"
+                        )
                         field_type = f"builtins.list[{sub_cls_name}]"
                     else:
                         field_type = field["type"]
@@ -234,7 +242,11 @@ def generate_python(endpoints, output_file):
             # Sub-dataclasses for response (just in case)
             for field in ep["response"]:
                 if "sub_fields" in field and field["sub_fields"]:
-                    sub_cls_name = resp_name.replace("Response", "") + field["name"].capitalize() + "Item"
+                    sub_cls_name = (
+                        resp_name.replace("Response", "")
+                        + field["name"].capitalize()
+                        + "Item"
+                    )
                     f.write(f"@dataclass\nclass {sub_cls_name}:\n")
                     req_sub = [sf for sf in field["sub_fields"] if sf["required"]]
                     opt_sub = [sf for sf in field["sub_fields"] if not sf["required"]]
@@ -277,7 +289,17 @@ def generate_python(endpoints, output_file):
                         py_name += "_"
                     py_name = py_name.replace(".", "_").replace("-", "_")
 
-                    f.write(f"    {py_name}: Optional[{field['type']}] = None\n")
+                    if "sub_fields" in field and field["sub_fields"]:
+                        sub_cls_name = (
+                            resp_name.replace("Response", "")
+                            + field["name"].capitalize()
+                            + "Item"
+                        )
+                        field_type = f"builtins.list[{sub_cls_name}]"
+                    else:
+                        field_type = field["type"]
+
+                    f.write(f"    {py_name}: Optional[{field_type}] = None\n")
             f.write("\n")
 
         f.write("class SzamlaiktatoAPI:\n")
