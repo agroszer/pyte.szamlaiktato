@@ -3,7 +3,6 @@ from typing import Any, Optional
 from dataclasses import dataclass, asdict
 from .client import OnlineSzamlazoClient
 
-
 @dataclass
 class InstallRequest:
     user: str
@@ -54,13 +53,11 @@ class InstallRequest:
     invoiceDigitalSignature: Optional[int] = None
     admin_user_type: Optional[int] = None
 
-
 @dataclass
 class InstallResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     other: Optional[str] = None
-
 
 @dataclass
 class UpdateRequest:
@@ -106,13 +103,11 @@ class UpdateRequest:
     invoiceDigitalSignature: Optional[int] = None
     admin_user_type: Optional[int] = None
 
-
 @dataclass
 class UpdateResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     other: Optional[str] = None
-
 
 @dataclass
 class CustomerAddRequest:
@@ -140,13 +135,11 @@ class CustomerAddRequest:
     firm_type: Optional[int] = None
     other: Optional[str] = None
 
-
 @dataclass
 class CustomerAddResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     sid: Optional[str] = None
-
 
 @dataclass
 class CustomerModifyRequest:
@@ -174,20 +167,17 @@ class CustomerModifyRequest:
     bank: Optional[str] = None
     other: Optional[str] = None
 
-
 @dataclass
 class CustomerModifyResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     sid: Optional[str] = None
 
-
 @dataclass
 class CustomerGetRequest:
     sid: str
     tax_number: Optional[str] = None
     email: Optional[str] = None
-
 
 @dataclass
 class CustomerGetResponse:
@@ -221,11 +211,9 @@ class CustomerGetResponse:
     modify_date: Optional[str] = None
     other_json: Optional[str] = None
 
-
 @dataclass
 class CustomerActivateRequest:
     sid: str
-
 
 @dataclass
 class CustomerActivateResponse:
@@ -233,11 +221,9 @@ class CustomerActivateResponse:
     status: Optional[str] = None
     sid: Optional[str] = None
 
-
 @dataclass
 class CustomerInactivateRequest:
     sid: str
-
 
 @dataclass
 class CustomerInactivateResponse:
@@ -245,19 +231,16 @@ class CustomerInactivateResponse:
     status: Optional[str] = None
     sid: Optional[str] = None
 
-
 @dataclass
 class CustomerSwapRequest:
     sid: str
     swapped_sids: builtins.list[builtins.dict[str, Any]]
-
 
 @dataclass
 class CustomerSwapResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     sid: Optional[str] = None
-
 
 @dataclass
 class CustomerListRequest:
@@ -268,12 +251,8 @@ class CustomerListRequest:
     limit: Optional[int] = None
     page: Optional[int] = None
 
-
 @dataclass
-class CustomerListResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    customers: Optional[builtins.list[builtins.dict[str, Any]]] = None
+class CustomerListCustomersItem:
     sid: Optional[str] = None
     name: Optional[str] = None
     country: Optional[str] = None
@@ -299,6 +278,24 @@ class CustomerListResponse:
     other_json: Optional[str] = None
     modify_date: Optional[str] = None
 
+@dataclass
+class CustomerListResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    customers: Optional[builtins.list[builtins.dict[str, Any]]] = None
+
+@dataclass
+class ProductAddLangItem:
+    lang: str
+    name: str
+    short_description: Optional[str] = None
+    description: Optional[str] = None
+
+@dataclass
+class ProductAddOtherItem:
+    lineNatureIndicator: Optional[str] = None
+    FINAL_DATADELETE_CODE_SET: Optional[int] = None
+    intermediatedService: Optional[int] = None
 
 @dataclass
 class ProductAddRequest:
@@ -311,14 +308,8 @@ class ProductAddRequest:
     comment: Optional[str] = None
     cost_type: Optional[str] = None
     cost_centre: Optional[str] = None
-    lang: Optional[builtins.list[builtins.dict[str, Any]]] = None
-    short_description: Optional[str] = None
-    description: Optional[str] = None
-    other: Optional[str] = None
-    lineNatureIndicator: Optional[str] = None
-    FINAL_DATADELETE_CODE_SET: Optional[int] = None
-    intermediatedService: Optional[int] = None
-
+    lang: Optional[builtins.list[ProductAddLangItem]] = None
+    other: Optional[builtins.list[ProductAddOtherItem]] = None
 
 @dataclass
 class ProductAddResponse:
@@ -326,6 +317,18 @@ class ProductAddResponse:
     status: Optional[str] = None
     sid: Optional[str] = None
 
+@dataclass
+class ProductModifyLangItem:
+    lang: str
+    name: str
+    short_description: Optional[str] = None
+    description: Optional[str] = None
+
+@dataclass
+class ProductModifyOtherItem:
+    lineNatureIndicator: Optional[str] = None
+    FINAL_DATADELETE_CODE_SET: Optional[int] = None
+    intermediatedService: Optional[int] = None
 
 @dataclass
 class ProductModifyRequest:
@@ -338,14 +341,8 @@ class ProductModifyRequest:
     comment: Optional[str] = None
     cost_type: Optional[str] = None
     cost_centre: Optional[str] = None
-    lang: Optional[builtins.list[builtins.dict[str, Any]]] = None
-    short_description: Optional[str] = None
-    description: Optional[str] = None
-    other: Optional[str] = None
-    lineNatureIndicator: Optional[str] = None
-    FINAL_DATADELETE_CODE_SET: Optional[int] = None
-    intermediatedService: Optional[int] = None
-
+    lang: Optional[builtins.list[ProductModifyLangItem]] = None
+    other: Optional[builtins.list[ProductModifyOtherItem]] = None
 
 @dataclass
 class ProductModifyResponse:
@@ -353,11 +350,16 @@ class ProductModifyResponse:
     status: Optional[str] = None
     sid: Optional[str] = None
 
-
 @dataclass
 class ProductGetRequest:
     sid: str
 
+@dataclass
+class ProductGetLangItem:
+    lang: Optional[str] = None
+    name: Optional[str] = None
+    short_description: Optional[str] = None
+    description: Optional[str] = None
 
 @dataclass
 class ProductGetResponse:
@@ -382,11 +384,9 @@ class ProductGetResponse:
     files_number: Optional[int] = None
     modify_date: Optional[str] = None
 
-
 @dataclass
 class ProductActivateRequest:
     sid: str
-
 
 @dataclass
 class ProductActivateResponse:
@@ -394,18 +394,15 @@ class ProductActivateResponse:
     status: Optional[str] = None
     sid: Optional[str] = None
 
-
 @dataclass
 class ProductInactivateRequest:
     sid: str
-
 
 @dataclass
 class ProductInactivateResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     sid: Optional[str] = None
-
 
 @dataclass
 class ProductListRequest:
@@ -419,14 +416,8 @@ class ProductListRequest:
     limit: Optional[int] = None
     page: Optional[int] = None
 
-
 @dataclass
-class ProductListResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    numberOfResults: Optional[int] = None
-    numberOfPages: Optional[int] = None
-    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
+class ProductListListItem:
     id: Optional[int] = None
     sid: Optional[str] = None
     name: Optional[str] = None
@@ -452,46 +443,54 @@ class ProductListResponse:
     files_number: Optional[int] = None
     modify_date: Optional[str] = None
 
+@dataclass
+class ProductListResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    numberOfResults: Optional[int] = None
+    numberOfPages: Optional[int] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 @dataclass
 class ProductFileListRequest:
     sid: str
     with_file_content: bool
 
-
 @dataclass
-class ProductFileListResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
+class ProductFileListListItem:
     sid: Optional[str] = None
     filename: Optional[str] = None
     checksum: Optional[str] = None
     file_type: Optional[str] = None
     file: Optional[str] = None
 
+@dataclass
+class ProductFileListResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 @dataclass
 class OuterDatasourcesRequest:
     pass
 
-
 @dataclass
-class OuterDatasourcesResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
+class OuterDatasourcesListItem:
     id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
     description: Optional[str] = None
     settings: Optional[str] = None
 
+@dataclass
+class OuterDatasourcesResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 @dataclass
 class OuterDatasourcesGetRequest:
     type: str
-
 
 @dataclass
 class OuterDatasourcesGetResponse:
@@ -499,23 +498,23 @@ class OuterDatasourcesGetResponse:
     status: Optional[str] = None
     data: Optional[str] = None
 
-
 @dataclass
-class OuterDatasourcesSaveRequest:
-    type: str
-    data: str
+class OuterDatasourcesSaveDataItem:
     nav_xml_user: str
     nav_xml_password: str
     nav_xml_key: str
     nav_xml_exchange_key: str
     nav_invoice_download: int
 
+@dataclass
+class OuterDatasourcesSaveRequest:
+    type: str
+    data: builtins.list[OuterDatasourcesSaveDataItem]
 
 @dataclass
 class OuterDatasourcesSaveResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-
 
 @dataclass
 class AdminUserAddRequest:
@@ -526,7 +525,6 @@ class AdminUserAddRequest:
     user_type: int
     service_key: Optional[str] = None
 
-
 @dataclass
 class AdminUserAddResponse:
     status_id: Optional[int] = None
@@ -535,12 +533,10 @@ class AdminUserAddResponse:
     email: Optional[str] = None
     password: Optional[str] = None
 
-
 @dataclass
 class AdminUserPasswordRequest:
     email: str
     new_password: str
-
 
 @dataclass
 class AdminUserPasswordResponse:
@@ -548,11 +544,9 @@ class AdminUserPasswordResponse:
     status: Optional[str] = None
     email: Optional[str] = None
 
-
 @dataclass
 class AdminUserDelRequest:
     email: str
-
 
 @dataclass
 class AdminUserDelResponse:
@@ -560,6 +554,33 @@ class AdminUserDelResponse:
     status: Optional[str] = None
     email: Optional[str] = None
 
+@dataclass
+class BlockAddOtherItem:
+    countryMustVisibleInInvoice: int
+    invoice_start: Optional[int] = None
+    invoice_mails: Optional[int] = None
+    invoice_mails_accounting: Optional[int] = None
+    invoice_pdf_mail: Optional[int] = None
+    invoice_pay_notice_mails: Optional[int] = None
+    pdfProformGeneratePdf: Optional[int] = None
+    pdfProformGeneratePdfSend: Optional[int] = None
+    invoiceAppearance_paper: Optional[int] = None
+    invoiceAppearance_edi: Optional[int] = None
+    prepayment_invoice_enabled: Optional[int] = None
+    reversevat_invoice_enabled: Optional[int] = None
+    cashaccounting_invoice_enabled: Optional[int] = None
+    smallBusinessIndicator: Optional[int] = None
+    pdfHideCurrencyRate: Optional[int] = None
+    bankPairingAutomaticInvoice: Optional[int] = None
+    invoiceTax_EU_OSS: Optional[int] = None
+    invoice_en16931_xml_attached: Optional[int] = None
+    invoiceDigitalSignature: Optional[int] = None
+    certificate_logo_visible: Optional[int] = None
+    order_number_visible: Optional[int] = None
+    pdfConvertZpl: Optional[int] = None
+    pdfConvertZplDownload: Optional[int] = None
+    pdf_design05: Optional[builtins.list[builtins.dict[str, Any]]] = None
+    color1: Optional[str] = None
 
 @dataclass
 class BlockAddRequest:
@@ -573,37 +594,11 @@ class BlockAddRequest:
     lang: str
     invoice_template: str
     currency: str
-    other: builtins.list[builtins.dict[str, Any]]
-    countryMustVisibleInInvoice: int
+    other: builtins.list[BlockAddOtherItem]
     bank_name: Optional[str] = None
     comment: Optional[str] = None
     logo: Optional[int] = None
     invoice_number_format: Optional[str] = None
-    invoice_start: Optional[int] = None
-    invoice_mails: Optional[int] = None
-    invoice_mails_accounting: Optional[int] = None
-    invoice_pdf_mail: Optional[int] = None
-    invoice_pay_notice_mails: Optional[int] = None
-    pdfProformGeneratePdf: Optional[int] = None
-    pdfProformGeneratePdfSend: Optional[int] = None
-    invoiceAppearance_paper: Optional[int] = None
-    invoiceAppearance_edi: Optional[int] = None
-    prepayment_invoice_enabled: Optional[int] = None
-    reversevat_invoice_enabled: Optional[int] = None
-    cashaccounting_invoice_enabled: Optional[int] = None
-    smallBusinessIndicator: Optional[int] = None
-    pdfHideCurrencyRate: Optional[int] = None
-    bankPairingAutomaticInvoice: Optional[int] = None
-    invoiceTax_EU_OSS: Optional[int] = None
-    invoice_en16931_xml_attached: Optional[int] = None
-    invoiceDigitalSignature: Optional[int] = None
-    certificate_logo_visible: Optional[int] = None
-    order_number_visible: Optional[int] = None
-    pdfConvertZpl: Optional[int] = None
-    pdfConvertZplDownload: Optional[int] = None
-    pdf_design05: Optional[builtins.list[builtins.dict[str, Any]]] = None
-    color1: Optional[str] = None
-
 
 @dataclass
 class BlockAddResponse:
@@ -611,7 +606,6 @@ class BlockAddResponse:
     status: Optional[str] = None
     block_id: Optional[int] = None
     block: Optional[str] = None
-
 
 @dataclass
 class BlockUpdateCompanyDataRequest:
@@ -625,31 +619,14 @@ class BlockUpdateCompanyDataRequest:
     tax_number: str
     eu_tax_number: str
 
-
 @dataclass
 class BlockUpdateCompanyDataResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
 
-
 @dataclass
-class BlockModifyRequest:
-    block_name: str
-    bank_number: str
-    invoice_number_pre: str
-    invoice_number_length: int
-    invoice_issue: int
-    email: str
-    restart_number_by_year: int
-    lang: str
-    invoice_template: str
-    currency: str
-    other: builtins.list[builtins.dict[str, Any]]
+class BlockModifyOtherItem:
     countryMustVisibleInInvoice: int
-    bank_name: Optional[str] = None
-    comment: Optional[str] = None
-    logo: Optional[int] = None
-    invoice_number_format: Optional[str] = None
     invoice_start: Optional[int] = None
     invoice_mails: Optional[int] = None
     invoice_mails_accounting: Optional[int] = None
@@ -675,6 +652,23 @@ class BlockModifyRequest:
     pdf_design05: Optional[builtins.list[builtins.dict[str, Any]]] = None
     color1: Optional[str] = None
 
+@dataclass
+class BlockModifyRequest:
+    block_name: str
+    bank_number: str
+    invoice_number_pre: str
+    invoice_number_length: int
+    invoice_issue: int
+    email: str
+    restart_number_by_year: int
+    lang: str
+    invoice_template: str
+    currency: str
+    other: builtins.list[BlockModifyOtherItem]
+    bank_name: Optional[str] = None
+    comment: Optional[str] = None
+    logo: Optional[int] = None
+    invoice_number_format: Optional[str] = None
 
 @dataclass
 class BlockModifyResponse:
@@ -683,17 +677,12 @@ class BlockModifyResponse:
     block_id: Optional[int] = None
     block: Optional[str] = None
 
-
 @dataclass
 class BlockListRequest:
     active: int
 
-
 @dataclass
-class BlockListResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
+class BlockListListItem:
     id: Optional[int] = None
     block_name: Optional[str] = None
     name: Optional[str] = None
@@ -702,30 +691,31 @@ class BlockListResponse:
     invoice_number_pre: Optional[str] = None
     active: Optional[int] = None
 
+@dataclass
+class BlockListResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 @dataclass
 class BlockCloseRequest:
     block_id: int
     block_name: str
 
-
 @dataclass
 class BlockCloseResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-
 
 @dataclass
 class BlockOpenRequest:
     block_id: int
     block_name: str
 
-
 @dataclass
 class BlockOpenResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-
 
 @dataclass
 class CostCentreAddRequest:
@@ -735,13 +725,11 @@ class CostCentreAddRequest:
     orderby: Optional[int] = None
     is_default: Optional[int] = None
 
-
 @dataclass
 class CostCentreAddResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     code: Optional[str] = None
-
 
 @dataclass
 class CostCentreModifyRequest:
@@ -751,33 +739,31 @@ class CostCentreModifyRequest:
     orderby: Optional[int] = None
     is_default: Optional[int] = None
 
-
 @dataclass
 class CostCentreModifyResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     code: Optional[str] = None
 
-
 @dataclass
 class CostCentreListRequest:
     pass
 
+@dataclass
+class CostCentreListCost_centresItem:
+    name: Optional[str] = None
+    code: Optional[str] = None
+    comment: Optional[int] = None
 
 @dataclass
 class CostCentreListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     cost_centres: Optional[builtins.list[builtins.dict[str, Any]]] = None
-    name: Optional[str] = None
-    code: Optional[str] = None
-    comment: Optional[int] = None
-
 
 @dataclass
 class CostCentreActivateRequest:
     code: str
-
 
 @dataclass
 class CostCentreActivateResponse:
@@ -785,18 +771,15 @@ class CostCentreActivateResponse:
     status: Optional[str] = None
     code: Optional[str] = None
 
-
 @dataclass
 class CostCentreInactivateRequest:
     code: str
-
 
 @dataclass
 class CostCentreInactivateResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     code: Optional[str] = None
-
 
 @dataclass
 class CostTypeAddRequest:
@@ -806,13 +789,11 @@ class CostTypeAddRequest:
     orderby: Optional[int] = None
     is_default: Optional[int] = None
 
-
 @dataclass
 class CostTypeAddResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     code: Optional[str] = None
-
 
 @dataclass
 class CostTypeModifyRequest:
@@ -822,24 +803,18 @@ class CostTypeModifyRequest:
     orderby: Optional[int] = None
     is_default: Optional[int] = None
 
-
 @dataclass
 class CostTypeModifyResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     code: Optional[str] = None
 
-
 @dataclass
 class CostTypeListRequest:
     pass
 
-
 @dataclass
-class CostTypeListResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
+class CostTypeListListItem:
     id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
@@ -848,11 +823,15 @@ class CostTypeListResponse:
     is_default: Optional[int] = None
     active: Optional[int] = None
 
+@dataclass
+class CostTypeListResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 @dataclass
 class CostTypeActivateRequest:
     code: str
-
 
 @dataclass
 class CostTypeActivateResponse:
@@ -860,11 +839,9 @@ class CostTypeActivateResponse:
     status: Optional[str] = None
     code: Optional[str] = None
 
-
 @dataclass
 class CostTypeInactivateRequest:
     code: str
-
 
 @dataclass
 class CostTypeInactivateResponse:
@@ -872,11 +849,9 @@ class CostTypeInactivateResponse:
     status: Optional[str] = None
     code: Optional[str] = None
 
-
 @dataclass
 class ProjectListRequest:
     active: Optional[int] = None
-
 
 @dataclass
 class ProjectListResponse:
@@ -884,11 +859,9 @@ class ProjectListResponse:
     status: Optional[str] = None
     projects: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
-
 @dataclass
 class ProjectGetRequest:
     code: str
-
 
 @dataclass
 class ProjectGetResponse:
@@ -898,7 +871,6 @@ class ProjectGetResponse:
     code: Optional[str] = None
     name: Optional[str] = None
     is_booking: Optional[int] = None
-
 
 @dataclass
 class ProjectCreateRequest:
@@ -919,7 +891,6 @@ class ProjectCreateRequest:
     is_booking: Optional[int] = None
     active: Optional[int] = None
 
-
 @dataclass
 class ProjectCreateResponse:
     status_id: Optional[int] = None
@@ -927,11 +898,9 @@ class ProjectCreateResponse:
     id: Optional[int] = None
     code: Optional[str] = None
 
-
 @dataclass
 class ProjectInactivateRequest:
     code: str
-
 
 @dataclass
 class ProjectInactivateResponse:
@@ -939,11 +908,9 @@ class ProjectInactivateResponse:
     status: Optional[str] = None
     code: Optional[str] = None
 
-
 @dataclass
 class ProjectTimesheetListRequest:
     code: str
-
 
 @dataclass
 class ProjectTimesheetListResponse:
@@ -951,13 +918,11 @@ class ProjectTimesheetListResponse:
     status: Optional[str] = None
     timesheets: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
-
 @dataclass
 class ProjectTimesheetStartRequest:
     code: str
     projects_workers_id: int
     comment: Optional[str] = None
-
 
 @dataclass
 class ProjectTimesheetStartResponse:
@@ -965,19 +930,16 @@ class ProjectTimesheetStartResponse:
     status: Optional[str] = None
     timesheet_id: Optional[int] = None
 
-
 @dataclass
 class ProjectTimesheetStopRequest:
     timesheet_id: int
     comment: Optional[str] = None
-
 
 @dataclass
 class ProjectTimesheetStopResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     timesheet_id: Optional[int] = None
-
 
 @dataclass
 class ProjectBookingSlotCreateRequest:
@@ -987,19 +949,16 @@ class ProjectBookingSlotCreateRequest:
     stop_date: str
     comment: Optional[str] = None
 
-
 @dataclass
 class ProjectBookingSlotCreateResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     slot_id: Optional[int] = None
 
-
 @dataclass
 class ProjectBookingBookRequest:
     timesheet_id: int
     customer_id: int
-
 
 @dataclass
 class ProjectBookingBookResponse:
@@ -1007,11 +966,9 @@ class ProjectBookingBookResponse:
     status: Optional[str] = None
     timesheet_id: Optional[int] = None
 
-
 @dataclass
 class ProjectBookingCancelRequest:
     timesheet_id: int
-
 
 @dataclass
 class ProjectBookingCancelResponse:
@@ -1019,18 +976,15 @@ class ProjectBookingCancelResponse:
     status: Optional[str] = None
     timesheet_id: Optional[int] = None
 
-
 @dataclass
 class ProjectBookingCloseRequest:
     timesheet_id: int
-
 
 @dataclass
 class ProjectBookingCloseResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     timesheet_id: Optional[int] = None
-
 
 @dataclass
 class ProjectBookingBookDateRangeRequest:
@@ -1039,7 +993,6 @@ class ProjectBookingBookDateRangeRequest:
     date_from: str
     date_to: str
 
-
 @dataclass
 class ProjectBookingBookDateRangeResponse:
     status_id: Optional[int] = None
@@ -1047,11 +1000,9 @@ class ProjectBookingBookDateRangeResponse:
     booking_group_id: Optional[str] = None
     nights: Optional[int] = None
 
-
 @dataclass
 class ProjectBookingCancelGroupRequest:
     booking_group_id: str
-
 
 @dataclass
 class ProjectBookingCancelGroupResponse:
@@ -1059,12 +1010,10 @@ class ProjectBookingCancelGroupResponse:
     status: Optional[str] = None
     booking_group_id: Optional[str] = None
 
-
 @dataclass
 class ProjectBookingCloseGroupRequest:
     booking_group_id: str
     comment: Optional[str] = None
-
 
 @dataclass
 class ProjectBookingCloseGroupResponse:
@@ -1072,12 +1021,10 @@ class ProjectBookingCloseGroupResponse:
     status: Optional[str] = None
     booking_group_id: Optional[str] = None
 
-
 @dataclass
 class ProjectBookingSetSlotPriceRequest:
     timesheet_id: int
     net_price_override: Optional[str] = None
-
 
 @dataclass
 class ProjectBookingSetSlotPriceResponse:
@@ -1085,13 +1032,11 @@ class ProjectBookingSetSlotPriceResponse:
     status: Optional[str] = None
     timesheet_id: Optional[int] = None
 
-
 @dataclass
 class ProjectAvailableSlotsRequest:
     code: str
     date_from: str
     date_to: str
-
 
 @dataclass
 class ProjectAvailableSlotsResponse:
@@ -1099,11 +1044,9 @@ class ProjectAvailableSlotsResponse:
     status: Optional[str] = None
     slots: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
-
 @dataclass
 class ProjectWorkerListRequest:
     pass
-
 
 @dataclass
 class ProjectWorkerListResponse:
@@ -1111,20 +1054,17 @@ class ProjectWorkerListResponse:
     status: Optional[str] = None
     workers: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
-
 @dataclass
 class ProjectCalendarRequest:
     code: str
     year: int
     month: int
 
-
 @dataclass
 class ProjectCalendarResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     calendar: Optional[str] = None
-
 
 @dataclass
 class ProjectPassCreateRequest:
@@ -1136,18 +1076,15 @@ class ProjectPassCreateRequest:
     auto_invoice: Optional[int] = None
     expiry_date: Optional[str] = None
 
-
 @dataclass
 class ProjectPassCreateResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     pass_id: Optional[int] = None
 
-
 @dataclass
 class ProjectPassListRequest:
     code: str
-
 
 @dataclass
 class ProjectPassListResponse:
@@ -1155,40 +1092,31 @@ class ProjectPassListResponse:
     status: Optional[str] = None
     passes: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
-
 @dataclass
 class ProjectPassDeactivateRequest:
     pass_id: int
-
 
 @dataclass
 class ProjectPassDeactivateResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
 
-
 @dataclass
 class ProjectPassUpdateExpiryRequest:
     pass_id: int
     expiry_date: str
-
 
 @dataclass
 class ProjectPassUpdateExpiryResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
 
-
 @dataclass
 class TaxListRequest:
     type: str
 
-
 @dataclass
-class TaxListResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
+class TaxListListItem:
     id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
@@ -1199,6 +1127,11 @@ class TaxListResponse:
     vatSubType: Optional[str] = None
     taxTypeDesc: Optional[str] = None
 
+@dataclass
+class TaxListResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 @dataclass
 class TaxAddRequest:
@@ -1208,13 +1141,11 @@ class TaxAddRequest:
     is_default: Optional[int] = None
     other: Optional[str] = None
 
-
 @dataclass
 class TaxAddResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     code: Optional[str] = None
-
 
 @dataclass
 class TaxModifyRequest:
@@ -1224,18 +1155,15 @@ class TaxModifyRequest:
     is_default: Optional[int] = None
     other: Optional[str] = None
 
-
 @dataclass
 class TaxModifyResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     code: Optional[str] = None
 
-
 @dataclass
 class TaxActivateRequest:
     code: str
-
 
 @dataclass
 class TaxActivateResponse:
@@ -1243,11 +1171,9 @@ class TaxActivateResponse:
     status: Optional[str] = None
     code: Optional[str] = None
 
-
 @dataclass
 class TaxInactivateRequest:
     code: str
-
 
 @dataclass
 class TaxInactivateResponse:
@@ -1255,45 +1181,58 @@ class TaxInactivateResponse:
     status: Optional[str] = None
     code: Optional[str] = None
 
-
 @dataclass
 class PaymentModeInactivateRequest:
     code: str
-
 
 @dataclass
 class PaymentModeInactivateResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
 
-
 @dataclass
 class PaymentModeActivateRequest:
     code: str
-
 
 @dataclass
 class PaymentModeActivateResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
 
-
 @dataclass
 class PaymentModeDownloadRequest:
     pass
 
-
 @dataclass
-class PaymentModeDownloadResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
+class PaymentModeDownloadListItem:
     id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
     active: Optional[int] = None
     is_default: Optional[int] = None
 
+@dataclass
+class PaymentModeDownloadResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
+
+@dataclass
+class OrderAddElementsItem:
+    product_sid: str
+    amount: float
+    quantity: str
+    tax_code: str
+    net_price_single: Optional[float] = None
+    gross_price_single: Optional[float] = None
+    other: Optional[str] = None
+    discount_type: Optional[str] = None
+    discount_value: Optional[float] = None
+
+@dataclass
+class OrderAddOtherItem:
+    meta: Optional[builtins.list[builtins.dict[str, Any]]] = None
+    KULCS: Optional[str] = None
 
 @dataclass
 class OrderAddRequest:
@@ -1303,28 +1242,17 @@ class OrderAddRequest:
     trade_date: str
     print_date: str
     pay_date: str
-    elements: builtins.list[builtins.dict[str, Any]]
-    product_sid: str
-    amount: float
-    quantity: str
-    tax_code: str
+    elements: builtins.list[OrderAddElementsItem]
     order_date: str
     paid: int
     currency: str
     lang: Optional[str] = None
     order_number: Optional[str] = None
     comment: Optional[str] = None
-    net_price_single: Optional[float] = None
-    gross_price_single: Optional[float] = None
-    other: Optional[str] = None
-    discount_type: Optional[str] = None
-    discount_value: Optional[float] = None
     regularities_id: Optional[int] = None
     regularity: Optional[str] = None
     regularities_date: Optional[str] = None
-    meta: Optional[builtins.list[builtins.dict[str, Any]]] = None
-    KULCS: Optional[str] = None
-
+    other: Optional[builtins.list[OrderAddOtherItem]] = None
 
 @dataclass
 class OrderAddResponse:
@@ -1335,6 +1263,14 @@ class OrderAddResponse:
     invoice_number: Optional[str] = None
     invoice_client_url: Optional[str] = None
 
+@dataclass
+class OrderCollectiveAddElementsItem:
+    product_sid: str
+    amount: float
+    quantity: str
+    tax_code: str
+    net_price_single: Optional[float] = None
+    gross_price_single: Optional[float] = None
 
 @dataclass
 class OrderCollectiveAddRequest:
@@ -1343,22 +1279,15 @@ class OrderCollectiveAddRequest:
     trade_date: str
     print_date: str
     pay_date: str
-    elements: builtins.list[builtins.dict[str, Any]]
-    product_sid: str
-    amount: float
-    quantity: str
-    tax_code: str
+    elements: builtins.list[OrderCollectiveAddElementsItem]
     order_date: str
     paid: int
     currency: str
     lang: Optional[str] = None
     order_number: Optional[str] = None
     comment: Optional[str] = None
-    net_price_single: Optional[float] = None
-    gross_price_single: Optional[float] = None
     regularity: Optional[str] = None
     regularities_date: Optional[str] = None
-
 
 @dataclass
 class OrderCollectiveAddResponse:
@@ -1366,7 +1295,6 @@ class OrderCollectiveAddResponse:
     status: Optional[str] = None
     order_id: Optional[int] = None
     order_number: Optional[str] = None
-
 
 @dataclass
 class OrderListRequest:
@@ -1379,14 +1307,8 @@ class OrderListRequest:
     regularity: Optional[str] = None
     type: Optional[str] = None
 
-
 @dataclass
-class OrderListResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    numberOfResults: Optional[int] = None
-    numberOfPages: Optional[int] = None
-    orders: Optional[builtins.list[builtins.dict[str, Any]]] = None
+class OrderListOrdersItem:
     order_number: Optional[str] = None
     block_id: Optional[int] = None
     print_date: Optional[str] = None
@@ -1424,6 +1346,13 @@ class OrderListResponse:
     paid: Optional[int] = None
     paid_code: Optional[str] = None
 
+@dataclass
+class OrderListResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    numberOfResults: Optional[int] = None
+    numberOfPages: Optional[int] = None
+    orders: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 @dataclass
 class OrderStornoRequest:
@@ -1433,7 +1362,6 @@ class OrderStornoRequest:
     refund: Optional[int] = None
     comment: Optional[str] = None
 
-
 @dataclass
 class OrderStornoResponse:
     status_id: Optional[int] = None
@@ -1441,11 +1369,9 @@ class OrderStornoResponse:
     order_number: Optional[str] = None
     invoice_number: Optional[str] = None
 
-
 @dataclass
 class OrderProformDownloadRequest:
     order_number: str
-
 
 @dataclass
 class OrderProformDownloadResponse:
@@ -1456,13 +1382,20 @@ class OrderProformDownloadResponse:
     proform_file_size: Optional[int] = None
     proform: Optional[str] = None
 
-
 @dataclass
 class OrderBillRequest:
     order_number: str
     paid: int
     payment_mode_id: Optional[int] = None
 
+@dataclass
+class OrderBillInvoicesItem:
+    invoice_id: Optional[int] = None
+    invoice_number: Optional[str] = None
+    invoice_type_id: Optional[int] = None
+    invoice_type: Optional[str] = None
+    invoice_file_size: Optional[int] = None
+    invoice: Optional[str] = None
 
 @dataclass
 class OrderBillResponse:
@@ -1471,17 +1404,24 @@ class OrderBillResponse:
     invoice_number: Optional[str] = None
     invoice_client_url: Optional[str] = None
     invoices: Optional[builtins.list[builtins.dict[str, Any]]] = None
-    invoice_id: Optional[int] = None
-    invoice_type_id: Optional[int] = None
-    invoice_type: Optional[str] = None
-    invoice_file_size: Optional[int] = None
-    invoice: Optional[str] = None
-
 
 @dataclass
 class OrderDetailsRequest:
     order_number: str
 
+@dataclass
+class OrderDetailsElementsItem:
+    product_sid: Optional[str] = None
+    amount: Optional[float] = None
+    quantity: Optional[str] = None
+    net_price_single: Optional[float] = None
+    tax: Optional[float] = None
+    net_price: Optional[float] = None
+    tax_value: Optional[float] = None
+    gross_price: Optional[float] = None
+    comment: Optional[str] = None
+    other: Optional[str] = None
+    other_json: Optional[str] = None
 
 @dataclass
 class OrderDetailsResponse:
@@ -1510,13 +1450,6 @@ class OrderDetailsResponse:
     tax_value: Optional[str] = None
     gross_price: Optional[str] = None
     elements: Optional[builtins.list[builtins.dict[str, Any]]] = None
-    product_sid: Optional[str] = None
-    amount: Optional[float] = None
-    quantity: Optional[str] = None
-    net_price_single: Optional[float] = None
-    tax: Optional[float] = None
-    other: Optional[str] = None
-    other_json: Optional[str] = None
     order_date: Optional[str] = None
     invoice_to_post: Optional[int] = None
     invoice_to_post_code: Optional[str] = None
@@ -1527,11 +1460,9 @@ class OrderDetailsResponse:
     admin_comment: Optional[str] = None
     api_invoice: Optional[int] = None
 
-
 @dataclass
 class OrderCollectiveCloseRequest:
     customer_sid: str
-
 
 @dataclass
 class OrderCollectiveCloseResponse:
@@ -1539,18 +1470,13 @@ class OrderCollectiveCloseResponse:
     status: Optional[str] = None
     invoice_number: Optional[str] = None
 
-
 @dataclass
 class OrderCollectiveSettlingRequest:
     order_number: str
     invoice_number: str
 
-
 @dataclass
-class OrderCollectiveSettlingResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
+class OrderCollectiveSettlingListItem:
     order_number: Optional[str] = None
     invoice_number: Optional[str] = None
     customer_sid: Optional[str] = None
@@ -1564,11 +1490,14 @@ class OrderCollectiveSettlingResponse:
     confirmed: Optional[int] = None
     other: Optional[str] = None
 
+@dataclass
+class OrderCollectiveSettlingResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 @dataclass
-class OrderCollectiveAddElementsRequest:
-    customer_sid: str
-    elements: builtins.list[builtins.dict[str, Any]]
+class OrderCollectiveAddElementsElementsItem:
     product_sid: str
     amount: float
     quantity: str
@@ -1577,6 +1506,10 @@ class OrderCollectiveAddElementsRequest:
     comment: Optional[str] = None
     other: Optional[str] = None
 
+@dataclass
+class OrderCollectiveAddElementsRequest:
+    customer_sid: str
+    elements: builtins.list[OrderCollectiveAddElementsElementsItem]
 
 @dataclass
 class OrderCollectiveAddElementsResponse:
@@ -1585,11 +1518,9 @@ class OrderCollectiveAddElementsResponse:
     order_id: Optional[int] = None
     order_number: Optional[str] = None
 
-
 @dataclass
 class OrderSetPaidRequest:
     order_number: str
-
 
 @dataclass
 class OrderSetPaidResponse:
@@ -1598,11 +1529,9 @@ class OrderSetPaidResponse:
     paid: Optional[int] = None
     paid_code: Optional[str] = None
 
-
 @dataclass
 class OrderCheckPaidRequest:
     order_number: str
-
 
 @dataclass
 class OrderCheckPaidResponse:
@@ -1611,19 +1540,31 @@ class OrderCheckPaidResponse:
     paid: Optional[int] = None
     paid_code: Optional[str] = None
 
-
 @dataclass
 class OrderPaidChangeListRequest:
     pass
 
+@dataclass
+class OrderPaidChangeListListItem:
+    order_number: Optional[str] = None
 
 @dataclass
 class OrderPaidChangeListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     list: Optional[builtins.list[builtins.dict[str, Any]]] = None
-    order_number: Optional[str] = None
 
+@dataclass
+class InvoiceAddElementsItem:
+    product_sid: str
+    amount: float
+    quantity: str
+    tax_code: str
+    net_price_single: Optional[float] = None
+    gross_price_single: Optional[float] = None
+    other: Optional[str] = None
+    discount_type: Optional[str] = None
+    discount_value: Optional[float] = None
 
 @dataclass
 class InvoiceAddRequest:
@@ -1632,11 +1573,7 @@ class InvoiceAddRequest:
     trade_date: str
     print_date: str
     pay_date: str
-    elements: builtins.list[builtins.dict[str, Any]]
-    product_sid: str
-    amount: float
-    quantity: str
-    tax_code: str
+    elements: builtins.list[InvoiceAddElementsItem]
     order_date: str
     paid: int
     currency: str
@@ -1644,12 +1581,7 @@ class InvoiceAddRequest:
     lang: Optional[str] = None
     order_number: Optional[str] = None
     comment: Optional[str] = None
-    net_price_single: Optional[float] = None
-    gross_price_single: Optional[float] = None
     other: Optional[str] = None
-    discount_type: Optional[str] = None
-    discount_value: Optional[float] = None
-
 
 @dataclass
 class InvoiceAddResponse:
@@ -1658,6 +1590,16 @@ class InvoiceAddResponse:
     invoice_number: Optional[str] = None
     invoice_client_url: Optional[str] = None
 
+@dataclass
+class InvoiceAddPrepaymentElementsItem:
+    product_sid: str
+    amount: float
+    quantity: str
+    net_price_single: float
+    tax_code: str
+    other: Optional[str] = None
+    discount_type: Optional[str] = None
+    discount_value: Optional[float] = None
 
 @dataclass
 class InvoiceAddPrepaymentRequest:
@@ -1666,12 +1608,7 @@ class InvoiceAddPrepaymentRequest:
     trade_date: str
     print_date: str
     pay_date: str
-    elements: builtins.list[builtins.dict[str, Any]]
-    product_sid: str
-    amount: float
-    quantity: str
-    net_price_single: float
-    tax_code: str
+    elements: builtins.list[InvoiceAddPrepaymentElementsItem]
     order_date: str
     paid: int
     currency: str
@@ -1679,9 +1616,6 @@ class InvoiceAddPrepaymentRequest:
     order_number: Optional[str] = None
     comment: Optional[str] = None
     other: Optional[str] = None
-    discount_type: Optional[str] = None
-    discount_value: Optional[float] = None
-
 
 @dataclass
 class InvoiceAddPrepaymentResponse:
@@ -1690,6 +1624,16 @@ class InvoiceAddPrepaymentResponse:
     invoice_number: Optional[str] = None
     invoice_client_url: Optional[str] = None
 
+@dataclass
+class InvoiceAddFinalElementsItem:
+    product_sid: str
+    amount: float
+    quantity: str
+    net_price_single: float
+    tax_code: str
+    other: Optional[str] = None
+    discount_type: Optional[str] = None
+    discount_value: Optional[float] = None
 
 @dataclass
 class InvoiceAddFinalRequest:
@@ -1698,12 +1642,7 @@ class InvoiceAddFinalRequest:
     trade_date: str
     print_date: str
     pay_date: str
-    elements: builtins.list[builtins.dict[str, Any]]
-    product_sid: str
-    amount: float
-    quantity: str
-    net_price_single: float
-    tax_code: str
+    elements: builtins.list[InvoiceAddFinalElementsItem]
     order_date: str
     paid: int
     currency: str
@@ -1711,9 +1650,6 @@ class InvoiceAddFinalRequest:
     order_number: Optional[str] = None
     comment: Optional[str] = None
     other: Optional[str] = None
-    discount_type: Optional[str] = None
-    discount_value: Optional[float] = None
-
 
 @dataclass
 class InvoiceAddFinalResponse:
@@ -1722,11 +1658,24 @@ class InvoiceAddFinalResponse:
     invoice_number: Optional[str] = None
     invoice_client_url: Optional[str] = None
 
-
 @dataclass
 class InvoiceDetailsRequest:
     invoice_number: str
 
+@dataclass
+class InvoiceDetailsElementsItem:
+    product_sid: Optional[str] = None
+    amount: Optional[float] = None
+    quantity: Optional[str] = None
+    net_price_single: Optional[float] = None
+    tax: Optional[float] = None
+    tax_code: Optional[str] = None
+    net_price: Optional[float] = None
+    tax_value: Optional[float] = None
+    gross_price: Optional[float] = None
+    comment: Optional[str] = None
+    other: Optional[str] = None
+    other_json: Optional[str] = None
 
 @dataclass
 class InvoiceDetailsResponse:
@@ -1756,32 +1705,20 @@ class InvoiceDetailsResponse:
     tax_value: Optional[str] = None
     gross_price: Optional[str] = None
     elements: Optional[builtins.list[builtins.dict[str, Any]]] = None
-    product_sid: Optional[str] = None
-    amount: Optional[float] = None
-    quantity: Optional[str] = None
-    net_price_single: Optional[float] = None
-    tax: Optional[float] = None
-    tax_code: Optional[str] = None
-    other: Optional[str] = None
-    other_json: Optional[str] = None
     order_date: Optional[str] = None
+    other: Optional[str] = None
     block_name: Optional[str] = None
     invoice_to_post: Optional[int] = None
     invoice_to_post_code: Optional[str] = None
     api_invoice: Optional[int] = None
-
 
 @dataclass
 class InvoiceDownloadRequest:
     invoice_number: str
     invoice_type: str
 
-
 @dataclass
-class InvoiceDownloadResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    invoices: Optional[builtins.list[builtins.dict[str, Any]]] = None
+class InvoiceDownloadInvoicesItem:
     invoice_id: Optional[int] = None
     invoice_number: Optional[str] = None
     invoice_type_id: Optional[int] = None
@@ -1789,6 +1726,11 @@ class InvoiceDownloadResponse:
     invoice_file_size: Optional[int] = None
     invoice: Optional[str] = None
 
+@dataclass
+class InvoiceDownloadResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    invoices: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 @dataclass
 class InvoiceStornoRequest:
@@ -1798,13 +1740,11 @@ class InvoiceStornoRequest:
     refund: Optional[int] = None
     comment: Optional[str] = None
 
-
 @dataclass
 class InvoiceStornoResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     invoice_number: Optional[str] = None
-
 
 @dataclass
 class InvoiceListRequest:
@@ -1814,14 +1754,8 @@ class InvoiceListRequest:
     to: Optional[str] = None
     customer_sid: Optional[str] = None
 
-
 @dataclass
-class InvoiceListResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    numberOfResults: Optional[int] = None
-    numberOfPages: Optional[int] = None
-    invoices: Optional[builtins.list[builtins.dict[str, Any]]] = None
+class InvoiceListInvoicesItem:
     invoice_id: Optional[int] = None
     invoice_number: Optional[str] = None
     customer_sid: Optional[str] = None
@@ -1859,6 +1793,13 @@ class InvoiceListResponse:
     invoice_file_size: Optional[int] = None
     invoice: Optional[str] = None
 
+@dataclass
+class InvoiceListResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    numberOfResults: Optional[int] = None
+    numberOfPages: Optional[int] = None
+    invoices: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 @dataclass
 class InvoiceExportRequest:
@@ -1867,19 +1808,32 @@ class InvoiceExportRequest:
     number_from: Optional[str] = None
     number_to: Optional[str] = None
 
-
 @dataclass
 class InvoiceExportResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     invoice_export_file: Optional[str] = None
 
-
 @dataclass
 class InvoiceSearchRequest:
     search_type_code: str
     search: str
 
+@dataclass
+class InvoiceSearchElementsItem:
+    product_sid: Optional[str] = None
+    product_name: Optional[str] = None
+    product_service_id: Optional[str] = None
+    amount: Optional[float] = None
+    quantity: Optional[str] = None
+    net_price_single: Optional[float] = None
+    tax: Optional[float] = None
+    net_price: Optional[float] = None
+    tax_value: Optional[float] = None
+    gross_price: Optional[float] = None
+    comment: Optional[str] = None
+    other: Optional[str] = None
+    other_json: Optional[str] = None
 
 @dataclass
 class InvoiceSearchResponse:
@@ -1909,36 +1863,34 @@ class InvoiceSearchResponse:
     tax_value: Optional[float] = None
     gross_price: Optional[float] = None
     elements: Optional[builtins.list[builtins.dict[str, Any]]] = None
-    product_sid: Optional[str] = None
-    product_name: Optional[str] = None
-    product_service_id: Optional[str] = None
-    amount: Optional[float] = None
-    quantity: Optional[str] = None
-    net_price_single: Optional[float] = None
-    tax: Optional[float] = None
-    other: Optional[str] = None
-    other_json: Optional[str] = None
     order_date: Optional[str] = None
     invoice_type: Optional[str] = None
 
+@dataclass
+class InvoiceCorrectionElementsstornoItem:
+    product_sid: Optional[int] = None
+    amount: Optional[int] = None
+
+@dataclass
+class InvoiceCorrectionElementsItem:
+    product_sid: str
+    amount: float
+    quantity: str
+    net_price_single: float
+    tax_code: str
+    comment: Optional[str] = None
+    other: Optional[str] = None
 
 @dataclass
 class InvoiceCorrectionRequest:
     invoice_number: str
-    elementsStorno: builtins.list[builtins.dict[str, Any]]
-    elements: builtins.list[builtins.dict[str, Any]]
-    quantity: str
-    net_price_single: float
-    tax_code: str
+    elementsStorno: builtins.list[InvoiceCorrectionElementsstornoItem]
+    elements: builtins.list[InvoiceCorrectionElementsItem]
     payment_mode_id: int
-    product_sid: Optional[int] = None
-    amount: Optional[int] = None
-    comment: Optional[str] = None
-    other: Optional[str] = None
     trade_date: Optional[str] = None
     pay_date: Optional[str] = None
+    comment: Optional[str] = None
     paid: Optional[int] = None
-
 
 @dataclass
 class InvoiceCorrectionResponse:
@@ -1946,11 +1898,9 @@ class InvoiceCorrectionResponse:
     status: Optional[str] = None
     invoice_number: Optional[str] = None
 
-
 @dataclass
 class InvoiceResendRequest:
     invoice_number: str
-
 
 @dataclass
 class InvoiceResendResponse:
@@ -1960,11 +1910,9 @@ class InvoiceResendResponse:
     invoice_to_post: Optional[int] = None
     invoice_to_post_code: Optional[str] = None
 
-
 @dataclass
 class InvoiceCheckPaidRequest:
     invoice_number: str
-
 
 @dataclass
 class InvoiceCheckPaidResponse:
@@ -1973,11 +1921,9 @@ class InvoiceCheckPaidResponse:
     paid: Optional[int] = None
     paid_code: Optional[str] = None
 
-
 @dataclass
 class InvoiceSetPaidRequest:
     invoice_number: str
-
 
 @dataclass
 class InvoiceSetPaidResponse:
@@ -1986,13 +1932,11 @@ class InvoiceSetPaidResponse:
     paid: Optional[int] = None
     paid_code: Optional[str] = None
 
-
 @dataclass
 class DebtDetailsRequest:
     type: str
     customer_sid: str
     invoice_number: str
-
 
 @dataclass
 class DebtDetailsResponse:
@@ -2000,12 +1944,10 @@ class DebtDetailsResponse:
     status: Optional[str] = None
     debt: Optional[Any] = None
 
-
 @dataclass
 class DebtDownloadRequest:
     invoice_number: str
     invoice_type: str
-
 
 @dataclass
 class DebtDownloadResponse:
@@ -2013,7 +1955,6 @@ class DebtDownloadResponse:
     status: Optional[str] = None
     file: Optional[str] = None
     file_size: Optional[int] = None
-
 
 @dataclass
 class DebtListRequest:
@@ -2026,7 +1967,6 @@ class DebtListRequest:
     from_: Optional[str] = None
     to: Optional[str] = None
 
-
 @dataclass
 class DebtListResponse:
     status_id: Optional[int] = None
@@ -2034,7 +1974,6 @@ class DebtListResponse:
     numberOfResults: Optional[int] = None
     numberOfPages: Optional[int] = None
     list: Optional[builtins.list[builtins.dict[str, Any]]] = None
-
 
 @dataclass
 class DebtAddRequest:
@@ -2058,13 +1997,11 @@ class DebtAddRequest:
     comment: Optional[str] = None
     invoice_file: Optional[str] = None
 
-
 @dataclass
 class DebtAddResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     debt_id: Optional[int] = None
-
 
 @dataclass
 class DebtModifyRequest:
@@ -2089,18 +2026,15 @@ class DebtModifyRequest:
     comment: Optional[str] = None
     invoice_file: Optional[str] = None
 
-
 @dataclass
 class DebtModifyResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     debt_id: Optional[int] = None
 
-
 @dataclass
 class DebtAcceptRequest:
     debt_ids: builtins.list[builtins.dict[str, Any]]
-
 
 @dataclass
 class DebtAcceptResponse:
@@ -2108,11 +2042,9 @@ class DebtAcceptResponse:
     status: Optional[str] = None
     accepted_count: Optional[int] = None
 
-
 @dataclass
 class DebtPayRequest:
     debt_ids: builtins.list[builtins.dict[str, Any]]
-
 
 @dataclass
 class DebtPayResponse:
@@ -2120,11 +2052,9 @@ class DebtPayResponse:
     status: Optional[str] = None
     paid_count: Optional[int] = None
 
-
 @dataclass
 class DebtDeleteRequest:
     debt_ids: builtins.list[builtins.dict[str, Any]]
-
 
 @dataclass
 class DebtDeleteResponse:
@@ -2132,11 +2062,9 @@ class DebtDeleteResponse:
     status: Optional[str] = None
     deleted_count: Optional[int] = None
 
-
 @dataclass
 class DebtGenerateRequest:
     debt_ids: builtins.list[builtins.dict[str, Any]]
-
 
 @dataclass
 class DebtGenerateResponse:
@@ -2145,12 +2073,10 @@ class DebtGenerateResponse:
     file: Optional[str] = None
     file_size: Optional[int] = None
 
-
 @dataclass
 class DebtExportRequest:
     dateFrom: str
     dateTo: str
-
 
 @dataclass
 class DebtExportResponse:
@@ -2158,53 +2084,51 @@ class DebtExportResponse:
     status: Optional[str] = None
     list: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
-
 @dataclass
 class SystemMessageListRequest:
     pass
 
+@dataclass
+class SystemMessageListListItem:
+    id: Optional[int] = None
+    message: Optional[str] = None
+    message_date: Optional[str] = None
+    message_type: Optional[int] = None
 
 @dataclass
 class SystemMessageListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     list: Optional[builtins.list[builtins.dict[str, Any]]] = None
-    id: Optional[int] = None
-    message: Optional[str] = None
-    message_date: Optional[str] = None
-    message_type: Optional[int] = None
-
 
 @dataclass
 class SystemMessageSetReadRequest:
     id: int
-
 
 @dataclass
 class SystemMessageSetReadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
 
-
 @dataclass
 class SystemErrorCodeListRequest:
     lang: Optional[str] = None
 
+@dataclass
+class SystemErrorCodeListLangItem:
+    code: Optional[int] = None
+    description: Optional[str] = None
+    type: Optional[str] = None
 
 @dataclass
 class SystemErrorCodeListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     lang: Optional[builtins.list[builtins.dict[str, Any]]] = None
-    code: Optional[int] = None
-    description: Optional[str] = None
-    type: Optional[str] = None
-
 
 @dataclass
 class GetVersionRequest:
     pass
-
 
 @dataclass
 class GetVersionResponse:
@@ -2212,11 +2136,9 @@ class GetVersionResponse:
     status: Optional[str] = None
     version: Optional[str] = None
 
-
 @dataclass
 class ServiceProviderDatasRequest:
     pass
-
 
 @dataclass
 class ServiceProviderDatasResponse:
@@ -2238,11 +2160,9 @@ class ServiceProviderDatasResponse:
     instance_soap_url: Optional[str] = None
     instance_rest_url: Optional[str] = None
 
-
 @dataclass
 class CompanyDataRequest:
     pass
-
 
 @dataclass
 class CompanyDataResponse:
@@ -2276,17 +2196,12 @@ class CompanyDataResponse:
     bank_name: Optional[str] = None
     currency: Optional[str] = None
 
-
 @dataclass
 class QuantityListRequest:
     type: str
 
-
 @dataclass
-class QuantityListResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
+class QuantityListListItem:
     id: Optional[int] = None
     name: Optional[str] = None
     code: Optional[str] = None
@@ -2294,93 +2209,101 @@ class QuantityListResponse:
     is_default: Optional[int] = None
     unitOfMeasure: Optional[str] = None
 
+@dataclass
+class QuantityListResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 @dataclass
 class CurrencyDownloadRequest:
     type: str
 
-
 @dataclass
-class CurrencyDownloadResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
+class CurrencyDownloadListItem:
     id: Optional[int] = None
     currency: Optional[str] = None
     amount: Optional[float] = None
     unit: Optional[float] = None
     date: Optional[str] = None
 
+@dataclass
+class CurrencyDownloadResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 @dataclass
 class RegularityDownloadRequest:
     pass
 
+@dataclass
+class RegularityDownloadListItem:
+    id: Optional[int] = None
+    code: Optional[str] = None
+    regularity: Optional[str] = None
 
 @dataclass
 class RegularityDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     list: Optional[builtins.list[builtins.dict[str, Any]]] = None
-    id: Optional[int] = None
-    code: Optional[str] = None
-    regularity: Optional[str] = None
-
 
 @dataclass
 class CountryDownloadRequest:
     pass
 
+@dataclass
+class CountryDownloadListItem:
+    code: Optional[str] = None
+    country: Optional[str] = None
 
 @dataclass
 class CountryDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     list: Optional[builtins.list[builtins.dict[str, Any]]] = None
-    code: Optional[str] = None
-    country: Optional[str] = None
-
 
 @dataclass
 class PostcodeDownloadRequest:
     country: str
 
+@dataclass
+class PostcodeDownloadPostcodesItem:
+    postcode: Optional[str] = None
+    city: Optional[str] = None
+    region: Optional[str] = None
 
 @dataclass
 class PostcodeDownloadResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     postcodes: Optional[builtins.list[builtins.dict[str, Any]]] = None
-    postcode: Optional[str] = None
-    city: Optional[str] = None
-    region: Optional[str] = None
-
 
 @dataclass
 class PingRequest:
     pass
-
 
 @dataclass
 class PingResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
 
-
 @dataclass
 class MonitorRequest:
     pass
 
+@dataclass
+class MonitorListItem:
+    state: Optional[str] = None
+    name: Optional[str] = None
+    last_check: Optional[str] = None
 
 @dataclass
 class MonitorResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     list: Optional[builtins.list[builtins.dict[str, Any]]] = None
-    state: Optional[str] = None
-    name: Optional[str] = None
-    last_check: Optional[str] = None
-
 
 class SzamlaiktatoAPI:
     def __init__(self, client: OnlineSzamlazoClient):
@@ -2412,12 +2335,14 @@ class SzamlaiktatoAPI:
                 if orig_name in data:
                     data[py_name] = data.pop(orig_name)
         valid_keys = response_cls.__dataclass_fields__.keys()
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
+        filtered_data = {
+            k: v for k, v in data.items() if k in valid_keys
+        }
         return response_cls(**filtered_data)
 
     def install(self, request: InstallRequest) -> InstallResponse:
         return self._invoke(
-            "install",
+            'install',
             request,
             InstallResponse,
             skip_block=True,
@@ -2426,7 +2351,7 @@ class SzamlaiktatoAPI:
 
     def update(self, request: UpdateRequest) -> UpdateResponse:
         return self._invoke(
-            "update",
+            'update',
             request,
             UpdateResponse,
             skip_block=True,
@@ -2435,53 +2360,49 @@ class SzamlaiktatoAPI:
 
     def customerAdd(self, request: CustomerAddRequest) -> CustomerAddResponse:
         return self._invoke(
-            "customerAdd",
+            'customerAdd',
             request,
             CustomerAddResponse,
         )
 
     def customerModify(self, request: CustomerModifyRequest) -> CustomerModifyResponse:
         return self._invoke(
-            "customerModify",
+            'customerModify',
             request,
             CustomerModifyResponse,
         )
 
     def customerGet(self, request: CustomerGetRequest) -> CustomerGetResponse:
         return self._invoke(
-            "customerGet",
+            'customerGet',
             request,
             CustomerGetResponse,
         )
 
-    def customerActivate(
-        self, request: CustomerActivateRequest
-    ) -> CustomerActivateResponse:
+    def customerActivate(self, request: CustomerActivateRequest) -> CustomerActivateResponse:
         return self._invoke(
-            "customerActivate",
+            'customerActivate',
             request,
             CustomerActivateResponse,
         )
 
-    def customerInactivate(
-        self, request: CustomerInactivateRequest
-    ) -> CustomerInactivateResponse:
+    def customerInactivate(self, request: CustomerInactivateRequest) -> CustomerInactivateResponse:
         return self._invoke(
-            "customerInactivate",
+            'customerInactivate',
             request,
             CustomerInactivateResponse,
         )
 
     def customerSwap(self, request: CustomerSwapRequest) -> CustomerSwapResponse:
         return self._invoke(
-            "customerSwap",
+            'customerSwap',
             request,
             CustomerSwapResponse,
         )
 
     def customerList(self, request: CustomerListRequest) -> CustomerListResponse:
         return self._invoke(
-            "customerList",
+            'customerList',
             request,
             CustomerListResponse,
             skip_block=True,
@@ -2489,86 +2410,74 @@ class SzamlaiktatoAPI:
 
     def productAdd(self, request: ProductAddRequest) -> ProductAddResponse:
         return self._invoke(
-            "productAdd",
+            'productAdd',
             request,
             ProductAddResponse,
         )
 
     def productModify(self, request: ProductModifyRequest) -> ProductModifyResponse:
         return self._invoke(
-            "productModify",
+            'productModify',
             request,
             ProductModifyResponse,
         )
 
     def productGet(self, request: ProductGetRequest) -> ProductGetResponse:
         return self._invoke(
-            "productGet",
+            'productGet',
             request,
             ProductGetResponse,
         )
 
-    def productActivate(
-        self, request: ProductActivateRequest
-    ) -> ProductActivateResponse:
+    def productActivate(self, request: ProductActivateRequest) -> ProductActivateResponse:
         return self._invoke(
-            "productActivate",
+            'productActivate',
             request,
             ProductActivateResponse,
         )
 
-    def productInactivate(
-        self, request: ProductInactivateRequest
-    ) -> ProductInactivateResponse:
+    def productInactivate(self, request: ProductInactivateRequest) -> ProductInactivateResponse:
         return self._invoke(
-            "productInactivate",
+            'productInactivate',
             request,
             ProductInactivateResponse,
         )
 
     def productList(self, request: ProductListRequest) -> ProductListResponse:
         return self._invoke(
-            "productList",
+            'productList',
             request,
             ProductListResponse,
             skip_block=True,
         )
 
-    def productFileList(
-        self, request: ProductFileListRequest
-    ) -> ProductFileListResponse:
+    def productFileList(self, request: ProductFileListRequest) -> ProductFileListResponse:
         return self._invoke(
-            "productFileList",
+            'productFileList',
             request,
             ProductFileListResponse,
             skip_block=True,
         )
 
-    def outerDatasources(
-        self, request: Optional[OuterDatasourcesRequest] = None
-    ) -> OuterDatasourcesResponse:
+    def outerDatasources(self, request: Optional[OuterDatasourcesRequest] = None) -> OuterDatasourcesResponse:
         return self._invoke(
-            "outerDatasources",
+            'outerDatasources',
             request,
             OuterDatasourcesResponse,
             skip_block=True,
         )
 
-    def outerDatasourcesGet(
-        self, request: OuterDatasourcesGetRequest
-    ) -> OuterDatasourcesGetResponse:
+    def outerDatasourcesGet(self, request: OuterDatasourcesGetRequest) -> OuterDatasourcesGetResponse:
         return self._invoke(
-            "outerDatasourcesGet",
+            'outerDatasourcesGet',
             request,
             OuterDatasourcesGetResponse,
             skip_block=True,
         )
 
-    def outerDatasourcesSave(
-        self, request: OuterDatasourcesSaveRequest
-    ) -> OuterDatasourcesSaveResponse:
+    def outerDatasourcesSave(self, request: OuterDatasourcesSaveRequest) -> OuterDatasourcesSaveResponse:
         return self._invoke(
-            "outerDatasourcesSave",
+            'outerDatasourcesSave',
             request,
             OuterDatasourcesSaveResponse,
             skip_block=True,
@@ -2576,17 +2485,15 @@ class SzamlaiktatoAPI:
 
     def adminUserAdd(self, request: AdminUserAddRequest) -> AdminUserAddResponse:
         return self._invoke(
-            "adminUserAdd",
+            'adminUserAdd',
             request,
             AdminUserAddResponse,
             skip_block=True,
         )
 
-    def adminUserPassword(
-        self, request: AdminUserPasswordRequest
-    ) -> AdminUserPasswordResponse:
+    def adminUserPassword(self, request: AdminUserPasswordRequest) -> AdminUserPasswordResponse:
         return self._invoke(
-            "adminUserPassword",
+            'adminUserPassword',
             request,
             AdminUserPasswordResponse,
             skip_block=True,
@@ -2594,7 +2501,7 @@ class SzamlaiktatoAPI:
 
     def adminUserDel(self, request: AdminUserDelRequest) -> AdminUserDelResponse:
         return self._invoke(
-            "adminUserDel",
+            'adminUserDel',
             request,
             AdminUserDelResponse,
             skip_block=True,
@@ -2602,17 +2509,15 @@ class SzamlaiktatoAPI:
 
     def blockAdd(self, request: BlockAddRequest) -> BlockAddResponse:
         return self._invoke(
-            "blockAdd",
+            'blockAdd',
             request,
             BlockAddResponse,
             skip_block=True,
         )
 
-    def blockUpdateCompanyData(
-        self, request: BlockUpdateCompanyDataRequest
-    ) -> BlockUpdateCompanyDataResponse:
+    def blockUpdateCompanyData(self, request: BlockUpdateCompanyDataRequest) -> BlockUpdateCompanyDataResponse:
         return self._invoke(
-            "blockUpdateCompanyData",
+            'blockUpdateCompanyData',
             request,
             BlockUpdateCompanyDataResponse,
             skip_block=True,
@@ -2620,7 +2525,7 @@ class SzamlaiktatoAPI:
 
     def blockModify(self, request: BlockModifyRequest) -> BlockModifyResponse:
         return self._invoke(
-            "blockModify",
+            'blockModify',
             request,
             BlockModifyResponse,
             skip_block=True,
@@ -2628,7 +2533,7 @@ class SzamlaiktatoAPI:
 
     def blockList(self, request: BlockListRequest) -> BlockListResponse:
         return self._invoke(
-            "blockList",
+            'blockList',
             request,
             BlockListResponse,
             skip_block=True,
@@ -2636,7 +2541,7 @@ class SzamlaiktatoAPI:
 
     def blockClose(self, request: BlockCloseRequest) -> BlockCloseResponse:
         return self._invoke(
-            "blockClose",
+            'blockClose',
             request,
             BlockCloseResponse,
             skip_block=True,
@@ -2644,7 +2549,7 @@ class SzamlaiktatoAPI:
 
     def blockOpen(self, request: BlockOpenRequest) -> BlockOpenResponse:
         return self._invoke(
-            "blockOpen",
+            'blockOpen',
             request,
             BlockOpenResponse,
             skip_block=True,
@@ -2652,47 +2557,39 @@ class SzamlaiktatoAPI:
 
     def costCentreAdd(self, request: CostCentreAddRequest) -> CostCentreAddResponse:
         return self._invoke(
-            "costCentreAdd",
+            'costCentreAdd',
             request,
             CostCentreAddResponse,
             skip_block=True,
         )
 
-    def costCentreModify(
-        self, request: CostCentreModifyRequest
-    ) -> CostCentreModifyResponse:
+    def costCentreModify(self, request: CostCentreModifyRequest) -> CostCentreModifyResponse:
         return self._invoke(
-            "costCentreModify",
+            'costCentreModify',
             request,
             CostCentreModifyResponse,
             skip_block=True,
         )
 
-    def costCentreList(
-        self, request: Optional[CostCentreListRequest] = None
-    ) -> CostCentreListResponse:
+    def costCentreList(self, request: Optional[CostCentreListRequest] = None) -> CostCentreListResponse:
         return self._invoke(
-            "costCentreList",
+            'costCentreList',
             request,
             CostCentreListResponse,
             skip_block=True,
         )
 
-    def costCentreActivate(
-        self, request: CostCentreActivateRequest
-    ) -> CostCentreActivateResponse:
+    def costCentreActivate(self, request: CostCentreActivateRequest) -> CostCentreActivateResponse:
         return self._invoke(
-            "costCentreActivate",
+            'costCentreActivate',
             request,
             CostCentreActivateResponse,
             skip_block=True,
         )
 
-    def costCentreInactivate(
-        self, request: CostCentreInactivateRequest
-    ) -> CostCentreInactivateResponse:
+    def costCentreInactivate(self, request: CostCentreInactivateRequest) -> CostCentreInactivateResponse:
         return self._invoke(
-            "costCentreInactivate",
+            'costCentreInactivate',
             request,
             CostCentreInactivateResponse,
             skip_block=True,
@@ -2700,7 +2597,7 @@ class SzamlaiktatoAPI:
 
     def costTypeAdd(self, request: CostTypeAddRequest) -> CostTypeAddResponse:
         return self._invoke(
-            "costTypeAdd",
+            'costTypeAdd',
             request,
             CostTypeAddResponse,
             skip_block=True,
@@ -2708,37 +2605,31 @@ class SzamlaiktatoAPI:
 
     def costTypeModify(self, request: CostTypeModifyRequest) -> CostTypeModifyResponse:
         return self._invoke(
-            "costTypeModify",
+            'costTypeModify',
             request,
             CostTypeModifyResponse,
             skip_block=True,
         )
 
-    def costTypeList(
-        self, request: Optional[CostTypeListRequest] = None
-    ) -> CostTypeListResponse:
+    def costTypeList(self, request: Optional[CostTypeListRequest] = None) -> CostTypeListResponse:
         return self._invoke(
-            "costTypeList",
+            'costTypeList',
             request,
             CostTypeListResponse,
             skip_block=True,
         )
 
-    def costTypeActivate(
-        self, request: CostTypeActivateRequest
-    ) -> CostTypeActivateResponse:
+    def costTypeActivate(self, request: CostTypeActivateRequest) -> CostTypeActivateResponse:
         return self._invoke(
-            "costTypeActivate",
+            'costTypeActivate',
             request,
             CostTypeActivateResponse,
             skip_block=True,
         )
 
-    def costTypeInactivate(
-        self, request: CostTypeInactivateRequest
-    ) -> CostTypeInactivateResponse:
+    def costTypeInactivate(self, request: CostTypeInactivateRequest) -> CostTypeInactivateResponse:
         return self._invoke(
-            "costTypeInactivate",
+            'costTypeInactivate',
             request,
             CostTypeInactivateResponse,
             skip_block=True,
@@ -2746,7 +2637,7 @@ class SzamlaiktatoAPI:
 
     def projectList(self, request: ProjectListRequest) -> ProjectListResponse:
         return self._invoke(
-            "projectList",
+            'projectList',
             request,
             ProjectListResponse,
             skip_block=True,
@@ -2754,7 +2645,7 @@ class SzamlaiktatoAPI:
 
     def projectGet(self, request: ProjectGetRequest) -> ProjectGetResponse:
         return self._invoke(
-            "projectGet",
+            'projectGet',
             request,
             ProjectGetResponse,
             skip_block=True,
@@ -2762,197 +2653,159 @@ class SzamlaiktatoAPI:
 
     def projectCreate(self, request: ProjectCreateRequest) -> ProjectCreateResponse:
         return self._invoke(
-            "projectCreate",
+            'projectCreate',
             request,
             ProjectCreateResponse,
             skip_block=True,
         )
 
-    def projectInactivate(
-        self, request: ProjectInactivateRequest
-    ) -> ProjectInactivateResponse:
+    def projectInactivate(self, request: ProjectInactivateRequest) -> ProjectInactivateResponse:
         return self._invoke(
-            "projectInactivate",
+            'projectInactivate',
             request,
             ProjectInactivateResponse,
             skip_block=True,
         )
 
-    def projectTimesheetList(
-        self, request: ProjectTimesheetListRequest
-    ) -> ProjectTimesheetListResponse:
+    def projectTimesheetList(self, request: ProjectTimesheetListRequest) -> ProjectTimesheetListResponse:
         return self._invoke(
-            "projectTimesheetList",
+            'projectTimesheetList',
             request,
             ProjectTimesheetListResponse,
             skip_block=True,
         )
 
-    def projectTimesheetStart(
-        self, request: ProjectTimesheetStartRequest
-    ) -> ProjectTimesheetStartResponse:
+    def projectTimesheetStart(self, request: ProjectTimesheetStartRequest) -> ProjectTimesheetStartResponse:
         return self._invoke(
-            "projectTimesheetStart",
+            'projectTimesheetStart',
             request,
             ProjectTimesheetStartResponse,
             skip_block=True,
         )
 
-    def projectTimesheetStop(
-        self, request: ProjectTimesheetStopRequest
-    ) -> ProjectTimesheetStopResponse:
+    def projectTimesheetStop(self, request: ProjectTimesheetStopRequest) -> ProjectTimesheetStopResponse:
         return self._invoke(
-            "projectTimesheetStop",
+            'projectTimesheetStop',
             request,
             ProjectTimesheetStopResponse,
             skip_block=True,
         )
 
-    def projectBookingSlotCreate(
-        self, request: ProjectBookingSlotCreateRequest
-    ) -> ProjectBookingSlotCreateResponse:
+    def projectBookingSlotCreate(self, request: ProjectBookingSlotCreateRequest) -> ProjectBookingSlotCreateResponse:
         return self._invoke(
-            "projectBookingSlotCreate",
+            'projectBookingSlotCreate',
             request,
             ProjectBookingSlotCreateResponse,
             skip_block=True,
         )
 
-    def projectBookingBook(
-        self, request: ProjectBookingBookRequest
-    ) -> ProjectBookingBookResponse:
+    def projectBookingBook(self, request: ProjectBookingBookRequest) -> ProjectBookingBookResponse:
         return self._invoke(
-            "projectBookingBook",
+            'projectBookingBook',
             request,
             ProjectBookingBookResponse,
             skip_block=True,
         )
 
-    def projectBookingCancel(
-        self, request: ProjectBookingCancelRequest
-    ) -> ProjectBookingCancelResponse:
+    def projectBookingCancel(self, request: ProjectBookingCancelRequest) -> ProjectBookingCancelResponse:
         return self._invoke(
-            "projectBookingCancel",
+            'projectBookingCancel',
             request,
             ProjectBookingCancelResponse,
             skip_block=True,
         )
 
-    def projectBookingClose(
-        self, request: ProjectBookingCloseRequest
-    ) -> ProjectBookingCloseResponse:
+    def projectBookingClose(self, request: ProjectBookingCloseRequest) -> ProjectBookingCloseResponse:
         return self._invoke(
-            "projectBookingClose",
+            'projectBookingClose',
             request,
             ProjectBookingCloseResponse,
             skip_block=True,
         )
 
-    def projectBookingBookDateRange(
-        self, request: ProjectBookingBookDateRangeRequest
-    ) -> ProjectBookingBookDateRangeResponse:
+    def projectBookingBookDateRange(self, request: ProjectBookingBookDateRangeRequest) -> ProjectBookingBookDateRangeResponse:
         return self._invoke(
-            "projectBookingBookDateRange",
+            'projectBookingBookDateRange',
             request,
             ProjectBookingBookDateRangeResponse,
             skip_block=True,
         )
 
-    def projectBookingCancelGroup(
-        self, request: ProjectBookingCancelGroupRequest
-    ) -> ProjectBookingCancelGroupResponse:
+    def projectBookingCancelGroup(self, request: ProjectBookingCancelGroupRequest) -> ProjectBookingCancelGroupResponse:
         return self._invoke(
-            "projectBookingCancelGroup",
+            'projectBookingCancelGroup',
             request,
             ProjectBookingCancelGroupResponse,
             skip_block=True,
         )
 
-    def projectBookingCloseGroup(
-        self, request: ProjectBookingCloseGroupRequest
-    ) -> ProjectBookingCloseGroupResponse:
+    def projectBookingCloseGroup(self, request: ProjectBookingCloseGroupRequest) -> ProjectBookingCloseGroupResponse:
         return self._invoke(
-            "projectBookingCloseGroup",
+            'projectBookingCloseGroup',
             request,
             ProjectBookingCloseGroupResponse,
             skip_block=True,
         )
 
-    def projectBookingSetSlotPrice(
-        self, request: ProjectBookingSetSlotPriceRequest
-    ) -> ProjectBookingSetSlotPriceResponse:
+    def projectBookingSetSlotPrice(self, request: ProjectBookingSetSlotPriceRequest) -> ProjectBookingSetSlotPriceResponse:
         return self._invoke(
-            "projectBookingSetSlotPrice",
+            'projectBookingSetSlotPrice',
             request,
             ProjectBookingSetSlotPriceResponse,
             skip_block=True,
         )
 
-    def projectAvailableSlots(
-        self, request: ProjectAvailableSlotsRequest
-    ) -> ProjectAvailableSlotsResponse:
+    def projectAvailableSlots(self, request: ProjectAvailableSlotsRequest) -> ProjectAvailableSlotsResponse:
         return self._invoke(
-            "projectAvailableSlots",
+            'projectAvailableSlots',
             request,
             ProjectAvailableSlotsResponse,
             skip_block=True,
         )
 
-    def projectWorkerList(
-        self, request: Optional[ProjectWorkerListRequest] = None
-    ) -> ProjectWorkerListResponse:
+    def projectWorkerList(self, request: Optional[ProjectWorkerListRequest] = None) -> ProjectWorkerListResponse:
         return self._invoke(
-            "projectWorkerList",
+            'projectWorkerList',
             request,
             ProjectWorkerListResponse,
             skip_block=True,
         )
 
-    def projectCalendar(
-        self, request: ProjectCalendarRequest
-    ) -> ProjectCalendarResponse:
+    def projectCalendar(self, request: ProjectCalendarRequest) -> ProjectCalendarResponse:
         return self._invoke(
-            "projectCalendar",
+            'projectCalendar',
             request,
             ProjectCalendarResponse,
             skip_block=True,
         )
 
-    def projectPassCreate(
-        self, request: ProjectPassCreateRequest
-    ) -> ProjectPassCreateResponse:
+    def projectPassCreate(self, request: ProjectPassCreateRequest) -> ProjectPassCreateResponse:
         return self._invoke(
-            "projectPassCreate",
+            'projectPassCreate',
             request,
             ProjectPassCreateResponse,
             skip_block=True,
         )
 
-    def projectPassList(
-        self, request: ProjectPassListRequest
-    ) -> ProjectPassListResponse:
+    def projectPassList(self, request: ProjectPassListRequest) -> ProjectPassListResponse:
         return self._invoke(
-            "projectPassList",
+            'projectPassList',
             request,
             ProjectPassListResponse,
             skip_block=True,
         )
 
-    def projectPassDeactivate(
-        self, request: ProjectPassDeactivateRequest
-    ) -> ProjectPassDeactivateResponse:
+    def projectPassDeactivate(self, request: ProjectPassDeactivateRequest) -> ProjectPassDeactivateResponse:
         return self._invoke(
-            "projectPassDeactivate",
+            'projectPassDeactivate',
             request,
             ProjectPassDeactivateResponse,
             skip_block=True,
         )
 
-    def projectPassUpdateExpiry(
-        self, request: ProjectPassUpdateExpiryRequest
-    ) -> ProjectPassUpdateExpiryResponse:
+    def projectPassUpdateExpiry(self, request: ProjectPassUpdateExpiryRequest) -> ProjectPassUpdateExpiryResponse:
         return self._invoke(
-            "projectPassUpdateExpiry",
+            'projectPassUpdateExpiry',
             request,
             ProjectPassUpdateExpiryResponse,
             skip_block=True,
@@ -2960,7 +2813,7 @@ class SzamlaiktatoAPI:
 
     def taxList(self, request: TaxListRequest) -> TaxListResponse:
         return self._invoke(
-            "taxList",
+            'taxList',
             request,
             TaxListResponse,
             skip_block=True,
@@ -2968,7 +2821,7 @@ class SzamlaiktatoAPI:
 
     def taxAdd(self, request: TaxAddRequest) -> TaxAddResponse:
         return self._invoke(
-            "taxAdd",
+            'taxAdd',
             request,
             TaxAddResponse,
             skip_block=True,
@@ -2976,7 +2829,7 @@ class SzamlaiktatoAPI:
 
     def taxModify(self, request: TaxModifyRequest) -> TaxModifyResponse:
         return self._invoke(
-            "taxModify",
+            'taxModify',
             request,
             TaxModifyResponse,
             skip_block=True,
@@ -2984,7 +2837,7 @@ class SzamlaiktatoAPI:
 
     def taxActivate(self, request: TaxActivateRequest) -> TaxActivateResponse:
         return self._invoke(
-            "taxActivate",
+            'taxActivate',
             request,
             TaxActivateResponse,
             skip_block=True,
@@ -2992,37 +2845,31 @@ class SzamlaiktatoAPI:
 
     def taxInactivate(self, request: TaxInactivateRequest) -> TaxInactivateResponse:
         return self._invoke(
-            "taxInactivate",
+            'taxInactivate',
             request,
             TaxInactivateResponse,
             skip_block=True,
         )
 
-    def paymentModeInactivate(
-        self, request: PaymentModeInactivateRequest
-    ) -> PaymentModeInactivateResponse:
+    def paymentModeInactivate(self, request: PaymentModeInactivateRequest) -> PaymentModeInactivateResponse:
         return self._invoke(
-            "paymentModeInactivate",
+            'paymentModeInactivate',
             request,
             PaymentModeInactivateResponse,
             skip_block=True,
         )
 
-    def paymentModeActivate(
-        self, request: PaymentModeActivateRequest
-    ) -> PaymentModeActivateResponse:
+    def paymentModeActivate(self, request: PaymentModeActivateRequest) -> PaymentModeActivateResponse:
         return self._invoke(
-            "paymentModeActivate",
+            'paymentModeActivate',
             request,
             PaymentModeActivateResponse,
             skip_block=True,
         )
 
-    def paymentModeDownload(
-        self, request: Optional[PaymentModeDownloadRequest] = None
-    ) -> PaymentModeDownloadResponse:
+    def paymentModeDownload(self, request: Optional[PaymentModeDownloadRequest] = None) -> PaymentModeDownloadResponse:
         return self._invoke(
-            "paymentModeDownload",
+            'paymentModeDownload',
             request,
             PaymentModeDownloadResponse,
             skip_block=True,
@@ -3030,183 +2877,163 @@ class SzamlaiktatoAPI:
 
     def orderAdd(self, request: OrderAddRequest) -> OrderAddResponse:
         return self._invoke(
-            "orderAdd",
+            'orderAdd',
             request,
             OrderAddResponse,
         )
 
-    def orderCollectiveAdd(
-        self, request: OrderCollectiveAddRequest
-    ) -> OrderCollectiveAddResponse:
+    def orderCollectiveAdd(self, request: OrderCollectiveAddRequest) -> OrderCollectiveAddResponse:
         return self._invoke(
-            "orderCollectiveAdd",
+            'orderCollectiveAdd',
             request,
             OrderCollectiveAddResponse,
         )
 
     def orderList(self, request: OrderListRequest) -> OrderListResponse:
         return self._invoke(
-            "orderList",
+            'orderList',
             request,
             OrderListResponse,
-            req_mapping={"from_": "from"},
+            req_mapping={'from_': 'from'},
         )
 
     def orderStorno(self, request: OrderStornoRequest) -> OrderStornoResponse:
         return self._invoke(
-            "orderStorno",
+            'orderStorno',
             request,
             OrderStornoResponse,
         )
 
-    def orderProformDownload(
-        self, request: OrderProformDownloadRequest
-    ) -> OrderProformDownloadResponse:
+    def orderProformDownload(self, request: OrderProformDownloadRequest) -> OrderProformDownloadResponse:
         return self._invoke(
-            "orderProformDownload",
+            'orderProformDownload',
             request,
             OrderProformDownloadResponse,
         )
 
     def orderBill(self, request: OrderBillRequest) -> OrderBillResponse:
         return self._invoke(
-            "orderBill",
+            'orderBill',
             request,
             OrderBillResponse,
         )
 
     def orderDetails(self, request: OrderDetailsRequest) -> OrderDetailsResponse:
         return self._invoke(
-            "orderDetails",
+            'orderDetails',
             request,
             OrderDetailsResponse,
         )
 
-    def orderCollectiveClose(
-        self, request: OrderCollectiveCloseRequest
-    ) -> OrderCollectiveCloseResponse:
+    def orderCollectiveClose(self, request: OrderCollectiveCloseRequest) -> OrderCollectiveCloseResponse:
         return self._invoke(
-            "orderCollectiveClose",
+            'orderCollectiveClose',
             request,
             OrderCollectiveCloseResponse,
         )
 
-    def orderCollectiveSettling(
-        self, request: OrderCollectiveSettlingRequest
-    ) -> OrderCollectiveSettlingResponse:
+    def orderCollectiveSettling(self, request: OrderCollectiveSettlingRequest) -> OrderCollectiveSettlingResponse:
         return self._invoke(
-            "orderCollectiveSettling",
+            'orderCollectiveSettling',
             request,
             OrderCollectiveSettlingResponse,
         )
 
-    def orderCollectiveAddElements(
-        self, request: OrderCollectiveAddElementsRequest
-    ) -> OrderCollectiveAddElementsResponse:
+    def orderCollectiveAddElements(self, request: OrderCollectiveAddElementsRequest) -> OrderCollectiveAddElementsResponse:
         return self._invoke(
-            "orderCollectiveAddElements",
+            'orderCollectiveAddElements',
             request,
             OrderCollectiveAddElementsResponse,
         )
 
     def orderSetPaid(self, request: OrderSetPaidRequest) -> OrderSetPaidResponse:
         return self._invoke(
-            "orderSetPaid",
+            'orderSetPaid',
             request,
             OrderSetPaidResponse,
         )
 
     def orderCheckPaid(self, request: OrderCheckPaidRequest) -> OrderCheckPaidResponse:
         return self._invoke(
-            "orderCheckPaid",
+            'orderCheckPaid',
             request,
             OrderCheckPaidResponse,
         )
 
-    def orderPaidChangeList(
-        self, request: Optional[OrderPaidChangeListRequest] = None
-    ) -> OrderPaidChangeListResponse:
+    def orderPaidChangeList(self, request: Optional[OrderPaidChangeListRequest] = None) -> OrderPaidChangeListResponse:
         return self._invoke(
-            "orderPaidChangeList",
+            'orderPaidChangeList',
             request,
             OrderPaidChangeListResponse,
         )
 
     def invoiceAdd(self, request: InvoiceAddRequest) -> InvoiceAddResponse:
         return self._invoke(
-            "invoiceAdd",
+            'invoiceAdd',
             request,
             InvoiceAddResponse,
         )
 
-    def invoiceAddPrepayment(
-        self, request: InvoiceAddPrepaymentRequest
-    ) -> InvoiceAddPrepaymentResponse:
+    def invoiceAddPrepayment(self, request: InvoiceAddPrepaymentRequest) -> InvoiceAddPrepaymentResponse:
         return self._invoke(
-            "invoiceAddPrepayment",
+            'invoiceAddPrepayment',
             request,
             InvoiceAddPrepaymentResponse,
         )
 
-    def invoiceAddFinal(
-        self, request: InvoiceAddFinalRequest
-    ) -> InvoiceAddFinalResponse:
+    def invoiceAddFinal(self, request: InvoiceAddFinalRequest) -> InvoiceAddFinalResponse:
         return self._invoke(
-            "invoiceAddFinal",
+            'invoiceAddFinal',
             request,
             InvoiceAddFinalResponse,
         )
 
     def invoiceDetails(self, request: InvoiceDetailsRequest) -> InvoiceDetailsResponse:
         return self._invoke(
-            "invoiceDetails",
+            'invoiceDetails',
             request,
             InvoiceDetailsResponse,
         )
 
-    def invoiceDownload(
-        self, request: InvoiceDownloadRequest
-    ) -> InvoiceDownloadResponse:
+    def invoiceDownload(self, request: InvoiceDownloadRequest) -> InvoiceDownloadResponse:
         return self._invoke(
-            "invoiceDownload",
+            'invoiceDownload',
             request,
             InvoiceDownloadResponse,
         )
 
     def invoiceStorno(self, request: InvoiceStornoRequest) -> InvoiceStornoResponse:
         return self._invoke(
-            "invoiceStorno",
+            'invoiceStorno',
             request,
             InvoiceStornoResponse,
         )
 
     def invoiceList(self, request: InvoiceListRequest) -> InvoiceListResponse:
         return self._invoke(
-            "invoiceList",
+            'invoiceList',
             request,
             InvoiceListResponse,
-            req_mapping={"from_": "from"},
+            req_mapping={'from_': 'from'},
         )
 
     def invoiceExport(self, request: InvoiceExportRequest) -> InvoiceExportResponse:
         return self._invoke(
-            "invoiceExport",
+            'invoiceExport',
             request,
             InvoiceExportResponse,
         )
 
     def invoiceSearch(self, request: InvoiceSearchRequest) -> InvoiceSearchResponse:
         return self._invoke(
-            "invoiceSearch",
+            'invoiceSearch',
             request,
             InvoiceSearchResponse,
         )
 
-    def invoiceCorrection(
-        self, request: InvoiceCorrectionRequest
-    ) -> InvoiceCorrectionResponse:
+    def invoiceCorrection(self, request: InvoiceCorrectionRequest) -> InvoiceCorrectionResponse:
         return self._invoke(
-            "invoiceCorrection",
+            'invoiceCorrection',
             request,
             InvoiceCorrectionResponse,
             skip_block=True,
@@ -3214,30 +3041,28 @@ class SzamlaiktatoAPI:
 
     def invoiceResend(self, request: InvoiceResendRequest) -> InvoiceResendResponse:
         return self._invoke(
-            "invoiceResend",
+            'invoiceResend',
             request,
             InvoiceResendResponse,
         )
 
-    def invoiceCheckPaid(
-        self, request: InvoiceCheckPaidRequest
-    ) -> InvoiceCheckPaidResponse:
+    def invoiceCheckPaid(self, request: InvoiceCheckPaidRequest) -> InvoiceCheckPaidResponse:
         return self._invoke(
-            "invoiceCheckPaid",
+            'invoiceCheckPaid',
             request,
             InvoiceCheckPaidResponse,
         )
 
     def invoiceSetPaid(self, request: InvoiceSetPaidRequest) -> InvoiceSetPaidResponse:
         return self._invoke(
-            "invoiceSetPaid",
+            'invoiceSetPaid',
             request,
             InvoiceSetPaidResponse,
         )
 
     def debtDetails(self, request: DebtDetailsRequest) -> DebtDetailsResponse:
         return self._invoke(
-            "debtDetails",
+            'debtDetails',
             request,
             DebtDetailsResponse,
             skip_block=True,
@@ -3245,7 +3070,7 @@ class SzamlaiktatoAPI:
 
     def debtDownload(self, request: DebtDownloadRequest) -> DebtDownloadResponse:
         return self._invoke(
-            "debtDownload",
+            'debtDownload',
             request,
             DebtDownloadResponse,
             skip_block=True,
@@ -3253,16 +3078,16 @@ class SzamlaiktatoAPI:
 
     def debtList(self, request: DebtListRequest) -> DebtListResponse:
         return self._invoke(
-            "debtList",
+            'debtList',
             request,
             DebtListResponse,
             skip_block=True,
-            req_mapping={"from_": "from"},
+            req_mapping={'from_': 'from'},
         )
 
     def debtAdd(self, request: DebtAddRequest) -> DebtAddResponse:
         return self._invoke(
-            "debtAdd",
+            'debtAdd',
             request,
             DebtAddResponse,
             skip_block=True,
@@ -3270,7 +3095,7 @@ class SzamlaiktatoAPI:
 
     def debtModify(self, request: DebtModifyRequest) -> DebtModifyResponse:
         return self._invoke(
-            "debtModify",
+            'debtModify',
             request,
             DebtModifyResponse,
             skip_block=True,
@@ -3278,7 +3103,7 @@ class SzamlaiktatoAPI:
 
     def debtAccept(self, request: DebtAcceptRequest) -> DebtAcceptResponse:
         return self._invoke(
-            "debtAccept",
+            'debtAccept',
             request,
             DebtAcceptResponse,
             skip_block=True,
@@ -3286,7 +3111,7 @@ class SzamlaiktatoAPI:
 
     def debtPay(self, request: DebtPayRequest) -> DebtPayResponse:
         return self._invoke(
-            "debtPay",
+            'debtPay',
             request,
             DebtPayResponse,
             skip_block=True,
@@ -3294,7 +3119,7 @@ class SzamlaiktatoAPI:
 
     def debtDelete(self, request: DebtDeleteRequest) -> DebtDeleteResponse:
         return self._invoke(
-            "debtDelete",
+            'debtDelete',
             request,
             DebtDeleteResponse,
             skip_block=True,
@@ -3302,7 +3127,7 @@ class SzamlaiktatoAPI:
 
     def debtGenerate(self, request: DebtGenerateRequest) -> DebtGenerateResponse:
         return self._invoke(
-            "debtGenerate",
+            'debtGenerate',
             request,
             DebtGenerateResponse,
             skip_block=True,
@@ -3310,67 +3135,55 @@ class SzamlaiktatoAPI:
 
     def debtExport(self, request: DebtExportRequest) -> DebtExportResponse:
         return self._invoke(
-            "debtExport",
+            'debtExport',
             request,
             DebtExportResponse,
             skip_block=True,
         )
 
-    def systemMessageList(
-        self, request: Optional[SystemMessageListRequest] = None
-    ) -> SystemMessageListResponse:
+    def systemMessageList(self, request: Optional[SystemMessageListRequest] = None) -> SystemMessageListResponse:
         return self._invoke(
-            "systemMessageList",
+            'systemMessageList',
             request,
             SystemMessageListResponse,
             skip_block=True,
         )
 
-    def systemMessageSetRead(
-        self, request: SystemMessageSetReadRequest
-    ) -> SystemMessageSetReadResponse:
+    def systemMessageSetRead(self, request: SystemMessageSetReadRequest) -> SystemMessageSetReadResponse:
         return self._invoke(
-            "systemMessageSetRead",
+            'systemMessageSetRead',
             request,
             SystemMessageSetReadResponse,
             skip_block=True,
         )
 
-    def systemErrorCodeList(
-        self, request: SystemErrorCodeListRequest
-    ) -> SystemErrorCodeListResponse:
+    def systemErrorCodeList(self, request: SystemErrorCodeListRequest) -> SystemErrorCodeListResponse:
         return self._invoke(
-            "systemErrorCodeList",
+            'systemErrorCodeList',
             request,
             SystemErrorCodeListResponse,
             skip_block=True,
         )
 
-    def getVersion(
-        self, request: Optional[GetVersionRequest] = None
-    ) -> GetVersionResponse:
+    def getVersion(self, request: Optional[GetVersionRequest] = None) -> GetVersionResponse:
         return self._invoke(
-            "getVersion",
+            'getVersion',
             request,
             GetVersionResponse,
             skip_block=True,
         )
 
-    def serviceProviderDatas(
-        self, request: Optional[ServiceProviderDatasRequest] = None
-    ) -> ServiceProviderDatasResponse:
+    def serviceProviderDatas(self, request: Optional[ServiceProviderDatasRequest] = None) -> ServiceProviderDatasResponse:
         return self._invoke(
-            "serviceProviderDatas",
+            'serviceProviderDatas',
             request,
             ServiceProviderDatasResponse,
             skip_block=True,
         )
 
-    def companyData(
-        self, request: Optional[CompanyDataRequest] = None
-    ) -> CompanyDataResponse:
+    def companyData(self, request: Optional[CompanyDataRequest] = None) -> CompanyDataResponse:
         return self._invoke(
-            "companyData",
+            'companyData',
             request,
             CompanyDataResponse,
             skip_block=True,
@@ -3378,47 +3191,39 @@ class SzamlaiktatoAPI:
 
     def quantityList(self, request: QuantityListRequest) -> QuantityListResponse:
         return self._invoke(
-            "quantityList",
+            'quantityList',
             request,
             QuantityListResponse,
             skip_block=True,
         )
 
-    def currencyDownload(
-        self, request: CurrencyDownloadRequest
-    ) -> CurrencyDownloadResponse:
+    def currencyDownload(self, request: CurrencyDownloadRequest) -> CurrencyDownloadResponse:
         return self._invoke(
-            "currencyDownload",
+            'currencyDownload',
             request,
             CurrencyDownloadResponse,
             skip_block=True,
         )
 
-    def regularityDownload(
-        self, request: Optional[RegularityDownloadRequest] = None
-    ) -> RegularityDownloadResponse:
+    def regularityDownload(self, request: Optional[RegularityDownloadRequest] = None) -> RegularityDownloadResponse:
         return self._invoke(
-            "regularityDownload",
+            'regularityDownload',
             request,
             RegularityDownloadResponse,
             skip_block=True,
         )
 
-    def countryDownload(
-        self, request: Optional[CountryDownloadRequest] = None
-    ) -> CountryDownloadResponse:
+    def countryDownload(self, request: Optional[CountryDownloadRequest] = None) -> CountryDownloadResponse:
         return self._invoke(
-            "countryDownload",
+            'countryDownload',
             request,
             CountryDownloadResponse,
             skip_block=True,
         )
 
-    def postcodeDownload(
-        self, request: PostcodeDownloadRequest
-    ) -> PostcodeDownloadResponse:
+    def postcodeDownload(self, request: PostcodeDownloadRequest) -> PostcodeDownloadResponse:
         return self._invoke(
-            "postcodeDownload",
+            'postcodeDownload',
             request,
             PostcodeDownloadResponse,
             skip_block=True,
@@ -3426,7 +3231,7 @@ class SzamlaiktatoAPI:
 
     def ping(self, request: Optional[PingRequest] = None) -> PingResponse:
         return self._invoke(
-            "ping",
+            'ping',
             request,
             PingResponse,
             skip_block=True,
@@ -3434,7 +3239,7 @@ class SzamlaiktatoAPI:
 
     def monitor(self, request: Optional[MonitorRequest] = None) -> MonitorResponse:
         return self._invoke(
-            "monitor",
+            'monitor',
             request,
             MonitorResponse,
             skip_block=True,

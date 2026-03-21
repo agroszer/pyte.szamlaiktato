@@ -40,13 +40,15 @@ def parse_table(table_node):
     idx_req = headers.index("kötelező") if "kötelező" in headers else -1
 
     parsed_fields = []
+    current_parent = None
 
     for row in rows[1:]:
         if len(row) <= idx_name:
             continue
 
-        name = row[idx_name]
-        name = re.sub(r"^[\s\->]+", "", name)
+        raw_name = row[idx_name]
+        is_sub_field = raw_name.strip().startswith("->")
+        name = re.sub(r"^[\s\->]+", "", raw_name)
 
         if not name or "[" in name or "]" in name:
             continue
@@ -56,9 +58,15 @@ def parse_table(table_node):
 
         is_req = req_val.upper().startswith("R") and "O" not in req_val.upper()
 
-        parsed_fields.append(
-            {"name": name, "type": normalize_type(t_type), "required": is_req}
-        )
+        field_def = {"name": name, "type": normalize_type(t_type), "required": is_req}
+
+        if is_sub_field and current_parent:
+            if "sub_fields" not in current_parent:
+                current_parent["sub_fields"] = []
+            current_parent["sub_fields"].append(field_def)
+        else:
+            current_parent = field_def
+            parsed_fields.append(field_def)
 
     return parsed_fields
 
@@ -110,6 +118,15 @@ def extract_endpoints(html_file):
             for f in req_table:
                 if f["name"] not in seen:
                     seen.add(f["name"])
+                    # Preserve sub_fields by deduplicating them as well
+                    if "sub_fields" in f:
+                        sub_seen = set()
+                        dedup_sub = []
+                        for sf in f["sub_fields"]:
+                            if sf["name"] not in sub_seen:
+                                sub_seen.add(sf["name"])
+                                dedup_sub.append(sf)
+                        f["sub_fields"] = dedup_sub
                     dedup_req.append(f)
 
             seen = set()
@@ -117,6 +134,15 @@ def extract_endpoints(html_file):
             for f in resp_table:
                 if f["name"] not in seen:
                     seen.add(f["name"])
+                    # Sub fields in responses? Usually not, but just in case
+                    if "sub_fields" in f:
+                        sub_seen = set()
+                        dedup_sub = []
+                        for sf in f["sub_fields"]:
+                            if sf["name"] not in sub_seen:
+                                sub_seen.add(sf["name"])
+                                dedup_sub.append(sf)
+                        f["sub_fields"] = dedup_sub
                     dedup_resp.append(f)
 
             endpoints.append(
@@ -143,6 +169,34 @@ def generate_python(endpoints, output_file):
             req_name = ep["name"][0].upper() + ep["name"][1:] + "Request"
             resp_name = ep["name"][0].upper() + ep["name"][1:] + "Response"
 
+            # Generate sub-dataclasses for fields with sub_fields in request
+            for field in ep["request"]:
+                if "sub_fields" in field and field["sub_fields"]:
+                    sub_cls_name = req_name.replace("Request", "") + field["name"].capitalize() + "Item"
+                    f.write(f"@dataclass\nclass {sub_cls_name}:\n")
+                    req_sub = [sf for sf in field["sub_fields"] if sf["required"]]
+                    opt_sub = [sf for sf in field["sub_fields"] if not sf["required"]]
+                    ordered_sub = req_sub + opt_sub
+                    for sf in ordered_sub:
+                        py_name = sf["name"]
+                        reserved = (
+                            "from",
+                            "import",
+                            "pass",
+                            "def",
+                            "class",
+                            "global",
+                        )
+                        if py_name in reserved:
+                            py_name += "_"
+                        py_name = py_name.replace(".", "_").replace("-", "_")
+
+                        if sf["required"]:
+                            f.write(f"    {py_name}: {sf['type']}\n")
+                        else:
+                            f.write(f"    {py_name}: Optional[{sf['type']}] = None\n")
+                    f.write("\n")
+
             f.write(f"@dataclass\nclass {req_name}:\n")
             if not ep["request"]:
                 f.write("    pass\n")
@@ -165,11 +219,45 @@ def generate_python(endpoints, output_file):
 
                     py_name = py_name.replace(".", "_").replace("-", "_")
 
-                    if field["required"]:
-                        f.write(f"    {py_name}: {field['type']}\n")
+                    if "sub_fields" in field and field["sub_fields"]:
+                        sub_cls_name = req_name.replace("Request", "") + field["name"].capitalize() + "Item"
+                        field_type = f"builtins.list[{sub_cls_name}]"
                     else:
-                        f.write(f"    {py_name}: Optional[{field['type']}] = None\n")
+                        field_type = field["type"]
+
+                    if field["required"]:
+                        f.write(f"    {py_name}: {field_type}\n")
+                    else:
+                        f.write(f"    {py_name}: Optional[{field_type}] = None\n")
             f.write("\n")
+
+            # Sub-dataclasses for response (just in case)
+            for field in ep["response"]:
+                if "sub_fields" in field and field["sub_fields"]:
+                    sub_cls_name = resp_name.replace("Response", "") + field["name"].capitalize() + "Item"
+                    f.write(f"@dataclass\nclass {sub_cls_name}:\n")
+                    req_sub = [sf for sf in field["sub_fields"] if sf["required"]]
+                    opt_sub = [sf for sf in field["sub_fields"] if not sf["required"]]
+                    ordered_sub = req_sub + opt_sub
+                    for sf in ordered_sub:
+                        py_name = sf["name"]
+                        reserved = (
+                            "from",
+                            "import",
+                            "pass",
+                            "def",
+                            "class",
+                            "global",
+                        )
+                        if py_name in reserved:
+                            py_name += "_"
+                        py_name = py_name.replace(".", "_").replace("-", "_")
+
+                        if sf["required"]:
+                            f.write(f"    {py_name}: {sf['type']}\n")
+                        else:
+                            f.write(f"    {py_name}: Optional[{sf['type']}] = None\n")
+                    f.write("\n")
 
             f.write(f"@dataclass\nclass {resp_name}:\n")
             if not ep["response"]:
