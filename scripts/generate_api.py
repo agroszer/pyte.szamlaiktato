@@ -1,5 +1,5 @@
-import sys
 import re
+import argparse
 from bs4 import BeautifulSoup
 
 
@@ -441,6 +441,22 @@ def generate_python(endpoints, output_file):
             f.write("        )\n\n")
 
 
+def main():
+    parser = argparse.ArgumentParser(
+        description="Generate Python API client from HTML spec."
+    )
+    parser.add_argument("html_file", help="Path to the input HTML specification file")
+    parser.add_argument(
+        "output_file",
+        nargs="?",
+        default="src/pyte/szamlaiktato/api.py",
+        help="Path to the output Python file (default: src/pyte/szamlaiktato/api.py)",
+    )
+    args = parser.parse_args()
+
+    endpoints = extract_endpoints(args.html_file)
+    generate_python(endpoints, args.output_file)
+
+
 if __name__ == "__main__":
-    endpoints = extract_endpoints(sys.argv[1])
-    generate_python(endpoints, sys.argv[2])
+    main()

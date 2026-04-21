@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyte.szamlaiktato"
-version = "0.1.0"
+version = "0.7.59"
 description = "API client for szamlaiktato.hu (Online Számlázó) generated from spec"
 readme = "README.md"
 authors = [
-    { name = "Adam G", email = "agroszer@gmail.com" },
+    { name = "Adam Groszer", email = "agroszer@gmail.com" },
     { name = "Jules", email = "jules@google.com" }
 ]
 license = { text = "MIT" }

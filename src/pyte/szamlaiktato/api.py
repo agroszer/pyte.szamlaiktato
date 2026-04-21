@@ -126,7 +126,7 @@ class CustomerAddRequest:
     invoice_send: int
     active: int
     lang: str
-    legal_status: int
+    legal_status: str
     region: Optional[str] = None
     street_number: Optional[str] = None
     door: Optional[str] = None
@@ -302,6 +302,18 @@ class CustomerListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     customers: Optional[builtins.list[CustomerListCustomersItem]] = None
+
+
+@dataclass
+class CustomerSearchRequest:
+    search: str
+
+
+@dataclass
+class CustomerSearchResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    customers: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 
 @dataclass
@@ -490,6 +502,22 @@ class ProductListResponse:
 
 
 @dataclass
+class ProductSearchRequest:
+    search: str
+    currency: Optional[str] = None
+    lang: Optional[str] = None
+
+
+@dataclass
+class ProductSearchResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    numberOfResults: Optional[int] = None
+    numberOfPages: Optional[int] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
+
+
+@dataclass
 class ProductFileListRequest:
     sid: str
     with_file_content: bool
@@ -509,6 +537,841 @@ class ProductFileListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     list: Optional[builtins.list[ProductFileListListItem]] = None
+
+
+@dataclass
+class OrderAddElementsItem:
+    product_sid: str
+    amount: float
+    quantity: str
+    tax_code: str
+    net_price_single: Optional[float] = None
+    gross_price_single: Optional[float] = None
+    comment: Optional[str] = None
+    other: Optional[str] = None
+    discount_type: Optional[str] = None
+    discount_value: Optional[float] = None
+
+
+@dataclass
+class OrderAddOtherItem:
+    meta: Optional[builtins.list[builtins.dict[str, Any]]] = None
+    KULCS: Optional[str] = None
+
+
+@dataclass
+class OrderAddRequest:
+    proform_order: int
+    customer_sid: str
+    payment_mode_id: int
+    trade_date: str
+    print_date: str
+    pay_date: str
+    elements: builtins.list[OrderAddElementsItem]
+    order_date: str
+    paid: int
+    currency: str
+    lang: Optional[str] = None
+    order_number: Optional[str] = None
+    comment: Optional[str] = None
+    regularities_id: Optional[int] = None
+    regularity: Optional[str] = None
+    regularities_date: Optional[str] = None
+    other: Optional[builtins.list[OrderAddOtherItem]] = None
+
+
+@dataclass
+class OrderAddResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    order_id: Optional[int] = None
+    order_number: Optional[str] = None
+    invoice_number: Optional[str] = None
+    invoice_client_url: Optional[str] = None
+
+
+@dataclass
+class OrderCollectiveAddElementsItem:
+    product_sid: str
+    amount: float
+    quantity: str
+    tax_code: str
+    net_price_single: Optional[float] = None
+    gross_price_single: Optional[float] = None
+    comment: Optional[str] = None
+
+
+@dataclass
+class OrderCollectiveAddRequest:
+    customer_sid: str
+    payment_mode_id: int
+    trade_date: str
+    print_date: str
+    pay_date: str
+    elements: builtins.list[OrderCollectiveAddElementsItem]
+    order_date: str
+    paid: int
+    currency: str
+    lang: Optional[str] = None
+    order_number: Optional[str] = None
+    comment: Optional[str] = None
+    regularity: Optional[str] = None
+    regularities_date: Optional[str] = None
+
+
+@dataclass
+class OrderCollectiveAddResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    order_id: Optional[int] = None
+    order_number: Optional[str] = None
+
+
+@dataclass
+class OrderListRequest:
+    limit: Optional[int] = None
+    page: Optional[int] = None
+    from_: Optional[str] = None
+    to: Optional[str] = None
+    customer_sid: Optional[str] = None
+    regularities_id: Optional[int] = None
+    regularity: Optional[str] = None
+    type: Optional[str] = None
+
+
+@dataclass
+class OrderListOrdersItem:
+    order_number: Optional[str] = None
+    block_id: Optional[int] = None
+    print_date: Optional[str] = None
+    trade_date: Optional[str] = None
+    pay_date: Optional[str] = None
+    order_date: Optional[str] = None
+    regularities_id: Optional[int] = None
+    regularity: Optional[str] = None
+    regularities_date: Optional[str] = None
+    invoice_to_post: Optional[int] = None
+    invoice_to_post_code: Optional[str] = None
+    collective: Optional[int] = None
+    type: Optional[int] = None
+    type_code: Optional[str] = None
+    payment_mode_id: Optional[int] = None
+    payment_mode_code: Optional[str] = None
+    comment: Optional[str] = None
+    admin_comment: Optional[str] = None
+    net_price: Optional[float] = None
+    tax_value: Optional[float] = None
+    gross_price: Optional[float] = None
+    currency_id: Optional[int] = None
+    currency: Optional[str] = None
+    customer_sid: Optional[str] = None
+    customer_legal_status: Optional[str] = None
+    customer_name: Optional[str] = None
+    customer_country: Optional[str] = None
+    customer_region: Optional[str] = None
+    customer_city: Optional[str] = None
+    customer_postcode: Optional[str] = None
+    customer_street: Optional[str] = None
+    customer_street_number: Optional[str] = None
+    customer_door: Optional[str] = None
+    customer_phone: Optional[str] = None
+    customer_email: Optional[str] = None
+    customer_tax_number: Optional[str] = None
+    customer_eu_tax_number: Optional[str] = None
+    customer_lang: Optional[str] = None
+    paid: Optional[int] = None
+    paid_code: Optional[str] = None
+    other_json: Optional[str] = None
+
+
+@dataclass
+class OrderListResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    numberOfResults: Optional[int] = None
+    numberOfPages: Optional[int] = None
+    orders: Optional[builtins.list[OrderListOrdersItem]] = None
+
+
+@dataclass
+class OrderStornoRequest:
+    order_number: str
+    admin_comment: Optional[str] = None
+
+
+@dataclass
+class OrderStornoResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    order_number: Optional[str] = None
+    invoice_number: Optional[str] = None
+
+
+@dataclass
+class OrderProformDownloadRequest:
+    order_number: str
+
+
+@dataclass
+class OrderProformDownloadResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    proform_id: Optional[int] = None
+    proform_number: Optional[str] = None
+    proform_file_size: Optional[int] = None
+    proform: Optional[str] = None
+
+
+@dataclass
+class OrderBillRequest:
+    order_number: str
+    paid: int
+    payment_mode_id: Optional[int] = None
+
+
+@dataclass
+class OrderBillInvoicesItem:
+    invoice_id: Optional[int] = None
+    invoice_number: Optional[str] = None
+    invoice_type_id: Optional[int] = None
+    invoice_type: Optional[str] = None
+    invoice_file_size: Optional[int] = None
+    invoice: Optional[str] = None
+
+
+@dataclass
+class OrderBillResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    invoice_number: Optional[str] = None
+    invoice_client_url: Optional[str] = None
+    invoices: Optional[builtins.list[OrderBillInvoicesItem]] = None
+
+
+@dataclass
+class OrderDetailsRequest:
+    order_number: str
+
+
+@dataclass
+class OrderDetailsElementsItem:
+    product_sid: Optional[str] = None
+    amount: Optional[float] = None
+    quantity: Optional[str] = None
+    net_price_single: Optional[float] = None
+    tax: Optional[float] = None
+    net_price: Optional[float] = None
+    tax_value: Optional[float] = None
+    gross_price: Optional[float] = None
+    comment: Optional[str] = None
+    other: Optional[str] = None
+    other_json: Optional[str] = None
+
+
+@dataclass
+class OrderDetailsResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    customer_sid: Optional[str] = None
+    name: Optional[str] = None
+    country: Optional[str] = None
+    postcode: Optional[str] = None
+    city: Optional[str] = None
+    street: Optional[str] = None
+    street_number: Optional[str] = None
+    door: Optional[str] = None
+    tax_number: Optional[str] = None
+    eu_tax_number: Optional[str] = None
+    currency: Optional[str] = None
+    currency_id: Optional[int] = None
+    order_number: Optional[str] = None
+    payment_mode_id: Optional[int] = None
+    payment_mode: Optional[str] = None
+    trade_date: Optional[str] = None
+    print_date: Optional[str] = None
+    pay_date: Optional[str] = None
+    comment: Optional[int] = None
+    net_price: Optional[str] = None
+    tax_value: Optional[str] = None
+    gross_price: Optional[str] = None
+    elements: Optional[builtins.list[OrderDetailsElementsItem]] = None
+    order_date: Optional[str] = None
+    invoice_to_post: Optional[int] = None
+    invoice_to_post_code: Optional[str] = None
+    collective: Optional[int] = None
+    regularities_id: Optional[int] = None
+    regularities_date: Optional[str] = None
+    invoices: Optional[str] = None
+    admin_comment: Optional[str] = None
+    api_invoice: Optional[int] = None
+
+
+@dataclass
+class OrderCollectiveCloseRequest:
+    customer_sid: str
+
+
+@dataclass
+class OrderCollectiveCloseResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    invoice_number: Optional[str] = None
+
+
+@dataclass
+class OrderCollectiveSettlingRequest:
+    order_number: str
+    invoice_number: str
+
+
+@dataclass
+class OrderCollectiveSettlingListItem:
+    order_number: Optional[str] = None
+    invoice_number: Optional[str] = None
+    customer_sid: Optional[str] = None
+    services_sid: Optional[str] = None
+    service: Optional[str] = None
+    amount: Optional[float] = None
+    net_price: Optional[float] = None
+    tax_value: Optional[float] = None
+    gross_price: Optional[float] = None
+    currency: Optional[str] = None
+    confirmed: Optional[int] = None
+    other: Optional[str] = None
+
+
+@dataclass
+class OrderCollectiveSettlingResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[OrderCollectiveSettlingListItem]] = None
+
+
+@dataclass
+class OrderCollectiveAddElementsElementsItem:
+    product_sid: str
+    amount: float
+    quantity: str
+    net_price_single: float
+    tax_code: str
+    comment: Optional[str] = None
+    other: Optional[str] = None
+
+
+@dataclass
+class OrderCollectiveAddElementsRequest:
+    customer_sid: str
+    elements: builtins.list[OrderCollectiveAddElementsElementsItem]
+
+
+@dataclass
+class OrderCollectiveAddElementsResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    order_id: Optional[int] = None
+    order_number: Optional[str] = None
+
+
+@dataclass
+class OrderSetPaidRequest:
+    order_number: str
+
+
+@dataclass
+class OrderSetPaidResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    paid: Optional[int] = None
+    paid_code: Optional[str] = None
+
+
+@dataclass
+class OrderCheckPaidRequest:
+    order_number: str
+
+
+@dataclass
+class OrderCheckPaidResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    paid: Optional[int] = None
+    paid_code: Optional[str] = None
+
+
+@dataclass
+class OrderPaidChangeListRequest:
+    pass
+
+
+@dataclass
+class OrderPaidChangeListListItem:
+    order_number: Optional[str] = None
+
+
+@dataclass
+class OrderPaidChangeListResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[OrderPaidChangeListListItem]] = None
+
+
+@dataclass
+class InvoiceAddElementsItem:
+    product_sid: str
+    amount: float
+    quantity: str
+    tax_code: str
+    net_price_single: Optional[float] = None
+    gross_price_single: Optional[float] = None
+    comment: Optional[str] = None
+    other: Optional[str] = None
+    discount_type: Optional[str] = None
+    discount_value: Optional[float] = None
+
+
+@dataclass
+class InvoiceAddRequest:
+    customer_sid: str
+    payment_mode_id: int
+    trade_date: str
+    print_date: str
+    pay_date: str
+    elements: builtins.list[InvoiceAddElementsItem]
+    order_date: str
+    paid: int
+    currency: str
+    prepayment: int
+    lang: Optional[str] = None
+    order_number: Optional[str] = None
+    comment: Optional[str] = None
+    other: Optional[str] = None
+
+
+@dataclass
+class InvoiceAddResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    invoice_number: Optional[str] = None
+    invoice_client_url: Optional[str] = None
+
+
+@dataclass
+class InvoiceAddPrepaymentElementsItem:
+    product_sid: str
+    amount: float
+    quantity: str
+    net_price_single: float
+    tax_code: str
+    comment: Optional[str] = None
+    other: Optional[str] = None
+    discount_type: Optional[str] = None
+    discount_value: Optional[float] = None
+
+
+@dataclass
+class InvoiceAddPrepaymentRequest:
+    customer_sid: str
+    payment_mode_id: int
+    trade_date: str
+    print_date: str
+    pay_date: str
+    elements: builtins.list[InvoiceAddPrepaymentElementsItem]
+    order_date: str
+    paid: int
+    currency: str
+    lang: Optional[str] = None
+    order_number: Optional[str] = None
+    comment: Optional[str] = None
+    other: Optional[str] = None
+
+
+@dataclass
+class InvoiceAddPrepaymentResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    invoice_number: Optional[str] = None
+    invoice_client_url: Optional[str] = None
+
+
+@dataclass
+class InvoiceAddFinalElementsItem:
+    product_sid: str
+    amount: float
+    quantity: str
+    net_price_single: float
+    tax_code: str
+    comment: Optional[str] = None
+    other: Optional[str] = None
+    discount_type: Optional[str] = None
+    discount_value: Optional[float] = None
+
+
+@dataclass
+class InvoiceAddFinalRequest:
+    customer_sid: str
+    payment_mode_id: int
+    trade_date: str
+    print_date: str
+    pay_date: str
+    elements: builtins.list[InvoiceAddFinalElementsItem]
+    order_date: str
+    paid: int
+    currency: str
+    lang: Optional[str] = None
+    order_number: Optional[str] = None
+    comment: Optional[str] = None
+    other: Optional[str] = None
+
+
+@dataclass
+class InvoiceAddFinalResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    invoice_number: Optional[str] = None
+    invoice_client_url: Optional[str] = None
+
+
+@dataclass
+class InvoiceDetailsRequest:
+    invoice_number: str
+
+
+@dataclass
+class InvoiceDetailsElementsItem:
+    product_sid: Optional[str] = None
+    amount: Optional[float] = None
+    quantity: Optional[str] = None
+    net_price_single: Optional[float] = None
+    tax: Optional[float] = None
+    tax_code: Optional[str] = None
+    net_price: Optional[float] = None
+    tax_value: Optional[float] = None
+    gross_price: Optional[float] = None
+    comment: Optional[str] = None
+    other: Optional[str] = None
+    other_json: Optional[str] = None
+
+
+@dataclass
+class InvoiceDetailsResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    invoice_number: Optional[str] = None
+    customer_sid: Optional[str] = None
+    name: Optional[str] = None
+    country: Optional[str] = None
+    postcode: Optional[str] = None
+    city: Optional[str] = None
+    street: Optional[str] = None
+    street_number: Optional[str] = None
+    door: Optional[str] = None
+    tax_number: Optional[str] = None
+    eu_tax_number: Optional[str] = None
+    currency: Optional[str] = None
+    currency_id: Optional[int] = None
+    order_number: Optional[str] = None
+    payment_mode_id: Optional[int] = None
+    payment_mode: Optional[str] = None
+    trade_date: Optional[str] = None
+    print_date: Optional[str] = None
+    pay_date: Optional[str] = None
+    comment: Optional[int] = None
+    net_price: Optional[str] = None
+    tax_value: Optional[str] = None
+    gross_price: Optional[str] = None
+    elements: Optional[builtins.list[InvoiceDetailsElementsItem]] = None
+    order_date: Optional[str] = None
+    other: Optional[str] = None
+    block_name: Optional[str] = None
+    invoice_to_post: Optional[int] = None
+    invoice_to_post_code: Optional[str] = None
+    api_invoice: Optional[int] = None
+
+
+@dataclass
+class InvoiceDownloadRequest:
+    invoice_number: str
+    invoice_type: str
+
+
+@dataclass
+class InvoiceDownloadInvoicesItem:
+    invoice_id: Optional[int] = None
+    invoice_number: Optional[str] = None
+    invoice_type_id: Optional[int] = None
+    invoice_type: Optional[str] = None
+    invoice_file_size: Optional[int] = None
+    invoice: Optional[str] = None
+
+
+@dataclass
+class InvoiceDownloadResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    invoices: Optional[builtins.list[InvoiceDownloadInvoicesItem]] = None
+
+
+@dataclass
+class InvoiceStornoRequest:
+    invoice_number: str
+    admin_comment: Optional[str] = None
+    storno_reason: Optional[str] = None
+    refund: Optional[int] = None
+    comment: Optional[str] = None
+
+
+@dataclass
+class InvoiceStornoResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    invoice_number: Optional[str] = None
+
+
+@dataclass
+class InvoiceListRequest:
+    limit: Optional[int] = None
+    page: Optional[int] = None
+    from_: Optional[str] = None
+    to: Optional[str] = None
+    customer_sid: Optional[str] = None
+
+
+@dataclass
+class InvoiceListInvoicesItem:
+    invoice_id: Optional[int] = None
+    invoice_number: Optional[str] = None
+    customer_sid: Optional[str] = None
+    customer_legal_status: Optional[str] = None
+    customer_name: Optional[str] = None
+    customer_country: Optional[str] = None
+    customer_postcode: Optional[str] = None
+    customer_city: Optional[str] = None
+    customer_street: Optional[str] = None
+    customer_street_number: Optional[str] = None
+    customer_door: Optional[str] = None
+    customer_tax_number: Optional[str] = None
+    customer_eu_tax_number: Optional[str] = None
+    customer_region: Optional[str] = None
+    customer_phone: Optional[str] = None
+    customer_email: Optional[str] = None
+    customer_lang: Optional[str] = None
+    trade_date: Optional[str] = None
+    print_date: Optional[str] = None
+    pay_date: Optional[str] = None
+    type: Optional[int] = None
+    type_code: Optional[str] = None
+    reference: Optional[str] = None
+    payment_mode_id: Optional[int] = None
+    comment: Optional[int] = None
+    net_price: Optional[float] = None
+    tax_value: Optional[float] = None
+    gross_price: Optional[float] = None
+    currency: Optional[str] = None
+    currency_id: Optional[int] = None
+    paid: Optional[int] = None
+    paid_code: Optional[str] = None
+    invoice_type_id: Optional[int] = None
+    invoice_type: Optional[str] = None
+    invoice_file_size: Optional[int] = None
+    invoice: Optional[str] = None
+
+
+@dataclass
+class InvoiceListResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    numberOfResults: Optional[int] = None
+    numberOfPages: Optional[int] = None
+    invoices: Optional[builtins.list[InvoiceListInvoicesItem]] = None
+
+
+@dataclass
+class InvoiceExportRequest:
+    date_from: Optional[str] = None
+    date_to: Optional[str] = None
+    number_from: Optional[str] = None
+    number_to: Optional[str] = None
+
+
+@dataclass
+class InvoiceExportResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    invoice_export_file: Optional[str] = None
+
+
+@dataclass
+class InvoiceSearchRequest:
+    search_type_code: str
+    search: str
+
+
+@dataclass
+class InvoiceSearchElementsItem:
+    product_sid: Optional[str] = None
+    product_name: Optional[str] = None
+    product_service_id: Optional[str] = None
+    amount: Optional[float] = None
+    quantity: Optional[str] = None
+    net_price_single: Optional[float] = None
+    tax: Optional[float] = None
+    net_price: Optional[float] = None
+    tax_value: Optional[float] = None
+    gross_price: Optional[float] = None
+    comment: Optional[str] = None
+    other: Optional[str] = None
+    other_json: Optional[str] = None
+
+
+@dataclass
+class InvoiceSearchResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    invoice_number: Optional[str] = None
+    customer_sid: Optional[str] = None
+    name: Optional[str] = None
+    country: Optional[str] = None
+    postcode: Optional[str] = None
+    city: Optional[str] = None
+    street: Optional[str] = None
+    street_number: Optional[str] = None
+    door: Optional[str] = None
+    tax_number: Optional[str] = None
+    eu_tax_number: Optional[str] = None
+    currency_id: Optional[int] = None
+    currency: Optional[str] = None
+    order_number: Optional[str] = None
+    payment_mode_id: Optional[int] = None
+    payment_mode_code: Optional[str] = None
+    trade_date: Optional[str] = None
+    print_date: Optional[str] = None
+    pay_date: Optional[str] = None
+    comment: Optional[str] = None
+    net_price: Optional[float] = None
+    tax_value: Optional[float] = None
+    gross_price: Optional[float] = None
+    elements: Optional[builtins.list[InvoiceSearchElementsItem]] = None
+    order_date: Optional[str] = None
+    invoice_type: Optional[str] = None
+
+
+@dataclass
+class InvoiceCorrectionElementsstornoItem:
+    product_sid: Optional[int] = None
+    amount: Optional[int] = None
+
+
+@dataclass
+class InvoiceCorrectionElementsItem:
+    product_sid: str
+    amount: float
+    quantity: str
+    net_price_single: float
+    tax_code: str
+    comment: Optional[str] = None
+    other: Optional[str] = None
+
+
+@dataclass
+class InvoiceCorrectionRequest:
+    invoice_number: str
+    elementsStorno: builtins.list[InvoiceCorrectionElementsstornoItem]
+    elements: builtins.list[InvoiceCorrectionElementsItem]
+    payment_mode_id: int
+    trade_date: Optional[str] = None
+    pay_date: Optional[str] = None
+    comment: Optional[str] = None
+    paid: Optional[int] = None
+
+
+@dataclass
+class InvoiceCorrectionResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    invoice_number: Optional[str] = None
+
+
+@dataclass
+class InvoiceResendRequest:
+    invoice_number: str
+
+
+@dataclass
+class InvoiceResendResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    invoice_number: Optional[str] = None
+    invoice_to_post: Optional[int] = None
+    invoice_to_post_code: Optional[str] = None
+
+
+@dataclass
+class InvoiceCheckPaidRequest:
+    invoice_number: str
+
+
+@dataclass
+class InvoiceCheckPaidResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    paid: Optional[int] = None
+    paid_code: Optional[str] = None
+
+
+@dataclass
+class InvoiceSetPaidRequest:
+    invoice_number: str
+
+
+@dataclass
+class InvoiceSetPaidResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    paid: Optional[int] = None
+    paid_code: Optional[str] = None
+
+
+@dataclass
+class PaymentModeInactivateRequest:
+    code: str
+
+
+@dataclass
+class PaymentModeInactivateResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+
+
+@dataclass
+class PaymentModeActivateRequest:
+    code: str
+
+
+@dataclass
+class PaymentModeActivateResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+
+
+@dataclass
+class PaymentModeDownloadRequest:
+    pass
+
+
+@dataclass
+class PaymentModeDownloadListItem:
+    id: Optional[int] = None
+    name: Optional[str] = None
+    code: Optional[str] = None
+    active: Optional[int] = None
+    is_default: Optional[int] = None
+
+
+@dataclass
+class PaymentModeDownloadResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[PaymentModeDownloadListItem]] = None
 
 
 @dataclass
@@ -607,6 +1470,18 @@ class AdminUserDelResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
     email: Optional[str] = None
+
+
+@dataclass
+class AdminAPIUserRegenerateServiceKeyRequest:
+    email: str
+
+
+@dataclass
+class AdminAPIUserRegenerateServiceKeyResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    password: Optional[str] = None
 
 
 @dataclass
@@ -942,6 +1817,515 @@ class CostTypeInactivateResponse:
 
 
 @dataclass
+class TaxListRequest:
+    type: str
+
+
+@dataclass
+class TaxListListItem:
+    id: Optional[int] = None
+    name: Optional[str] = None
+    code: Optional[str] = None
+    value: Optional[float] = None
+    active: Optional[int] = None
+    is_default: Optional[int] = None
+    vatType: Optional[str] = None
+    vatSubType: Optional[str] = None
+    taxTypeDesc: Optional[str] = None
+
+
+@dataclass
+class TaxListResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[TaxListListItem]] = None
+
+
+@dataclass
+class TaxAddRequest:
+    name: str
+    code: str
+    value: float
+    is_default: Optional[int] = None
+    other: Optional[str] = None
+
+
+@dataclass
+class TaxAddResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    code: Optional[str] = None
+
+
+@dataclass
+class TaxModifyRequest:
+    name: str
+    code: str
+    value: float
+    is_default: Optional[int] = None
+    other: Optional[str] = None
+
+
+@dataclass
+class TaxModifyResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    code: Optional[str] = None
+
+
+@dataclass
+class TaxActivateRequest:
+    code: str
+
+
+@dataclass
+class TaxActivateResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    code: Optional[str] = None
+
+
+@dataclass
+class TaxInactivateRequest:
+    code: str
+
+
+@dataclass
+class TaxInactivateResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    code: Optional[str] = None
+
+
+@dataclass
+class SystemMessageListRequest:
+    pass
+
+
+@dataclass
+class SystemMessageListListItem:
+    id: Optional[int] = None
+    message: Optional[str] = None
+    message_date: Optional[str] = None
+    message_type: Optional[int] = None
+
+
+@dataclass
+class SystemMessageListResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[SystemMessageListListItem]] = None
+
+
+@dataclass
+class SystemMessageSetReadRequest:
+    id: int
+
+
+@dataclass
+class SystemMessageSetReadResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+
+
+@dataclass
+class SystemErrorCodeListRequest:
+    lang: Optional[str] = None
+
+
+@dataclass
+class SystemErrorCodeListLangItem:
+    code: Optional[int] = None
+    description: Optional[str] = None
+    type: Optional[str] = None
+
+
+@dataclass
+class SystemErrorCodeListResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    lang: Optional[builtins.list[SystemErrorCodeListLangItem]] = None
+
+
+@dataclass
+class GetVersionRequest:
+    pass
+
+
+@dataclass
+class GetVersionResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    version: Optional[str] = None
+    mcp_version: Optional[str] = None
+
+
+@dataclass
+class ServiceProviderDatasRequest:
+    pass
+
+
+@dataclass
+class ServiceProviderDatasResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    hosting_name: Optional[str] = None
+    hosting_address: Optional[str] = None
+    hosting_tax_number: Optional[str] = None
+    hosting_email: Optional[str] = None
+    hosting_phone: Optional[str] = None
+    hosting_customer_service_langs: Optional[str] = None
+    hosting_customer_service_times: Optional[str] = None
+    hosting_bank_name: Optional[str] = None
+    hosting_bank_number: Optional[str] = None
+    hosting_service_url: Optional[str] = None
+    hosting_service_start_date: Optional[str] = None
+    hosting_service_version: Optional[str] = None
+    instance_web_url: Optional[str] = None
+    instance_soap_url: Optional[str] = None
+    instance_rest_url: Optional[str] = None
+
+
+@dataclass
+class CompanyDataRequest:
+    pass
+
+
+@dataclass
+class CompanyDataResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    id: Optional[int] = None
+    block_name: Optional[str] = None
+    name: Optional[str] = None
+    country: Optional[str] = None
+    postcode: Optional[str] = None
+    city: Optional[str] = None
+    street: Optional[str] = None
+    street_number: Optional[str] = None
+    door: Optional[str] = None
+    tax_number: Optional[str] = None
+    eu_tax_number: Optional[str] = None
+    bank_number: Optional[str] = None
+    invoice_number_pre: Optional[str] = None
+    invoice_number_length: Optional[int] = None
+    email: Optional[str] = None
+    comment: Optional[str] = None
+    invoice_footer: Optional[str] = None
+    invoice_issue: Optional[int] = None
+    restart_number_by_year: Optional[int] = None
+    lang: Optional[str] = None
+    date: Optional[str] = None
+    invoice_template: Optional[str] = None
+    admin_users_id: Optional[int] = None
+    currency_id: Optional[int] = None
+    active: Optional[int] = None
+    bank_name: Optional[str] = None
+    currency: Optional[str] = None
+
+
+@dataclass
+class QuantityListRequest:
+    type: str
+
+
+@dataclass
+class QuantityListListItem:
+    id: Optional[int] = None
+    name: Optional[str] = None
+    code: Optional[str] = None
+    active: Optional[int] = None
+    is_default: Optional[int] = None
+    unitOfMeasure: Optional[str] = None
+
+
+@dataclass
+class QuantityListResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[QuantityListListItem]] = None
+
+
+@dataclass
+class CurrencyDownloadRequest:
+    type: str
+
+
+@dataclass
+class CurrencyDownloadListItem:
+    id: Optional[int] = None
+    currency: Optional[str] = None
+    amount: Optional[float] = None
+    unit: Optional[float] = None
+    date: Optional[str] = None
+
+
+@dataclass
+class CurrencyDownloadResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[CurrencyDownloadListItem]] = None
+
+
+@dataclass
+class RegularityDownloadRequest:
+    pass
+
+
+@dataclass
+class RegularityDownloadListItem:
+    id: Optional[int] = None
+    code: Optional[str] = None
+    regularity: Optional[str] = None
+
+
+@dataclass
+class RegularityDownloadResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[RegularityDownloadListItem]] = None
+
+
+@dataclass
+class CountryDownloadRequest:
+    pass
+
+
+@dataclass
+class CountryDownloadListItem:
+    code: Optional[str] = None
+    country: Optional[str] = None
+
+
+@dataclass
+class CountryDownloadResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[CountryDownloadListItem]] = None
+
+
+@dataclass
+class PostcodeDownloadRequest:
+    country: str
+
+
+@dataclass
+class PostcodeDownloadPostcodesItem:
+    postcode: Optional[str] = None
+    city: Optional[str] = None
+    region: Optional[str] = None
+
+
+@dataclass
+class PostcodeDownloadResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    postcodes: Optional[builtins.list[PostcodeDownloadPostcodesItem]] = None
+
+
+@dataclass
+class PingRequest:
+    pass
+
+
+@dataclass
+class PingResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+
+
+@dataclass
+class MonitorRequest:
+    pass
+
+
+@dataclass
+class MonitorListItem:
+    state: Optional[str] = None
+    name: Optional[str] = None
+    last_check: Optional[str] = None
+
+
+@dataclass
+class MonitorResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[MonitorListItem]] = None
+
+
+@dataclass
+class DebtDetailsRequest:
+    type: str
+    customer_sid: str
+    invoice_number: str
+
+
+@dataclass
+class DebtDetailsResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    debt: Optional[Any] = None
+
+
+@dataclass
+class DebtDownloadRequest:
+    invoice_number: str
+    invoice_type: str
+
+
+@dataclass
+class DebtDownloadResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    file: Optional[str] = None
+    file_size: Optional[int] = None
+
+
+@dataclass
+class DebtListRequest:
+    type: Optional[int] = None
+    active: Optional[int] = None
+    paid: Optional[int] = None
+    customer_sid: Optional[str] = None
+    limit: Optional[int] = None
+    page: Optional[int] = None
+    from_: Optional[str] = None
+    to: Optional[str] = None
+
+
+@dataclass
+class DebtListResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    numberOfResults: Optional[int] = None
+    numberOfPages: Optional[int] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
+
+
+@dataclass
+class DebtAddRequest:
+    customer_sid: str
+    invoice_number: str
+    amount: float
+    currency: str
+    trade_date: str
+    print_date: str
+    pay_date: str
+    currency_id: Optional[int] = None
+    payment_date: Optional[str] = None
+    payment_mode: Optional[str] = None
+    payment_mode_id: Optional[int] = None
+    paid: Optional[int] = None
+    paid_code: Optional[str] = None
+    cost_centre: Optional[str] = None
+    cost_type: Optional[str] = None
+    invoice_reference: Optional[str] = None
+    bank_comment: Optional[str] = None
+    comment: Optional[str] = None
+    invoice_file: Optional[str] = None
+
+
+@dataclass
+class DebtAddResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    debt_id: Optional[int] = None
+
+
+@dataclass
+class DebtModifyRequest:
+    id: int
+    customer_sid: Optional[str] = None
+    invoice_number: Optional[str] = None
+    amount: Optional[float] = None
+    currency: Optional[str] = None
+    currency_id: Optional[int] = None
+    trade_date: Optional[str] = None
+    print_date: Optional[str] = None
+    pay_date: Optional[str] = None
+    payment_date: Optional[str] = None
+    payment_mode: Optional[str] = None
+    payment_mode_id: Optional[int] = None
+    paid: Optional[int] = None
+    paid_code: Optional[str] = None
+    cost_centre: Optional[str] = None
+    cost_type: Optional[str] = None
+    invoice_reference: Optional[str] = None
+    bank_comment: Optional[str] = None
+    comment: Optional[str] = None
+    invoice_file: Optional[str] = None
+
+
+@dataclass
+class DebtModifyResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    debt_id: Optional[int] = None
+
+
+@dataclass
+class DebtAcceptRequest:
+    debt_ids: builtins.list[builtins.dict[str, Any]]
+
+
+@dataclass
+class DebtAcceptResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    accepted_count: Optional[int] = None
+
+
+@dataclass
+class DebtPayRequest:
+    debt_ids: builtins.list[builtins.dict[str, Any]]
+
+
+@dataclass
+class DebtPayResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    paid_count: Optional[int] = None
+
+
+@dataclass
+class DebtDeleteRequest:
+    debt_ids: builtins.list[builtins.dict[str, Any]]
+
+
+@dataclass
+class DebtDeleteResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    deleted_count: Optional[int] = None
+
+
+@dataclass
+class DebtGenerateRequest:
+    debt_ids: builtins.list[builtins.dict[str, Any]]
+
+
+@dataclass
+class DebtGenerateResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    file: Optional[str] = None
+    file_size: Optional[int] = None
+
+
+@dataclass
+class DebtExportRequest:
+    dateFrom: str
+    dateTo: str
+
+
+@dataclass
+class DebtExportResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
+
+
+@dataclass
 class ProjectListRequest:
     active: Optional[int] = None
 
@@ -1248,1339 +2632,81 @@ class ProjectPassUpdateExpiryResponse:
 
 
 @dataclass
-class TaxListRequest:
-    type: str
-
-
-@dataclass
-class TaxListListItem:
-    id: Optional[int] = None
-    name: Optional[str] = None
-    code: Optional[str] = None
-    value: Optional[float] = None
-    active: Optional[int] = None
-    is_default: Optional[int] = None
-    vatType: Optional[str] = None
-    vatSubType: Optional[str] = None
-    taxTypeDesc: Optional[str] = None
-
-
-@dataclass
-class TaxListResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[TaxListListItem]] = None
-
-
-@dataclass
-class TaxAddRequest:
-    name: str
-    code: str
-    value: float
-    is_default: Optional[int] = None
-    other: Optional[str] = None
-
-
-@dataclass
-class TaxAddResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    code: Optional[str] = None
-
-
-@dataclass
-class TaxModifyRequest:
-    name: str
-    code: str
-    value: float
-    is_default: Optional[int] = None
-    other: Optional[str] = None
-
-
-@dataclass
-class TaxModifyResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    code: Optional[str] = None
-
-
-@dataclass
-class TaxActivateRequest:
-    code: str
-
-
-@dataclass
-class TaxActivateResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    code: Optional[str] = None
-
-
-@dataclass
-class TaxInactivateRequest:
-    code: str
-
-
-@dataclass
-class TaxInactivateResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    code: Optional[str] = None
-
-
-@dataclass
-class PaymentModeInactivateRequest:
-    code: str
-
-
-@dataclass
-class PaymentModeInactivateResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-
-
-@dataclass
-class PaymentModeActivateRequest:
-    code: str
-
-
-@dataclass
-class PaymentModeActivateResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-
-
-@dataclass
-class PaymentModeDownloadRequest:
+class IpWhitelistListRequest:
     pass
 
 
 @dataclass
-class PaymentModeDownloadListItem:
-    id: Optional[int] = None
-    name: Optional[str] = None
-    code: Optional[str] = None
+class IpWhitelistListResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+    rules: Optional[builtins.list[builtins.dict[str, Any]]] = None
+    ip: Optional[str] = None
+    port: Optional[str] = None
     active: Optional[int] = None
-    is_default: Optional[int] = None
-
-
-@dataclass
-class PaymentModeDownloadResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[PaymentModeDownloadListItem]] = None
-
-
-@dataclass
-class OrderAddElementsItem:
-    product_sid: str
-    amount: float
-    quantity: str
-    tax_code: str
-    net_price_single: Optional[float] = None
-    gross_price_single: Optional[float] = None
-    other: Optional[str] = None
-    discount_type: Optional[str] = None
-    discount_value: Optional[float] = None
-
-
-@dataclass
-class OrderAddOtherItem:
-    meta: Optional[builtins.list[builtins.dict[str, Any]]] = None
-    KULCS: Optional[str] = None
-
-
-@dataclass
-class OrderAddRequest:
-    proform_order: int
-    customer_sid: str
-    payment_mode_id: int
-    trade_date: str
-    print_date: str
-    pay_date: str
-    elements: builtins.list[OrderAddElementsItem]
-    order_date: str
-    paid: int
-    currency: str
-    lang: Optional[str] = None
-    order_number: Optional[str] = None
     comment: Optional[str] = None
-    regularities_id: Optional[int] = None
-    regularity: Optional[str] = None
-    regularities_date: Optional[str] = None
-    other: Optional[builtins.list[OrderAddOtherItem]] = None
+    registration_date: Optional[str] = None
 
 
 @dataclass
-class OrderAddResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    order_id: Optional[int] = None
-    order_number: Optional[str] = None
-    invoice_number: Optional[str] = None
-    invoice_client_url: Optional[str] = None
-
-
-@dataclass
-class OrderCollectiveAddElementsItem:
-    product_sid: str
-    amount: float
-    quantity: str
-    tax_code: str
-    net_price_single: Optional[float] = None
-    gross_price_single: Optional[float] = None
-
-
-@dataclass
-class OrderCollectiveAddRequest:
-    customer_sid: str
-    payment_mode_id: int
-    trade_date: str
-    print_date: str
-    pay_date: str
-    elements: builtins.list[OrderCollectiveAddElementsItem]
-    order_date: str
-    paid: int
-    currency: str
-    lang: Optional[str] = None
-    order_number: Optional[str] = None
+class IpWhitelistAddRequest:
+    ip: str
+    port: str
     comment: Optional[str] = None
-    regularity: Optional[str] = None
-    regularities_date: Optional[str] = None
 
 
 @dataclass
-class OrderCollectiveAddResponse:
+class IpWhitelistAddResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    order_id: Optional[int] = None
-    order_number: Optional[str] = None
 
 
 @dataclass
-class OrderListRequest:
+class IpWhitelistRemoveRequest:
+    ip: str
+    port: str
+
+
+@dataclass
+class IpWhitelistRemoveResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+
+
+@dataclass
+class IpWhitelistActivateRequest:
+    ip: str
+    port: str
+
+
+@dataclass
+class IpWhitelistActivateResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+
+
+@dataclass
+class IpWhitelistDeactivateRequest:
+    ip: str
+    port: str
+
+
+@dataclass
+class IpWhitelistDeactivateResponse:
+    status_id: Optional[int] = None
+    status: Optional[str] = None
+
+
+@dataclass
+class IpWhitelistLogListRequest:
     limit: Optional[int] = None
-    page: Optional[int] = None
-    from_: Optional[str] = None
-    to: Optional[str] = None
-    customer_sid: Optional[str] = None
-    regularities_id: Optional[int] = None
-    regularity: Optional[str] = None
-    type: Optional[str] = None
 
 
 @dataclass
-class OrderListOrdersItem:
-    order_number: Optional[str] = None
-    block_id: Optional[int] = None
-    print_date: Optional[str] = None
-    trade_date: Optional[str] = None
-    pay_date: Optional[str] = None
-    order_date: Optional[str] = None
-    regularities_id: Optional[int] = None
-    regularity: Optional[str] = None
-    regularities_date: Optional[str] = None
-    invoice_to_post: Optional[int] = None
-    invoice_to_post_code: Optional[str] = None
-    collective: Optional[int] = None
-    type: Optional[int] = None
-    type_code: Optional[str] = None
-    payment_mode_id: Optional[int] = None
-    payment_mode_code: Optional[str] = None
-    comment: Optional[str] = None
-    admin_comment: Optional[str] = None
-    net_price: Optional[float] = None
-    tax_value: Optional[float] = None
-    gross_price: Optional[float] = None
-    currency_id: Optional[int] = None
-    currency: Optional[str] = None
-    customer_sid: Optional[str] = None
-    customer_legal_status: Optional[str] = None
-    customer_name: Optional[str] = None
-    customer_country: Optional[str] = None
-    customer_city: Optional[str] = None
-    customer_postcode: Optional[str] = None
-    customer_street: Optional[str] = None
-    customer_email: Optional[str] = None
-    customer_tax_number: Optional[str] = None
-    customer_eu_tax_number: Optional[str] = None
-    customer_lang: Optional[str] = None
-    paid: Optional[int] = None
-    paid_code: Optional[str] = None
-
-
-@dataclass
-class OrderListResponse:
+class IpWhitelistLogListResponse:
     status_id: Optional[int] = None
     status: Optional[str] = None
-    numberOfResults: Optional[int] = None
-    numberOfPages: Optional[int] = None
-    orders: Optional[builtins.list[OrderListOrdersItem]] = None
-
-
-@dataclass
-class OrderStornoRequest:
-    order_number: str
-    admin_comment: Optional[str] = None
-    storno_reason: Optional[str] = None
-    refund: Optional[int] = None
-    comment: Optional[str] = None
-
-
-@dataclass
-class OrderStornoResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    order_number: Optional[str] = None
-    invoice_number: Optional[str] = None
-
-
-@dataclass
-class OrderProformDownloadRequest:
-    order_number: str
-
-
-@dataclass
-class OrderProformDownloadResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    proform_id: Optional[int] = None
-    proform_number: Optional[str] = None
-    proform_file_size: Optional[int] = None
-    proform: Optional[str] = None
-
-
-@dataclass
-class OrderBillRequest:
-    order_number: str
-    paid: int
-    payment_mode_id: Optional[int] = None
-
-
-@dataclass
-class OrderBillInvoicesItem:
-    invoice_id: Optional[int] = None
-    invoice_number: Optional[str] = None
-    invoice_type_id: Optional[int] = None
-    invoice_type: Optional[str] = None
-    invoice_file_size: Optional[int] = None
-    invoice: Optional[str] = None
-
-
-@dataclass
-class OrderBillResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    invoice_number: Optional[str] = None
-    invoice_client_url: Optional[str] = None
-    invoices: Optional[builtins.list[OrderBillInvoicesItem]] = None
-
-
-@dataclass
-class OrderDetailsRequest:
-    order_number: str
-
-
-@dataclass
-class OrderDetailsElementsItem:
-    product_sid: Optional[str] = None
-    amount: Optional[float] = None
-    quantity: Optional[str] = None
-    net_price_single: Optional[float] = None
-    tax: Optional[float] = None
-    net_price: Optional[float] = None
-    tax_value: Optional[float] = None
-    gross_price: Optional[float] = None
-    comment: Optional[str] = None
-    other: Optional[str] = None
-    other_json: Optional[str] = None
-
-
-@dataclass
-class OrderDetailsResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    customer_sid: Optional[str] = None
-    name: Optional[str] = None
-    country: Optional[str] = None
-    postcode: Optional[str] = None
-    city: Optional[str] = None
-    street: Optional[str] = None
-    street_number: Optional[str] = None
-    door: Optional[str] = None
-    tax_number: Optional[str] = None
-    eu_tax_number: Optional[str] = None
-    currency: Optional[str] = None
-    currency_id: Optional[int] = None
-    order_number: Optional[str] = None
-    payment_mode_id: Optional[int] = None
-    payment_mode: Optional[str] = None
-    trade_date: Optional[str] = None
-    print_date: Optional[str] = None
-    pay_date: Optional[str] = None
-    comment: Optional[int] = None
-    net_price: Optional[str] = None
-    tax_value: Optional[str] = None
-    gross_price: Optional[str] = None
-    elements: Optional[builtins.list[OrderDetailsElementsItem]] = None
-    order_date: Optional[str] = None
-    invoice_to_post: Optional[int] = None
-    invoice_to_post_code: Optional[str] = None
-    collective: Optional[int] = None
-    regularities_id: Optional[int] = None
-    regularities_date: Optional[str] = None
-    invoices: Optional[str] = None
-    admin_comment: Optional[str] = None
-    api_invoice: Optional[int] = None
-
-
-@dataclass
-class OrderCollectiveCloseRequest:
-    customer_sid: str
-
-
-@dataclass
-class OrderCollectiveCloseResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    invoice_number: Optional[str] = None
-
-
-@dataclass
-class OrderCollectiveSettlingRequest:
-    order_number: str
-    invoice_number: str
-
-
-@dataclass
-class OrderCollectiveSettlingListItem:
-    order_number: Optional[str] = None
-    invoice_number: Optional[str] = None
-    customer_sid: Optional[str] = None
-    services_sid: Optional[str] = None
-    service: Optional[str] = None
-    amount: Optional[float] = None
-    net_price: Optional[float] = None
-    tax_value: Optional[float] = None
-    gross_price: Optional[float] = None
-    currency: Optional[str] = None
-    confirmed: Optional[int] = None
-    other: Optional[str] = None
-
-
-@dataclass
-class OrderCollectiveSettlingResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[OrderCollectiveSettlingListItem]] = None
-
-
-@dataclass
-class OrderCollectiveAddElementsElementsItem:
-    product_sid: str
-    amount: float
-    quantity: str
-    net_price_single: float
-    tax_code: str
-    comment: Optional[str] = None
-    other: Optional[str] = None
-
-
-@dataclass
-class OrderCollectiveAddElementsRequest:
-    customer_sid: str
-    elements: builtins.list[OrderCollectiveAddElementsElementsItem]
-
-
-@dataclass
-class OrderCollectiveAddElementsResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    order_id: Optional[int] = None
-    order_number: Optional[str] = None
-
-
-@dataclass
-class OrderSetPaidRequest:
-    order_number: str
-
-
-@dataclass
-class OrderSetPaidResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    paid: Optional[int] = None
-    paid_code: Optional[str] = None
-
-
-@dataclass
-class OrderCheckPaidRequest:
-    order_number: str
-
-
-@dataclass
-class OrderCheckPaidResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    paid: Optional[int] = None
-    paid_code: Optional[str] = None
-
-
-@dataclass
-class OrderPaidChangeListRequest:
-    pass
-
-
-@dataclass
-class OrderPaidChangeListListItem:
-    order_number: Optional[str] = None
-
-
-@dataclass
-class OrderPaidChangeListResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[OrderPaidChangeListListItem]] = None
-
-
-@dataclass
-class InvoiceAddElementsItem:
-    product_sid: str
-    amount: float
-    quantity: str
-    tax_code: str
-    net_price_single: Optional[float] = None
-    gross_price_single: Optional[float] = None
-    other: Optional[str] = None
-    discount_type: Optional[str] = None
-    discount_value: Optional[float] = None
-
-
-@dataclass
-class InvoiceAddRequest:
-    customer_sid: str
-    payment_mode_id: int
-    trade_date: str
-    print_date: str
-    pay_date: str
-    elements: builtins.list[InvoiceAddElementsItem]
-    order_date: str
-    paid: int
-    currency: str
-    prepayment: int
-    lang: Optional[str] = None
-    order_number: Optional[str] = None
-    comment: Optional[str] = None
-    other: Optional[str] = None
-
-
-@dataclass
-class InvoiceAddResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    invoice_number: Optional[str] = None
-    invoice_client_url: Optional[str] = None
-
-
-@dataclass
-class InvoiceAddPrepaymentElementsItem:
-    product_sid: str
-    amount: float
-    quantity: str
-    net_price_single: float
-    tax_code: str
-    other: Optional[str] = None
-    discount_type: Optional[str] = None
-    discount_value: Optional[float] = None
-
-
-@dataclass
-class InvoiceAddPrepaymentRequest:
-    customer_sid: str
-    payment_mode_id: int
-    trade_date: str
-    print_date: str
-    pay_date: str
-    elements: builtins.list[InvoiceAddPrepaymentElementsItem]
-    order_date: str
-    paid: int
-    currency: str
-    lang: Optional[str] = None
-    order_number: Optional[str] = None
-    comment: Optional[str] = None
-    other: Optional[str] = None
-
-
-@dataclass
-class InvoiceAddPrepaymentResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    invoice_number: Optional[str] = None
-    invoice_client_url: Optional[str] = None
-
-
-@dataclass
-class InvoiceAddFinalElementsItem:
-    product_sid: str
-    amount: float
-    quantity: str
-    net_price_single: float
-    tax_code: str
-    other: Optional[str] = None
-    discount_type: Optional[str] = None
-    discount_value: Optional[float] = None
-
-
-@dataclass
-class InvoiceAddFinalRequest:
-    customer_sid: str
-    payment_mode_id: int
-    trade_date: str
-    print_date: str
-    pay_date: str
-    elements: builtins.list[InvoiceAddFinalElementsItem]
-    order_date: str
-    paid: int
-    currency: str
-    lang: Optional[str] = None
-    order_number: Optional[str] = None
-    comment: Optional[str] = None
-    other: Optional[str] = None
-
-
-@dataclass
-class InvoiceAddFinalResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    invoice_number: Optional[str] = None
-    invoice_client_url: Optional[str] = None
-
-
-@dataclass
-class InvoiceDetailsRequest:
-    invoice_number: str
-
-
-@dataclass
-class InvoiceDetailsElementsItem:
-    product_sid: Optional[str] = None
-    amount: Optional[float] = None
-    quantity: Optional[str] = None
-    net_price_single: Optional[float] = None
-    tax: Optional[float] = None
-    tax_code: Optional[str] = None
-    net_price: Optional[float] = None
-    tax_value: Optional[float] = None
-    gross_price: Optional[float] = None
-    comment: Optional[str] = None
-    other: Optional[str] = None
-    other_json: Optional[str] = None
-
-
-@dataclass
-class InvoiceDetailsResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    invoice_number: Optional[str] = None
-    customer_sid: Optional[str] = None
-    name: Optional[str] = None
-    country: Optional[str] = None
-    postcode: Optional[str] = None
-    city: Optional[str] = None
-    street: Optional[str] = None
-    street_number: Optional[str] = None
-    door: Optional[str] = None
-    tax_number: Optional[str] = None
-    eu_tax_number: Optional[str] = None
-    currency: Optional[str] = None
-    currency_id: Optional[int] = None
-    order_number: Optional[str] = None
-    payment_mode_id: Optional[int] = None
-    payment_mode: Optional[str] = None
-    trade_date: Optional[str] = None
-    print_date: Optional[str] = None
-    pay_date: Optional[str] = None
-    comment: Optional[int] = None
-    net_price: Optional[str] = None
-    tax_value: Optional[str] = None
-    gross_price: Optional[str] = None
-    elements: Optional[builtins.list[InvoiceDetailsElementsItem]] = None
-    order_date: Optional[str] = None
-    other: Optional[str] = None
-    block_name: Optional[str] = None
-    invoice_to_post: Optional[int] = None
-    invoice_to_post_code: Optional[str] = None
-    api_invoice: Optional[int] = None
-
-
-@dataclass
-class InvoiceDownloadRequest:
-    invoice_number: str
-    invoice_type: str
-
-
-@dataclass
-class InvoiceDownloadInvoicesItem:
-    invoice_id: Optional[int] = None
-    invoice_number: Optional[str] = None
-    invoice_type_id: Optional[int] = None
-    invoice_type: Optional[str] = None
-    invoice_file_size: Optional[int] = None
-    invoice: Optional[str] = None
-
-
-@dataclass
-class InvoiceDownloadResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    invoices: Optional[builtins.list[InvoiceDownloadInvoicesItem]] = None
-
-
-@dataclass
-class InvoiceStornoRequest:
-    invoice_number: str
-    admin_comment: Optional[str] = None
-    storno_reason: Optional[str] = None
-    refund: Optional[int] = None
-    comment: Optional[str] = None
-
-
-@dataclass
-class InvoiceStornoResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    invoice_number: Optional[str] = None
-
-
-@dataclass
-class InvoiceListRequest:
-    limit: Optional[int] = None
-    page: Optional[int] = None
-    from_: Optional[str] = None
-    to: Optional[str] = None
-    customer_sid: Optional[str] = None
-
-
-@dataclass
-class InvoiceListInvoicesItem:
-    invoice_id: Optional[int] = None
-    invoice_number: Optional[str] = None
-    customer_sid: Optional[str] = None
-    customer_legal_status: Optional[str] = None
-    customer_name: Optional[str] = None
-    customer_country: Optional[str] = None
-    customer_postcode: Optional[str] = None
-    customer_city: Optional[str] = None
-    customer_street: Optional[str] = None
-    customer_street_number: Optional[str] = None
-    customer_door: Optional[str] = None
-    customer_tax_number: Optional[str] = None
-    customer_eu_tax_number: Optional[str] = None
-    customer_region: Optional[str] = None
-    customer_phone: Optional[str] = None
-    customer_email: Optional[str] = None
-    customer_lang: Optional[str] = None
-    trade_date: Optional[str] = None
-    print_date: Optional[str] = None
-    pay_date: Optional[str] = None
-    type: Optional[int] = None
-    type_code: Optional[str] = None
-    reference: Optional[str] = None
-    payment_mode_id: Optional[int] = None
-    comment: Optional[int] = None
-    net_price: Optional[float] = None
-    tax_value: Optional[float] = None
-    gross_price: Optional[float] = None
-    currency: Optional[str] = None
-    currency_id: Optional[int] = None
-    paid: Optional[int] = None
-    paid_code: Optional[str] = None
-    invoice_type_id: Optional[int] = None
-    invoice_type: Optional[str] = None
-    invoice_file_size: Optional[int] = None
-    invoice: Optional[str] = None
-
-
-@dataclass
-class InvoiceListResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    numberOfResults: Optional[int] = None
-    numberOfPages: Optional[int] = None
-    invoices: Optional[builtins.list[InvoiceListInvoicesItem]] = None
-
-
-@dataclass
-class InvoiceExportRequest:
-    date_from: Optional[str] = None
-    date_to: Optional[str] = None
-    number_from: Optional[str] = None
-    number_to: Optional[str] = None
-
-
-@dataclass
-class InvoiceExportResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    invoice_export_file: Optional[str] = None
-
-
-@dataclass
-class InvoiceSearchRequest:
-    search_type_code: str
-    search: str
-
-
-@dataclass
-class InvoiceSearchElementsItem:
-    product_sid: Optional[str] = None
-    product_name: Optional[str] = None
-    product_service_id: Optional[str] = None
-    amount: Optional[float] = None
-    quantity: Optional[str] = None
-    net_price_single: Optional[float] = None
-    tax: Optional[float] = None
-    net_price: Optional[float] = None
-    tax_value: Optional[float] = None
-    gross_price: Optional[float] = None
-    comment: Optional[str] = None
-    other: Optional[str] = None
-    other_json: Optional[str] = None
-
-
-@dataclass
-class InvoiceSearchResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    invoice_number: Optional[str] = None
-    customer_sid: Optional[str] = None
-    name: Optional[str] = None
-    country: Optional[str] = None
-    postcode: Optional[str] = None
-    city: Optional[str] = None
-    street: Optional[str] = None
-    street_number: Optional[str] = None
-    door: Optional[str] = None
-    tax_number: Optional[str] = None
-    eu_tax_number: Optional[str] = None
-    currency_id: Optional[int] = None
-    currency: Optional[str] = None
-    order_number: Optional[str] = None
-    payment_mode_id: Optional[int] = None
-    payment_mode_code: Optional[str] = None
-    trade_date: Optional[str] = None
-    print_date: Optional[str] = None
-    pay_date: Optional[str] = None
-    comment: Optional[str] = None
-    net_price: Optional[float] = None
-    tax_value: Optional[float] = None
-    gross_price: Optional[float] = None
-    elements: Optional[builtins.list[InvoiceSearchElementsItem]] = None
-    order_date: Optional[str] = None
-    invoice_type: Optional[str] = None
-
-
-@dataclass
-class InvoiceCorrectionElementsstornoItem:
-    product_sid: Optional[int] = None
-    amount: Optional[int] = None
-
-
-@dataclass
-class InvoiceCorrectionElementsItem:
-    product_sid: str
-    amount: float
-    quantity: str
-    net_price_single: float
-    tax_code: str
-    comment: Optional[str] = None
-    other: Optional[str] = None
-
-
-@dataclass
-class InvoiceCorrectionRequest:
-    invoice_number: str
-    elementsStorno: builtins.list[InvoiceCorrectionElementsstornoItem]
-    elements: builtins.list[InvoiceCorrectionElementsItem]
-    payment_mode_id: int
-    trade_date: Optional[str] = None
-    pay_date: Optional[str] = None
-    comment: Optional[str] = None
-    paid: Optional[int] = None
-
-
-@dataclass
-class InvoiceCorrectionResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    invoice_number: Optional[str] = None
-
-
-@dataclass
-class InvoiceResendRequest:
-    invoice_number: str
-
-
-@dataclass
-class InvoiceResendResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    invoice_number: Optional[str] = None
-    invoice_to_post: Optional[int] = None
-    invoice_to_post_code: Optional[str] = None
-
-
-@dataclass
-class InvoiceCheckPaidRequest:
-    invoice_number: str
-
-
-@dataclass
-class InvoiceCheckPaidResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    paid: Optional[int] = None
-    paid_code: Optional[str] = None
-
-
-@dataclass
-class InvoiceSetPaidRequest:
-    invoice_number: str
-
-
-@dataclass
-class InvoiceSetPaidResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    paid: Optional[int] = None
-    paid_code: Optional[str] = None
-
-
-@dataclass
-class DebtDetailsRequest:
-    type: str
-    customer_sid: str
-    invoice_number: str
-
-
-@dataclass
-class DebtDetailsResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    debt: Optional[Any] = None
-
-
-@dataclass
-class DebtDownloadRequest:
-    invoice_number: str
-    invoice_type: str
-
-
-@dataclass
-class DebtDownloadResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    file: Optional[str] = None
-    file_size: Optional[int] = None
-
-
-@dataclass
-class DebtListRequest:
-    type: Optional[int] = None
-    active: Optional[int] = None
-    paid: Optional[int] = None
-    customer_sid: Optional[str] = None
-    limit: Optional[int] = None
-    page: Optional[int] = None
-    from_: Optional[str] = None
-    to: Optional[str] = None
-
-
-@dataclass
-class DebtListResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    numberOfResults: Optional[int] = None
-    numberOfPages: Optional[int] = None
-    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
-
-
-@dataclass
-class DebtAddRequest:
-    customer_sid: str
-    invoice_number: str
-    amount: float
-    currency: str
-    trade_date: str
-    print_date: str
-    pay_date: str
-    currency_id: Optional[int] = None
-    payment_date: Optional[str] = None
-    payment_mode: Optional[str] = None
-    payment_mode_id: Optional[int] = None
-    paid: Optional[int] = None
-    paid_code: Optional[str] = None
-    cost_centre: Optional[str] = None
-    cost_type: Optional[str] = None
-    invoice_reference: Optional[str] = None
-    bank_comment: Optional[str] = None
-    comment: Optional[str] = None
-    invoice_file: Optional[str] = None
-
-
-@dataclass
-class DebtAddResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    debt_id: Optional[int] = None
-
-
-@dataclass
-class DebtModifyRequest:
-    id: int
-    customer_sid: Optional[str] = None
-    invoice_number: Optional[str] = None
-    amount: Optional[float] = None
-    currency: Optional[str] = None
-    currency_id: Optional[int] = None
-    trade_date: Optional[str] = None
-    print_date: Optional[str] = None
-    pay_date: Optional[str] = None
-    payment_date: Optional[str] = None
-    payment_mode: Optional[str] = None
-    payment_mode_id: Optional[int] = None
-    paid: Optional[int] = None
-    paid_code: Optional[str] = None
-    cost_centre: Optional[str] = None
-    cost_type: Optional[str] = None
-    invoice_reference: Optional[str] = None
-    bank_comment: Optional[str] = None
-    comment: Optional[str] = None
-    invoice_file: Optional[str] = None
-
-
-@dataclass
-class DebtModifyResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    debt_id: Optional[int] = None
-
-
-@dataclass
-class DebtAcceptRequest:
-    debt_ids: builtins.list[builtins.dict[str, Any]]
-
-
-@dataclass
-class DebtAcceptResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    accepted_count: Optional[int] = None
-
-
-@dataclass
-class DebtPayRequest:
-    debt_ids: builtins.list[builtins.dict[str, Any]]
-
-
-@dataclass
-class DebtPayResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    paid_count: Optional[int] = None
-
-
-@dataclass
-class DebtDeleteRequest:
-    debt_ids: builtins.list[builtins.dict[str, Any]]
-
-
-@dataclass
-class DebtDeleteResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    deleted_count: Optional[int] = None
-
-
-@dataclass
-class DebtGenerateRequest:
-    debt_ids: builtins.list[builtins.dict[str, Any]]
-
-
-@dataclass
-class DebtGenerateResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    file: Optional[str] = None
-    file_size: Optional[int] = None
-
-
-@dataclass
-class DebtExportRequest:
-    dateFrom: str
-    dateTo: str
-
-
-@dataclass
-class DebtExportResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[builtins.dict[str, Any]]] = None
-
-
-@dataclass
-class SystemMessageListRequest:
-    pass
-
-
-@dataclass
-class SystemMessageListListItem:
-    id: Optional[int] = None
-    message: Optional[str] = None
-    message_date: Optional[str] = None
-    message_type: Optional[int] = None
-
-
-@dataclass
-class SystemMessageListResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[SystemMessageListListItem]] = None
-
-
-@dataclass
-class SystemMessageSetReadRequest:
-    id: int
-
-
-@dataclass
-class SystemMessageSetReadResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-
-
-@dataclass
-class SystemErrorCodeListRequest:
-    lang: Optional[str] = None
-
-
-@dataclass
-class SystemErrorCodeListLangItem:
-    code: Optional[int] = None
-    description: Optional[str] = None
-    type: Optional[str] = None
-
-
-@dataclass
-class SystemErrorCodeListResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    lang: Optional[builtins.list[SystemErrorCodeListLangItem]] = None
-
-
-@dataclass
-class GetVersionRequest:
-    pass
-
-
-@dataclass
-class GetVersionResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    version: Optional[str] = None
-
-
-@dataclass
-class ServiceProviderDatasRequest:
-    pass
-
-
-@dataclass
-class ServiceProviderDatasResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    hosting_name: Optional[str] = None
-    hosting_address: Optional[str] = None
-    hosting_tax_number: Optional[str] = None
-    hosting_email: Optional[str] = None
-    hosting_phone: Optional[str] = None
-    hosting_customer_service_langs: Optional[str] = None
-    hosting_customer_service_times: Optional[str] = None
-    hosting_bank_name: Optional[str] = None
-    hosting_bank_number: Optional[str] = None
-    hosting_service_url: Optional[str] = None
-    hosting_service_start_date: Optional[str] = None
-    hosting_service_version: Optional[str] = None
-    instance_web_url: Optional[str] = None
-    instance_soap_url: Optional[str] = None
-    instance_rest_url: Optional[str] = None
-
-
-@dataclass
-class CompanyDataRequest:
-    pass
-
-
-@dataclass
-class CompanyDataResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    id: Optional[int] = None
-    block_name: Optional[str] = None
-    name: Optional[str] = None
-    country: Optional[str] = None
-    postcode: Optional[str] = None
-    city: Optional[str] = None
-    street: Optional[str] = None
-    street_number: Optional[str] = None
-    door: Optional[str] = None
-    tax_number: Optional[str] = None
-    eu_tax_number: Optional[str] = None
-    bank_number: Optional[str] = None
-    invoice_number_pre: Optional[str] = None
-    invoice_number_length: Optional[int] = None
-    email: Optional[str] = None
-    comment: Optional[str] = None
-    invoice_footer: Optional[str] = None
-    invoice_issue: Optional[int] = None
-    restart_number_by_year: Optional[int] = None
-    lang: Optional[str] = None
-    date: Optional[str] = None
-    invoice_template: Optional[str] = None
-    admin_users_id: Optional[int] = None
-    currency_id: Optional[int] = None
-    active: Optional[int] = None
-    bank_name: Optional[str] = None
-    currency: Optional[str] = None
-
-
-@dataclass
-class QuantityListRequest:
-    type: str
-
-
-@dataclass
-class QuantityListListItem:
-    id: Optional[int] = None
-    name: Optional[str] = None
-    code: Optional[str] = None
-    active: Optional[int] = None
-    is_default: Optional[int] = None
-    unitOfMeasure: Optional[str] = None
-
-
-@dataclass
-class QuantityListResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[QuantityListListItem]] = None
-
-
-@dataclass
-class CurrencyDownloadRequest:
-    type: str
-
-
-@dataclass
-class CurrencyDownloadListItem:
-    id: Optional[int] = None
-    currency: Optional[str] = None
-    amount: Optional[float] = None
-    unit: Optional[float] = None
-    date: Optional[str] = None
-
-
-@dataclass
-class CurrencyDownloadResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[CurrencyDownloadListItem]] = None
-
-
-@dataclass
-class RegularityDownloadRequest:
-    pass
-
-
-@dataclass
-class RegularityDownloadListItem:
-    id: Optional[int] = None
-    code: Optional[str] = None
-    regularity: Optional[str] = None
-
-
-@dataclass
-class RegularityDownloadResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[RegularityDownloadListItem]] = None
-
-
-@dataclass
-class CountryDownloadRequest:
-    pass
-
-
-@dataclass
-class CountryDownloadListItem:
-    code: Optional[str] = None
-    country: Optional[str] = None
-
-
-@dataclass
-class CountryDownloadResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[CountryDownloadListItem]] = None
-
-
-@dataclass
-class PostcodeDownloadRequest:
-    country: str
-
-
-@dataclass
-class PostcodeDownloadPostcodesItem:
-    postcode: Optional[str] = None
-    city: Optional[str] = None
-    region: Optional[str] = None
-
-
-@dataclass
-class PostcodeDownloadResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    postcodes: Optional[builtins.list[PostcodeDownloadPostcodesItem]] = None
-
-
-@dataclass
-class PingRequest:
-    pass
-
-
-@dataclass
-class PingResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-
-
-@dataclass
-class MonitorRequest:
-    pass
-
-
-@dataclass
-class MonitorListItem:
-    state: Optional[str] = None
-    name: Optional[str] = None
-    last_check: Optional[str] = None
-
-
-@dataclass
-class MonitorResponse:
-    status_id: Optional[int] = None
-    status: Optional[str] = None
-    list: Optional[builtins.list[MonitorListItem]] = None
+    logs: Optional[builtins.list[builtins.dict[str, Any]]] = None
 
 
 class SzamlaiktatoAPI:
@@ -2706,6 +2832,14 @@ class SzamlaiktatoAPI:
             },
         )
 
+    def customerSearch(self, request: CustomerSearchRequest) -> CustomerSearchResponse:
+        return self._invoke(
+            "customerSearch",
+            request,
+            CustomerSearchResponse,
+            skip_block=True,
+        )
+
     def productAdd(self, request: ProductAddRequest) -> ProductAddResponse:
         return self._invoke(
             "productAdd",
@@ -2759,6 +2893,14 @@ class SzamlaiktatoAPI:
             },
         )
 
+    def productSearch(self, request: ProductSearchRequest) -> ProductSearchResponse:
+        return self._invoke(
+            "productSearch",
+            request,
+            ProductSearchResponse,
+            skip_block=True,
+        )
+
     def productFileList(
         self, request: ProductFileListRequest
     ) -> ProductFileListResponse:
@@ -2769,508 +2911,6 @@ class SzamlaiktatoAPI:
             skip_block=True,
             list_mapping={
                 "list": ProductFileListListItem,
-            },
-        )
-
-    def outerDatasources(
-        self, request: Optional[OuterDatasourcesRequest] = None
-    ) -> OuterDatasourcesResponse:
-        return self._invoke(
-            "outerDatasources",
-            request,
-            OuterDatasourcesResponse,
-            skip_block=True,
-            list_mapping={
-                "list": OuterDatasourcesListItem,
-            },
-        )
-
-    def outerDatasourcesGet(
-        self, request: OuterDatasourcesGetRequest
-    ) -> OuterDatasourcesGetResponse:
-        return self._invoke(
-            "outerDatasourcesGet",
-            request,
-            OuterDatasourcesGetResponse,
-            skip_block=True,
-        )
-
-    def outerDatasourcesSave(
-        self, request: OuterDatasourcesSaveRequest
-    ) -> OuterDatasourcesSaveResponse:
-        return self._invoke(
-            "outerDatasourcesSave",
-            request,
-            OuterDatasourcesSaveResponse,
-            skip_block=True,
-        )
-
-    def adminUserAdd(self, request: AdminUserAddRequest) -> AdminUserAddResponse:
-        return self._invoke(
-            "adminUserAdd",
-            request,
-            AdminUserAddResponse,
-            skip_block=True,
-        )
-
-    def adminUserPassword(
-        self, request: AdminUserPasswordRequest
-    ) -> AdminUserPasswordResponse:
-        return self._invoke(
-            "adminUserPassword",
-            request,
-            AdminUserPasswordResponse,
-            skip_block=True,
-        )
-
-    def adminUserDel(self, request: AdminUserDelRequest) -> AdminUserDelResponse:
-        return self._invoke(
-            "adminUserDel",
-            request,
-            AdminUserDelResponse,
-            skip_block=True,
-        )
-
-    def blockAdd(self, request: BlockAddRequest) -> BlockAddResponse:
-        return self._invoke(
-            "blockAdd",
-            request,
-            BlockAddResponse,
-            skip_block=True,
-        )
-
-    def blockUpdateCompanyData(
-        self, request: BlockUpdateCompanyDataRequest
-    ) -> BlockUpdateCompanyDataResponse:
-        return self._invoke(
-            "blockUpdateCompanyData",
-            request,
-            BlockUpdateCompanyDataResponse,
-            skip_block=True,
-        )
-
-    def blockModify(self, request: BlockModifyRequest) -> BlockModifyResponse:
-        return self._invoke(
-            "blockModify",
-            request,
-            BlockModifyResponse,
-            skip_block=True,
-        )
-
-    def blockList(self, request: BlockListRequest) -> BlockListResponse:
-        return self._invoke(
-            "blockList",
-            request,
-            BlockListResponse,
-            skip_block=True,
-            list_mapping={
-                "list": BlockListListItem,
-            },
-        )
-
-    def blockClose(self, request: BlockCloseRequest) -> BlockCloseResponse:
-        return self._invoke(
-            "blockClose",
-            request,
-            BlockCloseResponse,
-            skip_block=True,
-        )
-
-    def blockOpen(self, request: BlockOpenRequest) -> BlockOpenResponse:
-        return self._invoke(
-            "blockOpen",
-            request,
-            BlockOpenResponse,
-            skip_block=True,
-        )
-
-    def costCentreAdd(self, request: CostCentreAddRequest) -> CostCentreAddResponse:
-        return self._invoke(
-            "costCentreAdd",
-            request,
-            CostCentreAddResponse,
-            skip_block=True,
-        )
-
-    def costCentreModify(
-        self, request: CostCentreModifyRequest
-    ) -> CostCentreModifyResponse:
-        return self._invoke(
-            "costCentreModify",
-            request,
-            CostCentreModifyResponse,
-            skip_block=True,
-        )
-
-    def costCentreList(
-        self, request: Optional[CostCentreListRequest] = None
-    ) -> CostCentreListResponse:
-        return self._invoke(
-            "costCentreList",
-            request,
-            CostCentreListResponse,
-            skip_block=True,
-            list_mapping={
-                "cost_centres": CostCentreListCost_centresItem,
-            },
-        )
-
-    def costCentreActivate(
-        self, request: CostCentreActivateRequest
-    ) -> CostCentreActivateResponse:
-        return self._invoke(
-            "costCentreActivate",
-            request,
-            CostCentreActivateResponse,
-            skip_block=True,
-        )
-
-    def costCentreInactivate(
-        self, request: CostCentreInactivateRequest
-    ) -> CostCentreInactivateResponse:
-        return self._invoke(
-            "costCentreInactivate",
-            request,
-            CostCentreInactivateResponse,
-            skip_block=True,
-        )
-
-    def costTypeAdd(self, request: CostTypeAddRequest) -> CostTypeAddResponse:
-        return self._invoke(
-            "costTypeAdd",
-            request,
-            CostTypeAddResponse,
-            skip_block=True,
-        )
-
-    def costTypeModify(self, request: CostTypeModifyRequest) -> CostTypeModifyResponse:
-        return self._invoke(
-            "costTypeModify",
-            request,
-            CostTypeModifyResponse,
-            skip_block=True,
-        )
-
-    def costTypeList(
-        self, request: Optional[CostTypeListRequest] = None
-    ) -> CostTypeListResponse:
-        return self._invoke(
-            "costTypeList",
-            request,
-            CostTypeListResponse,
-            skip_block=True,
-            list_mapping={
-                "list": CostTypeListListItem,
-            },
-        )
-
-    def costTypeActivate(
-        self, request: CostTypeActivateRequest
-    ) -> CostTypeActivateResponse:
-        return self._invoke(
-            "costTypeActivate",
-            request,
-            CostTypeActivateResponse,
-            skip_block=True,
-        )
-
-    def costTypeInactivate(
-        self, request: CostTypeInactivateRequest
-    ) -> CostTypeInactivateResponse:
-        return self._invoke(
-            "costTypeInactivate",
-            request,
-            CostTypeInactivateResponse,
-            skip_block=True,
-        )
-
-    def projectList(self, request: ProjectListRequest) -> ProjectListResponse:
-        return self._invoke(
-            "projectList",
-            request,
-            ProjectListResponse,
-            skip_block=True,
-        )
-
-    def projectGet(self, request: ProjectGetRequest) -> ProjectGetResponse:
-        return self._invoke(
-            "projectGet",
-            request,
-            ProjectGetResponse,
-            skip_block=True,
-        )
-
-    def projectCreate(self, request: ProjectCreateRequest) -> ProjectCreateResponse:
-        return self._invoke(
-            "projectCreate",
-            request,
-            ProjectCreateResponse,
-            skip_block=True,
-        )
-
-    def projectInactivate(
-        self, request: ProjectInactivateRequest
-    ) -> ProjectInactivateResponse:
-        return self._invoke(
-            "projectInactivate",
-            request,
-            ProjectInactivateResponse,
-            skip_block=True,
-        )
-
-    def projectTimesheetList(
-        self, request: ProjectTimesheetListRequest
-    ) -> ProjectTimesheetListResponse:
-        return self._invoke(
-            "projectTimesheetList",
-            request,
-            ProjectTimesheetListResponse,
-            skip_block=True,
-        )
-
-    def projectTimesheetStart(
-        self, request: ProjectTimesheetStartRequest
-    ) -> ProjectTimesheetStartResponse:
-        return self._invoke(
-            "projectTimesheetStart",
-            request,
-            ProjectTimesheetStartResponse,
-            skip_block=True,
-        )
-
-    def projectTimesheetStop(
-        self, request: ProjectTimesheetStopRequest
-    ) -> ProjectTimesheetStopResponse:
-        return self._invoke(
-            "projectTimesheetStop",
-            request,
-            ProjectTimesheetStopResponse,
-            skip_block=True,
-        )
-
-    def projectBookingSlotCreate(
-        self, request: ProjectBookingSlotCreateRequest
-    ) -> ProjectBookingSlotCreateResponse:
-        return self._invoke(
-            "projectBookingSlotCreate",
-            request,
-            ProjectBookingSlotCreateResponse,
-            skip_block=True,
-        )
-
-    def projectBookingBook(
-        self, request: ProjectBookingBookRequest
-    ) -> ProjectBookingBookResponse:
-        return self._invoke(
-            "projectBookingBook",
-            request,
-            ProjectBookingBookResponse,
-            skip_block=True,
-        )
-
-    def projectBookingCancel(
-        self, request: ProjectBookingCancelRequest
-    ) -> ProjectBookingCancelResponse:
-        return self._invoke(
-            "projectBookingCancel",
-            request,
-            ProjectBookingCancelResponse,
-            skip_block=True,
-        )
-
-    def projectBookingClose(
-        self, request: ProjectBookingCloseRequest
-    ) -> ProjectBookingCloseResponse:
-        return self._invoke(
-            "projectBookingClose",
-            request,
-            ProjectBookingCloseResponse,
-            skip_block=True,
-        )
-
-    def projectBookingBookDateRange(
-        self, request: ProjectBookingBookDateRangeRequest
-    ) -> ProjectBookingBookDateRangeResponse:
-        return self._invoke(
-            "projectBookingBookDateRange",
-            request,
-            ProjectBookingBookDateRangeResponse,
-            skip_block=True,
-        )
-
-    def projectBookingCancelGroup(
-        self, request: ProjectBookingCancelGroupRequest
-    ) -> ProjectBookingCancelGroupResponse:
-        return self._invoke(
-            "projectBookingCancelGroup",
-            request,
-            ProjectBookingCancelGroupResponse,
-            skip_block=True,
-        )
-
-    def projectBookingCloseGroup(
-        self, request: ProjectBookingCloseGroupRequest
-    ) -> ProjectBookingCloseGroupResponse:
-        return self._invoke(
-            "projectBookingCloseGroup",
-            request,
-            ProjectBookingCloseGroupResponse,
-            skip_block=True,
-        )
-
-    def projectBookingSetSlotPrice(
-        self, request: ProjectBookingSetSlotPriceRequest
-    ) -> ProjectBookingSetSlotPriceResponse:
-        return self._invoke(
-            "projectBookingSetSlotPrice",
-            request,
-            ProjectBookingSetSlotPriceResponse,
-            skip_block=True,
-        )
-
-    def projectAvailableSlots(
-        self, request: ProjectAvailableSlotsRequest
-    ) -> ProjectAvailableSlotsResponse:
-        return self._invoke(
-            "projectAvailableSlots",
-            request,
-            ProjectAvailableSlotsResponse,
-            skip_block=True,
-        )
-
-    def projectWorkerList(
-        self, request: Optional[ProjectWorkerListRequest] = None
-    ) -> ProjectWorkerListResponse:
-        return self._invoke(
-            "projectWorkerList",
-            request,
-            ProjectWorkerListResponse,
-            skip_block=True,
-        )
-
-    def projectCalendar(
-        self, request: ProjectCalendarRequest
-    ) -> ProjectCalendarResponse:
-        return self._invoke(
-            "projectCalendar",
-            request,
-            ProjectCalendarResponse,
-            skip_block=True,
-        )
-
-    def projectPassCreate(
-        self, request: ProjectPassCreateRequest
-    ) -> ProjectPassCreateResponse:
-        return self._invoke(
-            "projectPassCreate",
-            request,
-            ProjectPassCreateResponse,
-            skip_block=True,
-        )
-
-    def projectPassList(
-        self, request: ProjectPassListRequest
-    ) -> ProjectPassListResponse:
-        return self._invoke(
-            "projectPassList",
-            request,
-            ProjectPassListResponse,
-            skip_block=True,
-        )
-
-    def projectPassDeactivate(
-        self, request: ProjectPassDeactivateRequest
-    ) -> ProjectPassDeactivateResponse:
-        return self._invoke(
-            "projectPassDeactivate",
-            request,
-            ProjectPassDeactivateResponse,
-            skip_block=True,
-        )
-
-    def projectPassUpdateExpiry(
-        self, request: ProjectPassUpdateExpiryRequest
-    ) -> ProjectPassUpdateExpiryResponse:
-        return self._invoke(
-            "projectPassUpdateExpiry",
-            request,
-            ProjectPassUpdateExpiryResponse,
-            skip_block=True,
-        )
-
-    def taxList(self, request: TaxListRequest) -> TaxListResponse:
-        return self._invoke(
-            "taxList",
-            request,
-            TaxListResponse,
-            skip_block=True,
-            list_mapping={
-                "list": TaxListListItem,
-            },
-        )
-
-    def taxAdd(self, request: TaxAddRequest) -> TaxAddResponse:
-        return self._invoke(
-            "taxAdd",
-            request,
-            TaxAddResponse,
-            skip_block=True,
-        )
-
-    def taxModify(self, request: TaxModifyRequest) -> TaxModifyResponse:
-        return self._invoke(
-            "taxModify",
-            request,
-            TaxModifyResponse,
-            skip_block=True,
-        )
-
-    def taxActivate(self, request: TaxActivateRequest) -> TaxActivateResponse:
-        return self._invoke(
-            "taxActivate",
-            request,
-            TaxActivateResponse,
-            skip_block=True,
-        )
-
-    def taxInactivate(self, request: TaxInactivateRequest) -> TaxInactivateResponse:
-        return self._invoke(
-            "taxInactivate",
-            request,
-            TaxInactivateResponse,
-            skip_block=True,
-        )
-
-    def paymentModeInactivate(
-        self, request: PaymentModeInactivateRequest
-    ) -> PaymentModeInactivateResponse:
-        return self._invoke(
-            "paymentModeInactivate",
-            request,
-            PaymentModeInactivateResponse,
-            skip_block=True,
-        )
-
-    def paymentModeActivate(
-        self, request: PaymentModeActivateRequest
-    ) -> PaymentModeActivateResponse:
-        return self._invoke(
-            "paymentModeActivate",
-            request,
-            PaymentModeActivateResponse,
-            skip_block=True,
-        )
-
-    def paymentModeDownload(
-        self, request: Optional[PaymentModeDownloadRequest] = None
-    ) -> PaymentModeDownloadResponse:
-        return self._invoke(
-            "paymentModeDownload",
-            request,
-            PaymentModeDownloadResponse,
-            skip_block=True,
-            list_mapping={
-                "list": PaymentModeDownloadListItem,
             },
         )
 
@@ -3508,84 +3148,301 @@ class SzamlaiktatoAPI:
             InvoiceSetPaidResponse,
         )
 
-    def debtDetails(self, request: DebtDetailsRequest) -> DebtDetailsResponse:
+    def paymentModeInactivate(
+        self, request: PaymentModeInactivateRequest
+    ) -> PaymentModeInactivateResponse:
         return self._invoke(
-            "debtDetails",
+            "paymentModeInactivate",
             request,
-            DebtDetailsResponse,
+            PaymentModeInactivateResponse,
             skip_block=True,
         )
 
-    def debtDownload(self, request: DebtDownloadRequest) -> DebtDownloadResponse:
+    def paymentModeActivate(
+        self, request: PaymentModeActivateRequest
+    ) -> PaymentModeActivateResponse:
         return self._invoke(
-            "debtDownload",
+            "paymentModeActivate",
             request,
-            DebtDownloadResponse,
+            PaymentModeActivateResponse,
             skip_block=True,
         )
 
-    def debtList(self, request: DebtListRequest) -> DebtListResponse:
+    def paymentModeDownload(
+        self, request: Optional[PaymentModeDownloadRequest] = None
+    ) -> PaymentModeDownloadResponse:
         return self._invoke(
-            "debtList",
+            "paymentModeDownload",
             request,
-            DebtListResponse,
+            PaymentModeDownloadResponse,
             skip_block=True,
-            req_mapping={"from_": "from"},
+            list_mapping={
+                "list": PaymentModeDownloadListItem,
+            },
         )
 
-    def debtAdd(self, request: DebtAddRequest) -> DebtAddResponse:
+    def outerDatasources(
+        self, request: Optional[OuterDatasourcesRequest] = None
+    ) -> OuterDatasourcesResponse:
         return self._invoke(
-            "debtAdd",
+            "outerDatasources",
             request,
-            DebtAddResponse,
+            OuterDatasourcesResponse,
             skip_block=True,
+            list_mapping={
+                "list": OuterDatasourcesListItem,
+            },
         )
 
-    def debtModify(self, request: DebtModifyRequest) -> DebtModifyResponse:
+    def outerDatasourcesGet(
+        self, request: OuterDatasourcesGetRequest
+    ) -> OuterDatasourcesGetResponse:
         return self._invoke(
-            "debtModify",
+            "outerDatasourcesGet",
             request,
-            DebtModifyResponse,
-            skip_block=True,
-        )
-
-    def debtAccept(self, request: DebtAcceptRequest) -> DebtAcceptResponse:
-        return self._invoke(
-            "debtAccept",
-            request,
-            DebtAcceptResponse,
-            skip_block=True,
-        )
-
-    def debtPay(self, request: DebtPayRequest) -> DebtPayResponse:
-        return self._invoke(
-            "debtPay",
-            request,
-            DebtPayResponse,
+            OuterDatasourcesGetResponse,
             skip_block=True,
         )
 
-    def debtDelete(self, request: DebtDeleteRequest) -> DebtDeleteResponse:
+    def outerDatasourcesSave(
+        self, request: OuterDatasourcesSaveRequest
+    ) -> OuterDatasourcesSaveResponse:
         return self._invoke(
-            "debtDelete",
+            "outerDatasourcesSave",
             request,
-            DebtDeleteResponse,
+            OuterDatasourcesSaveResponse,
             skip_block=True,
         )
 
-    def debtGenerate(self, request: DebtGenerateRequest) -> DebtGenerateResponse:
+    def adminUserAdd(self, request: AdminUserAddRequest) -> AdminUserAddResponse:
         return self._invoke(
-            "debtGenerate",
+            "adminUserAdd",
             request,
-            DebtGenerateResponse,
+            AdminUserAddResponse,
             skip_block=True,
         )
 
-    def debtExport(self, request: DebtExportRequest) -> DebtExportResponse:
+    def adminUserPassword(
+        self, request: AdminUserPasswordRequest
+    ) -> AdminUserPasswordResponse:
         return self._invoke(
-            "debtExport",
+            "adminUserPassword",
             request,
-            DebtExportResponse,
+            AdminUserPasswordResponse,
+            skip_block=True,
+        )
+
+    def adminUserDel(self, request: AdminUserDelRequest) -> AdminUserDelResponse:
+        return self._invoke(
+            "adminUserDel",
+            request,
+            AdminUserDelResponse,
+            skip_block=True,
+        )
+
+    def adminAPIUserRegenerateServiceKey(
+        self, request: AdminAPIUserRegenerateServiceKeyRequest
+    ) -> AdminAPIUserRegenerateServiceKeyResponse:
+        return self._invoke(
+            "adminAPIUserRegenerateServiceKey",
+            request,
+            AdminAPIUserRegenerateServiceKeyResponse,
+            skip_block=True,
+        )
+
+    def blockAdd(self, request: BlockAddRequest) -> BlockAddResponse:
+        return self._invoke(
+            "blockAdd",
+            request,
+            BlockAddResponse,
+            skip_block=True,
+        )
+
+    def blockUpdateCompanyData(
+        self, request: BlockUpdateCompanyDataRequest
+    ) -> BlockUpdateCompanyDataResponse:
+        return self._invoke(
+            "blockUpdateCompanyData",
+            request,
+            BlockUpdateCompanyDataResponse,
+            skip_block=True,
+        )
+
+    def blockModify(self, request: BlockModifyRequest) -> BlockModifyResponse:
+        return self._invoke(
+            "blockModify",
+            request,
+            BlockModifyResponse,
+            skip_block=True,
+        )
+
+    def blockList(self, request: BlockListRequest) -> BlockListResponse:
+        return self._invoke(
+            "blockList",
+            request,
+            BlockListResponse,
+            skip_block=True,
+            list_mapping={
+                "list": BlockListListItem,
+            },
+        )
+
+    def blockClose(self, request: BlockCloseRequest) -> BlockCloseResponse:
+        return self._invoke(
+            "blockClose",
+            request,
+            BlockCloseResponse,
+            skip_block=True,
+        )
+
+    def blockOpen(self, request: BlockOpenRequest) -> BlockOpenResponse:
+        return self._invoke(
+            "blockOpen",
+            request,
+            BlockOpenResponse,
+            skip_block=True,
+        )
+
+    def costCentreAdd(self, request: CostCentreAddRequest) -> CostCentreAddResponse:
+        return self._invoke(
+            "costCentreAdd",
+            request,
+            CostCentreAddResponse,
+            skip_block=True,
+        )
+
+    def costCentreModify(
+        self, request: CostCentreModifyRequest
+    ) -> CostCentreModifyResponse:
+        return self._invoke(
+            "costCentreModify",
+            request,
+            CostCentreModifyResponse,
+            skip_block=True,
+        )
+
+    def costCentreList(
+        self, request: Optional[CostCentreListRequest] = None
+    ) -> CostCentreListResponse:
+        return self._invoke(
+            "costCentreList",
+            request,
+            CostCentreListResponse,
+            skip_block=True,
+            list_mapping={
+                "cost_centres": CostCentreListCost_centresItem,
+            },
+        )
+
+    def costCentreActivate(
+        self, request: CostCentreActivateRequest
+    ) -> CostCentreActivateResponse:
+        return self._invoke(
+            "costCentreActivate",
+            request,
+            CostCentreActivateResponse,
+            skip_block=True,
+        )
+
+    def costCentreInactivate(
+        self, request: CostCentreInactivateRequest
+    ) -> CostCentreInactivateResponse:
+        return self._invoke(
+            "costCentreInactivate",
+            request,
+            CostCentreInactivateResponse,
+            skip_block=True,
+        )
+
+    def costTypeAdd(self, request: CostTypeAddRequest) -> CostTypeAddResponse:
+        return self._invoke(
+            "costTypeAdd",
+            request,
+            CostTypeAddResponse,
+            skip_block=True,
+        )
+
+    def costTypeModify(self, request: CostTypeModifyRequest) -> CostTypeModifyResponse:
+        return self._invoke(
+            "costTypeModify",
+            request,
+            CostTypeModifyResponse,
+            skip_block=True,
+        )
+
+    def costTypeList(
+        self, request: Optional[CostTypeListRequest] = None
+    ) -> CostTypeListResponse:
+        return self._invoke(
+            "costTypeList",
+            request,
+            CostTypeListResponse,
+            skip_block=True,
+            list_mapping={
+                "list": CostTypeListListItem,
+            },
+        )
+
+    def costTypeActivate(
+        self, request: CostTypeActivateRequest
+    ) -> CostTypeActivateResponse:
+        return self._invoke(
+            "costTypeActivate",
+            request,
+            CostTypeActivateResponse,
+            skip_block=True,
+        )
+
+    def costTypeInactivate(
+        self, request: CostTypeInactivateRequest
+    ) -> CostTypeInactivateResponse:
+        return self._invoke(
+            "costTypeInactivate",
+            request,
+            CostTypeInactivateResponse,
+            skip_block=True,
+        )
+
+    def taxList(self, request: TaxListRequest) -> TaxListResponse:
+        return self._invoke(
+            "taxList",
+            request,
+            TaxListResponse,
+            skip_block=True,
+            list_mapping={
+                "list": TaxListListItem,
+            },
+        )
+
+    def taxAdd(self, request: TaxAddRequest) -> TaxAddResponse:
+        return self._invoke(
+            "taxAdd",
+            request,
+            TaxAddResponse,
+            skip_block=True,
+        )
+
+    def taxModify(self, request: TaxModifyRequest) -> TaxModifyResponse:
+        return self._invoke(
+            "taxModify",
+            request,
+            TaxModifyResponse,
+            skip_block=True,
+        )
+
+    def taxActivate(self, request: TaxActivateRequest) -> TaxActivateResponse:
+        return self._invoke(
+            "taxActivate",
+            request,
+            TaxActivateResponse,
+            skip_block=True,
+        )
+
+    def taxInactivate(self, request: TaxInactivateRequest) -> TaxInactivateResponse:
+        return self._invoke(
+            "taxInactivate",
+            request,
+            TaxInactivateResponse,
             skip_block=True,
         )
 
@@ -3735,4 +3592,357 @@ class SzamlaiktatoAPI:
             list_mapping={
                 "list": MonitorListItem,
             },
+        )
+
+    def debtDetails(self, request: DebtDetailsRequest) -> DebtDetailsResponse:
+        return self._invoke(
+            "debtDetails",
+            request,
+            DebtDetailsResponse,
+            skip_block=True,
+        )
+
+    def debtDownload(self, request: DebtDownloadRequest) -> DebtDownloadResponse:
+        return self._invoke(
+            "debtDownload",
+            request,
+            DebtDownloadResponse,
+            skip_block=True,
+        )
+
+    def debtList(self, request: DebtListRequest) -> DebtListResponse:
+        return self._invoke(
+            "debtList",
+            request,
+            DebtListResponse,
+            skip_block=True,
+            req_mapping={"from_": "from"},
+        )
+
+    def debtAdd(self, request: DebtAddRequest) -> DebtAddResponse:
+        return self._invoke(
+            "debtAdd",
+            request,
+            DebtAddResponse,
+            skip_block=True,
+        )
+
+    def debtModify(self, request: DebtModifyRequest) -> DebtModifyResponse:
+        return self._invoke(
+            "debtModify",
+            request,
+            DebtModifyResponse,
+            skip_block=True,
+        )
+
+    def debtAccept(self, request: DebtAcceptRequest) -> DebtAcceptResponse:
+        return self._invoke(
+            "debtAccept",
+            request,
+            DebtAcceptResponse,
+            skip_block=True,
+        )
+
+    def debtPay(self, request: DebtPayRequest) -> DebtPayResponse:
+        return self._invoke(
+            "debtPay",
+            request,
+            DebtPayResponse,
+            skip_block=True,
+        )
+
+    def debtDelete(self, request: DebtDeleteRequest) -> DebtDeleteResponse:
+        return self._invoke(
+            "debtDelete",
+            request,
+            DebtDeleteResponse,
+            skip_block=True,
+        )
+
+    def debtGenerate(self, request: DebtGenerateRequest) -> DebtGenerateResponse:
+        return self._invoke(
+            "debtGenerate",
+            request,
+            DebtGenerateResponse,
+            skip_block=True,
+        )
+
+    def debtExport(self, request: DebtExportRequest) -> DebtExportResponse:
+        return self._invoke(
+            "debtExport",
+            request,
+            DebtExportResponse,
+            skip_block=True,
+        )
+
+    def projectList(self, request: ProjectListRequest) -> ProjectListResponse:
+        return self._invoke(
+            "projectList",
+            request,
+            ProjectListResponse,
+            skip_block=True,
+        )
+
+    def projectGet(self, request: ProjectGetRequest) -> ProjectGetResponse:
+        return self._invoke(
+            "projectGet",
+            request,
+            ProjectGetResponse,
+            skip_block=True,
+        )
+
+    def projectCreate(self, request: ProjectCreateRequest) -> ProjectCreateResponse:
+        return self._invoke(
+            "projectCreate",
+            request,
+            ProjectCreateResponse,
+            skip_block=True,
+        )
+
+    def projectInactivate(
+        self, request: ProjectInactivateRequest
+    ) -> ProjectInactivateResponse:
+        return self._invoke(
+            "projectInactivate",
+            request,
+            ProjectInactivateResponse,
+            skip_block=True,
+        )
+
+    def projectTimesheetList(
+        self, request: ProjectTimesheetListRequest
+    ) -> ProjectTimesheetListResponse:
+        return self._invoke(
+            "projectTimesheetList",
+            request,
+            ProjectTimesheetListResponse,
+            skip_block=True,
+        )
+
+    def projectTimesheetStart(
+        self, request: ProjectTimesheetStartRequest
+    ) -> ProjectTimesheetStartResponse:
+        return self._invoke(
+            "projectTimesheetStart",
+            request,
+            ProjectTimesheetStartResponse,
+            skip_block=True,
+        )
+
+    def projectTimesheetStop(
+        self, request: ProjectTimesheetStopRequest
+    ) -> ProjectTimesheetStopResponse:
+        return self._invoke(
+            "projectTimesheetStop",
+            request,
+            ProjectTimesheetStopResponse,
+            skip_block=True,
+        )
+
+    def projectBookingSlotCreate(
+        self, request: ProjectBookingSlotCreateRequest
+    ) -> ProjectBookingSlotCreateResponse:
+        return self._invoke(
+            "projectBookingSlotCreate",
+            request,
+            ProjectBookingSlotCreateResponse,
+            skip_block=True,
+        )
+
+    def projectBookingBook(
+        self, request: ProjectBookingBookRequest
+    ) -> ProjectBookingBookResponse:
+        return self._invoke(
+            "projectBookingBook",
+            request,
+            ProjectBookingBookResponse,
+            skip_block=True,
+        )
+
+    def projectBookingCancel(
+        self, request: ProjectBookingCancelRequest
+    ) -> ProjectBookingCancelResponse:
+        return self._invoke(
+            "projectBookingCancel",
+            request,
+            ProjectBookingCancelResponse,
+            skip_block=True,
+        )
+
+    def projectBookingClose(
+        self, request: ProjectBookingCloseRequest
+    ) -> ProjectBookingCloseResponse:
+        return self._invoke(
+            "projectBookingClose",
+            request,
+            ProjectBookingCloseResponse,
+            skip_block=True,
+        )
+
+    def projectBookingBookDateRange(
+        self, request: ProjectBookingBookDateRangeRequest
+    ) -> ProjectBookingBookDateRangeResponse:
+        return self._invoke(
+            "projectBookingBookDateRange",
+            request,
+            ProjectBookingBookDateRangeResponse,
+            skip_block=True,
+        )
+
+    def projectBookingCancelGroup(
+        self, request: ProjectBookingCancelGroupRequest
+    ) -> ProjectBookingCancelGroupResponse:
+        return self._invoke(
+            "projectBookingCancelGroup",
+            request,
+            ProjectBookingCancelGroupResponse,
+            skip_block=True,
+        )
+
+    def projectBookingCloseGroup(
+        self, request: ProjectBookingCloseGroupRequest
+    ) -> ProjectBookingCloseGroupResponse:
+        return self._invoke(
+            "projectBookingCloseGroup",
+            request,
+            ProjectBookingCloseGroupResponse,
+            skip_block=True,
+        )
+
+    def projectBookingSetSlotPrice(
+        self, request: ProjectBookingSetSlotPriceRequest
+    ) -> ProjectBookingSetSlotPriceResponse:
+        return self._invoke(
+            "projectBookingSetSlotPrice",
+            request,
+            ProjectBookingSetSlotPriceResponse,
+            skip_block=True,
+        )
+
+    def projectAvailableSlots(
+        self, request: ProjectAvailableSlotsRequest
+    ) -> ProjectAvailableSlotsResponse:
+        return self._invoke(
+            "projectAvailableSlots",
+            request,
+            ProjectAvailableSlotsResponse,
+            skip_block=True,
+        )
+
+    def projectWorkerList(
+        self, request: Optional[ProjectWorkerListRequest] = None
+    ) -> ProjectWorkerListResponse:
+        return self._invoke(
+            "projectWorkerList",
+            request,
+            ProjectWorkerListResponse,
+            skip_block=True,
+        )
+
+    def projectCalendar(
+        self, request: ProjectCalendarRequest
+    ) -> ProjectCalendarResponse:
+        return self._invoke(
+            "projectCalendar",
+            request,
+            ProjectCalendarResponse,
+            skip_block=True,
+        )
+
+    def projectPassCreate(
+        self, request: ProjectPassCreateRequest
+    ) -> ProjectPassCreateResponse:
+        return self._invoke(
+            "projectPassCreate",
+            request,
+            ProjectPassCreateResponse,
+            skip_block=True,
+        )
+
+    def projectPassList(
+        self, request: ProjectPassListRequest
+    ) -> ProjectPassListResponse:
+        return self._invoke(
+            "projectPassList",
+            request,
+            ProjectPassListResponse,
+            skip_block=True,
+        )
+
+    def projectPassDeactivate(
+        self, request: ProjectPassDeactivateRequest
+    ) -> ProjectPassDeactivateResponse:
+        return self._invoke(
+            "projectPassDeactivate",
+            request,
+            ProjectPassDeactivateResponse,
+            skip_block=True,
+        )
+
+    def projectPassUpdateExpiry(
+        self, request: ProjectPassUpdateExpiryRequest
+    ) -> ProjectPassUpdateExpiryResponse:
+        return self._invoke(
+            "projectPassUpdateExpiry",
+            request,
+            ProjectPassUpdateExpiryResponse,
+            skip_block=True,
+        )
+
+    def ipWhitelistList(
+        self, request: Optional[IpWhitelistListRequest] = None
+    ) -> IpWhitelistListResponse:
+        return self._invoke(
+            "ipWhitelistList",
+            request,
+            IpWhitelistListResponse,
+            skip_block=True,
+        )
+
+    def ipWhitelistAdd(self, request: IpWhitelistAddRequest) -> IpWhitelistAddResponse:
+        return self._invoke(
+            "ipWhitelistAdd",
+            request,
+            IpWhitelistAddResponse,
+            skip_block=True,
+        )
+
+    def ipWhitelistRemove(
+        self, request: IpWhitelistRemoveRequest
+    ) -> IpWhitelistRemoveResponse:
+        return self._invoke(
+            "ipWhitelistRemove",
+            request,
+            IpWhitelistRemoveResponse,
+            skip_block=True,
+        )
+
+    def ipWhitelistActivate(
+        self, request: IpWhitelistActivateRequest
+    ) -> IpWhitelistActivateResponse:
+        return self._invoke(
+            "ipWhitelistActivate",
+            request,
+            IpWhitelistActivateResponse,
+            skip_block=True,
+        )
+
+    def ipWhitelistDeactivate(
+        self, request: IpWhitelistDeactivateRequest
+    ) -> IpWhitelistDeactivateResponse:
+        return self._invoke(
+            "ipWhitelistDeactivate",
+            request,
+            IpWhitelistDeactivateResponse,
+            skip_block=True,
+        )
+
+    def ipWhitelistLogList(
+        self, request: IpWhitelistLogListRequest
+    ) -> IpWhitelistLogListResponse:
+        return self._invoke(
+            "ipWhitelistLogList",
+            request,
+            IpWhitelistLogListResponse,
+            skip_block=True,
         )
