@@ -1,6 +1,9 @@
 from typing import Any
-
+import hashlib
+import hmac
 import logging
+import time
+
 import requests
 
 LOG = logging.getLogger(__name__)
@@ -24,12 +27,20 @@ class OnlineSzamlazoClient:
         password: str,
         block: str,
         instance_id: str | None = None,
+        auth_mode: str = "hmac",
     ):
         self.api_url = api_url.rstrip("/")
         self.uid = uid
         self.password = password
         self.block = block
         self.instance_id = instance_id
+
+        normalized_mode = auth_mode.lower()
+        if normalized_mode not in ("hmac", "password"):
+            raise ValueError(
+                f"Invalid auth_mode: '{auth_mode}'. Must be 'hmac' or 'password'."
+            )
+        self.auth_mode = normalized_mode
 
     def _call(
         self,
@@ -62,7 +73,14 @@ class OnlineSzamlazoClient:
 
         LOG.info("Request URL:\n%s\npayload:\n%r", url, body)
 
-        body["password"] = self.password
+        if self.auth_mode == "hmac":
+            timestamp = int(time.time())
+            message = str(timestamp).encode("utf-8")
+            key = self.password.encode("utf-8")
+            signature = hmac.new(key, message, hashlib.sha256).hexdigest()
+            body["password"] = f"hmac_{timestamp}_{signature}"
+        else:
+            body["password"] = self.password
 
         response = requests.post(
             url, json=body, headers={"Content-Type": "application/json"}
